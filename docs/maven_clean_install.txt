@@ -1,0 +1,1 @@
+clean install -Pupdate-database -Dliquibase.url=jdbc:mysql://localhost:3306/mdm -Dliquibase.username=root -Dliquibase.password=mysql
