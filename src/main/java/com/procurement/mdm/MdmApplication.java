@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration;
 
 @SpringBootApplication(
-        scanBasePackageClasses = {ApplicationConfig.class},
-        exclude = {LiquibaseAutoConfiguration.class}
+    scanBasePackageClasses = {ApplicationConfig.class},
+    exclude = {LiquibaseAutoConfiguration.class}
 )
 public class MdmApplication {
     public static void main(String[] args) {

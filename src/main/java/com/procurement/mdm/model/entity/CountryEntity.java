@@ -13,7 +13,7 @@ public class CountryEntity {
 
     @Id
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(name = "code")
     private String code;
@@ -22,12 +22,11 @@ public class CountryEntity {
     private String name;
 
     @Column(name = "language_id")
-    private long languageId;
+    private Long languageId;
 
     @Column(name = "description")
     private String description;
 
     @Column(name = "phone_code")
     private String phoneCode;
-
 }

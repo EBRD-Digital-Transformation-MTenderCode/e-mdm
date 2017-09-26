@@ -13,10 +13,10 @@ public class LanguageEntity {
 
     @Id
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(name = "s_no")
-    private int sNo;
+    private Integer sNo;
 
     @Column(name = "name")
     private String name;
@@ -29,5 +29,4 @@ public class LanguageEntity {
 
     @Column(name = "description")
     private String description;
-
 }

@@ -14,7 +14,7 @@ public class CpvEntity {
     private String name;
 
     @Column(name = "group")
-    private int group;
+    private Integer group;
 
     @Column(name = "parent")
     private String parent;
@@ -22,5 +22,4 @@ public class CpvEntity {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "FK_cpv_language_id"))
     private LanguageEntity language;
-
 }
