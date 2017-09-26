@@ -5,88 +5,38 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
-    <!--<changeSet id="init" author="maxim">-->
-        <!--<sql>-->
-            <!--CREATE TABLE `events` (-->
-                <!--`id` bigint(20) NOT NULL AUTO_INCREMENT,-->
-                <!--`business_process` varchar(255) NOT NULL,-->
-                <!--`code` varchar(255) NOT NULL,-->
-                <!--`func_unit` varchar(255) NOT NULL,-->
-                <!--`type` varchar(255) NOT NULL,-->
-                    <!--PRIMARY KEY (`id`)-->
-            <!--) ENGINE=InnoDB DEFAULT CHARSET=utf8;-->
+    <changeSet id="init" author="kolchev">
+        <sql>
+            CREATE TABLE `languages` (
+            `id` BIGINT NOT NULL,
+            `s_no` INT NOT NULL,
+            `name` VARCHAR(255) NOT NULL,
+            `family` VARCHAR(255),
+            `iso_639_1` VARCHAR(255) NOT NULL,
+            `description` VARCHAR(255),
+            PRIMARY KEY (`id`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-            <!--CREATE TABLE `languages` (-->
-                <!--`id` bigint(20) NOT NULL AUTO_INCREMENT,-->
-                <!--`encoding` varchar(255) NOT NULL,-->
-                <!--`code` varchar(2) NOT NULL,-->
-                <!--`name` varchar(255) NOT NULL,-->
-                <!--`transliteration` bit(1) NOT NULL,-->
-                    <!--PRIMARY KEY (`id`)-->
-            <!--) ENGINE=InnoDB DEFAULT CHARSET=utf8;-->
+            CREATE TABLE `cpv` (
+            `code` VARCHAR(255) NOT NULL,
+            `name` VARCHAR(255),
+            `group` INT NOT NULL,
+            `parent` VARCHAR(255),
+            `language_id` BIGINT NOT NULL,
+            PRIMARY KEY (`code`),
+            KEY `cpv_language_id` (`language_id`),
+            CONSTRAINT `FK_cpv_language_id` FOREIGN KEY (`language_id`) REFERENCES `languages` (`id`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-            <!--CREATE TABLE `time_intervals` (-->
-                <!--`id` bigint(20) NOT NULL AUTO_INCREMENT,-->
-                <!--`time_end` time NOT NULL,-->
-                <!--`time_start` time NOT NULL,-->
-                    <!--PRIMARY KEY (`id`)-->
-            <!--) ENGINE=InnoDB DEFAULT CHARSET=utf8;-->
-
-            <!--CREATE TABLE `message_covers` (-->
-                <!--`id` bigint(20) NOT NULL AUTO_INCREMENT,-->
-                <!--`actual_date` date NOT NULL,-->
-                <!--`channel` varchar(255) NOT NULL,-->
-                <!--`code` varchar(255) NOT NULL,-->
-                <!--`description` varchar(255) NOT NULL,-->
-                <!--`template` varchar(255) NOT NULL,-->
-                <!--`language_id` bigint(20) NOT NULL,-->
-                <!--`time_interval_id` bigint(20) NOT NULL,-->
-                    <!--PRIMARY KEY (`id`),-->
-                    <!--KEY `message_covers_language_id` (`language_id`),-->
-                    <!--KEY `message_covers_time_interval_id` (`time_interval_id`),-->
-                    <!--CONSTRAINT `FK_message_covers_language_id` FOREIGN KEY (`language_id`) REFERENCES `languages` (`id`),-->
-                    <!--CONSTRAINT `FK_message_covers_time_interval_id` FOREIGN KEY (`time_interval_id`) REFERENCES `time_intervals` (`id`)-->
-            <!--) ENGINE=InnoDB DEFAULT CHARSET=utf8;-->
-
-            <!--CREATE TABLE `message_attributes` (-->
-                <!--`id` bigint(20) NOT NULL AUTO_INCREMENT,-->
-                <!--`default_value` varchar(255) NOT NULL,-->
-                <!--`description` varchar(255) NOT NULL,-->
-                <!--`required` bit(1) NOT NULL,-->
-                <!--`max_length` int(11) NOT NULL,-->
-                <!--`min_length` int(11) NOT NULL,-->
-                <!--`name` varchar(255) NOT NULL,-->
-                <!--`reg_exp` varchar(255) NOT NULL,-->
-                <!--`message_cover_id` bigint(20) NOT NULL,-->
-                    <!--PRIMARY KEY (`id`),-->
-                    <!--KEY `message_attributes_message_cover_id` (`message_cover_id`),-->
-                    <!--CONSTRAINT `FK_message_attributes_message_cover_id` FOREIGN KEY (`message_cover_id`) REFERENCES `message_covers` (`id`)-->
-            <!--) ENGINE=InnoDB DEFAULT CHARSET=utf8;-->
-
-            <!--CREATE TABLE `message_covers_events` (-->
-                <!--`message_covers_id` bigint(20) NOT NULL,-->
-                <!--`events_id` bigint(20) NOT NULL,-->
-                    <!--PRIMARY KEY (`message_covers_id`,`events_id`),-->
-                    <!--KEY `FKd2ix0jgdljg26a822an5foyup` (`events_id`),-->
-                    <!--CONSTRAINT `FK_message_covers_events_events_id` FOREIGN KEY (`events_id`) REFERENCES `events` (`id`),-->
-                    <!--CONSTRAINT `FK_message_covers_events_message_covers_id` FOREIGN KEY (`message_covers_id`) REFERENCES `message_covers` (`id`)-->
-            <!--) ENGINE=InnoDB DEFAULT CHARSET=utf8;-->
-
-            <!--CREATE TABLE `tech_parameters` (-->
-                <!--`id` bigint(20) NOT NULL AUTO_INCREMENT,-->
-                <!--`default_value` varchar(255) NOT NULL,-->
-                <!--`description` varchar(255) NOT NULL,-->
-                <!--`required` bit(1) NOT NULL,-->
-                <!--`max_length` int(11) NOT NULL,-->
-                <!--`min_length` int(11) NOT NULL,-->
-                <!--`name` varchar(255) NOT NULL,-->
-                <!--`reg_exp` varchar(255) NOT NULL,-->
-                <!--`tech_parameter` varchar(255) NOT NULL,-->
-                <!--`message_cover_id` bigint(20) NOT NULL,-->
-                    <!--PRIMARY KEY (`id`),-->
-                    <!--KEY `tech_parameters_message_cover_id` (`message_cover_id`),-->
-                    <!--CONSTRAINT `FK_tech_parameters_message_cover_id` FOREIGN KEY (`message_cover_id`) REFERENCES `message_covers` (`id`)-->
-            <!--) ENGINE=InnoDB DEFAULT CHARSET=utf8;-->
-        <!--</sql>-->
-    <!--</changeSet>-->
+            CREATE TABLE `countries` (
+            `id` BIGINT NOT NULL,
+            `code` VARCHAR(255) NOT NULL,
+            `name` VARCHAR(255),
+            `language_id` BIGINT NOT NULL,
+            `description` VARCHAR(255),
+            `phone_code` VARCHAR(255),
+            PRIMARY KEY (`id`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+        </sql>
+    </changeSet>
 </databaseChangeLog>
