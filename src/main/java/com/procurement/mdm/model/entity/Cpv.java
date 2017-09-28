@@ -1,10 +1,16 @@
 package com.procurement.mdm.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "cpv")
-public class CpvEntity {
+public class Cpv {
 
     @Id
     @Column(name = "code")
@@ -19,7 +25,8 @@ public class CpvEntity {
     @Column(name = "parent")
     private String parent;
 
+    @JsonIgnore
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name = "FK_cpv_language_id"))
-    private LanguageEntity language;
+    private Language language;
 }

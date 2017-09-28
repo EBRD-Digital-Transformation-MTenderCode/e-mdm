@@ -1,15 +1,18 @@
 package com.procurement.mdm.repositories;
 
-import com.procurement.mdm.model.entity.CountryEntity;
+import com.procurement.mdm.model.entity.Country;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface CountryRepository extends JpaRepository<CountryEntity, Long> {
+public interface CountryRepository extends JpaRepository<Country, Long> {
 
-    List<CountryEntity> findCountryEntitiesByName(String name);
+    List<Country> findAllById(Long id);
 
-    List<CountryEntity> findCountryEntitiesByCode(String code);
+    List<Country> findCountriesByName(String name);
+
+    List<Country> findCountriesByCode(String code);
+
 }

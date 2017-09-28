@@ -1,12 +1,12 @@
 package com.procurement.mdm.service;
 
-import com.procurement.mdm.model.entity.CpvEntity;
+import com.procurement.mdm.model.entity.Cpv;
 
 import java.util.List;
 
 public interface CpvService {
 
-    List<CpvEntity> getCpvByParam(Long language_id, String group, String parent);
+    List<Cpv> getCpvByParam(Long language_id, Integer group, String parent);
 
-    List<CpvEntity> getCpvByLanguage(Long language_id);
+    List<Cpv> getCpvByLanguage(Long language_id);
 }

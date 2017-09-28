@@ -1,19 +1,34 @@
 package com.procurement.mdm.service;
 
-import com.procurement.mdm.model.entity.CpvEntity;
+import com.procurement.mdm.model.entity.Cpv;
+import com.procurement.mdm.repositories.CpvRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class CpvServiceImpl implements CpvService {
+
+    @Autowired
+    CpvRepository cpvRepository;
+
     @Override
-    public List<CpvEntity> getCpvByParam(Long language_id, String group, String parent) {
+    public List<Cpv> getCpvByParam(Long language_id, Integer group, String parent) {
+        if (group != null && parent != null) {
+            return cpvRepository.findCpvsByLanguage_IdAndGroupAndParent(language_id, group, parent);
+        }else if (group == null && parent == null) {
+            return cpvRepository.findCpvsByLanguage_Id(language_id);
+        } else if (group == null) {
+            return cpvRepository.findCpvsByLanguage_IdAndParent(language_id, parent);
+        } else if (parent == null) {
+            return cpvRepository.findCpvsByLanguage_IdAndGroup(language_id, group);
+        }
         return null;
     }
 
     @Override
-    public List<CpvEntity> getCpvByLanguage(Long language_id) {
-        return null;
+    public List<Cpv> getCpvByLanguage(Long language_id) {
+        return cpvRepository.findCpvsByLanguage_Id(language_id);
     }
 }

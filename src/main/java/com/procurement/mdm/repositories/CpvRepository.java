@@ -1,16 +1,19 @@
 package com.procurement.mdm.repositories;
 
-import com.procurement.mdm.model.entity.CountryEntity;
-import com.procurement.mdm.model.entity.CpvEntity;
+import com.procurement.mdm.model.entity.Cpv;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface CpvRepository extends JpaRepository<CpvEntity, String> {
+public interface CpvRepository extends JpaRepository<Cpv, String> {
 
-    List<CpvEntity> findCpvEntitiesByLanguage_Id(Long language_id);
+    List<Cpv> findCpvsByLanguage_Id(Long language_id);
 
-    List<CountryEntity> findCpvEntitiesByLanguage_IdAndGroupAndParent(Long language_id, String group, String parent);
+    List<Cpv> findCpvsByLanguage_IdAndGroupAndParent(Long language_id, Integer group, String parent);
+
+    List<Cpv> findCpvsByLanguage_IdAndGroup(Long language_id, Integer group);
+
+    List<Cpv> findCpvsByLanguage_IdAndParent(Long language_id, String parent);
 }

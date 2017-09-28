@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "languages")
-public class LanguageEntity {
+public class Language {
 
     @Id
     @Column(name = "id")

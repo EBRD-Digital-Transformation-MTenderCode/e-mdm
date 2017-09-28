@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "countries")
-public class CountryEntity {
+public class Country {
 
     @Id
     @Column(name = "id")
