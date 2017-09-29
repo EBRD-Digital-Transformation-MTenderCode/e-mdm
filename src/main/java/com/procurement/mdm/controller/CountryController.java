@@ -2,7 +2,6 @@ package com.procurement.mdm.controller;
 
 import com.procurement.mdm.model.entity.Country;
 import com.procurement.mdm.service.CountryService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,8 +16,12 @@ import java.util.List;
 @RequestMapping("/countries")
 public class CountryController {
 
-    @Autowired
-    CountryService countryService;
+
+    private CountryService countryService;
+
+    public CountryController(CountryService countryService) {
+        this.countryService = countryService;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<Country>> getCountries() {

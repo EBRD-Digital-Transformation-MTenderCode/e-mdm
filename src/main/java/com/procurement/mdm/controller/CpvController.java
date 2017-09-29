@@ -1,6 +1,7 @@
 package com.procurement.mdm.controller;
 
 import com.procurement.mdm.model.entity.Cpv;
+import com.procurement.mdm.service.CountryService;
 import com.procurement.mdm.service.CpvService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,8 +17,11 @@ import java.util.List;
 @RequestMapping("/cpv")
 public class CpvController {
 
-    @Autowired
-    CpvService cpvService;
+    private CpvService cpvService;
+
+    public CpvController(CpvService cpvService) {
+        this.cpvService = cpvService;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<Cpv>> getCpvByLanguageId(@RequestParam Long language_id) {
