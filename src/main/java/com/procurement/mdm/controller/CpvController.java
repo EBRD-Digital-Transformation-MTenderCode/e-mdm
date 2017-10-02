@@ -1,9 +1,7 @@
 package com.procurement.mdm.controller;
 
 import com.procurement.mdm.model.entity.Cpv;
-import com.procurement.mdm.service.CountryService;
 import com.procurement.mdm.service.CpvService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -2,7 +2,6 @@ package com.procurement.mdm.service;
 
 import com.procurement.mdm.model.entity.Country;
 import com.procurement.mdm.repositories.CountryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

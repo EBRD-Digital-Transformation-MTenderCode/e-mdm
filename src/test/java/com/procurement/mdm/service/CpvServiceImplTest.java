@@ -69,6 +69,8 @@ class CpvServiceImplTest {
 
     @Test
     void getCpvByParam() {
+        List<Cpv> cpvs = cpvService.getCpvByParam(null, null, null);
+        assertTrue(cpvs.isEmpty());
         List<Cpv> cpvs1 = cpvService.getCpvByParam(language.getId(), null, null);
         assertTrue(cpvs1.get(0).getCode().equals(cpv.getCode()));
         List<Cpv> cpvs2 = cpvService.getCpvByParam(language.getId(), null, cpv.getParent());
