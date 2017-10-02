@@ -2,6 +2,7 @@ package com.procurement.mdm.repository;
 
 import com.procurement.mdm.model.entity.Cpv;
 import com.procurement.mdm.model.entity.Language;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,18 +14,19 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
 
 @ExtendWith(SpringExtension.class)
 class CpvRepositoryTest {
 
-    @MockBean
-    private CpvRepository cpvRepository;
+    private static CpvRepository cpvRepository;
 
-    private Cpv cpv;
-    private Language language;
+    private static Cpv cpv;
 
-    @BeforeEach
-    void setUp() {
+    private static Language language;
+
+    @BeforeAll
+    static void setUp() {
         List<Cpv> cpvs = new ArrayList<>();
         language = new Language();
         language.setId(41L);
@@ -35,10 +37,11 @@ class CpvRepositoryTest {
         cpv.setParent("03000000-1");
         cpv.setLanguage(language);
         cpvs.add(cpv);
-        given(this.cpvRepository.findCpvsByLanguage_Id(language.getId())).willReturn(cpvs);
-        given(this.cpvRepository.findCpvsByLanguage_IdAndGroup(language.getId(), cpv.getGroup())).willReturn(cpvs);
-        given(this.cpvRepository.findCpvsByLanguage_IdAndParent(language.getId(), cpv.getParent())).willReturn(cpvs);
-        given(this.cpvRepository.findCpvsByLanguage_IdAndGroupAndParent(language.getId(), cpv.getGroup(), cpv.getParent())).willReturn(cpvs);
+        cpvRepository = mock(CpvRepository.class);
+        given(cpvRepository.findCpvsByLanguage_Id(language.getId())).willReturn(cpvs);
+        given(cpvRepository.findCpvsByLanguage_IdAndGroup(language.getId(), cpv.getGroup())).willReturn(cpvs);
+        given(cpvRepository.findCpvsByLanguage_IdAndParent(language.getId(), cpv.getParent())).willReturn(cpvs);
+        given(cpvRepository.findCpvsByLanguage_IdAndGroupAndParent(language.getId(), cpv.getGroup(), cpv.getParent())).willReturn(cpvs);
     }
 
     @Test

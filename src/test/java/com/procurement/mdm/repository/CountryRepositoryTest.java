@@ -1,6 +1,7 @@
 package com.procurement.mdm.repository;
 
 import com.procurement.mdm.model.entity.Country;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,17 +13,17 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
 
 @ExtendWith(SpringExtension.class)
 class CountryRepositoryTest {
 
-    @MockBean
-    private CountryRepository countryRepository;
+    private static CountryRepository countryRepository;
 
-    private Country country;
+    private static Country country;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void setUp() {
         List<Country> countries = new ArrayList<>();
         country = new Country();
         country.setId(1L);
@@ -32,9 +33,10 @@ class CountryRepositoryTest {
         country.setDescription("Test description");
         country.setPhoneCode("+380991112233");
         countries.add(country);
-        given(this.countryRepository.findAllById(country.getId())).willReturn(countries);
-        given(this.countryRepository.findCountriesByName(country.getName())).willReturn(countries);
-        given(this.countryRepository.findCountriesByCode(country.getCode())).willReturn(countries);
+        countryRepository = mock(CountryRepository.class);
+        given(countryRepository.findAllById(country.getId())).willReturn(countries);
+        given(countryRepository.findCountriesByName(country.getName())).willReturn(countries);
+        given(countryRepository.findCountriesByCode(country.getCode())).willReturn(countries);
     }
 
     @Test
