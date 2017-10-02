@@ -1,35 +1,29 @@
 package com.procurement.mdm.service;
 
 import com.procurement.mdm.model.entity.Country;
-import com.procurement.mdm.repositories.CountryRepository;
-import org.junit.jupiter.api.BeforeEach;
+import com.procurement.mdm.repository.CountryRepository;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.BDDMockito.given;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 class CountryServiceImplTest {
 
+    private static CountryService countryService;
 
-    private CountryServiceImpl countryService;
+    private static Country country;
 
-    @MockBean
-    private CountryRepository countryRepository;
-
-    private Country country;
-
-    @BeforeEach
-    void setUp() {
-        List<Country> countries = new ArrayList<>();
+    @BeforeAll
+    static void setUp() {
+        final List<Country> countries = new ArrayList<>();
         country = new Country();
         country.setId(1L);
         country.setCode("0-000001");
@@ -38,11 +32,12 @@ class CountryServiceImplTest {
         country.setDescription("Test description");
         country.setPhoneCode("+380991112233");
         countries.add(country);
-        given(this.countryRepository.findAll()).willReturn(countries);
-        given(this.countryRepository.findAllById(country.getId())).willReturn(countries);
-        given(this.countryRepository.findCountriesByName(country.getName())).willReturn(countries);
-        given(this.countryRepository.findCountriesByCode(country.getCode())).willReturn(countries);
-        this.countryService = new CountryServiceImpl(countryRepository);
+        CountryRepository countryRepository = mock(CountryRepository.class);
+        when(countryRepository.findAll()).thenReturn(countries);
+        when(countryRepository.findAllById(country.getId())).thenReturn(countries);
+        when(countryRepository.findCountriesByName(country.getName())).thenReturn(countries);
+        when(countryRepository.findCountriesByCode(country.getCode())).thenReturn(countries);
+        countryService = new CountryServiceImpl(countryRepository);
     }
 
     @Test

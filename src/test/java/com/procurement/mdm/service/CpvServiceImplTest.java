@@ -2,8 +2,8 @@ package com.procurement.mdm.service;
 
 import com.procurement.mdm.model.entity.Cpv;
 import com.procurement.mdm.model.entity.Language;
-import com.procurement.mdm.repositories.CountryRepository;
-import com.procurement.mdm.repositories.CpvRepository;
+import com.procurement.mdm.repository.CpvRepository;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,20 +15,20 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 class CpvServiceImplTest {
 
-    private CpvServiceImpl cpvService;
+    private static CpvService cpvService;
 
-    @MockBean
-    private CpvRepository cpvRepository;
+    private static Cpv cpv;
 
-    private Cpv cpv;
-    private Language language;
+    private static Language language;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void setUp() {
         List<Cpv> cpvs = new ArrayList<>();
         language = new Language();
         language.setId(41L);
@@ -44,11 +44,13 @@ class CpvServiceImplTest {
         cpv.setParent("03000000-1");
         cpv.setLanguage(language);
         cpvs.add(cpv);
-        given(this.cpvRepository.findCpvsByLanguage_Id(language.getId())).willReturn(cpvs);
-        given(this.cpvRepository.findCpvsByLanguage_IdAndGroup(language.getId(), cpv.getGroup())).willReturn(cpvs);
-        given(this.cpvRepository.findCpvsByLanguage_IdAndParent(language.getId(), cpv.getParent())).willReturn(cpvs);
-        given(this.cpvRepository.findCpvsByLanguage_IdAndGroupAndParent(language.getId(), cpv.getGroup(), cpv.getParent())).willReturn(cpvs);
-        this.cpvService = new CpvServiceImpl(cpvRepository);
+        CpvRepository cpvRepository = mock(CpvRepository.class);
+        when(cpvRepository.findCpvsByLanguage_Id(language.getId())).thenReturn(cpvs);
+        when(cpvRepository.findCpvsByLanguage_IdAndGroup(language.getId(), cpv.getGroup())).thenReturn(cpvs);
+        when(cpvRepository.findCpvsByLanguage_IdAndParent(language.getId(), cpv.getParent())).thenReturn(cpvs);
+        when(cpvRepository.findCpvsByLanguage_IdAndGroupAndParent(language.getId(), cpv.getGroup(), cpv.getParent()))
+            .thenReturn(cpvs);
+        cpvService = new CpvServiceImpl(cpvRepository);
     }
 
     @Test
@@ -68,16 +70,26 @@ class CpvServiceImplTest {
     }
 
     @Test
-    void getCpvByParam() {
-        List<Cpv> cpvs = cpvService.getCpvByParam(null, null, null);
-        assertTrue(cpvs.isEmpty());
-        List<Cpv> cpvs1 = cpvService.getCpvByParam(language.getId(), null, null);
-        assertTrue(cpvs1.get(0).getCode().equals(cpv.getCode()));
-        List<Cpv> cpvs2 = cpvService.getCpvByParam(language.getId(), null, cpv.getParent());
-        assertTrue(cpvs2.get(0).getCode().equals(cpv.getCode()));
-        List<Cpv> cpvs3 = cpvService.getCpvByParam(language.getId(), cpv.getGroup(), null);
-        assertTrue(cpvs3.get(0).getCode().equals(cpv.getCode()));
-        List<Cpv> cpvs4 = cpvService.getCpvByParam(language.getId(), cpv.getGroup(), cpv.getParent());
-        assertTrue(cpvs4.get(0).getCode().equals(cpv.getCode()));
+    void getCpvByParamLanguageId() {
+        List<Cpv> cpvs = cpvService.getCpvByParam(language.getId());
+        assertTrue(cpvs.get(0).getCode().equals(cpv.getCode()));
+    }
+
+    @Test
+    void getCpvByParamsLanguageIdAndGroup() {
+        List<Cpv> cpvs = cpvService.getCpvByParam(language.getId(), cpv.getGroup());
+        assertTrue(cpvs.get(0).getCode().equals(cpv.getCode()));
+    }
+
+    @Test
+    void getCpvByParamsLanguageIdAndParent() {
+        List<Cpv> cpvs = cpvService.getCpvByParam(language.getId(), cpv.getParent());
+        assertTrue(cpvs.get(0).getCode().equals(cpv.getCode()));
+    }
+
+    @Test
+    void getCpvByParamsLanguageIdAndGroupAndParent() {
+        List<Cpv> cpvs = cpvService.getCpvByParam(language.getId(), cpv.getGroup(), cpv.getParent());
+        assertTrue(cpvs.get(0).getCode().equals(cpv.getCode()));
     }
 }

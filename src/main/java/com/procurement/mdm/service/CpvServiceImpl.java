@@ -1,10 +1,11 @@
 package com.procurement.mdm.service;
 
 import com.procurement.mdm.model.entity.Cpv;
-import com.procurement.mdm.repositories.CpvRepository;
+import com.procurement.mdm.repository.CpvRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class CpvServiceImpl implements CpvService {
@@ -16,17 +17,31 @@ public class CpvServiceImpl implements CpvService {
     }
 
     @Override
+    public List<Cpv> getCpvByParam(Long language_id) {
+        Objects.requireNonNull(language_id);
+        return cpvRepository.findCpvsByLanguage_Id(language_id);
+    }
+
+    @Override
+    public List<Cpv> getCpvByParam(Long language_id, Integer group) {
+        Objects.requireNonNull(language_id);
+        Objects.requireNonNull(group);
+        return cpvRepository.findCpvsByLanguage_IdAndGroup(language_id, group);
+    }
+
+    @Override
+    public List<Cpv> getCpvByParam(Long language_id, String parent) {
+        Objects.requireNonNull(language_id);
+        Objects.requireNonNull(parent);
+        return cpvRepository.findCpvsByLanguage_IdAndParent(language_id, parent);
+    }
+
+    @Override
     public List<Cpv> getCpvByParam(Long language_id, Integer group, String parent) {
-        if (group != null && parent != null) {
-            return cpvRepository.findCpvsByLanguage_IdAndGroupAndParent(language_id, group, parent);
-        } else if (group == null && parent == null) {
-            return cpvRepository.findCpvsByLanguage_Id(language_id);
-        } else if (group == null) {
-            return cpvRepository.findCpvsByLanguage_IdAndParent(language_id, parent);
-        } else if (parent == null) {
-            return cpvRepository.findCpvsByLanguage_IdAndGroup(language_id, group);
-        }
-        return null;
+        Objects.requireNonNull(language_id);
+        Objects.requireNonNull(group);
+        Objects.requireNonNull(parent);
+        return cpvRepository.findCpvsByLanguage_IdAndGroupAndParent(language_id, group, parent);
     }
 
     @Override

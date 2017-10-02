@@ -1,10 +1,11 @@
 package com.procurement.mdm.service;
 
 import com.procurement.mdm.model.entity.Country;
-import com.procurement.mdm.repositories.CountryRepository;
+import com.procurement.mdm.repository.CountryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class CountryServiceImpl implements CountryService {
@@ -22,16 +23,19 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public List<Country> getCountriesById(Long id) {
+        Objects.requireNonNull(id);
         return countryRepository.findAllById(id);
     }
 
     @Override
     public List<Country> getCountriesByName(String name) {
+        Objects.requireNonNull(name);
         return countryRepository.findCountriesByName(name);
     }
 
     @Override
     public List<Country> getCountriesByCode(String code) {
+        Objects.requireNonNull(code);
         return countryRepository.findCountriesByCode(code);
     }
 }

@@ -2,48 +2,39 @@ package com.procurement.mdm.controller;
 
 import com.procurement.mdm.model.entity.Country;
 import com.procurement.mdm.service.CountryService;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
-import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(CountryController.class)
 class CountryControllerTest {
 
+    private static MockMvc mockMvc;
 
-    private MockMvc mockMvc;
+    private static Country country;
 
-    @Autowired
-    private WebApplicationContext webApplicationContext;
-
-    @MockBean
-    private CountryService countryService;
-
-    private Country country;
-
-    @BeforeEach
-    void setUp() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-        List<Country> countries = new ArrayList<>();
+    @BeforeAll
+    static void setUp() {
+        final CountryService countryService = mock(CountryService.class);
+        final CountryController countryController = new CountryController(countryService);
+        final List<Country> countries = new ArrayList<>();
+        mockMvc = MockMvcBuilders.standaloneSetup(countryController).build();
         country = new Country();
         country.setId(1L);
         country.setCode("0-000001");
@@ -52,10 +43,10 @@ class CountryControllerTest {
         country.setDescription("Test description");
         country.setPhoneCode("+380991112233");
         countries.add(country);
-        given(this.countryService.getAllCountries()).willReturn(countries);
-        given(this.countryService.getCountriesById(country.getId())).willReturn(countries);
-        given(this.countryService.getCountriesByName(country.getName())).willReturn(countries);
-        given(this.countryService.getCountriesByCode(country.getCode())).willReturn(countries);
+        when(countryService.getAllCountries()).thenReturn(countries);
+        when(countryService.getCountriesById(country.getId())).thenReturn(countries);
+        when(countryService.getCountriesByName(country.getName())).thenReturn(countries);
+        when(countryService.getCountriesByCode(country.getCode())).thenReturn(countries);
     }
 
     @Test

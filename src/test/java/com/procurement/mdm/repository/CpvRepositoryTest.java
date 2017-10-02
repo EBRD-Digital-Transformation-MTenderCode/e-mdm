@@ -1,4 +1,4 @@
-package com.procurement.mdm.repositories;
+package com.procurement.mdm.repository;
 
 import com.procurement.mdm.model.entity.Cpv;
 import com.procurement.mdm.model.entity.Language;

@@ -3,48 +3,41 @@ package com.procurement.mdm.controller;
 import com.procurement.mdm.model.entity.Cpv;
 import com.procurement.mdm.model.entity.Language;
 import com.procurement.mdm.service.CpvService;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
-import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(CpvController.class)
 class CpvControllerTest {
 
-    private MockMvc mockMvc;
+    private static MockMvc mockMvc;
 
-    @Autowired
-    private WebApplicationContext webApplicationContext;
+    private static Cpv cpv;
+    private static Language language;
 
-    @MockBean
-    private CpvService cpvService;
-
-    private Cpv cpv;
-    private Language language;
-
-    @BeforeEach
-    void setUp() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-        List<Cpv> cpvs = new ArrayList<>();
+    @BeforeAll
+    static void setUp() {
+        final CpvService cpvService = mock(CpvService.class);
+        final CpvController cpvController = new CpvController(cpvService);
+        final List<Cpv> cpvs = new ArrayList<>();
+        mockMvc = MockMvcBuilders.standaloneSetup(cpvController).build();
         language = new Language();
         language.setId(41L);
         cpv = new Cpv();
@@ -54,13 +47,12 @@ class CpvControllerTest {
         cpv.setParent("03000000-1");
         cpv.setLanguage(language);
         cpvs.add(cpv);
-        given(this.cpvService.getCpvByLanguage(language.getId())).willReturn(cpvs);
-        given(this.cpvService.getCpvByParam(language.getId(), cpv.getGroup(), cpv.getParent())).willReturn(cpvs);
+        when(cpvService.getCpvByLanguage(language.getId())).thenReturn(cpvs);
+        when(cpvService.getCpvByParam(language.getId(), cpv.getGroup(), cpv.getParent())).thenReturn(cpvs);
     }
 
     @Test
     void getCpvByLanguageId() throws Exception {
-
         mockMvc.perform(get("/cpv")
             .param("language_id", String.valueOf(cpv.getLanguage().getId()))
             .accept(MediaType.APPLICATION_JSON))
@@ -72,7 +64,7 @@ class CpvControllerTest {
     }
 
     @Test
-    void getCpvByParam() throws Exception{
+    void getCpvByParam() throws Exception {
         mockMvc.perform(get("/cpv/byParam")
             .param("language_id", String.valueOf(cpv.getLanguage().getId()))
             .param("group", String.valueOf(cpv.getGroup()))
