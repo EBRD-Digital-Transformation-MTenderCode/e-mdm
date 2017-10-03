@@ -8,374 +8,508 @@
     <changeSet id="insert" author="kolchev">
         <sql>
             SET nameS 'utf8';
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (1, 1, 'Northwest Caucasian', 'Abkhaz', 'ab', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (2, 2, 'Afro-Asiatic', 'Afar', 'aa', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (3, 3, 'Indo-European', 'Afrikaans', 'af', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (4, 4, 'Niger-Congo', 'Akan', 'ak', 'macrolanguage, Twi is [tw/twi], Fanti is [fat]');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (5, 5, 'Indo-European', 'Albanian', 'sq', 'macrolanguage, Albanian Phylozone in 639-6');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (6, 6, 'Afro-Asiatic', 'Amharic', 'am', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (7, 7, 'Afro-Asiatic', 'Arabic', 'ar', 'macrolanguage, Standard Arabic is [arb]');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (8, 8, 'Indo-European', 'Aragonese', 'an', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (9, 9, 'Indo-European', 'Armenian', 'hy', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (10, 10, 'Indo-European', 'Assamese', 'as', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (11, 11, 'Northeast Caucasian', 'Avaric', 'av', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (12, 12, 'Indo-European', 'Avestan', 'ae', 'ancient');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (13, 13, 'Aymaran', 'Aymara', 'ay', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (14, 14, 'Turkic', 'Azerbaijani', 'az', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (15, 15, 'Niger-Congo', 'Bambara', 'bm', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (16, 16, 'Turkic', 'Bashkir', 'ba', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (17, 17, 'Language isolate', 'Basque', 'eu', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (18, 18, 'Indo-European', 'Belarusian', 'be', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (19, 19, 'Indo-European', 'Bengali; Bangla', 'bn', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (20, 20, 'Indo-European', 'Bihari', 'bh', 'Collective language code for Bhojpuri, Magahi, and Maithili');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (21, 21, 'Creole', 'Bislama', 'bi', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (22, 22, 'Indo-European', 'Bosnian', 'bs', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (23, 23, 'Indo-European', 'Breton', 'br', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (24, 24, 'Indo-European', 'Bulgarian', 'bg', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (25, 25, 'Sino-Tibetan', 'Burmese', 'my', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (26, 26, 'Indo-European', 'Catalan; Valencian', 'ca', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (27, 27, 'Austronesian', 'Chamorro', 'ch', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (28, 28, 'Northeast Caucasian', 'Chechen', 'ce', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (29, 29, 'Niger-Congo', 'Chichewa; Chewa; Nyanja', 'ny', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (30, 30, 'Sino-Tibetan', 'Chinese', 'zh', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (31, 31, 'Turkic', 'Chuvash', 'cv', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (32, 32, 'Indo-European', 'Cornish', 'kw', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (33, 33, 'Indo-European', 'Corsican', 'co', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (34, 34, 'Algonquian', 'Cree', 'cr', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (35, 35, 'Indo-European', 'Croatian', 'hr', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (36, 36, 'Indo-European', 'Czech', 'cs', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (37, 37, 'Indo-European', 'Danish', 'da', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (38, 38, 'Indo-European', 'Divehi; Dhivehi; Maldivian;', 'dv', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (39, 39, 'Indo-European', 'Dutch', 'nl', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (40, 40, 'Sino-Tibetan', 'Dzongkha', 'dz', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (41, 41, 'Indo-European', 'English', 'en', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (42, 42, 'Constructed', 'Esperanto', 'eo', 'constructed, initiated from L.L. Zamenhof, 1887');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (43, 43, 'Uralic', 'Estonian', 'et', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (44, 44, 'Niger-Congo', 'Ewe', 'ee', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (45, 45, 'Indo-European', 'Faroese', 'fo', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (46, 46, 'Austronesian', 'Fijian', 'fj', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (47, 47, 'Uralic', 'Finnish', 'fi', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (48, 48, 'Indo-European', 'French', 'fr', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (49, 49, 'Niger-Congo', 'Fula; Fulah; Pulaar; Pular', 'ff', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (50, 50, 'Indo-European', 'Galician', 'gl', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (51, 51, 'South Caucasian', 'Georgian', 'ka', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (52, 52, 'Indo-European', 'German', 'de', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (53, 53, 'Indo-European', 'Greek, Modern', 'el', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (54, 54, 'Tupian', 'Guarani', 'gn', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (55, 55, 'Indo-European', 'Gujarati', 'gu', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (56, 56, 'Creole', 'Haitian; Haitian Creole', 'ht', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (57, 57, 'Afro-Asiatic', 'Hausa', 'ha', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (58, 58, 'Afro-Asiatic', 'Hebrew (modern)', 'he', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (59, 59, 'Niger-Congo', 'Herero', 'hz', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (60, 60, 'Indo-European', 'Hindi', 'hi', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (61, 61, 'Austronesian', 'Hiri Motu', 'ho', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (62, 62, 'Uralic', 'Hungarian', 'hu', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (63, 63, 'Constructed', 'Interlingua', 'ia', 'constructed by International Auxiliary Language Association');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (64, 64, 'Austronesian', 'Indonesian', 'id', 'Covered by macrolanguage [ms/msa]');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (65, 65, 'Constructed', 'Interlingue', 'ie', 'constructed by Edgar de Wahl, first published in 1922');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (66, 66, 'Indo-European', 'Irish', 'ga', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (67, 67, 'Niger-Congo', 'Igbo', 'ig', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (68, 68, 'Eskimo-Aleut', 'Inupiaq', 'ik', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (69, 69, 'Constructed', 'ido', 'io', 'constructed by De Beaufront, 1907, as variation of Esperanto');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (70, 70, 'Indo-European', 'Icelandic', 'is', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (71, 71, 'Indo-European', 'Italian', 'it', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (72, 72, 'Eskimo-Aleut', 'Inuktitut', 'iu', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (73, 73, 'Japonic', 'Japanese', 'ja', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (74, 74, 'Austronesian', 'Javanese', 'jv', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (75, 75, 'Eskimo-Aleut', 'Kalaallisut, Greenlandic', 'kl', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (76, 76, 'Dravidian', 'Kannada', 'kn', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (77, 77, 'Nilo-Saharan', 'Kanuri', 'kr', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (78, 78, 'Indo-European', 'Kashmiri', 'ks', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (79, 79, 'Turkic', 'Kazakh', 'kk', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (80, 80, 'Austroasiatic', 'Khmer', 'km', 'a.k.a. Cambodian');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (81, 81, 'Niger-Congo', 'Kikuyu, Gikuyu', 'ki', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (82, 82, 'Niger-Congo', 'Kinyarwanda', 'rw', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (83, 83, 'Turkic', 'Kyrgyz', 'ky', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (84, 84, 'Uralic', 'Komi', 'kv', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (85, 85, 'Niger-Congo', 'Kongo', 'kg', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (86, 86, 'Language isolate', 'Korean', 'ko', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (87, 87, 'Indo-European', 'Kurdish', 'ku', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (88, 88, 'Niger-Congo', 'Kwanyama, Kuanyama', 'kj', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (89, 89, 'Indo-European', 'Latin', 'la', 'ancient');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (90, 90, 'Indo-European', 'Luxembourgish, Letzeburgesch', 'lb', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (91, 91, 'Niger-Congo', 'Ganda', 'lg', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (92, 92, 'Indo-European', 'Limburgish, Limburgan, Limburger', 'li', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (93, 93, 'Niger-Congo', 'Lingala', 'ln', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (94, 94, 'Tai-Kadai', 'Lao', 'lo', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (95, 95, 'Indo-European', 'Lithuanian', 'lt', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (96, 96, 'Niger-Congo', 'Luba-Katanga', 'lu', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (97, 97, 'Indo-European', 'Latvian', 'lv', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (98, 98, 'Indo-European', 'Manx', 'gv', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (99, 99, 'Indo-European', 'Macedonian', 'mk', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (100, 100, 'Austronesian', 'Malagasy', 'mg', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (101, 101, 'Austronesian', 'Malay', 'ms', 'macrolanguage, Standard Malay is [zsm], Indonesian is [id/ind]');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (102, 102, 'Dravidian', 'Malayalam', 'ml', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (103, 103, 'Afro-Asiatic', 'Maltese', 'mt', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (104, 104, 'Austronesian', 'Māori', 'mi', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (105, 105, 'Indo-European', 'Marathi (Marāṭhī)', 'mr', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (106, 106, 'Austronesian', 'Marshallese', 'mh', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (107, 107, 'Mongolic', 'Mongolian', 'mn', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (108, 108, 'Austronesian', 'Nauru', 'na', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (109, 109, 'Dene-Yeniseian', 'Navajo, Navaho', 'nv', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (110, 110, 'Indo-European', 'Norwegian Bokmal', 'nb', 'Covered by macrolanguage [no/nor]');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (111, 111, 'Niger-Congo', 'North Ndebele', 'nd', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (112, 112, 'Indo-European', 'Nepali', 'ne', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (113, 113, 'Niger-Congo', 'Ndonga', 'ng', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (114, 114, 'Indo-European', 'Norwegian Nynorsk', 'nn', 'Covered by macrolanguage [no/nor]');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (115, 115, 'Indo-European', 'Norwegian', 'no', 'macrolanguage, Bokmal is [nb/nob], Nynorsk is [nn/nno]');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (116, 116, 'Sino-Tibetan', 'Nuosu', 'ii', 'Standard form of Yi languages');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (117, 117, 'Niger-Congo', 'South Ndebele', 'nr', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (118, 118, 'Indo-European', 'Occitan', 'oc', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (119, 119, 'Algonquian', 'Ojibwe, Ojibwa', 'oj', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (120, 120, 'Indo-European', 'Old Church Slavonic, Church Slavonic, Old Bulgarian', 'cu', 'ancient, in use by Orthodox Church');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (121, 121, 'Afro-Asiatic', 'Oromo', 'om', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (122, 122, 'Indo-European', 'Oriya', 'or', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (123, 123, 'Indo-European', 'Ossetian, Ossetic', 'os', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (124, 124, 'Indo-European', 'Panjabi, Punjabi', 'pa', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (125, 125, 'Indo-European', 'Pāli', 'pi', 'ancient');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (126, 126, 'Indo-European', 'Persian (Farsi)', 'fa', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (127, 127, 'Indo-European', 'Polish', 'pl', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (128, 128, 'Indo-European', 'Pashto, Pushto', 'ps', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (129, 129, 'Indo-European', 'Portuguese', 'pt', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (130, 130, 'Quechuan', 'Quechua', 'qu', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (131, 131, 'Indo-European', 'Romansh', 'rm', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (132, 132, 'Niger-Congo', 'Kirundi', 'rn', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (133, 133, 'Indo-European', 'Romanian', 'ro', '[mo] for Moldavian has been withdrawn, recommending [ro] also for Moldavian');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (134, 134, 'Indo-European', 'Russian', 'ru', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (135, 135, 'Indo-European', 'Sanskrit (Saṁskṛta)', 'sa', 'ancient, still spoken');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (136, 136, 'Indo-European', 'Sardinian', 'sc', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (137, 137, 'Indo-European', 'Sindhi', 'sd', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (138, 138, 'Uralic', 'Northern Sami', 'se', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (139, 139, 'Austronesian', 'Samoan', 'sm', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (140, 140, 'Creole', 'Sango', 'sg', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (141, 141, 'Indo-European', 'Serbian', 'sr', 'The ISO 639-2/T code srp deprecated the ISO 639-2/B code scc');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (142, 142, 'Indo-European', 'Scottish Gaelic; Gaelic', 'gd', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (143, 143, 'Niger-Congo', 'Shona', 'sn', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (144, 144, 'Indo-European', 'Sinhala, Sinhalese', 'si', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (145, 145, 'Indo-European', 'Slovak', 'sk', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (146, 146, 'Indo-European', 'Slovene', 'sl', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (147, 147, 'Afro-Asiatic', 'Somali', 'so', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (148, 148, 'Niger-Congo', 'Southern Sotho', 'st', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (149, 150, 'Indo-European', 'Spanish; Castilian', 'es', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (150, 151, 'Austronesian', 'Sundanese', 'su', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (151, 152, 'Niger-Congo', 'Swahili', 'sw', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (152, 153, 'Niger-Congo', 'Swati', 'ss', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (153, 154, 'Indo-European', 'Swedish', 'sv', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (154, 155, 'Dravidian', 'Tamil', 'ta', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (155, 156, 'Dravidian', 'Telugu', 'te', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (156, 157, 'Indo-European', 'Tajik', 'tg', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (157, 158, 'Tai-Kadai', 'Thai', 'th', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (158, 159, 'Afro-Asiatic', 'Tigrinya', 'ti', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (159, 160, 'Sino-Tibetan', 'Tibetan Standard, Tibetan, Central', 'bo', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (160, 161, 'Turkic', 'Turkmen', 'tk', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (161, 162, 'Austronesian', 'Tagalog', 'tl', 'Note: Filipino (Pilipino) has the code [fil]');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (162, 163, 'Niger-Congo', 'Tswana', 'tn', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (163, 164, 'Austronesian', 'Tonga (Tonga Islands)', 'to', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (164, 165, 'Turkic', 'Turkish', 'tr', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (165, 166, 'Niger-Congo', 'Tsonga', 'ts', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (166, 167, 'Turkic', 'Tatar', 'tt', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (167, 168, 'Niger-Congo', 'Twi', 'tw', 'Covered by macrolanguage [ak/aka]');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (168, 169, 'Austronesian', 'Tahitian', 'ty', 'One of the Reo Mā`ohi (languages of French Polynesia)');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (169, 170, 'Turkic', 'Uyghur, Uighur', 'ug', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (170, 171, 'Indo-European', 'Ukrainian', 'uk', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (171, 172, 'Indo-European', 'Urdu', 'ur', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (172, 173, 'Turkic', 'Uzbek', 'uz', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (173, 174, 'Niger-Congo', 'Venda', 've', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (174, 175, 'Austroasiatic', 'Vietnamese', 'vi', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (175, 176, 'Constructed', 'Volapuk', 'vo', 'constructed');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (176, 177, 'Indo-European', 'Walloon', 'wa', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (177, 178, 'Indo-European', 'Welsh', 'cy', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (178, 179, 'Niger-Congo', 'Wolof', 'wo', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (179, 180, 'Indo-European', 'Western Frisian', 'fy', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (180, 181, 'Niger-Congo', 'Xhosa', 'xh', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (181, 182, 'Indo-European', 'Yiddish', 'yi', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (182, 183, 'Niger-Congo', 'Yoruba', 'yo', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (183, 184, 'Tai-Kadai', 'Zhuang, Chuang', 'za', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (184, 185, 'Niger-Congo', 'Zulu', 'zu', '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (1, 'AF', 'AFGHANISTAN', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (2, 'AX', 'ALAND ISLANDS', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (3, 'AL', 'ALBANIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (4, 'DZ', 'ALGERIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (5, 'AS', 'AMERICAN SAMOA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (6, 'AD', 'ANDORRA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (7, 'AO', 'ANGOLA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (8, 'AI', 'ANGUILLA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (9, 'AQ', 'ANTARCTICA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (10, 'AG', 'ANTIGUA AND BARBUDA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (11, 'AR', 'ARGENTINA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (12, 'AM', 'ARMENIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (13, 'AW', 'ARUBA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (14, 'AU', 'AUSTRALIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (15, 'AT', 'AUSTRIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (16, 'AZ', 'AZERBAIJAN', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (17, 'BS', 'BAHAMAS (THE)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (18, 'BH', 'BAHRAIN', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (19, 'BD', 'BANGLADESH', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (20, 'BB', 'BARBADOS', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (21, 'BY', 'BELARUS', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (22, 'BE', 'BELGIUM', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (23, 'BZ', 'BELIZE', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (24, 'BJ', 'BENIN', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (25, 'BM', 'BERMUDA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (26, 'BT', 'BHUTAN', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (27, 'BO', 'BOLIVIA (PLURINATIONAL STATE OF)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (28, 'BQ', 'BONAIRE, SAINT EUSTATIUS AND SABA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (29, 'BA', 'BOSNIA AND HERZEGOVINA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (30, 'BW', 'BOTSWANA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (31, 'BV', 'BOUVET ISLAND', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (32, 'BR', 'BRAZIL', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (33, 'IO', 'BRITISH INDIAN OCEAN TERRITORY (THE)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (34, 'BN', 'BRUNEI DARUSSALAM', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (35, 'BG', 'BULGARIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (36, 'BF', 'BURKINA FASO', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (37, 'BI', 'BURUNDI', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (38, 'KH', 'CAMBODIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (39, 'CM', 'CAMEROON', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (40, 'CA', 'CANADA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (41, 'CV', 'CAPE VERDE', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (42, 'KY', 'CAYMAN ISLANDS (THE)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (43, 'CF', 'CENTRAL AFRICAN REPUBLIC (THE)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (44, 'TD', 'CHAD', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (45, 'CL', 'CHILE', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (46, 'CN', 'CHINA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (47, 'CX', 'CHRISTMAS ISLAND', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (48, 'CC', 'COCOS (KEELING) ISLANDS (THE)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (49, 'CO', 'COLOMBIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (50, 'KM', 'COMOROS (THE)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (51, 'CG', 'CONGO (THE)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (52, 'CD', 'CONGO, THE DEMOCRATIC REPUBLIC OF THE', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (53, 'CK', 'COOK ISLANDS (THE)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (54, 'CR', 'COSTA RICA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (55, 'CI', 'COTE D\'IVOIRE', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (56, 'HR', 'CROATIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (57, 'CU', 'CUBA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (58, 'CW', 'CURACAO', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (59, 'CY', 'CYPRUS', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (60, 'CZ', 'CZECH REPUBLIC (THE)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (61, 'DK', 'DENMARK', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (62, 'DJ', 'DJIBOUTI', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (63, 'DM', 'DOMINICA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (64, 'DO', 'DOMINICAN REPUBLIC (THE)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (65, 'EC', 'ECUADOR', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (66, 'EG', 'EGYPT', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (67, 'SV', 'EL SALVADOR', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (68, 'GQ', 'EQUATORIAL GUINEA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (69, 'ER', 'ERITREA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (70, 'EE', 'ESTONIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (71, 'ET', 'ETHIOPIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (72, 'FK', 'FALKLAND ISLANDS (THE) [MALVINAS]', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (73, 'FO', 'FAROE ISLANDS (THE)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (74, 'FJ', 'FIJI', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (75, 'FI', 'FINLAND', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (76, 'FR', 'FRANCE', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (77, 'GF', 'FRENCH GUIANA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (78, 'PF', 'FRENCH POLYNESIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (79, 'TF', 'FRENCH SOUTHERN TERRITORIES (THE)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (80, 'GA', 'GABON', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (81, 'GM', 'GAMBIA (THE)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (82, 'GE', 'GEORGIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (83, 'DE', 'GERMANY', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (84, 'GH', 'GHANA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (85, 'GI', 'GIBRALTAR', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (86, 'GR', 'GREECE', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (87, 'GL', 'GREENLAND', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (88, 'GD', 'GRENADA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (89, 'GP', 'GUADELOUPE', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (90, 'GU', 'GUAM', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (91, 'GT', 'GUATEMALA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (92, 'GG', 'GUERNSEY', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (93, 'GN', 'GUINEA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (94, 'GW', 'GUINEA-BISSAU', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (95, 'GY', 'GUYANA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (96, 'HT', 'HAITI', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (97, 'HM', 'HEARD ISLAND AND MCDONALD ISLANDS', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (98, 'VA', 'HOLY SEE (THE)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (99, 'HN', 'HONDURAS', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (100, 'HK', 'HONG KONG', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (101, 'HU', 'HUNGARY', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (102, 'IS', 'ICELAND', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (103, 'IN', 'INDIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (104, 'id', 'INDONESIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (105, 'IR', 'IRAN (ISLAMIC REPUBLIC OF)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (106, 'IQ', 'IRAQ', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (107, 'IE', 'IRELAND', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (108, 'IM', 'ISLE OF MAN', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (109, 'IL', 'ISRAEL', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (110, 'IT', 'ITALY', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (111, 'JM', 'JAMAICA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (112, 'JP', 'JAPAN', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (113, 'JE', 'JERSEY', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (114, 'JO', 'JORDAN', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (115, 'KZ', 'KAZAKHSTAN', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (116, 'KE', 'KENYA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (117, 'KI', 'KIRIBATI', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (118, 'KP', 'KOREA (DEMOCRATIC PEOPLE\'S REPUBLIC OF)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (119, 'KR', 'KOREA (REPUBLIC OF)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (120, 'XK', 'KOSOVO', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (121, 'KW', 'KUWAIT', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (122, 'KG', 'KYRGYZSTAN', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (123, 'LA', 'LAO PEOPLE\'S DEMOCRATIC REPUBLIC (THE)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (124, 'LV', 'LATVIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (125, 'LB', 'LEBANON', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (126, 'LS', 'LESOTHO', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (127, 'LR', 'LIBERIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (128, 'LY', 'LIBYAN ARAB JAMAHIRIYA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (129, 'LI', 'LIECHTENSTEIN', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (130, 'LT', 'LITHUANIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (131, 'LU', 'LUXEMBOURG', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (132, 'MO', 'MACAO', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (133, 'MK', 'MACEDONIA (THE FORMER YUGOSLAV REPUBLIC OF)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (134, 'MG', 'MADAGASCAR', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (135, 'MW', 'MALAWI', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (136, 'MY', 'MALAYSIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (137, 'MV', 'MALDIVES', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (138, 'ML', 'MALI', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (139, 'MT', 'MALTA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (140, 'MH', 'MARSHALL ISLANDS (THE)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (141, 'MQ', 'MARTINIQUE', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (142, 'MR', 'MAURITANIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (143, 'MU', 'MAURITIUS', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (144, 'YT', 'MAYOTTE', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (145, 'MX', 'MEXICO', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (146, 'FM', 'MICRONESIA (FEDERATED STATES OF)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (147, 'MD', 'MOLDOVA (REPUBLIC OF)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (148, 'MC', 'MONACO', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (149, 'MN', 'MONGOLIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (150, 'ME', 'MONTENEGRO', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (151, 'MS', 'MONTSERRAT', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (152, 'MA', 'MOROCCO', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (153, 'MZ', 'MOZAMBIQUE', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (154, 'MM', 'MYANMAR', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (155, 'NA', 'NAMIBIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (156, 'NR', 'NAURU', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (157, 'NP', 'NEPAL', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (158, 'NL', 'NETHERLANDS (THE)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (159, 'AN', 'NETHERLAND ANTILLES', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (160, 'NC', 'NEW CALEDONIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (161, 'NZ', 'NEW ZEALAND', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (162, 'NI', 'NICARAGUA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (163, 'NE', 'NIGER (THE)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (164, 'NG', 'NIGERIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (165, 'NU', 'NIUE', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (166, 'NF', 'NORFOLK ISLAND', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (167, 'MP', 'NORTHERN MARIANA ISLANDS (THE)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (168, 'NO', 'NORWAY', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (169, 'OM', 'OMAN', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (170, 'PK', 'PAKISTAN', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (171, 'PW', 'PALAU', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (172, 'PS', 'PALESTINIAN TERRITORY, OCCUPIED', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (173, 'PA', 'PANAMA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (174, 'PG', 'PAPUA NEW GUINEA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (175, 'PY', 'PARAGUAY', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (176, 'PE', 'PERU', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (177, 'PH', 'PHILIPPINES (THE)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (178, 'PN', 'PITCAIRN', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (179, 'PL', 'POLAND', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (180, 'PT', 'PORTUGAL', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (181, 'PR', 'PUERTO RICO', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (182, 'QA', 'QATAR', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (183, 'RE', 'REUNION', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (184, 'RO', 'ROMANIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (185, 'RU', 'RUSSIAN FEDERATION (THE)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (186, 'RW', 'RWANDA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (187, 'BL', 'SAINT BARTHELEMY', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (188, 'SH', 'SAINT HELENA, ASCENSION AND TRISTAN DA CUNHA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (189, 'KN', 'SAINT KITTS AND NEVIS', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (190, 'LC', 'SAINT LUCIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (191, 'MF', 'SAINT MARTIN (FRENCH PART)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (192, 'PM', 'SAINT PIERRE AND MIQUELON', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (193, 'VC', 'SAINT VINCENT AND THE GRENADINES', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (194, 'WS', 'SAMOA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (195, 'SM', 'SAN MARINO', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (196, 'ST', 'SAO TOME AND PRINCIPE', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (197, 'SA', 'SAUDI ARABIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (198, 'SN', 'SENEGAL', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (199, 'RS', 'SERBIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (200, 'SC', 'SEYCHELLES', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (201, 'SL', 'SIERRA LEONE', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (202, 'SG', 'SINGAPORE', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (203, 'SX', 'SINT MAARTEN (DUTCH PART)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (204, 'SK', 'SLOVAKIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (205, 'SI', 'SLOVENIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (206, 'SB', 'SOLOMON ISLANDS', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (207, 'SO', 'SOMALIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (208, 'ZA', 'SOUTH AFRICA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (209, 'GS', 'SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (210, 'SS', 'SOUTH SUDAN', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (211, 'ES', 'SPAIN', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (212, 'LK', 'SRI LANKA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (213, 'SD', 'SUDAN (THE)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (214, 'SR', 'SURIname', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (215, 'SJ', 'SVALBARD AND JAN MAYEN', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (216, 'SZ', 'SWAZILAND', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (217, 'SE', 'SWEDEN', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (218, 'CH', 'SWITZERLAND', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (219, 'SY', 'SYRIAN ARAB REPUBLIC', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (220, 'TW', 'TAIWAN (PROVINCE OF CHINA)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (221, 'TJ', 'TAJIKISTAN', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (222, 'TZ', 'TANZANIA, UNITED REPUBLIC OF', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (223, 'TH', 'THAILAND', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (224, 'TL', 'TIMOR-LESTE', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (225, 'TG', 'TOGO', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (226, 'TK', 'TOKELAU', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (227, 'TO', 'TONGA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (228, 'TT', 'TRINidAD AND TOBAGO', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (229, 'TN', 'TUNISIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (230, 'TR', 'TURKEY', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (231, 'TM', 'TURKMENISTAN', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (232, 'TC', 'TURKS AND CAICOS ISLANDS (THE)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (233, 'TV', 'TUVALU', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (234, 'UG', 'UGANDA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (235, 'UA', 'UKRAINE', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (236, 'AE', 'UNITED ARAB EMIRATES (THE)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (237, 'GB', 'UNITED KINGDOM OF GREAT BRITAIN AND NORTHERN IRELAND (THE)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (238, 'US', 'UNITED STATES OF AMERICA (THE)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (239, 'UM', 'UNITED STATES MINOR OUTLYING ISLANDS (THE)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (240, 'UY', 'URUGUAY', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (241, 'UZ', 'UZBEKISTAN', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (242, 'VU', 'VANUATU', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (243, 'VE', 'VENEZUELA (BOLIVARIAN REPUBLIC OF)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (244, 'VN', 'VIET NAM', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (245, 'VG', 'VIRGIN ISLANDS (BRITISH)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (246, 'VI', 'VIRGIN ISLANDS (U.S.)', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (247, 'WF', 'WALLIS AND FUTUNA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (248, 'EH', 'WESTERN SAHARA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (249, 'YE', 'YEMEN', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (250, 'ZM', 'ZAMBIA', 41, '');
+            INSERT INTO mdmdb.countries(id, code, name, language_id, description) VALUES
+            (251, 'ZW', 'ZIMBABWE', 41, '');
         </sql>
     </changeSet>
 </databaseChangeLog>

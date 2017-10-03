@@ -32,10 +32,12 @@
             `id` BIGINT NOT NULL,
             `code` VARCHAR(255) NOT NULL,
             `name` VARCHAR(255),
-            `language_id` BIGINT NOT NULL,
             `description` VARCHAR(255),
             `phone_code` VARCHAR(255),
-            PRIMARY KEY (`id`)
+            `language_id` BIGINT NOT NULL,
+            PRIMARY KEY (`id`),
+            KEY `countries_language_id` (`language_id`),
+            CONSTRAINT `FK_countries_language_id` FOREIGN KEY (`language_id`) REFERENCES `languages` (`id`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
         </sql>
     </changeSet>

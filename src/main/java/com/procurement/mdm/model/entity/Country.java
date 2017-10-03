@@ -1,5 +1,6 @@
 package com.procurement.mdm.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,12 +22,14 @@ public class Country {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "language_id")
-    private Long languageId;
-
     @Column(name = "description")
     private String description;
 
     @Column(name = "phone_code")
     private String phoneCode;
+
+    @JsonIgnore
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(foreignKey = @ForeignKey(name = "FK_countries_language_id"))
+    private Language language;
 }
