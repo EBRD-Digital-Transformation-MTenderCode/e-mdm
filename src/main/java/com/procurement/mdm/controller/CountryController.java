@@ -29,21 +29,15 @@ public class CountryController {
         return new ResponseEntity<>(countries, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<List<Country>> getCountriesById(@PathVariable("id") Long id) {
-        List<Country> countries = countryService.getCountriesById(id);
+    @RequestMapping(value = "/byCode", method = RequestMethod.GET)
+    public ResponseEntity<List<Country>> getCountriesByCode(@RequestParam String code) {
+        List<Country> countries = countryService.getCountriesByCode(code);
         return new ResponseEntity<>(countries, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/byName", method = RequestMethod.GET)
     public ResponseEntity<List<Country>> getCountriesByName(@RequestParam String name) {
         List<Country> countries = countryService.getCountriesByName(name);
-        return new ResponseEntity<>(countries, HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "/byCode", method = RequestMethod.GET)
-    public ResponseEntity<List<Country>> getCountriesByCode(@RequestParam String code) {
-        List<Country> countries = countryService.getCountriesByCode(code);
         return new ResponseEntity<>(countries, HttpStatus.OK);
     }
 

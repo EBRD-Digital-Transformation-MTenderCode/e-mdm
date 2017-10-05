@@ -31,8 +31,6 @@ class CpvServiceImplTest {
     static void setUp() {
         List<Cpv> cpvs = new ArrayList<>();
         language = new Language();
-        language.setId(41L);
-        language.setSNo(41);
         language.setName("Indo-European");
         language.setFamily("English");
         language.setIso6391("en");
@@ -45,18 +43,16 @@ class CpvServiceImplTest {
         cpv.setLanguage(language);
         cpvs.add(cpv);
         CpvRepository cpvRepository = mock(CpvRepository.class);
-        when(cpvRepository.findCpvsByLanguage_Id(language.getId())).thenReturn(cpvs);
-        when(cpvRepository.findCpvsByLanguage_IdAndGroup(language.getId(), cpv.getGroup())).thenReturn(cpvs);
-        when(cpvRepository.findCpvsByLanguage_IdAndParent(language.getId(), cpv.getParent())).thenReturn(cpvs);
-        when(cpvRepository.findCpvsByLanguage_IdAndGroupAndParent(language.getId(), cpv.getGroup(), cpv.getParent()))
-            .thenReturn(cpvs);
+        when(cpvRepository.findCpvsByLanguage_Iso6391(language.getIso6391())).thenReturn(cpvs);
+        when(cpvRepository.findCpvsByLanguage_Iso6391AndGroup(language.getIso6391(), cpv.getGroup())).thenReturn(cpvs);
+        when(cpvRepository.findCpvsByLanguage_Iso6391AndParent(language.getIso6391(), cpv.getParent())).thenReturn(cpvs);
+        when(cpvRepository.findCpvsByLanguage_Iso6391AndGroupAndParent(language.getIso6391(), cpv.getGroup(), cpv.getParent())).thenReturn(cpvs);
         cpvService = new CpvServiceImpl(cpvRepository);
     }
 
     @Test
     void getLanguage() {
-        assertTrue(language.getId().equals(41L));
-        assertTrue(language.getSNo().equals(41));
+        assertTrue(language.getIso6391().equals("en"));
         assertTrue(language.getName().equals("Indo-European"));
         assertTrue(language.getFamily().equals("English"));
         assertTrue(language.getIso6391().equals("en"));
@@ -64,32 +60,32 @@ class CpvServiceImplTest {
     }
 
     @Test
-    void getCpvByLanguage() {
-        List<Cpv> cpvs = cpvService.getCpvByLanguage(cpv.getLanguage().getId());
+    void getCpvByLanguageCode() {
+        List<Cpv> cpvs = cpvService.getCpvByLanguageCode(cpv.getLanguage().getIso6391());
         assertTrue(cpvs.get(0).getCode().equals(cpv.getCode()));
     }
 
     @Test
-    void getCpvByParamLanguageId() {
-        List<Cpv> cpvs = cpvService.getCpvByParam(language.getId());
+    void getCpvByParamLanguageCode() {
+        List<Cpv> cpvs = cpvService.getCpvByParam(language.getIso6391());
         assertTrue(cpvs.get(0).getCode().equals(cpv.getCode()));
     }
 
     @Test
-    void getCpvByParamsLanguageIdAndGroup() {
-        List<Cpv> cpvs = cpvService.getCpvByParam(language.getId(), cpv.getGroup());
+    void getCpvByParamsLanguageCodeAndGroup() {
+        List<Cpv> cpvs = cpvService.getCpvByParam(language.getIso6391(), cpv.getGroup());
         assertTrue(cpvs.get(0).getCode().equals(cpv.getCode()));
     }
 
     @Test
-    void getCpvByParamsLanguageIdAndParent() {
-        List<Cpv> cpvs = cpvService.getCpvByParam(language.getId(), cpv.getParent());
+    void getCpvByParamsLanguageCodeAndParent() {
+        List<Cpv> cpvs = cpvService.getCpvByParam(language.getIso6391(), cpv.getParent());
         assertTrue(cpvs.get(0).getCode().equals(cpv.getCode()));
     }
 
     @Test
-    void getCpvByParamsLanguageIdAndGroupAndParent() {
-        List<Cpv> cpvs = cpvService.getCpvByParam(language.getId(), cpv.getGroup(), cpv.getParent());
+    void getCpvByParamsLanguageCodeAndGroupAndParent() {
+        List<Cpv> cpvs = cpvService.getCpvByParam(language.getIso6391(), cpv.getGroup(), cpv.getParent());
         assertTrue(cpvs.get(0).getCode().equals(cpv.getCode()));
     }
 }

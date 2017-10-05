@@ -1,6 +1,7 @@
 package com.procurement.mdm.repository;
 
 import com.procurement.mdm.model.entity.Country;
+import com.procurement.mdm.model.entity.Language;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,23 +26,23 @@ class CountryRepositoryTest {
     @BeforeAll
     static void setUp() {
         List<Country> countries = new ArrayList<>();
+        Language language = new Language();
+        language.setIso6391("en");
         country = new Country();
-        country.setId(1L);
         country.setCode("0-000001");
-        country.setLanguageId(41L);
         country.setName("Test country");
         country.setDescription("Test description");
         country.setPhoneCode("+380991112233");
+        country.setLanguage(language);
         countries.add(country);
         countryRepository = mock(CountryRepository.class);
-        given(countryRepository.findAllById(country.getId())).willReturn(countries);
         given(countryRepository.findCountriesByName(country.getName())).willReturn(countries);
         given(countryRepository.findCountriesByCode(country.getCode())).willReturn(countries);
     }
 
     @Test
-    void findAllById() {
-        List<Country> countries = countryRepository.findAllById(country.getId());
+    void findCountriesByCode() {
+        List<Country> countries = countryRepository.findCountriesByCode(country.getCode());
         assertTrue(countries.get(0).getCode().equals(country.getCode()));
     }
 
@@ -49,11 +50,5 @@ class CountryRepositoryTest {
     void findCountriesByName() {
         List<Country> countries = countryRepository.findCountriesByName(country.getName());
         assertTrue(countries.get(0).getName().equals(country.getName()));
-    }
-
-    @Test
-    void findCountriesByCode() {
-        List<Country> countries = countryRepository.findCountriesByCode(country.getCode());
-        assertTrue(countries.get(0).getCode().equals(country.getCode()));
     }
 }

@@ -8,374 +8,190 @@
     <changeSet id="insert" author="kolchev">
         <sql>
             SET nameS 'utf8';
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (1, 1, 'Northwest Caucasian', 'Abkhaz', 'ab', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (2, 2, 'Afro-Asiatic', 'Afar', 'aa', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (3, 3, 'Indo-European', 'Afrikaans', 'af', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (4, 4, 'Niger-Congo', 'Akan', 'ak', 'macrolanguage, Twi is [tw/twi], Fanti is [fat]');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (5, 5, 'Indo-European', 'Albanian', 'sq', 'macrolanguage, Albanian Phylozone in 639-6');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (6, 6, 'Afro-Asiatic', 'Amharic', 'am', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (7, 7, 'Afro-Asiatic', 'Arabic', 'ar', 'macrolanguage, Standard Arabic is [arb]');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (8, 8, 'Indo-European', 'Aragonese', 'an', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (9, 9, 'Indo-European', 'Armenian', 'hy', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (10, 10, 'Indo-European', 'Assamese', 'as', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (11, 11, 'Northeast Caucasian', 'Avaric', 'av', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (12, 12, 'Indo-European', 'Avestan', 'ae', 'ancient');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (13, 13, 'Aymaran', 'Aymara', 'ay', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (14, 14, 'Turkic', 'Azerbaijani', 'az', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (15, 15, 'Niger-Congo', 'Bambara', 'bm', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (16, 16, 'Turkic', 'Bashkir', 'ba', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (17, 17, 'Language isolate', 'Basque', 'eu', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (18, 18, 'Indo-European', 'Belarusian', 'be', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (19, 19, 'Indo-European', 'Bengali; Bangla', 'bn', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (20, 20, 'Indo-European', 'Bihari', 'bh', 'Collective language code for Bhojpuri, Magahi, and Maithili');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (21, 21, 'Creole', 'Bislama', 'bi', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (22, 22, 'Indo-European', 'Bosnian', 'bs', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (23, 23, 'Indo-European', 'Breton', 'br', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (24, 24, 'Indo-European', 'Bulgarian', 'bg', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (25, 25, 'Sino-Tibetan', 'Burmese', 'my', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (26, 26, 'Indo-European', 'Catalan; Valencian', 'ca', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (27, 27, 'Austronesian', 'Chamorro', 'ch', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (28, 28, 'Northeast Caucasian', 'Chechen', 'ce', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (29, 29, 'Niger-Congo', 'Chichewa; Chewa; Nyanja', 'ny', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (30, 30, 'Sino-Tibetan', 'Chinese', 'zh', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (31, 31, 'Turkic', 'Chuvash', 'cv', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (32, 32, 'Indo-European', 'Cornish', 'kw', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (33, 33, 'Indo-European', 'Corsican', 'co', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (34, 34, 'Algonquian', 'Cree', 'cr', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (35, 35, 'Indo-European', 'Croatian', 'hr', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (36, 36, 'Indo-European', 'Czech', 'cs', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (37, 37, 'Indo-European', 'Danish', 'da', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (38, 38, 'Indo-European', 'Divehi; Dhivehi; Maldivian;', 'dv', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (39, 39, 'Indo-European', 'Dutch', 'nl', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (40, 40, 'Sino-Tibetan', 'Dzongkha', 'dz', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (41, 41, 'Indo-European', 'English', 'en', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (42, 42, 'Constructed', 'Esperanto', 'eo', 'constructed, initiated from L.L. Zamenhof, 1887');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (43, 43, 'Uralic', 'Estonian', 'et', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (44, 44, 'Niger-Congo', 'Ewe', 'ee', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (45, 45, 'Indo-European', 'Faroese', 'fo', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (46, 46, 'Austronesian', 'Fijian', 'fj', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (47, 47, 'Uralic', 'Finnish', 'fi', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (48, 48, 'Indo-European', 'French', 'fr', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (49, 49, 'Niger-Congo', 'Fula; Fulah; Pulaar; Pular', 'ff', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (50, 50, 'Indo-European', 'Galician', 'gl', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (51, 51, 'South Caucasian', 'Georgian', 'ka', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (52, 52, 'Indo-European', 'German', 'de', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (53, 53, 'Indo-European', 'Greek, Modern', 'el', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (54, 54, 'Tupian', 'Guarani', 'gn', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (55, 55, 'Indo-European', 'Gujarati', 'gu', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (56, 56, 'Creole', 'Haitian; Haitian Creole', 'ht', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (57, 57, 'Afro-Asiatic', 'Hausa', 'ha', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (58, 58, 'Afro-Asiatic', 'Hebrew (modern)', 'he', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (59, 59, 'Niger-Congo', 'Herero', 'hz', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (60, 60, 'Indo-European', 'Hindi', 'hi', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (61, 61, 'Austronesian', 'Hiri Motu', 'ho', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (62, 62, 'Uralic', 'Hungarian', 'hu', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (63, 63, 'Constructed', 'Interlingua', 'ia', 'constructed by International Auxiliary Language Association');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (64, 64, 'Austronesian', 'Indonesian', 'id', 'Covered by macrolanguage [ms/msa]');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (65, 65, 'Constructed', 'Interlingue', 'ie', 'constructed by Edgar de Wahl, first published in 1922');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (66, 66, 'Indo-European', 'Irish', 'ga', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (67, 67, 'Niger-Congo', 'Igbo', 'ig', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (68, 68, 'Eskimo-Aleut', 'Inupiaq', 'ik', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (69, 69, 'Constructed', 'ido', 'io', 'constructed by De Beaufront, 1907, as variation of Esperanto');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (70, 70, 'Indo-European', 'Icelandic', 'is', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (71, 71, 'Indo-European', 'Italian', 'it', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (72, 72, 'Eskimo-Aleut', 'Inuktitut', 'iu', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (73, 73, 'Japonic', 'Japanese', 'ja', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (74, 74, 'Austronesian', 'Javanese', 'jv', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (75, 75, 'Eskimo-Aleut', 'Kalaallisut, Greenlandic', 'kl', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (76, 76, 'Dravidian', 'Kannada', 'kn', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (77, 77, 'Nilo-Saharan', 'Kanuri', 'kr', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (78, 78, 'Indo-European', 'Kashmiri', 'ks', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (79, 79, 'Turkic', 'Kazakh', 'kk', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (80, 80, 'Austroasiatic', 'Khmer', 'km', 'a.k.a. Cambodian');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (81, 81, 'Niger-Congo', 'Kikuyu, Gikuyu', 'ki', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (82, 82, 'Niger-Congo', 'Kinyarwanda', 'rw', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (83, 83, 'Turkic', 'Kyrgyz', 'ky', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (84, 84, 'Uralic', 'Komi', 'kv', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (85, 85, 'Niger-Congo', 'Kongo', 'kg', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (86, 86, 'Language isolate', 'Korean', 'ko', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (87, 87, 'Indo-European', 'Kurdish', 'ku', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (88, 88, 'Niger-Congo', 'Kwanyama, Kuanyama', 'kj', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (89, 89, 'Indo-European', 'Latin', 'la', 'ancient');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (90, 90, 'Indo-European', 'Luxembourgish, Letzeburgesch', 'lb', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (91, 91, 'Niger-Congo', 'Ganda', 'lg', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (92, 92, 'Indo-European', 'Limburgish, Limburgan, Limburger', 'li', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (93, 93, 'Niger-Congo', 'Lingala', 'ln', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (94, 94, 'Tai-Kadai', 'Lao', 'lo', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (95, 95, 'Indo-European', 'Lithuanian', 'lt', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (96, 96, 'Niger-Congo', 'Luba-Katanga', 'lu', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (97, 97, 'Indo-European', 'Latvian', 'lv', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (98, 98, 'Indo-European', 'Manx', 'gv', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (99, 99, 'Indo-European', 'Macedonian', 'mk', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (100, 100, 'Austronesian', 'Malagasy', 'mg', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (101, 101, 'Austronesian', 'Malay', 'ms', 'macrolanguage, Standard Malay is [zsm], Indonesian is [id/ind]');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (102, 102, 'Dravidian', 'Malayalam', 'ml', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (103, 103, 'Afro-Asiatic', 'Maltese', 'mt', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (104, 104, 'Austronesian', 'Māori', 'mi', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (105, 105, 'Indo-European', 'Marathi (Marāṭhī)', 'mr', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (106, 106, 'Austronesian', 'Marshallese', 'mh', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (107, 107, 'Mongolic', 'Mongolian', 'mn', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (108, 108, 'Austronesian', 'Nauru', 'na', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (109, 109, 'Dene-Yeniseian', 'Navajo, Navaho', 'nv', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (110, 110, 'Indo-European', 'Norwegian Bokmal', 'nb', 'Covered by macrolanguage [no/nor]');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (111, 111, 'Niger-Congo', 'North Ndebele', 'nd', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (112, 112, 'Indo-European', 'Nepali', 'ne', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (113, 113, 'Niger-Congo', 'Ndonga', 'ng', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (114, 114, 'Indo-European', 'Norwegian Nynorsk', 'nn', 'Covered by macrolanguage [no/nor]');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (115, 115, 'Indo-European', 'Norwegian', 'no', 'macrolanguage, Bokmal is [nb/nob], Nynorsk is [nn/nno]');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (116, 116, 'Sino-Tibetan', 'Nuosu', 'ii', 'Standard form of Yi languages');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (117, 117, 'Niger-Congo', 'South Ndebele', 'nr', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (118, 118, 'Indo-European', 'Occitan', 'oc', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (119, 119, 'Algonquian', 'Ojibwe, Ojibwa', 'oj', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (120, 120, 'Indo-European', 'Old Church Slavonic, Church Slavonic, Old Bulgarian', 'cu', 'ancient, in use by Orthodox Church');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (121, 121, 'Afro-Asiatic', 'Oromo', 'om', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (122, 122, 'Indo-European', 'Oriya', 'or', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (123, 123, 'Indo-European', 'Ossetian, Ossetic', 'os', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (124, 124, 'Indo-European', 'Panjabi, Punjabi', 'pa', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (125, 125, 'Indo-European', 'Pāli', 'pi', 'ancient');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (126, 126, 'Indo-European', 'Persian (Farsi)', 'fa', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (127, 127, 'Indo-European', 'Polish', 'pl', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (128, 128, 'Indo-European', 'Pashto, Pushto', 'ps', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (129, 129, 'Indo-European', 'Portuguese', 'pt', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (130, 130, 'Quechuan', 'Quechua', 'qu', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (131, 131, 'Indo-European', 'Romansh', 'rm', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (132, 132, 'Niger-Congo', 'Kirundi', 'rn', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (133, 133, 'Indo-European', 'Romanian', 'ro', '[mo] for Moldavian has been withdrawn, recommending [ro] also for Moldavian');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (134, 134, 'Indo-European', 'Russian', 'ru', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (135, 135, 'Indo-European', 'Sanskrit (Saṁskṛta)', 'sa', 'ancient, still spoken');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (136, 136, 'Indo-European', 'Sardinian', 'sc', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (137, 137, 'Indo-European', 'Sindhi', 'sd', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (138, 138, 'Uralic', 'Northern Sami', 'se', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (139, 139, 'Austronesian', 'Samoan', 'sm', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (140, 140, 'Creole', 'Sango', 'sg', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (141, 141, 'Indo-European', 'Serbian', 'sr', 'The ISO 639-2/T code srp deprecated the ISO 639-2/B code scc');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (142, 142, 'Indo-European', 'Scottish Gaelic; Gaelic', 'gd', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (143, 143, 'Niger-Congo', 'Shona', 'sn', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (144, 144, 'Indo-European', 'Sinhala, Sinhalese', 'si', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (145, 145, 'Indo-European', 'Slovak', 'sk', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (146, 146, 'Indo-European', 'Slovene', 'sl', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (147, 147, 'Afro-Asiatic', 'Somali', 'so', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (148, 148, 'Niger-Congo', 'Southern Sotho', 'st', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (149, 150, 'Indo-European', 'Spanish; Castilian', 'es', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (150, 151, 'Austronesian', 'Sundanese', 'su', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (151, 152, 'Niger-Congo', 'Swahili', 'sw', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (152, 153, 'Niger-Congo', 'Swati', 'ss', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (153, 154, 'Indo-European', 'Swedish', 'sv', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (154, 155, 'Dravidian', 'Tamil', 'ta', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (155, 156, 'Dravidian', 'Telugu', 'te', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (156, 157, 'Indo-European', 'Tajik', 'tg', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (157, 158, 'Tai-Kadai', 'Thai', 'th', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (158, 159, 'Afro-Asiatic', 'Tigrinya', 'ti', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (159, 160, 'Sino-Tibetan', 'Tibetan Standard, Tibetan, Central', 'bo', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (160, 161, 'Turkic', 'Turkmen', 'tk', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (161, 162, 'Austronesian', 'Tagalog', 'tl', 'Note: Filipino (Pilipino) has the code [fil]');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (162, 163, 'Niger-Congo', 'Tswana', 'tn', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (163, 164, 'Austronesian', 'Tonga (Tonga Islands)', 'to', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (164, 165, 'Turkic', 'Turkish', 'tr', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (165, 166, 'Niger-Congo', 'Tsonga', 'ts', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (166, 167, 'Turkic', 'Tatar', 'tt', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (167, 168, 'Niger-Congo', 'Twi', 'tw', 'Covered by macrolanguage [ak/aka]');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (168, 169, 'Austronesian', 'Tahitian', 'ty', 'One of the Reo Mā`ohi (languages of French Polynesia)');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (169, 170, 'Turkic', 'Uyghur, Uighur', 'ug', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (170, 171, 'Indo-European', 'Ukrainian', 'uk', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (171, 172, 'Indo-European', 'Urdu', 'ur', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (172, 173, 'Turkic', 'Uzbek', 'uz', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (173, 174, 'Niger-Congo', 'Venda', 've', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (174, 175, 'Austroasiatic', 'Vietnamese', 'vi', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (175, 176, 'Constructed', 'Volapuk', 'vo', 'constructed');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (176, 177, 'Indo-European', 'Walloon', 'wa', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (177, 178, 'Indo-European', 'Welsh', 'cy', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (178, 179, 'Niger-Congo', 'Wolof', 'wo', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (179, 180, 'Indo-European', 'Western Frisian', 'fy', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (180, 181, 'Niger-Congo', 'Xhosa', 'xh', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (181, 182, 'Indo-European', 'Yiddish', 'yi', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (182, 183, 'Niger-Congo', 'Yoruba', 'yo', '');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (183, 184, 'Tai-Kadai', 'Zhuang, Chuang', 'za', 'macrolanguage');
-            INSERT INTO mdmdb.languages(id, s_no, name, family, `iso_639_1`, description) VALUES
-            (184, 185, 'Niger-Congo', 'Zulu', 'zu', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('aa', 'Afro-Asiatic', 'Afar', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ab', 'Northwest Caucasian', 'Abkhaz', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ae', 'Indo-European', 'Avestan', 'ancient');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('af', 'Indo-European', 'Afrikaans', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ak', 'Niger-Congo', 'Akan', 'macrolanguage, Twi is [tw/twi], Fanti is [fat]');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('am', 'Afro-Asiatic', 'Amharic', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('an', 'Indo-European', 'Aragonese', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ar', 'Afro-Asiatic', 'Arabic', 'macrolanguage, Standard Arabic is [arb]');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('as', 'Indo-European', 'Assamese', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('av', 'Northeast Caucasian', 'Avaric', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ay', 'Aymaran', 'Aymara', 'macrolanguage');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('az', 'Turkic', 'Azerbaijani', 'macrolanguage');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ba', 'Turkic', 'Bashkir', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('be', 'Indo-European', 'Belarusian', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('bg', 'Indo-European', 'Bulgarian', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('bh', 'Indo-European', 'Bihari', 'Collective language code for Bhojpuri, Magahi, and Maithili');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('bi', 'Creole', 'Bislama', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('bm', 'Niger-Congo', 'Bambara', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('bn', 'Indo-European', 'Bengali; Bangla', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('bo', 'Sino-Tibetan', 'Tibetan Standard, Tibetan, Central', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('br', 'Indo-European', 'Breton', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('bs', 'Indo-European', 'Bosnian', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ca', 'Indo-European', 'Catalan; Valencian', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ce', 'Northeast Caucasian', 'Chechen', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ch', 'Austronesian', 'Chamorro', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('co', 'Indo-European', 'Corsican', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('cr', 'Algonquian', 'Cree', 'macrolanguage');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('cs', 'Indo-European', 'Czech', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('cu', 'Indo-European', 'Old Church Slavonic, Church Slavonic, Old Bulgarian', 'ancient, in use by Orthodox Church');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('cv', 'Turkic', 'Chuvash', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('cy', 'Indo-European', 'Welsh', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('da', 'Indo-European', 'Danish', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('de', 'Indo-European', 'German', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('dv', 'Indo-European', 'Divehi; Dhivehi; Maldivian;', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('dz', 'Sino-Tibetan', 'Dzongkha', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ee', 'Niger-Congo', 'Ewe', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('el', 'Indo-European', 'Greek, Modern', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('en', 'Indo-European', 'English', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('eo', 'Constructed', 'Esperanto', 'constructed, initiated from L.L. Zamenhof, 1887');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('es', 'Indo-European', 'Spanish; Castilian', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('et', 'Uralic', 'Estonian', 'macrolanguage');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('eu', 'Language isolate', 'Basque', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('fa', 'Indo-European', 'Persian (Farsi)', 'macrolanguage');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ff', 'Niger-Congo', 'Fula; Fulah; Pulaar; Pular', 'macrolanguage');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('fi', 'Uralic', 'Finnish', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('fj', 'Austronesian', 'Fijian', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('fo', 'Indo-European', 'Faroese', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('fr', 'Indo-European', 'French', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('fy', 'Indo-European', 'Western Frisian', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ga', 'Indo-European', 'Irish', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('gd', 'Indo-European', 'Scottish Gaelic; Gaelic', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('gl', 'Indo-European', 'Galician', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('gn', 'Tupian', 'Guarani', 'macrolanguage');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('gu', 'Indo-European', 'Gujarati', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('gv', 'Indo-European', 'Manx', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ha', 'Afro-Asiatic', 'Hausa', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('he', 'Afro-Asiatic', 'Hebrew (modern)', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('hi', 'Indo-European', 'Hindi', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ho', 'Austronesian', 'Hiri Motu', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('hr', 'Indo-European', 'Croatian', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ht', 'Creole', 'Haitian; Haitian Creole', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('hu', 'Uralic', 'Hungarian', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('hy', 'Indo-European', 'Armenian', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('hz', 'Niger-Congo', 'Herero', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ia', 'Constructed', 'Interlingua', 'constructed by International Auxiliary Language Association');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('id', 'Austronesian', 'Indonesian', 'Covered by macrolanguage [ms/msa]');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ie', 'Constructed', 'Interlingue', 'constructed by Edgar de Wahl, first published in 1922');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ig', 'Niger-Congo', 'Igbo', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ii', 'Sino-Tibetan', 'Nuosu', 'Standard form of Yi languages');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ik', 'Eskimo-Aleut', 'Inupiaq', 'macrolanguage');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('io', 'Constructed', 'ido', 'constructed by De Beaufront, 1907, as variation of Esperanto');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('is', 'Indo-European', 'Icelandic', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('it', 'Indo-European', 'Italian', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('iu', 'Eskimo-Aleut', 'Inuktitut', 'macrolanguage');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ja', 'Japonic', 'Japanese', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('jv', 'Austronesian', 'Javanese', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ka', 'South Caucasian', 'Georgian', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('kg', 'Niger-Congo', 'Kongo', 'macrolanguage');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ki', 'Niger-Congo', 'Kikuyu, Gikuyu', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('kj', 'Niger-Congo', 'Kwanyama, Kuanyama', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('kk', 'Turkic', 'Kazakh', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('kl', 'Eskimo-Aleut', 'Kalaallisut, Greenlandic', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('km', 'Austroasiatic', 'Khmer', 'a.k.a. Cambodian');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('kn', 'Dravidian', 'Kannada', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ko', 'Language isolate', 'Korean', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('kr', 'Nilo-Saharan', 'Kanuri', 'macrolanguage');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ks', 'Indo-European', 'Kashmiri', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ku', 'Indo-European', 'Kurdish', 'macrolanguage');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('kv', 'Uralic', 'Komi', 'macrolanguage');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('kw', 'Indo-European', 'Cornish', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ky', 'Turkic', 'Kyrgyz', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('la', 'Indo-European', 'Latin', 'ancient');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('lb', 'Indo-European', 'Luxembourgish, Letzeburgesch', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('lg', 'Niger-Congo', 'Ganda', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('li', 'Indo-European', 'Limburgish, Limburgan, Limburger', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ln', 'Niger-Congo', 'Lingala', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('lo', 'Tai-Kadai', 'Lao', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('lt', 'Indo-European', 'Lithuanian', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('lu', 'Niger-Congo', 'Luba-Katanga', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('lv', 'Indo-European', 'Latvian', 'macrolanguage');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('mg', 'Austronesian', 'Malagasy', 'macrolanguage');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('mh', 'Austronesian', 'Marshallese', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('mi', 'Austronesian', 'M?ori', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('mk', 'Indo-European', 'Macedonian', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ml', 'Dravidian', 'Malayalam', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('mn', 'Mongolic', 'Mongolian', 'macrolanguage');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('mr', 'Indo-European', 'Marathi (Mar??h?)', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ms', 'Austronesian', 'Malay', 'macrolanguage, Standard Malay is [zsm], Indonesian is [id/ind]');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('mt', 'Afro-Asiatic', 'Maltese', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('my', 'Sino-Tibetan', 'Burmese', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('na', 'Austronesian', 'Nauru', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('nb', 'Indo-European', 'Norwegian Bokmal', 'Covered by macrolanguage [no/nor]');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('nd', 'Niger-Congo', 'North Ndebele', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ne', 'Indo-European', 'Nepali', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ng', 'Niger-Congo', 'Ndonga', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('nl', 'Indo-European', 'Dutch', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('nn', 'Indo-European', 'Norwegian Nynorsk', 'Covered by macrolanguage [no/nor]');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('no', 'Indo-European', 'Norwegian', 'macrolanguage, Bokmal is [nb/nob], Nynorsk is [nn/nno]');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('nr', 'Niger-Congo', 'South Ndebele', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('nv', 'Dene-Yeniseian', 'Navajo, Navaho', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ny', 'Niger-Congo', 'Chichewa; Chewa; Nyanja', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('oc', 'Indo-European', 'Occitan', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('oj', 'Algonquian', 'Ojibwe, Ojibwa', 'macrolanguage');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('om', 'Afro-Asiatic', 'Oromo', 'macrolanguage');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('or', 'Indo-European', 'Oriya', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('os', 'Indo-European', 'Ossetian, Ossetic', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('pa', 'Indo-European', 'Panjabi, Punjabi', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('pi', 'Indo-European', 'P?li', 'ancient');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('pl', 'Indo-European', 'Polish', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ps', 'Indo-European', 'Pashto, Pushto', 'macrolanguage');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('pt', 'Indo-European', 'Portuguese', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('qu', 'Quechuan', 'Quechua', 'macrolanguage');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('rm', 'Indo-European', 'Romansh', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('rn', 'Niger-Congo', 'Kirundi', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ro', 'Indo-European', 'Romanian', '[mo] for Moldavian has been withdrawn, recommending [ro] also for Moldavian');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ru', 'Indo-European', 'Russian', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('rw', 'Niger-Congo', 'Kinyarwanda', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('sa', 'Indo-European', 'Sanskrit (Sa?sk?ta)', 'ancient, still spoken');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('sc', 'Indo-European', 'Sardinian', 'macrolanguage');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('sd', 'Indo-European', 'Sindhi', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('se', 'Uralic', 'Northern Sami', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('sg', 'Creole', 'Sango', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('si', 'Indo-European', 'Sinhala, Sinhalese', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('sk', 'Indo-European', 'Slovak', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('sl', 'Indo-European', 'Slovene', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('sm', 'Austronesian', 'Samoan', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('sn', 'Niger-Congo', 'Shona', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('so', 'Afro-Asiatic', 'Somali', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('sq', 'Indo-European', 'Albanian', 'macrolanguage, Albanian Phylozone in 639-6');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('sr', 'Indo-European', 'Serbian', 'The ISO 639-2/T code srp deprecated the ISO 639-2/B code scc');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ss', 'Niger-Congo', 'Swati', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('st', 'Niger-Congo', 'Southern Sotho', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('su', 'Austronesian', 'Sundanese', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('sv', 'Indo-European', 'Swedish', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('sw', 'Niger-Congo', 'Swahili', 'macrolanguage');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ta', 'Dravidian', 'Tamil', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('te', 'Dravidian', 'Telugu', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('tg', 'Indo-European', 'Tajik', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('th', 'Tai-Kadai', 'Thai', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ti', 'Afro-Asiatic', 'Tigrinya', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('tk', 'Turkic', 'Turkmen', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('tl', 'Austronesian', 'Tagalog', 'Note: Filipino (Pilipino) has the code [fil]');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('tn', 'Niger-Congo', 'Tswana', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('to', 'Austronesian', 'Tonga (Tonga Islands)', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('tr', 'Turkic', 'Turkish', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ts', 'Niger-Congo', 'Tsonga', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('tt', 'Turkic', 'Tatar', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('tw', 'Niger-Congo', 'Twi', 'Covered by macrolanguage [ak/aka]');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ty', 'Austronesian', 'Tahitian', 'One of the Reo M?`ohi (languages of French Polynesia)');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ug', 'Turkic', 'Uyghur, Uighur', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('uk', 'Indo-European', 'Ukrainian', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ur', 'Indo-European', 'Urdu', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('uz', 'Turkic', 'Uzbek', 'macrolanguage');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('ve', 'Niger-Congo', 'Venda', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('vi', 'Austroasiatic', 'Vietnamese', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('vo', 'Constructed', 'Volapuk', 'constructed');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('wa', 'Indo-European', 'Walloon', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('wo', 'Niger-Congo', 'Wolof', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('xh', 'Niger-Congo', 'Xhosa', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('yi', 'Indo-European', 'Yiddish', 'macrolanguage');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('yo', 'Niger-Congo', 'Yoruba', '');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('za', 'Tai-Kadai', 'Zhuang, Chuang', 'macrolanguage');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('zh', 'Sino-Tibetan', 'Chinese', 'macrolanguage');
+            INSERT INTO mdmdb.languages (iso6391, name, family, description) VALUES ('zu', 'Niger-Congo', 'Zulu', '');
         </sql>
     </changeSet>
 </databaseChangeLog>

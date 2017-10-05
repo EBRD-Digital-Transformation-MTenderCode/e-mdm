@@ -21,17 +21,18 @@ public class CpvController {
         this.cpvService = cpvService;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Cpv>> getCpvByLanguageId(@RequestParam Long language_id) {
-        List<Cpv> cpv = cpvService.getCpvByLanguage(language_id);
+    @RequestMapping(value = "/byLanguage", method = RequestMethod.GET)
+    public ResponseEntity<List<Cpv>> getCpvByLanguageCode(@RequestParam("languageCode") String languageCode) {
+        List<Cpv> cpv = cpvService.getCpvByLanguageCode(languageCode);
         return new ResponseEntity<>(cpv, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/byParam", method = RequestMethod.GET)
-    public ResponseEntity<List<Cpv>> getCpvByParam(@RequestParam("language_id") Long language_id,
-                                                      @RequestParam(value = "group", required = false) Integer group,
-                                                      @RequestParam(value = "parent", required = false) String parent) {
-        List<Cpv> cpv = cpvService.getCpvByParam(language_id, group, parent);
+    public ResponseEntity<List<Cpv>> getCpvByParam(@RequestParam("languageCode") String languageCode,
+                                                   @RequestParam(value = "group", required = false) Integer group,
+                                                   @RequestParam(value = "parent", required = false) String parent) {
+
+        List<Cpv> cpv = cpvService.getCpvByParam(languageCode, group, parent);
         return new ResponseEntity<>(cpv, HttpStatus.OK);
     }
 }

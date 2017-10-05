@@ -29,7 +29,7 @@ class CpvRepositoryTest {
     static void setUp() {
         List<Cpv> cpvs = new ArrayList<>();
         language = new Language();
-        language.setId(41L);
+        language.setIso6391("en");
         cpv = new Cpv();
         cpv.setCode("03000000-1");
         cpv.setName("Test cpv");
@@ -38,34 +38,34 @@ class CpvRepositoryTest {
         cpv.setLanguage(language);
         cpvs.add(cpv);
         cpvRepository = mock(CpvRepository.class);
-        given(cpvRepository.findCpvsByLanguage_Id(language.getId())).willReturn(cpvs);
-        given(cpvRepository.findCpvsByLanguage_IdAndGroup(language.getId(), cpv.getGroup())).willReturn(cpvs);
-        given(cpvRepository.findCpvsByLanguage_IdAndParent(language.getId(), cpv.getParent())).willReturn(cpvs);
-        given(cpvRepository.findCpvsByLanguage_IdAndGroupAndParent(language.getId(), cpv.getGroup(), cpv.getParent())).willReturn(cpvs);
+        given(cpvRepository.findCpvsByLanguage_Iso6391(language.getIso6391())).willReturn(cpvs);
+        given(cpvRepository.findCpvsByLanguage_Iso6391AndGroup(language.getIso6391(), cpv.getGroup())).willReturn(cpvs);
+        given(cpvRepository.findCpvsByLanguage_Iso6391AndParent(language.getIso6391(), cpv.getParent())).willReturn(cpvs);
+        given(cpvRepository.findCpvsByLanguage_Iso6391AndGroupAndParent(language.getIso6391(), cpv.getGroup(), cpv.getParent())).willReturn(cpvs);
     }
 
     @Test
     void findCpvsByLanguage_Id() {
-        List<Cpv> cpvs = cpvRepository.findCpvsByLanguage_Id(language.getId());
+        List<Cpv> cpvs = cpvRepository.findCpvsByLanguage_Iso6391(language.getIso6391());
         assertTrue(cpvs.get(0).getCode().equals(cpv.getCode()));
     }
 
     @Test
     void findCpvsByLanguage_IdAndGroupAndParent() {
-        List<Cpv> cpvs = cpvRepository.findCpvsByLanguage_IdAndGroupAndParent(language.getId(), cpv.getGroup(), cpv
+        List<Cpv> cpvs = cpvRepository.findCpvsByLanguage_Iso6391AndGroupAndParent(language.getIso6391(), cpv.getGroup(), cpv
             .getParent());
         assertTrue(cpvs.get(0).getCode().equals(cpv.getCode()));
     }
 
     @Test
     void findCpvsByLanguage_IdAndGroup() {
-        List<Cpv> cpvs = cpvRepository.findCpvsByLanguage_IdAndGroup(language.getId(), cpv.getGroup());
+        List<Cpv> cpvs = cpvRepository.findCpvsByLanguage_Iso6391AndGroup(language.getIso6391(), cpv.getGroup());
         assertTrue(cpvs.get(0).getCode().equals(cpv.getCode()));
     }
 
     @Test
     void findCpvsByLanguage_IdAndParent() {
-        List<Cpv> cpvs = cpvRepository.findCpvsByLanguage_IdAndParent(language.getId(), cpv.getParent());
+        List<Cpv> cpvs = cpvRepository.findCpvsByLanguage_Iso6391AndParent(language.getIso6391(), cpv.getParent());
         assertTrue(cpvs.get(0).getCode().equals(cpv.getCode()));
     }
 }

@@ -17,35 +17,35 @@ public class CpvServiceImpl implements CpvService {
     }
 
     @Override
-    public List<Cpv> getCpvByParam(Long language_id) {
-        Objects.requireNonNull(language_id);
-        return cpvRepository.findCpvsByLanguage_Id(language_id);
+    public List<Cpv> getCpvByParam(String languageCode) {
+        Objects.requireNonNull(languageCode);
+        return cpvRepository.findCpvsByLanguage_Iso6391(languageCode);
     }
 
     @Override
-    public List<Cpv> getCpvByParam(Long language_id, Integer group) {
-        Objects.requireNonNull(language_id);
+    public List<Cpv> getCpvByParam(String languageCode, Integer group) {
+        Objects.requireNonNull(languageCode);
         Objects.requireNonNull(group);
-        return cpvRepository.findCpvsByLanguage_IdAndGroup(language_id, group);
+        return cpvRepository.findCpvsByLanguage_Iso6391AndGroup(languageCode, group);
     }
 
     @Override
-    public List<Cpv> getCpvByParam(Long language_id, String parent) {
-        Objects.requireNonNull(language_id);
+    public List<Cpv> getCpvByParam(String languageCode, String parent) {
+        Objects.requireNonNull(languageCode);
         Objects.requireNonNull(parent);
-        return cpvRepository.findCpvsByLanguage_IdAndParent(language_id, parent);
+        return cpvRepository.findCpvsByLanguage_Iso6391AndParent(languageCode, parent);
     }
 
     @Override
-    public List<Cpv> getCpvByParam(Long language_id, Integer group, String parent) {
-        Objects.requireNonNull(language_id);
+    public List<Cpv> getCpvByParam(String languageCode, Integer group, String parent) {
+        Objects.requireNonNull(languageCode);
         Objects.requireNonNull(group);
         Objects.requireNonNull(parent);
-        return cpvRepository.findCpvsByLanguage_IdAndGroupAndParent(language_id, group, parent);
+        return cpvRepository.findCpvsByLanguage_Iso6391AndGroupAndParent(languageCode, group, parent);
     }
 
     @Override
-    public List<Cpv> getCpvByLanguage(Long language_id) {
-        return cpvRepository.findCpvsByLanguage_Id(language_id);
+    public List<Cpv> getCpvByLanguageCode(String languageCode) {
+        return cpvRepository.findCpvsByLanguage_Iso6391(languageCode);
     }
 }

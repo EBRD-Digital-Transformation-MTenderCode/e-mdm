@@ -39,7 +39,7 @@ class CpvControllerTest {
         final List<Cpv> cpvs = new ArrayList<>();
         mockMvc = MockMvcBuilders.standaloneSetup(cpvController).build();
         language = new Language();
-        language.setId(41L);
+        language.setIso6391("en");
         cpv = new Cpv();
         cpv.setCode("03000000-1");
         cpv.setName("Test cpv");
@@ -47,14 +47,14 @@ class CpvControllerTest {
         cpv.setParent("03000000-1");
         cpv.setLanguage(language);
         cpvs.add(cpv);
-        when(cpvService.getCpvByLanguage(language.getId())).thenReturn(cpvs);
-        when(cpvService.getCpvByParam(language.getId(), cpv.getGroup(), cpv.getParent())).thenReturn(cpvs);
+        when(cpvService.getCpvByLanguageCode(language.getIso6391())).thenReturn(cpvs);
+        when(cpvService.getCpvByParam(language.getIso6391(), cpv.getGroup(), cpv.getParent())).thenReturn(cpvs);
     }
 
     @Test
-    void getCpvByLanguageId() throws Exception {
+    void getCpvByLanguageCode() throws Exception {
         mockMvc.perform(get("/cpv")
-            .param("language_id", String.valueOf(cpv.getLanguage().getId()))
+            .param("languageCode", String.valueOf(cpv.getLanguage().getIso6391()))
             .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
@@ -66,7 +66,7 @@ class CpvControllerTest {
     @Test
     void getCpvByParam() throws Exception {
         mockMvc.perform(get("/cpv/byParam")
-            .param("language_id", String.valueOf(cpv.getLanguage().getId()))
+            .param("languageCode", String.valueOf(cpv.getLanguage().getIso6391()))
             .param("group", String.valueOf(cpv.getGroup()))
             .param("parent", cpv.getParent())
             .accept(MediaType.APPLICATION_JSON))

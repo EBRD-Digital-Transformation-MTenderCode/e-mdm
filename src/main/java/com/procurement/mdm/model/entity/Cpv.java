@@ -27,6 +27,6 @@ public class Cpv {
 
     @JsonIgnore
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(foreignKey = @ForeignKey(name = "FK_cpv_language_id"))
+    @JoinColumn(foreignKey = @ForeignKey(name = "FK_cpv_language"))
     private Language language;
 }

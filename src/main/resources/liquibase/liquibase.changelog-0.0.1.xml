@@ -8,36 +8,33 @@
     <changeSet id="init" author="kolchev">
         <sql>
             CREATE TABLE `languages` (
-            `id` BIGINT NOT NULL,
-            `s_no` INT NOT NULL,
+            `iso6391` VARCHAR(2) NOT NULL,
             `name` VARCHAR(255) NOT NULL,
             `family` VARCHAR(255),
-            `iso_639_1` VARCHAR(255) NOT NULL,
             `description` VARCHAR(255),
-            PRIMARY KEY (`id`)
+            PRIMARY KEY (`iso6391`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
             CREATE TABLE `cpv` (
-            `code` VARCHAR(255) NOT NULL,
+            `code` VARCHAR(10) NOT NULL,
             `name` VARCHAR(255),
             `group` INT NOT NULL,
-            `parent` VARCHAR(255),
-            `language_id` BIGINT NOT NULL,
+            `parent` VARCHAR(10),
+            `language_iso6391` VARCHAR(2) NOT NULL,
             PRIMARY KEY (`code`),
-            KEY `cpv_language_id` (`language_id`),
-            CONSTRAINT `FK_cpv_language_id` FOREIGN KEY (`language_id`) REFERENCES `languages` (`id`)
+            KEY `cpv_language` (`language_iso6391`),
+            CONSTRAINT `FK_cpv_language` FOREIGN KEY (`language_iso6391`) REFERENCES `languages` (`iso6391`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
             CREATE TABLE `countries` (
-            `id` BIGINT NOT NULL,
-            `code` VARCHAR(255) NOT NULL,
+            `code` VARCHAR(2) NOT NULL,
             `name` VARCHAR(255),
             `description` VARCHAR(255),
             `phone_code` VARCHAR(255),
-            `language_id` BIGINT NOT NULL,
-            PRIMARY KEY (`id`),
-            KEY `countries_language_id` (`language_id`),
-            CONSTRAINT `FK_countries_language_id` FOREIGN KEY (`language_id`) REFERENCES `languages` (`id`)
+            `language_iso6391` VARCHAR(2) NOT NULL,
+            PRIMARY KEY (`code`),
+            KEY `countries_language` (`language_iso6391`),
+            CONSTRAINT `FK_countries_language` FOREIGN KEY (`language_iso6391`) REFERENCES `languages` (`iso6391`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
         </sql>
     </changeSet>

@@ -8,13 +8,13 @@ import java.util.List;
 @Service
 public interface CpvService {
 
-    List<Cpv> getCpvByParam(Long language_id);
+    List<Cpv> getCpvByParam(String languageCode);
 
-    List<Cpv> getCpvByParam(Long language_id, Integer group);
+    List<Cpv> getCpvByParam(String languageCode, Integer group);
 
-    List<Cpv> getCpvByParam(Long language_id, String parent);
+    List<Cpv> getCpvByParam(String languageCode, String parent);
 
-    List<Cpv> getCpvByParam(Long language_id, Integer group, String parent);
+    List<Cpv> getCpvByParam(String languageCode, Integer group, String parent);
 
-    List<Cpv> getCpvByLanguage(Long language_id);
+    List<Cpv> getCpvByLanguageCode(String languageCode);
 }

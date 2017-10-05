@@ -22,20 +22,14 @@ public class CountryServiceImpl implements CountryService {
     }
 
     @Override
-    public List<Country> getCountriesById(Long id) {
-        Objects.requireNonNull(id);
-        return countryRepository.findAllById(id);
+    public List<Country> getCountriesByCode(String code) {
+        Objects.requireNonNull(code);
+        return countryRepository.findCountriesByCode(code);
     }
 
     @Override
     public List<Country> getCountriesByName(String name) {
         Objects.requireNonNull(name);
         return countryRepository.findCountriesByName(name);
-    }
-
-    @Override
-    public List<Country> getCountriesByCode(String code) {
-        Objects.requireNonNull(code);
-        return countryRepository.findCountriesByCode(code);
     }
 }

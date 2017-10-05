@@ -13,9 +13,6 @@ import javax.persistence.*;
 public class Country {
 
     @Id
-    @Column(name = "id")
-    private Long id;
-
     @Column(name = "code")
     private String code;
 
@@ -30,6 +27,7 @@ public class Country {
 
     @JsonIgnore
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(foreignKey = @ForeignKey(name = "FK_countries_language_id"))
+    @JoinColumn(foreignKey = @ForeignKey(name = "FK_countries_language"))
     private Language language;
+
 }
