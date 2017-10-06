@@ -53,7 +53,7 @@ class CpvControllerTest {
 
     @Test
     void getCpvByLanguageCode() throws Exception {
-        mockMvc.perform(get("/cpv")
+        mockMvc.perform(get("/cpv/byLanguage")
             .param("languageCode", String.valueOf(cpv.getLanguage().getIso6391()))
             .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())

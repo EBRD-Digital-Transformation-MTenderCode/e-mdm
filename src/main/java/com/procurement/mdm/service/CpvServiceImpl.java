@@ -2,6 +2,7 @@ package com.procurement.mdm.service;
 
 import com.procurement.mdm.model.entity.Cpv;
 import com.procurement.mdm.repository.CpvRepository;
+import lombok.NonNull;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,8 +40,15 @@ public class CpvServiceImpl implements CpvService {
     @Override
     public List<Cpv> getCpvByParam(String languageCode, Integer group, String parent) {
         Objects.requireNonNull(languageCode);
-        Objects.requireNonNull(group);
-        Objects.requireNonNull(parent);
+        if (Objects.isNull(group) && Objects.isNull(parent)){
+            return getCpvByParam(languageCode);
+        }
+        if (Objects.isNull(group) && Objects.nonNull(parent)){
+            return getCpvByParam(languageCode, parent);
+        }
+        if (Objects.nonNull(group) && Objects.isNull(parent)){
+            return getCpvByParam(languageCode, group);
+        }
         return cpvRepository.findCpvsByLanguage_Iso6391AndGroupAndParent(languageCode, group, parent);
     }
 
