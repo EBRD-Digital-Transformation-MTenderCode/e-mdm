@@ -23,7 +23,7 @@
             `language_iso6391` VARCHAR(2) NOT NULL,
             PRIMARY KEY (`code`),
             KEY `cpv_language` (`language_iso6391`),
-            CONSTRAINT `FK_cpv_language` FOREIGN KEY (`language_iso6391`) REFERENCES `languages` (`iso6391`)
+            CONSTRAINT `FK_cpv_languages` FOREIGN KEY (`language_iso6391`) REFERENCES `languages` (`iso6391`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
             CREATE TABLE `countries` (
@@ -33,7 +33,7 @@
             `phone_code` VARCHAR(255),
             `language_iso6391` VARCHAR(2) NOT NULL,
             PRIMARY KEY (`code`),
-            KEY `countries_language` (`language_iso6391`),
+            KEY `countries_languages` (`language_iso6391`),
             CONSTRAINT `FK_countries_language` FOREIGN KEY (`language_iso6391`) REFERENCES `languages` (`iso6391`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
         </sql>
