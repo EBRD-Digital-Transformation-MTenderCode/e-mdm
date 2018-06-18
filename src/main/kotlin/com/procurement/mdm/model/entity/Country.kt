@@ -18,9 +18,6 @@ data class Country (
     @Column(name = "description")
     private val description: String,
 
-    @Column(name = "phone_code")
-    private val phoneCode: String,
-
     @JsonIgnore
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(foreignKey = ForeignKey(name = "FK_countries_language"))

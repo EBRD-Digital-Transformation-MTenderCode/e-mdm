@@ -12,7 +12,7 @@ class CountryController(private val countryService: CountryService) {
 
     @GetMapping
     fun getCountries(): ResponseEntity<List<Country>> {
-        val countries = countryService.allCountries
+        val countries = countryService.getAllCountries()
         return ResponseEntity(countries, HttpStatus.OK)
     }
 

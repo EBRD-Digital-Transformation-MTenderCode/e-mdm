@@ -1,21 +1,21 @@
 package com.procurement.mdm.service;
 
-import com.procurement.mdm.model.entity.Country;
-import com.procurement.mdm.model.entity.Language;
-import com.procurement.mdm.repository.CountryRepository;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-@ExtendWith(SpringExtension.class)
+//import com.procurement.mdm.model.entity.Country;
+//import com.procurement.mdm.model.entity.Language;
+//import com.procurement.mdm.repository.CountryRepository;
+//import org.junit.jupiter.api.BeforeAll;
+//import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.api.extension.ExtendWith;
+//import org.springframework.test.context.junit.jupiter.SpringExtension;
+//
+//import java.util.ArrayList;
+//import java.util.List;
+//
+//import static org.junit.jupiter.api.Assertions.assertTrue;
+//import static org.mockito.Mockito.mock;
+//import static org.mockito.Mockito.when;
+//
+//@ExtendWith(SpringExtension.class)
 class CountryServiceImplTest {
 //
 //    private static CountryService countryService;
