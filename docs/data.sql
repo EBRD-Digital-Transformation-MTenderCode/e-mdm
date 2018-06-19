@@ -27,7 +27,7 @@ INSERT INTO country (code, name, description, def, language_code) VALUES ('MD', 
 INSERT INTO country (code, name, description, def, language_code) VALUES ('UA', 'UKRAINE', 'UKRAINE', false , 'EN');
 
 INSERT INTO region (code, name, description, language_code, country_code) VALUES ('MD_Transnistria', 'Transnistria', 'Transnistria', 'EN', 'MD');
-INSERT INTO region (code, name, description, language_code, country_code) VALUES ('MD_Gagauzia ', 'Gagauzia', 'Gagauzia', 'EN', 'MD');
+INSERT INTO region (code, name, description, language_code, country_code) VALUES ('MD_Gagauzia', 'Gagauzia', 'Gagauzia', 'EN', 'MD');
 INSERT INTO region (code, name, description, language_code, country_code) VALUES ('UA_Kiev', 'Kiev', 'Kiev', 'EN', 'UA');
 INSERT INTO region (code, name, description, language_code, country_code) VALUES ('UA_Kiev_Oblast ', 'Kiev Oblast', 'Kiev Oblast', 'EN', 'UA');
 
