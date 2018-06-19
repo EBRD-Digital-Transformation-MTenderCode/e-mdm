@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 
 @Entity
-@Table(name = "countries")
+@Table(name = "country")
 data class Country(
         @Id
         @Column(name = "code")
@@ -14,14 +14,19 @@ data class Country(
         @Column(name = "name")
         val name: String = "",
 
+        @JsonIgnore
         @Column(name = "description")
         val description: String = "",
 
+        @JsonIgnore
         @Column(name = "def")
         val default: Boolean = false,
 
         @JsonIgnore
         @ManyToOne(optional = false, fetch = FetchType.LAZY)
-        @JoinColumn(foreignKey = ForeignKey(name = "FK_countries_language"))
-        private val language: Language? = null
+        @JoinColumn(foreignKey = ForeignKey(name = "FK_country_language"))
+        private val language: Language? = null,
+
+        @ManyToMany(mappedBy = "countries", fetch = FetchType.LAZY)
+        private val currencies: Set<Currency>? = null
 )

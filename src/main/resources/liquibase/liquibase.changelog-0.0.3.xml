@@ -10,6 +10,7 @@
             SET nameS 'utf8';
             INSERT INTO countries (code, name, description, def, language_code) VALUES ('MD', 'MOLDOVA', 'MOLDOVA (REPUBLIC OF)', true, 'en');
             INSERT INTO countries (code, name, description, def, language_code) VALUES ('UA', 'UKRAINE', 'UKRAINE', false , 'en');
+
             <!--INSERT INTO mdmdb.countries (code, name, description, phone_code, language_iso6391) VALUES ('AD', 'ANDORRA', '', null, 'en');-->
             <!--INSERT INTO mdmdb.countries (code, name, description, phone_code, language_iso6391) VALUES ('AE', 'UNITED ARAB EMIRATES (THE)', '', null, 'en');-->
             <!--INSERT INTO mdmdb.countries (code, name, description, phone_code, language_iso6391) VALUES ('AF', 'AFGHANISTAN', '', null, 'en');-->

@@ -9,6 +9,7 @@
         INSERT INTO mdm.languages (code, name, description) VALUES ('en', 'English', '');
         <sql>
             SET nameS 'utf8';
+
             INSERT INTO languages (code, name, description) VALUES ('ro', 'Romanian', '[mo] for Moldavian has been withdrawn, recommending [ro] also for Moldavian');
             INSERT INTO languages (code, name, description) VALUES ('en', 'English', '');
 

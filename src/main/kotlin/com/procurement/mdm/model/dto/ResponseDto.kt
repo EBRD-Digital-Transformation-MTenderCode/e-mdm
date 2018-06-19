@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 data class ResponseDto(
 
         @JsonProperty("default")
-        val default: Any?,
+        var default: Any?,
 
         @JsonProperty("data")
         val data: Any?

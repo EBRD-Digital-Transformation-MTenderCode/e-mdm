@@ -1,13 +1,13 @@
 package com.procurement.mdm.repository
 
-import com.procurement.mdm.model.entity.Country
+import com.procurement.mdm.model.entity.CPV
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
 
 @Repository
-interface CountryRepository : JpaRepository<Country, String> {
+interface CPVRepository : JpaRepository<CPV, String> {
 
     @Transactional(readOnly = true)
-    fun findByLanguageCode(lang: String): List<Country>
+    fun findByLanguageCodeAndParent(lang: String, parent: String = ""): List<CPV>
 }

@@ -3,7 +3,7 @@ package com.procurement.mdm.model.entity
 import javax.persistence.*
 
 @Entity
-@Table(name = "languages")
+@Table(name = "language")
 data class Language (
 
     @Id
