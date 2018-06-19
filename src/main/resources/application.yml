@@ -8,9 +8,3 @@ spring:
     properties.hibernate.jdbc.lob.non_contextual_creation: true
     hibernate:
       ddl-auto: update
-#  jpa:
-#    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
-#    properties:
-#      hibernate:
-#        temp.use_jdbc_metadata_defaults: false
-#        jdbc.lob.non_contextual_creation: true
