@@ -8,3 +8,5 @@ spring:
     properties.hibernate.jdbc.lob.non_contextual_creation: true
     hibernate:
       ddl-auto: update
+
+  jackson.serialization.indent_output: true

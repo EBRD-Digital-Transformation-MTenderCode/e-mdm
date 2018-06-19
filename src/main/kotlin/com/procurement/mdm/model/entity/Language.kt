@@ -8,11 +8,11 @@ data class Language (
 
     @Id
     @Column(name = "code")
-    private val code: String,
+    val code: String = "",
 
     @Column(name = "name")
-    private val name: String,
+    val name: String = "",
 
     @Column(name = "description")
-    private val description: String
+    val description: String = ""
 )

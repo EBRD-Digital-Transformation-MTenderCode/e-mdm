@@ -10,16 +10,19 @@ data class Cpv(
 
         @Id
         @Column(name = "code")
-        private val code: String,
+        val code: String = "",
 
         @Column(name = "name")
-        private val name: String,
+        val name: String = "",
+
+        @Column(name = "level")
+        val level: Int = 1,
 
         @Column(name = "parent")
-        private val parent: String,
+        val parent: String = "",
 
         @JsonIgnore
         @ManyToOne(optional = false, fetch = FetchType.LAZY)
         @JoinColumn(foreignKey = ForeignKey(name = "FK_cpv_language"))
-        private val language: Language
+        private val language: Language? = null
 )

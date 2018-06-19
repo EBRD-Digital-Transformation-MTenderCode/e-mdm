@@ -1,5 +1,6 @@
 package com.procurement.mdm.controller
 
+import com.procurement.budget.model.bpe.ResponseDto
 import com.procurement.mdm.model.entity.Country
 import com.procurement.mdm.service.CountryService
 import org.springframework.http.HttpStatus
@@ -11,21 +12,14 @@ import org.springframework.web.bind.annotation.*
 class CountryController(private val countryService: CountryService) {
 
     @GetMapping
-    fun getCountries(): ResponseEntity<List<Country>> {
+    fun getCountries(): ResponseEntity<ResponseDto> {
         val countries = countryService.getAllCountries()
         return ResponseEntity(countries, HttpStatus.OK)
     }
 
-    @GetMapping("/byCode")
-    fun getCountriesByCode(@RequestParam code: String): ResponseEntity<List<Country>> {
-        val countries = countryService.getCountriesByCode(code)
-        return ResponseEntity(countries, HttpStatus.OK)
-    }
-
-    @GetMapping("/byName")
-    fun getCountriesByName(@RequestParam name: String): ResponseEntity<List<Country>> {
-        val countries = countryService.getCountriesByName(name)
-        return ResponseEntity(countries, HttpStatus.OK)
+    @GetMapping("/byLanguage")
+    fun getCountriesByCode(@RequestParam lang: String): ResponseEntity<ResponseDto> {
+        return ResponseEntity(countryService.getCountriesByLanguage(lang), HttpStatus.OK)
     }
 
 }

@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/cpv")
 class CpvController(private val cpvService: CpvService) {
 
-    @GetMapping("/byParam")
-    fun getCpvByParam(@RequestParam("languageCode") languageCode: String): ResponseEntity<List<Cpv>> {
-
-        val cpv = cpvService.getCpvByParam(languageCode)
+    @GetMapping("/byLanguage")
+    fun getCpvByParam(@RequestParam lang: String): ResponseEntity<List<Cpv>> {
+        val cpv = cpvService.getCpvByParam(lang)
         return ResponseEntity(cpv, HttpStatus.OK)
     }
 }

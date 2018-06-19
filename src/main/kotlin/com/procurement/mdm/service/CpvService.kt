@@ -7,7 +7,7 @@ import java.util.Objects
 
 interface CpvService {
 
-    fun getCpvByParam(languageCode: String): List<Cpv>
+    fun getCpvByParam(lang: String): List<Cpv>
 
 //    fun getCpvByParam(languageCode: String, group: Int?): List<Cpv>
 //
@@ -22,9 +22,8 @@ interface CpvService {
 @Service
 class CpvServiceImpl(private val cpvRepository: CpvRepository) : CpvService {
 
-    override fun getCpvByParam(languageCode: String): List<Cpv> {
-        Objects.requireNonNull(languageCode)
-        return cpvRepository.findCpvsByLanguage(languageCode)
+    override fun getCpvByParam(lang: String): List<Cpv> {
+        return cpvRepository.findCpvsByLanguageCode(lang)
     }
 //
 //    override fun getCpvByParam(languageCode: String, group: Int?): List<Cpv> {
