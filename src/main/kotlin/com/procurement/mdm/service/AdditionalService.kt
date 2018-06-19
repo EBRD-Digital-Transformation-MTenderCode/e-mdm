@@ -4,7 +4,6 @@ import com.procurement.budget.model.bpe.ResponseDto
 import com.procurement.mdm.repository.BankRepository
 import com.procurement.mdm.repository.GPAannexesRepository
 import com.procurement.mdm.repository.HolidaysRepository
-import com.procurement.mdm.repository.RegionRepository
 import org.springframework.stereotype.Service
 
 interface AdditionalService {

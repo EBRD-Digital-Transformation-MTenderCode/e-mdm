@@ -82,3 +82,5 @@ INSERT INTO unit(code, description, name, language_code, unit_class_code) VALUES
 INSERT INTO unit(code, description, name, language_code, unit_class_code) VALUES ('K','kelvin','kelvin','EN','Θ');
 INSERT INTO unit(code, description, name, language_code, unit_class_code) VALUES ('mol','mole','mole','EN','N');
 INSERT INTO unit(code, description, name, language_code, unit_class_code) VALUES ('cd','candela','candela','EN','J');
+
+INSERT INTO holidays (code, holiday_date, description, name, country_code, language_code) VALUES ('01', '2019-01-01 00:00:00', 'New Year', 'New Year', 'UA', 'EN');

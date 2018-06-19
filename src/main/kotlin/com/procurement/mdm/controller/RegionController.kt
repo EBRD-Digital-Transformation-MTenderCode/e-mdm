@@ -15,7 +15,7 @@ class RegionController(private val regionService: RegionService) {
 
     @GetMapping
     fun getRegions(@RequestParam lang: String,
-                      @RequestParam country: String): ResponseEntity<ResponseDto> {
+                   @RequestParam country: String): ResponseEntity<ResponseDto> {
         return ResponseEntity(
                 regionService.getRegion(lang.toUpperCase(), country.toUpperCase()),
                 HttpStatus.OK)

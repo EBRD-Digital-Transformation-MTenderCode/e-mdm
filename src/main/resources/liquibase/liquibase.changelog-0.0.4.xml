@@ -9,23 +9,40 @@
         <sql>
             SET NAMES 'utf8';
 
-            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03000000-1', 'Agricultural, farming, fishing, forestry and related products', 1, '', 'en');
-            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03100000-2', 'Agricultural and horticultural products', 2, '03000000-1', 'en');
-            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03110000-5', 'Crops, products of market gardening and horticulture', 3, '03100000-2', 'en');
-            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03111000-2', 'Seeds', 4, '03110000-5', 'en');
-            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03111100-3', 'Soya beans', 4, '03110000-5', 'en');
-            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03111200-4', 'Peanuts', 4, '03110000-5', 'en');
-            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03111300-5', 'Sunflower seeds', 4, '03110000-5', 'en');
-            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03111400-6', 'Cotton seeds', 4, '03110000-5', 'en');
-            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03111500-7', 'Sesame seeds', 4, '03110000-5', 'en');
-            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03111600-8', 'Mustard seeds', 4, '03110000-5', 'en');
-            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03111700-9', 'Vegetable seeds', 4, '03110000-5', 'en');
-            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03111800-0', 'Fruit seeds', 4, '03110000-5', 'en');
-            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03111900-1', 'Flower seeds', 4, '03110000-5', 'en');
-            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03112000-9', 'Unmanufactured tobacco', 4, '03110000-5', 'en');
-            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03113000-6', 'Plants used for sugar manufacturing', 4, '03110000-5', 'en');
-            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03113100-7', 'Sugar beet', 4, '03110000-5', 'en');
-            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03113200-8', 'Sugar cane', 4, '03110000-5', 'en');
+            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03000000-1', 'Agricultural, farming,
+            fishing, forestry and related products', 1, '', 'en');
+            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03100000-2', 'Agricultural and
+            horticultural products', 2, '03000000-1', 'en');
+            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03110000-5', 'Crops, products of market
+            gardening and horticulture', 3, '03100000-2', 'en');
+            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03111000-2', 'Seeds', 4, '03110000-5',
+            'en');
+            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03111100-3', 'Soya beans', 4,
+            '03110000-5', 'en');
+            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03111200-4', 'Peanuts', 4, '03110000-5',
+            'en');
+            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03111300-5', 'Sunflower seeds', 4,
+            '03110000-5', 'en');
+            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03111400-6', 'Cotton seeds', 4,
+            '03110000-5', 'en');
+            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03111500-7', 'Sesame seeds', 4,
+            '03110000-5', 'en');
+            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03111600-8', 'Mustard seeds', 4,
+            '03110000-5', 'en');
+            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03111700-9', 'Vegetable seeds', 4,
+            '03110000-5', 'en');
+            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03111800-0', 'Fruit seeds', 4,
+            '03110000-5', 'en');
+            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03111900-1', 'Flower seeds', 4,
+            '03110000-5', 'en');
+            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03112000-9', 'Unmanufactured tobacco',
+            4, '03110000-5', 'en');
+            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03113000-6', 'Plants used for sugar
+            manufacturing', 4, '03110000-5', 'en');
+            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03113100-7', 'Sugar beet', 4,
+            '03110000-5', 'en');
+            INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03113200-8', 'Sugar cane', 4,
+            '03110000-5', 'en');
 
             <!--INSERT INTO mdmdb.cpv (code, name, `group`, parent, language_iso6391) VALUES ('03000000-1', 'Agricultural, farming, fishing, forestry and related products', 1, '', 'en');-->
             <!--INSERT INTO mdmdb.cpv (code, name, `group`, parent, language_iso6391) VALUES ('03100000-2', 'Agricultural and horticultural products', 2, '03000000-1', 'en');-->

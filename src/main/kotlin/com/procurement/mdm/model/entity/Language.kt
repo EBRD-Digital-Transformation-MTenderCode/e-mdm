@@ -1,18 +1,21 @@
 package com.procurement.mdm.model.entity
 
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.Id
+import javax.persistence.Table
 
 @Entity
 @Table(name = "language")
-data class Language (
+data class Language(
 
-    @Id
-    @Column(name = "code")
-    val code: String = "",
+        @Id
+        @Column(name = "code")
+        val code: String = "",
 
-    @Column(name = "name")
-    val name: String = "",
+        @Column(name = "name")
+        val name: String = "",
 
-    @Column(name = "description")
-    val description: String = ""
+        @Column(name = "description")
+        val description: String = ""
 )

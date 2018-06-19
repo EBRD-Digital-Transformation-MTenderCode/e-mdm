@@ -5,12 +5,14 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
-    <changeSet id="insert" author="kolchev">            INSERT INTO mdm.languages (code, name, description) VALUES ('de', 'German', '');
+    <changeSet id="insert" author="kolchev">INSERT INTO mdm.languages (code, name, description) VALUES ('de', 'German',
+        '');
         INSERT INTO mdm.languages (code, name, description) VALUES ('en', 'English', '');
         <sql>
             SET nameS 'utf8';
 
-            INSERT INTO languages (code, name, description) VALUES ('ro', 'Romanian', '[mo] for Moldavian has been withdrawn, recommending [ro] also for Moldavian');
+            INSERT INTO languages (code, name, description) VALUES ('ro', 'Romanian', '[mo] for Moldavian has been
+            withdrawn, recommending [ro] also for Moldavian');
             INSERT INTO languages (code, name, description) VALUES ('en', 'English', '');
 
             <!---->

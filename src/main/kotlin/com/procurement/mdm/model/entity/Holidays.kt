@@ -1,7 +1,7 @@
 package com.procurement.mdm.model.entity
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import java.util.*
+import java.sql.Date
 
 import javax.persistence.*
 
@@ -10,11 +10,11 @@ import javax.persistence.*
 data class Holidays(
 
         @Id
-        @Column(name = "id")
-        val id: Long = 0,
+        @Column(name = "code")
+        val code: String = "",
 
-        @Column(name = "date")
-        val date: Date = Date(),
+        @Column(name = "holiday_date")
+        val date: Date = Date(0),
 
         @Column(name = "name")
         val name: String = "",

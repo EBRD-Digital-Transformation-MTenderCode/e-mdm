@@ -15,7 +15,7 @@ class CurrencyServiceImpl(private val currencyRepository: CurrencyRepository) : 
 
     override fun getCurrencies(lang: String, country: String): ResponseDto {
         val currencies = currencyRepository.findByLanguageCodeAndCountriesCode(lang, country)
-        val defaultValue = currencies.asSequence().firstOrNull{ it.default }?.code
+        val defaultValue = currencies.asSequence().firstOrNull { it.default }?.code
         return ResponseDto(default = defaultValue, data = currencies)
     }
 }

@@ -21,7 +21,7 @@ class CountryServiceImpl(private val countryRepository: CountryRepository) : Cou
 
     override fun getCountriesByLanguage(lang: String): ResponseDto {
         val countries = countryRepository.findByLanguageCode(lang)
-        val defaultValue = countries.asSequence().firstOrNull{ it.default }?.code
+        val defaultValue = countries.asSequence().firstOrNull { it.default }?.code
         return ResponseDto(default = defaultValue, data = countries)
     }
 }
