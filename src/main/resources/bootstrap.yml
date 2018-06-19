@@ -1,7 +1,10 @@
-#-Dspring.cloud.config.uri=http://IP:PORT
 server:
   port: @project.service.port@
 
 spring:
   application:
     name: e-mdm
+  cloud:
+    config:
+      failFast: true
+      name: e-mdm
