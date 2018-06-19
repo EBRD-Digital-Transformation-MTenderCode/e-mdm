@@ -1,4 +1,4 @@
-package com.procurement.budget.model.bpe
+package com.procurement.mdm.model.bpe
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty

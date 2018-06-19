@@ -1,6 +1,6 @@
 package com.procurement.mdm.controller
 
-import com.procurement.budget.model.bpe.ResponseDto
+import com.procurement.mdm.model.bpe.ResponseDto
 import com.procurement.mdm.service.AdditionalService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

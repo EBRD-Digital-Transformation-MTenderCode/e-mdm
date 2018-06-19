@@ -1,6 +1,6 @@
 package com.procurement.mdm.service
 
-import com.procurement.budget.model.bpe.ResponseDto
+import com.procurement.mdm.model.bpe.ResponseDto
 import com.procurement.mdm.repository.UnitRepository
 import org.springframework.stereotype.Service
 
