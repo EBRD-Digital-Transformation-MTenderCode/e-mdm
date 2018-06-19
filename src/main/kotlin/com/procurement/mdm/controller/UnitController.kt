@@ -1,7 +1,7 @@
 package com.procurement.mdm.controller
 
 import com.procurement.budget.model.bpe.ResponseDto
-import com.procurement.mdm.service.CPVService
+import com.procurement.mdm.service.UnitService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/cpv")
-class CPVController(private val cpvService: CPVService) {
+@RequestMapping("/unit")
+class UnitController(private val unitService: UnitService) {
 
     @GetMapping
-    fun getCpv(@RequestParam lang: String,
-               @RequestParam(required = false) code: String?): ResponseEntity<ResponseDto> {
+    fun getUnits(@RequestParam lang: String,
+                 @RequestParam unitClass: String): ResponseEntity<ResponseDto> {
         return ResponseEntity(
-                cpvService.getCPV(lang.toUpperCase(), code?.toUpperCase()),
+                unitService.getUnit(lang.toUpperCase(), unitClass.toUpperCase()),
                 HttpStatus.OK)
     }
 }

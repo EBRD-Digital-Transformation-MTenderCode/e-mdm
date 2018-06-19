@@ -20,6 +20,10 @@ data class Currency(
         val default: Boolean = false,
 
         @JsonIgnore
+        @Column(name = "description")
+        val description: String = "",
+
+        @JsonIgnore
         @ManyToOne(optional = false, fetch = FetchType.LAZY)
         @JoinColumn(foreignKey = ForeignKey(name = "FK_currency_language"))
         private val language: Language? = null,

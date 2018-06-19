@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 
 @Entity
-@Table(name = "cpv")
-data class CPV(
+@Table(name = "region")
+data class Region(
 
         @Id
         @Column(name = "code")
@@ -16,19 +16,16 @@ data class CPV(
         val name: String = "",
 
         @JsonIgnore
-        @Column(name = "level")
-        val level: Int = 1,
-
-        @JsonIgnore
-        @Column(name = "parent")
-        val parent: String = "",
-
-        @JsonIgnore
         @Column(name = "description")
         val description: String = "",
 
         @JsonIgnore
         @ManyToOne(optional = false, fetch = FetchType.LAZY)
-        @JoinColumn(foreignKey = ForeignKey(name = "FK_cpv_language"))
-        private val language: Language? = null
+        @JoinColumn(foreignKey = ForeignKey(name = "FK_region_language"))
+        private val language: Language? = null,
+
+        @JsonIgnore
+        @ManyToOne(optional = false, fetch = FetchType.LAZY)
+        @JoinColumn(foreignKey = ForeignKey(name = "FK_region_country"))
+        private val country: Country? = null
 )

@@ -16,6 +16,8 @@ class CurrencyController(private val currencyService: CurrencyService) {
     @GetMapping
     fun getCurrencies(@RequestParam lang: String,
                       @RequestParam country: String): ResponseEntity<ResponseDto> {
-        return ResponseEntity(currencyService.getCurrencies(lang, country), HttpStatus.OK)
+        return ResponseEntity(
+                currencyService.getCurrencies(lang.toUpperCase(), country.toUpperCase()),
+                HttpStatus.OK)
     }
 }

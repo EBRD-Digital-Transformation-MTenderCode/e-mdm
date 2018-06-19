@@ -16,6 +16,8 @@ class CPVsController(private val cpvsService: CPVsService) {
     @GetMapping
     fun getCpvs(@RequestParam lang: String,
                 @RequestParam(required = false) code: String?): ResponseEntity<ResponseDto> {
-        return ResponseEntity(cpvsService.getCPVs(lang, code), HttpStatus.OK)
+        return ResponseEntity(
+                cpvsService.getCPVs(lang.toUpperCase(), code?.toUpperCase()),
+                HttpStatus.OK)
     }
 }

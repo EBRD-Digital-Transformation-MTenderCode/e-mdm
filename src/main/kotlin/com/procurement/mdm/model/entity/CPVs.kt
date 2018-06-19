@@ -24,6 +24,10 @@ data class CPVs(
         val parent: String = "",
 
         @JsonIgnore
+        @Column(name = "description")
+        val description: String = "",
+
+        @JsonIgnore
         @ManyToOne(optional = false, fetch = FetchType.LAZY)
         @JoinColumn(foreignKey = ForeignKey(name = "FK_cpvs_language"))
         private val language: Language? = null
