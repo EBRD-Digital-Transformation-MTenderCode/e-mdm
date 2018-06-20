@@ -1,21 +1,25 @@
 package com.procurement.mdm.service
 
-import com.procurement.mdm.model.bpe.ResponseDto
+import com.procurement.mdm.model.dto.ResponseDto
+import com.procurement.mdm.model.dto.getResponseDto
 import com.procurement.mdm.repository.CurrencyRepository
 import org.springframework.stereotype.Service
 
 interface CurrencyService {
 
-    fun getCurrencies(lang: String, country: String): ResponseDto
+    fun getCurrencies(lang: String, country: String, internal: Boolean): ResponseDto
 
 }
 
 @Service
 class CurrencyServiceImpl(private val currencyRepository: CurrencyRepository) : CurrencyService {
 
-    override fun getCurrencies(lang: String, country: String): ResponseDto {
-        val currencies = currencyRepository.findByLanguageCodeAndCountriesCode(lang, country)
-        val defaultValue = currencies.asSequence().firstOrNull { it.default }?.code
-        return ResponseDto(default = defaultValue, data = currencies)
+    override fun getCurrencies(lang: String, country: String, internal: Boolean): ResponseDto {
+        val entities = currencyRepository.findByLanguageCodeAndCountriesCode(lang, country)
+        val defaultValue = entities.asSequence().firstOrNull { it.default }?.code
+        return getResponseDto(
+                default = defaultValue,
+                items = entities,
+                internal = internal)
     }
 }

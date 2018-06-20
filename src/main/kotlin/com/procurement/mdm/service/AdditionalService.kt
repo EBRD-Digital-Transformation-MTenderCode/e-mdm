@@ -1,6 +1,7 @@
 package com.procurement.mdm.service
 
-import com.procurement.mdm.model.bpe.ResponseDto
+import com.procurement.mdm.model.dto.ResponseDto
+import com.procurement.mdm.model.dto.getResponseDto
 import com.procurement.mdm.repository.BankRepository
 import com.procurement.mdm.repository.GPAannexesRepository
 import com.procurement.mdm.repository.HolidaysRepository
@@ -8,11 +9,11 @@ import org.springframework.stereotype.Service
 
 interface AdditionalService {
 
-    fun getBank(lang: String, country: String): ResponseDto
+    fun getBank(lang: String, country: String, internal: Boolean): ResponseDto
 
-    fun getGPAnnexes(lang: String, country: String): ResponseDto
+    fun getGPAnnexes(lang: String, country: String, internal: Boolean): ResponseDto
 
-    fun getHolidays(lang: String, country: String): ResponseDto
+    fun getHolidays(lang: String, country: String, internal: Boolean): ResponseDto
 }
 
 @Service
@@ -21,15 +22,26 @@ class AdditionalServiceImpl(private val bankRepository: BankRepository,
                             private val holidaysRepository: HolidaysRepository
 ) : AdditionalService {
 
-    override fun getBank(lang: String, country: String): ResponseDto {
-        return ResponseDto(null, bankRepository.findByLanguageCodeAndCountryCode(lang, country))
+    override fun getBank(lang: String, country: String, internal: Boolean): ResponseDto {
+        return getResponseDto(
+                default = null,
+                items = bankRepository.findByLanguageCodeAndCountryCode(lang, country),
+                internal = internal)
     }
 
-    override fun getGPAnnexes(lang: String, country: String): ResponseDto {
-        return ResponseDto(null, gpaAnnexesRepository.findByLanguageCodeAndCountryCode(lang, country))
+    override fun getGPAnnexes(lang: String, country: String, internal: Boolean): ResponseDto {
+        return getResponseDto(
+                default = null,
+                items = gpaAnnexesRepository.findByLanguageCodeAndCountryCode(lang, country),
+                internal = internal)
     }
 
-    override fun getHolidays(lang: String, country: String): ResponseDto {
-        return ResponseDto(null, holidaysRepository.findByLanguageCodeAndCountryCode(lang, country))
+    override fun getHolidays(lang: String, country: String, internal: Boolean): ResponseDto {
+        return getResponseDto(
+                default = null,
+                items = holidaysRepository.findByLanguageCodeAndCountryCode(lang, country),
+                internal = internal)
     }
+
+
 }
