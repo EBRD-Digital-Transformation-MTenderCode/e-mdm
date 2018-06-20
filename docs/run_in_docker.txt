@@ -1,0 +1,5 @@
+mvn clean package docker:build
+docker login https://dev.docker-registry.eprocurement.systems
+Username: docker
+Password: EGrH4rOVQrcwXCtM
+docker push dev.docker-registry.eprocurement.systems/e-mdm:18.06.1
