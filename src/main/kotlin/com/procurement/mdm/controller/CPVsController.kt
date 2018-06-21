@@ -18,6 +18,9 @@ class CPVsController(private val validationService: ValidationService,
                 @RequestParam(required = false) code: String?,
                 @RequestParam(required = false) internal: Boolean = false): ResponseEntity<ResponseDto> {
         validationService.lang(lang.toUpperCase(), internal)
+        code?.let {
+            validationService.cpvsCode(code.toUpperCase(), internal)
+        }
         return ResponseEntity(
                 cpvsService.getCPVs(lang.toUpperCase(), code?.toUpperCase(), internal),
                 HttpStatus.OK)
