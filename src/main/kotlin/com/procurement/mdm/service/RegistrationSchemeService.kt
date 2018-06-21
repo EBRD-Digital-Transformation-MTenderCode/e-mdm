@@ -17,7 +17,7 @@ class RegistrationSchemeServiceImpl(
     override fun getRegistrationScheme(lang: String, country: String, internal: Boolean): ResponseDto {
         return getResponseDto(
                 default = null,
-                items = registrationSchemeRepository.findByLanguageCodeAndCountryCode(lang, country),
+                items = registrationSchemeRepository.findByCountry(country),
                 internal = internal)
     }
 }

@@ -25,21 +25,21 @@ class AdditionalServiceImpl(private val bankRepository: BankRepository,
     override fun getBank(lang: String, country: String, internal: Boolean): ResponseDto {
         return getResponseDto(
                 default = null,
-                items = bankRepository.findByLanguageCodeAndCountryCode(lang, country),
+                items = bankRepository.findByCountry(country),
                 internal = internal)
     }
 
     override fun getGPAnnexes(lang: String, country: String, internal: Boolean): ResponseDto {
         return getResponseDto(
                 default = null,
-                items = gpaAnnexesRepository.findByLanguageCodeAndCountryCode(lang, country),
+                items = gpaAnnexesRepository.findByCountry(country),
                 internal = internal)
     }
 
     override fun getHolidays(lang: String, country: String, internal: Boolean): ResponseDto {
         return getResponseDto(
                 default = null,
-                items = holidaysRepository.findByLanguageCodeAndCountryCode(lang, country),
+                items = holidaysRepository.findByCountry(country),
                 internal = internal)
     }
 

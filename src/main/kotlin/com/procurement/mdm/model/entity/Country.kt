@@ -7,7 +7,11 @@ import javax.persistence.*
 @Entity
 @Table(name = "country")
 data class Country(
+
         @Id
+        @Column(name = "id")
+        val id: String = "",
+
         @Column(name = "code")
         val code: String = "",
 

@@ -9,6 +9,9 @@ import javax.persistence.*
 data class DocumentType(
 
         @Id
+        @Column(name = "id")
+        val id: String = "",
+
         @Column(name = "code")
         val code: String = "",
 
@@ -32,5 +35,4 @@ data class DocumentType(
                 foreignKey = ForeignKey(name = "FK_document_type_code"),
                 inverseForeignKey = ForeignKey(name = "FK_entity_kind_code"))
         private val entityKinds: Set<EntityKind>? = null
-
 )

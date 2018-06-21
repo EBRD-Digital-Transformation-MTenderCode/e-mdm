@@ -9,6 +9,9 @@ import javax.persistence.*
 data class CPVs(
 
         @Id
+        @Column(name = "id")
+        val id: String = "",
+
         @Column(name = "code")
         val code: String = "",
 

@@ -10,6 +10,9 @@ import javax.persistence.Table
 data class Language(
 
         @Id
+        @Column(name = "id")
+        val id: String = "",
+
         @Column(name = "code")
         val code: String = "",
 

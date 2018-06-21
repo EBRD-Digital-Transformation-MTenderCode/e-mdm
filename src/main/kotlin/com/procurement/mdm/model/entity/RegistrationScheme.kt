@@ -9,6 +9,9 @@ import javax.persistence.*
 data class RegistrationScheme(
 
         @Id
+        @Column(name = "id")
+        val id: String = "",
+
         @Column(name = "code")
         val code: String = "",
 
@@ -18,11 +21,6 @@ data class RegistrationScheme(
         @JsonIgnore
         @Column(name = "description")
         val description: String = "",
-
-        @JsonIgnore
-        @ManyToOne(optional = false, fetch = FetchType.LAZY)
-        @JoinColumn(foreignKey = ForeignKey(name = "FK_registration_scheme_language"))
-        private val language: Language? = null,
 
         @JsonIgnore
         @ManyToOne(optional = false, fetch = FetchType.LAZY)

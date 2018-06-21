@@ -9,6 +9,6 @@ import org.springframework.transaction.annotation.Transactional
 interface HolidaysRepository : JpaRepository<Holidays, String> {
 
     @Transactional(readOnly = true)
-    fun findByLanguageCodeAndCountryCode(lang: String, country: String): List<Holidays>
+    fun findByCountry(country: String): List<Holidays>
 }
 

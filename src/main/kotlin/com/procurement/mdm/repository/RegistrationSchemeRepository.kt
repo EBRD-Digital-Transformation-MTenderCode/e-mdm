@@ -9,5 +9,5 @@ import org.springframework.transaction.annotation.Transactional
 interface RegistrationSchemeRepository : JpaRepository<RegistrationScheme, String> {
 
     @Transactional(readOnly = true)
-    fun findByLanguageCodeAndCountryCode(lang: String, country: String): List<RegistrationScheme>
+    fun findByCountry(country: String): List<RegistrationScheme>
 }

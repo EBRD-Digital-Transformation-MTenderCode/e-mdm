@@ -9,6 +9,6 @@ import org.springframework.transaction.annotation.Transactional
 interface GPAannexesRepository : JpaRepository<GPAannexes, String> {
 
     @Transactional(readOnly = true)
-    fun findByLanguageCodeAndCountryCode(lang: String, country: String): List<GPAannexes>
+    fun findByCountry(country: String): List<GPAannexes>
 }
 

@@ -9,6 +9,9 @@ import javax.persistence.*
 data class Currency(
 
         @Id
+        @Column(name = "id")
+        val id: String = "",
+
         @Column(name = "code")
         val code: String = "",
 
@@ -31,10 +34,9 @@ data class Currency(
         @JsonIgnore
         @ManyToMany(fetch = FetchType.LAZY)
         @JoinTable(name = "currency_country",
-                joinColumns = [JoinColumn(name = "currency_code")],
-                inverseJoinColumns = [JoinColumn(name = "country_code")],
-                foreignKey = ForeignKey(name = "FK_currency_code"),
-                inverseForeignKey = ForeignKey(name = "FK_country_code"))
+                joinColumns = [JoinColumn(name = "currency_id")],
+                inverseJoinColumns = [JoinColumn(name = "country_id")],
+                foreignKey = ForeignKey(name = "FK_currency"),
+                inverseForeignKey = ForeignKey(name = "FK_country"))
         private val countries: Set<Country>? = null
-
 )

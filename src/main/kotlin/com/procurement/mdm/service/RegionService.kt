@@ -16,7 +16,7 @@ class RegionServiceImpl(private val regionRepository: RegionRepository) : Region
     override fun getRegion(lang: String, country: String, internal: Boolean): ResponseDto {
         return getResponseDto(
                 default = null,
-                items = regionRepository.findByLanguageCodeAndCountryCode(lang, country),
+                items = regionRepository.findByCountry(country),
                 internal = internal)
     }
 }
