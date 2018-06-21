@@ -10,4 +10,7 @@ interface CPVRepository : JpaRepository<CPV, String> {
 
     @Transactional(readOnly = true)
     fun findByLanguageCodeAndParent(lang: String, parent: String = ""): List<CPV>
+
+    @Transactional(readOnly = true)
+    fun findByCode(code: String): CPV?
 }

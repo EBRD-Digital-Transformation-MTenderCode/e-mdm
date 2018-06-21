@@ -3,10 +3,7 @@ package com.procurement.mdm.service
 import com.procurement.mdm.exception.ErrorType
 import com.procurement.mdm.exception.ExternalErrorException
 import com.procurement.mdm.exception.InternalErrorException
-import com.procurement.mdm.repository.CountryRepository
-import com.procurement.mdm.repository.EntityKindRepository
-import com.procurement.mdm.repository.LanguageRepository
-import com.procurement.mdm.repository.UnitClassRepository
+import com.procurement.mdm.repository.*
 import org.springframework.stereotype.Service
 
 interface ValidationService {
@@ -18,13 +15,19 @@ interface ValidationService {
     fun unitClass(code: String, internal: Boolean)
 
     fun entityKind(code: String, internal: Boolean)
+
+    fun cpvCode(code: String, internal: Boolean)
+
+    fun cpvsCode(code: String, internal: Boolean)
 }
 
 @Service
 class ValidationServiceImpl(private val languageRepository: LanguageRepository,
                             private val countryRepository: CountryRepository,
                             private val unitClassRepository: UnitClassRepository,
-                            private val entityKindRepository: EntityKindRepository) : ValidationService {
+                            private val entityKindRepository: EntityKindRepository,
+                            private val cpvRepository: CPVRepository,
+                            private val cpvsRepository: CPVsRepository) : ValidationService {
 
     override fun lang(lang: String, internal: Boolean) {
         languageRepository.findByCode(lang) ?: if (internal) {
@@ -62,4 +65,22 @@ class ValidationServiceImpl(private val languageRepository: LanguageRepository,
             throw ExternalErrorException(ErrorType.ENTITY_KIND_UNKNOWN)
         }
     }
+
+    override fun cpvCode(code: String, internal: Boolean) {
+        cpvRepository.findByCode(code) ?: if (internal) {
+            throw InternalErrorException(ErrorType.CPV_CODE_UNKNOWN)
+        } else {
+            throw ExternalErrorException(ErrorType.CPV_CODE_UNKNOWN)
+        }
+    }
+
+    override fun cpvsCode(code: String, internal: Boolean) {
+        cpvsRepository.findByCode(code) ?: if (internal) {
+            throw InternalErrorException(ErrorType.CPVS_CODE_UNKNOWN)
+        } else {
+            throw ExternalErrorException(ErrorType.CPVS_CODE_UNKNOWN)
+        }
+    }
 }
+
+
