@@ -71,8 +71,8 @@ class ControllerExceptionHandler {
 //    @ExceptionHandler(ErrorException::class)
 //    fun error(e: ErrorException) = ResponseDto(false, getErrors(e.code, e.msg), null)
 //
-
-
+//
+//
 //
 //    private fun getErrors(result: BindingResult) =
 //            result.fieldErrors.asSequence()
