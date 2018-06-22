@@ -35,32 +35,34 @@ INSERT INTO unit(code, description, name, language_code, unit_class_code) VALUES
 INSERT INTO unit(code, description, name, language_code, unit_class_code) VALUES ('mol','mole','mole','EN','N');
 INSERT INTO unit(code, description, name, language_code, unit_class_code) VALUES ('cd','candela','candela','EN','J');
 
-INSERT INTO country (id, code, name, description, def, language_id) VALUES ('EN_MD', 'MD', 'MOLDOVA', 'MOLDOVA (REPUBLIC OF)', true, 'EN');
-INSERT INTO country (id, code, name, description, def, language_id) VALUES ('EN_UA', 'UA', 'UKRAINE', 'UKRAINE', false , 'EN');
+INSERT INTO document_type (code, description, name, language_code) VALUES ('TENDER_NOTICE', 'tenderNotice', 'tenderNotice', 'EN');
+INSERT INTO document_type (code, description, name, language_code) VALUES ('AWARD_NOTICE', 'awardNotice', 'awardNotice', 'EN');
+INSERT INTO document_type (code, description, name, language_code) VALUES ('CONTRACT_NOTICE', 'contractNotice', 'contractNotice', 'EN');
+
+INSERT INTO entity_kind (code, description, name) VALUES ('TENDER', 'tender', 'tender');
+INSERT INTO entity_kind (code, description, name) VALUES ('AWARD', 'award', 'award');
+INSERT INTO entity_kind (code, description, name) VALUES ('CONTRACT', 'contract', 'contract');
+
+INSERT INTO document_type_entity_kind (document_type_code, document_type_language_code, entity_kind_code) VALUES ('TENDER_NOTICE', 'EN', 'TENDER');
+INSERT INTO document_type_entity_kind (document_type_code, document_type_language_code, entity_kind_code) VALUES ('AWARD_NOTICE', 'EN', 'AWARD');
+INSERT INTO document_type_entity_kind (document_type_code, document_type_language_code, entity_kind_code) VALUES ('CONTRACT_NOTICE', 'EN', 'CONTRACT');
+
+
+INSERT INTO country (code, name, description, def, language_code) VALUES ('MD', 'MOLDOVA', 'MOLDOVA (REPUBLIC OF)', true, 'EN');
+INSERT INTO country (code, name, description, def, language_code) VALUES ('UA', 'UKRAINE', 'UKRAINE', false , 'EN');
+
+INSERT INTO currency(code, def, name, language_code) values ('MDL', true, 'MDL', 'EN');
+INSERT INTO currency(code, def, name, language_code) values ('EUR', false, 'EUR', 'EN');
+
+INSERT INTO currency_country(currency_code, currency_language_code, country_code, country_language_code) VALUES ('MDL', 'EN', 'MD', 'EN');
+INSERT INTO currency_country(currency_code, currency_language_code, country_code, country_language_code) VALUES ('EUR', 'EN', 'MD', 'EN');
 
 INSERT INTO region (id, code, name, description, country_id) VALUES ('EN_MD_Transnistria', 'MD_Transnistria', 'Transnistria', 'Transnistria', 'EN_MD');
 INSERT INTO region (id, code, name, description, country_id) VALUES ('EN_MD_Gagauzia', 'MD_Gagauzia', 'Gagauzia', 'Gagauzia', 'EN_MD');
 INSERT INTO region (id, code, name, description, country_id) VALUES ('EN_UA_Kiev', 'UA_Kiev', 'Kiev', 'Kiev', 'EN_UA');
 INSERT INTO region (id, code, name, description, country_id) VALUES ('EN_UA_Kiev_Oblast', 'UA_Kiev_Oblast ', 'Kiev Oblast', 'Kiev Oblast', 'EN_UA');
 
-INSERT INTO currency(id, code, def, name, language_id) values ('EN_MDL', 'MDL', true, 'MDL', 'EN');
-INSERT INTO currency(id, code, def, name, language_id) values ('EN_EUR', 'EUR', false, 'EUR', 'EN');
 
-INSERT INTO currency_country(currency_id, country_id) VALUES ('EN_MDL', 'EN_MD');
-INSERT INTO currency_country(currency_id, country_id) VALUES ('EN_EUR', 'EN_MD');
-
-INSERT INTO document_type (id, code, description, name, language_id) VALUES ('EN_TENDER_NOTICE', 'TENDER_NOTICE', 'tenderNotice', 'tenderNotice', 'EN');
-INSERT INTO document_type (id, code, description, name, language_id) VALUES ('EN_AWARD_NOTICE', 'AWARD_NOTICE', 'awardNotice', 'awardNotice', 'EN');
-INSERT INTO document_type (id, code, description, name, language_id) VALUES ('EN_CONTRACT_NOTICE', 'CONTRACT_NOTICE', 'contractNotice', 'contractNotice', 'EN');
-
-INSERT INTO entity_kind (id, code, description, name) VALUES ('TENDER', 'TENDER', 'tender', 'tender');
-INSERT INTO entity_kind (id, code, description, name) VALUES ('BID', 'BID', 'bid', 'bid');
-INSERT INTO entity_kind (id, code, description, name) VALUES ('AWARD', 'AWARD', 'award', 'award');
-INSERT INTO entity_kind (id, code, description, name) VALUES ('CONTRACT', 'CONTRACT', 'contract', 'contract');
-
-INSERT INTO document_type_entity_kind (document_type_id, entity_kind_id) VALUES ('EN_TENDER_NOTICE', 'TENDER');
-INSERT INTO document_type_entity_kind (document_type_id, entity_kind_id) VALUES ('EN_AWARD_NOTICE', 'AWARD');
-INSERT INTO document_type_entity_kind (document_type_id, entity_kind_id) VALUES ('EN_CONTRACT_NOTICE', 'CONTRACT');
 
 INSERT INTO registration_scheme(id, code, description, name, country_id) VALUES ('EN_MD-GR', 'MD-GR', 'MD-GR', 'MD-GR', 'EN_MD');
 INSERT INTO registration_scheme(id, code, description, name, country_id) VALUES ('EN_UA-GR', 'UA-EDR', 'UA-EDR', 'UA-EDR', 'EN_UA');

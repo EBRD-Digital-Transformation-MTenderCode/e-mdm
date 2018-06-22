@@ -1,16 +1,11 @@
 package com.procurement.mdm.model.entity
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 
 @Entity
 @Table(name = "entity_kind")
 data class EntityKind(
-        @JsonIgnore
         @Id
-        @Column(name = "id")
-        val id: String = "",
-
         @Column(name = "code")
         val code: String = "",
 
