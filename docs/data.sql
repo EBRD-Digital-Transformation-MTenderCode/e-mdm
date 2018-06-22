@@ -57,14 +57,10 @@ INSERT INTO currency(code, def, name, language_code) values ('EUR', false, 'EUR'
 INSERT INTO currency_country(currency_code, currency_language_code, country_code, country_language_code) VALUES ('MDL', 'EN', 'MD', 'EN');
 INSERT INTO currency_country(currency_code, currency_language_code, country_code, country_language_code) VALUES ('EUR', 'EN', 'MD', 'EN');
 
-INSERT INTO region (id, code, name, description, country_id) VALUES ('EN_MD_Transnistria', 'MD_Transnistria', 'Transnistria', 'Transnistria', 'EN_MD');
-INSERT INTO region (id, code, name, description, country_id) VALUES ('EN_MD_Gagauzia', 'MD_Gagauzia', 'Gagauzia', 'Gagauzia', 'EN_MD');
-INSERT INTO region (id, code, name, description, country_id) VALUES ('EN_UA_Kiev', 'UA_Kiev', 'Kiev', 'Kiev', 'EN_UA');
-INSERT INTO region (id, code, name, description, country_id) VALUES ('EN_UA_Kiev_Oblast', 'UA_Kiev_Oblast ', 'Kiev Oblast', 'Kiev Oblast', 'EN_UA');
+INSERT INTO region(code, name, description, country_code, country_language_code) VALUES ('Transnistria', 'Transnistria', 'Transnistria', 'MD', 'EN');
+INSERT INTO region(code, name, description, country_code, country_language_code) VALUES ('Gagauzia', 'Gagauzia', 'Gagauzia', 'MD', 'EN');
+INSERT INTO region(code, name, description, country_code, country_language_code) VALUES ('Kiev', 'Kiev', 'Kiev', 'UA', 'EN');
+INSERT INTO region(code, name, description, country_code, country_language_code) VALUES ('Kiev_Oblast ', 'Kiev Oblast', 'Kiev Oblast', 'UA', 'EN');
 
-
-
-INSERT INTO registration_scheme(id, code, description, name, country_id) VALUES ('EN_MD-GR', 'MD-GR', 'MD-GR', 'MD-GR', 'EN_MD');
-INSERT INTO registration_scheme(id, code, description, name, country_id) VALUES ('EN_UA-GR', 'UA-EDR', 'UA-EDR', 'UA-EDR', 'EN_UA');
-
-INSERT INTO holidays (id, code, holiday_date, description, name, country_id) VALUES ('EN_UA_01', '01', '2019-01-01 00:00:00', 'New Year', 'New Year', 'EN_UA');
+INSERT INTO registration_scheme(code, name, description, country_code, country_language_code) VALUES ('MD-GR', 'MD-GR', 'MD-GR', 'MD', 'EN');
+INSERT INTO registration_scheme(code, name, description, country_code, country_language_code) VALUES ('UA-EDR', 'UA-EDR', 'UA-EDR', 'UA', 'EN');
