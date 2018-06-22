@@ -53,7 +53,7 @@ class ValidationServiceImpl(private val languageRepository: LanguageRepository,
     }
 
     override fun getUnitClassId(code: String, internal: Boolean): String {
-        val unitClassEntity =  unitClassRepository.findByCode(code) ?: if (internal) {
+        val unitClassEntity = unitClassRepository.findByCode(code) ?: if (internal) {
             throw InternalErrorException(ErrorType.UNIT_CLASS_UNKNOWN)
         } else {
             throw ExternalErrorException(ErrorType.UNIT_CLASS_UNKNOWN)
