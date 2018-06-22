@@ -1,6 +1,5 @@
 package com.procurement.mdm.model.entity
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
@@ -9,12 +8,9 @@ import javax.persistence.Table
 @Entity
 @Table(name = "language")
 data class Language(
-        @JsonIgnore
-        @Id
-        @Column(name = "id")
-        val id: String = "",
 
-        @Column(name = "code")
+        @Id
+        @Column(name = "code", length = 2)
         val code: String = "",
 
         @Column(name = "name")

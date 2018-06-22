@@ -9,6 +9,6 @@ import org.springframework.transaction.annotation.Transactional
 interface LanguageRepository : JpaRepository<Language, String> {
 
     @Transactional(readOnly = true)
-    fun findByCode(lang: String): Language?
+    fun findByCode(code: String): Language?
 }
 
