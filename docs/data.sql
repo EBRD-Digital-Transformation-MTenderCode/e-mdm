@@ -6,7 +6,6 @@ INSERT INTO cpv (language_code, code, name, level, parent) VALUES ('EN', '031000
 INSERT INTO cpv (language_code, code, name, level, parent) VALUES ('EN', '03110000-5', 'Crops, products of market gardening and horticulture', 3, '03100000-2');
 INSERT INTO cpv (language_code, code, name, level, parent) VALUES ('EN', '03111000-2', 'Seeds', 4, '03110000-5');
 INSERT INTO cpv (language_code, code, name, level, parent) VALUES ('EN', '03111100-3', 'Soya beans', 4, '03110000-5');
-
 INSERT INTO cpv (language_code, code, name, level, parent) VALUES ('RO', '03000000-1', 'Agricultural, farming, fishing forestry and related products', 1, '');
 INSERT INTO cpv (language_code, code, name, level, parent) VALUES ('RO', '03100000-2', 'Agricultural and horticultural products', 2, '03000000-1');
 INSERT INTO cpv (language_code, code, name, level, parent) VALUES ('RO', '03110000-5', 'Crops, products of market gardening and horticulture', 3, '03100000-2');
@@ -16,10 +15,25 @@ INSERT INTO cpv (language_code, code, name, level, parent) VALUES ('RO', '031111
 INSERT INTO cpvs (language_code, code, name, level, parent) VALUES ('EN','030-1', 'volume', 1, '');
 INSERT INTO cpvs (language_code, code, name, level, parent) VALUES ('EN','030-2', 'liter', 2, 'EN_030-1');
 INSERT INTO cpvs (language_code, code, name, level, parent) VALUES ('EN','030-3', 'cbm', 2, 'EN_030-1');
-
 INSERT INTO cpvs (language_code, code, name, level, parent) VALUES ('RO','030-1', 'volume', 1, '');
 INSERT INTO cpvs (language_code, code, name, level, parent) VALUES ('RO','030-2', 'liter', 2, 'EN_030-1');
 INSERT INTO cpvs (language_code, code, name, level, parent) VALUES ('RO','030-3', 'cbm', 2, 'EN_030-1');
+
+INSERT INTO unit_class (code, description, name) VALUES ('L','length','length');
+INSERT INTO unit_class (code, description, name) VALUES ('M','mass','mass');
+INSERT INTO unit_class (code, description, name) VALUES ('T','time','time');
+INSERT INTO unit_class (code, description, name) VALUES ('I','electric current','electric current');
+INSERT INTO unit_class (code, description, name) VALUES ('Θ','thermodynamic temperature','thermodynamic temperature');
+INSERT INTO unit_class (code, description, name) VALUES ('N','amount of substance','amount of substance');
+INSERT INTO unit_class (code, description, name) VALUES ('J','luminous intensity','luminous intensity');
+
+INSERT INTO unit(code, description, name, language_code, unit_class_code) VALUES ('m','metre','metre','EN','L');
+INSERT INTO unit(code, description, name, language_code, unit_class_code) VALUES ('kg','kilogram','kilogram','EN','M');
+INSERT INTO unit(code, description, name, language_code, unit_class_code) VALUES ('s','second','second','EN','T');
+INSERT INTO unit(code, description, name, language_code, unit_class_code) VALUES ('A','ampere','ampere','EN','I');
+INSERT INTO unit(code, description, name, language_code, unit_class_code) VALUES ('K','kelvin','kelvin','EN','Θ');
+INSERT INTO unit(code, description, name, language_code, unit_class_code) VALUES ('mol','mole','mole','EN','N');
+INSERT INTO unit(code, description, name, language_code, unit_class_code) VALUES ('cd','candela','candela','EN','J');
 
 INSERT INTO country (id, code, name, description, def, language_id) VALUES ('EN_MD', 'MD', 'MOLDOVA', 'MOLDOVA (REPUBLIC OF)', true, 'EN');
 INSERT INTO country (id, code, name, description, def, language_id) VALUES ('EN_UA', 'UA', 'UKRAINE', 'UKRAINE', false , 'EN');
@@ -50,21 +64,5 @@ INSERT INTO document_type_entity_kind (document_type_id, entity_kind_id) VALUES 
 
 INSERT INTO registration_scheme(id, code, description, name, country_id) VALUES ('EN_MD-GR', 'MD-GR', 'MD-GR', 'MD-GR', 'EN_MD');
 INSERT INTO registration_scheme(id, code, description, name, country_id) VALUES ('EN_UA-GR', 'UA-EDR', 'UA-EDR', 'UA-EDR', 'EN_UA');
-
-INSERT INTO unit_class (id, code, description, name) VALUES ('L', 'L','length','length');
-INSERT INTO unit_class (id, code, description, name) VALUES ('M', 'M','mass','mass');
-INSERT INTO unit_class (id, code, description, name) VALUES ('T', 'T','time','time');
-INSERT INTO unit_class (id, code, description, name) VALUES ('I', 'I','electric current','electric current');
-INSERT INTO unit_class (id, code, description, name) VALUES ('Θ', 'Θ','thermodynamic temperature','thermodynamic temperature');
-INSERT INTO unit_class (id, code, description, name) VALUES ('N', 'N','amount of substance','amount of substance');
-INSERT INTO unit_class (id, code, description, name) VALUES ('J', 'J','luminous intensity','luminous intensity');
-
-INSERT INTO unit(id, code, description, name, language_id, unit_class_id) VALUES ('EN_m','m','metre','metre','EN','L');
-INSERT INTO unit(id, code, description, name, language_id, unit_class_id) VALUES ('EN_kg','kg','kilogram','kilogram','EN','M');
-INSERT INTO unit(id, code, description, name, language_id, unit_class_id) VALUES ('EN_s','s','second','second','EN','T');
-INSERT INTO unit(id, code, description, name, language_id, unit_class_id) VALUES ('EN_A','A','ampere','ampere','EN','I');
-INSERT INTO unit(id, code, description, name, language_id, unit_class_id) VALUES ('EN_K','K','kelvin','kelvin','EN','Θ');
-INSERT INTO unit(id, code, description, name, language_id, unit_class_id) VALUES ('EN_mol','mol','mole','mole','EN','N');
-INSERT INTO unit(id, code, description, name, language_id, unit_class_id) VALUES ('EN_cd','cd','candela','candela','EN','J');
 
 INSERT INTO holidays (id, code, holiday_date, description, name, country_id) VALUES ('EN_UA_01', '01', '2019-01-01 00:00:00', 'New Year', 'New Year', 'EN_UA');
