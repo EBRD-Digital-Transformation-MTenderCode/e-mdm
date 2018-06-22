@@ -1,11 +1,17 @@
 INSERT INTO language (id, code, name, description) VALUES ('RO', 'RO', 'Romanian', '[mo] for Moldavian has been withdrawn, recommending [ro] also for Moldavian');
 INSERT INTO language (id, code, name, description) VALUES ('EN', 'EN', 'English', 'English');
 
-INSERT INTO cpv (id, code, name, level, parent, language_id) VALUES ('EN_03000000-1', '03000000-1', 'Agricultural, farming, fishing, forestry and related products', 1, '', 'EN');
-INSERT INTO cpv (id, code, name, level, parent, language_id) VALUES ('EN_03100000-2', '03100000-2', 'Agricultural and horticultural products', 2, 'EN_03000000-1', 'EN');
-INSERT INTO cpv (id, code, name, level, parent, language_id) VALUES ('EN_03110000-5', '03110000-5', 'Crops, products of market gardening and horticulture', 3, 'EN_03100000-2', 'EN');
-INSERT INTO cpv (id, code, name, level, parent, language_id) VALUES ('EN_03111000-2', '03111000-2', 'Seeds', 4, 'EN_03110000-5', 'EN');
-INSERT INTO cpv (id, code, name, level, parent, language_id) VALUES ('EN_03111100-3', '03111100-3', 'Soya beans', 4, 'EN_03110000-5', 'EN');
+INSERT INTO cpv (language_id, code, name, level, parent) VALUES ('EN', '03000000-1', 'Agricultural, farming, fishing, forestry and related products', 1, '');
+INSERT INTO cpv (language_id, code, name, level, parent) VALUES ('EN', '03100000-2', 'Agricultural and horticultural products', 2, 'EN_03000000-1');
+INSERT INTO cpv (language_id, code, name, level, parent) VALUES ('EN', '03110000-5', 'Crops, products of market gardening and horticulture', 3, 'EN_03100000-2');
+INSERT INTO cpv (language_id, code, name, level, parent) VALUES ('EN', '03111000-2', 'Seeds', 4, 'EN_03110000-5');
+INSERT INTO cpv (language_id, code, name, level, parent) VALUES ('EN', '03111100-3', 'Soya beans', 4, 'EN_03110000-5');
+
+INSERT INTO cpv (language_id, code, name, level, parent) VALUES ('RO', '03000000-1', 'Agricultural, farming, fishing forestry and related products', 1, '');
+INSERT INTO cpv (language_id, code, name, level, parent) VALUES ('RO', '03100000-2', 'Agricultural and horticultural products', 2, 'EN_03000000-1');
+INSERT INTO cpv (language_id, code, name, level, parent) VALUES ('RO', '03110000-5', 'Crops, products of market gardening and horticulture', 3, 'EN_03100000-2');
+INSERT INTO cpv (language_id, code, name, level, parent) VALUES ('RO', '03111000-2', 'Seeds', 4, 'EN_03110000-5');
+INSERT INTO cpv (language_id, code, name, level, parent) VALUES ('RO', '03111100-3', 'Soya beans', 4, 'EN_03110000-5');
 
 INSERT INTO cpvs (id, code, name, level, parent, language_id) VALUES ('EN_030-1','030-1', 'volume', 1, '', 'EN');
 INSERT INTO cpvs (id, code, name, level, parent, language_id) VALUES ('EN_030-2','030-2', 'liter', 2, 'EN_030-1', 'EN');

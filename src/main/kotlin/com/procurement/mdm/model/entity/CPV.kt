@@ -7,13 +7,9 @@ import javax.persistence.*
 @Entity
 @Table(name = "cpv")
 data class CPV(
-        @JsonIgnore
-        @Id
-        @Column(name = "id")
-        val id: String = "",
 
-        @Column(name = "code")
-        val code: String = "",
+        @EmbeddedId
+        val cpvIdentity: CpvIdentity? = null,
 
         @Column(name = "name")
         val name: String = "",
@@ -28,10 +24,5 @@ data class CPV(
 
         @JsonIgnore
         @Column(name = "description")
-        val description: String = "",
-
-        @JsonIgnore
-        @ManyToOne(optional = false, fetch = FetchType.LAZY)
-        @JoinColumn(foreignKey = ForeignKey(name = "FK_cpv_language"))
-        private val language: Language? = null
+        val description: String = ""
 )

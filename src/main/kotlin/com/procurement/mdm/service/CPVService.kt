@@ -16,11 +16,18 @@ class CPVServiceImpl(private val cpvRepository: CPVRepository,
 
     override fun getCPV(languageCode: String, parentCode: String?, internal: Boolean): ResponseDto {
         val languageId = validationService.getLanguageId(languageCode, internal)
+//        val entities = when (parentCode) {
+//            null -> cpvRepository.findByLanguageIdAndParent(languageId)
+//            else -> {
+//                val parentId = validationService.getCpvParentId(languageId, parentCode, internal)
+//                cpvRepository.findByLanguageIdAndParent(languageId, parentId)
+//            }
+//        }
+
         val entities = when (parentCode) {
-            null -> cpvRepository.findByLanguageIdAndParent(languageId)
+            null -> cpvRepository.findByParentAndCpvIdentityLanguageId(languageId = languageId)
             else -> {
-                val parentId = validationService.getCpvParentId(languageId, parentCode, internal)
-                cpvRepository.findByLanguageIdAndParent(languageId, parentId)
+                cpvRepository.findByParentAndCpvIdentityLanguageId(parentCode = parentCode, languageId = languageId)
             }
         }
         return getResponseDto(

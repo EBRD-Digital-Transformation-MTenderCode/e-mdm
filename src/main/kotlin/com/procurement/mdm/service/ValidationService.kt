@@ -16,7 +16,7 @@ interface ValidationService {
 
     fun getEntityKindId(code: String, internal: Boolean): String
 
-    fun getCpvParentId(languageId: String, parentCode: String, internal: Boolean): String
+//    fun getCpvParentId(languageId: String, parentCode: String, internal: Boolean): String
 
     fun getCpvsParentId(languageId: String, parentCode: String, internal: Boolean): String
 }
@@ -70,14 +70,14 @@ class ValidationServiceImpl(private val languageRepository: LanguageRepository,
         return entityKindEntity.id
     }
 
-    override fun getCpvParentId(languageId: String, parentCode: String, internal: Boolean): String {
-        val parentEntity = cpvRepository.findByLanguageIdAndCode(languageId, parentCode) ?: if (internal) {
-            throw InternalErrorException(ErrorType.CPV_CODE_UNKNOWN)
-        } else {
-            throw ExternalErrorException(ErrorType.CPV_CODE_UNKNOWN)
-        }
-        return parentEntity.id
-    }
+//    override fun getCpvParentId(languageId: String, parentCode: String, internal: Boolean): String {
+//        val parentEntity = cpvRepository.findByLanguageIdAndCode(languageId, parentCode) ?: if (internal) {
+//            throw InternalErrorException(ErrorType.CPV_CODE_UNKNOWN)
+//        } else {
+//            throw ExternalErrorException(ErrorType.CPV_CODE_UNKNOWN)
+//        }
+//        return parentEntity.id
+//    }
 
     override fun getCpvsParentId(languageId: String, parentCode: String, internal: Boolean): String {
         val entity = cpvsRepository.findByLanguageIdAndCode(languageId, parentCode) ?: if (internal) {
