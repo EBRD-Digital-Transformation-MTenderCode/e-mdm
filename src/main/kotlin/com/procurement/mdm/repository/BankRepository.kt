@@ -9,6 +9,6 @@ import org.springframework.transaction.annotation.Transactional
 interface BankRepository : JpaRepository<Bank, String> {
 
     @Transactional(readOnly = true)
-    fun findByCountry(country: String): List<Bank>
+    fun findByCountryId(countryId: String): List<Bank>
 }
 

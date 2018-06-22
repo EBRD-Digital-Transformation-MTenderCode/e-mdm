@@ -7,7 +7,7 @@ import javax.persistence.*
 @Entity
 @Table(name = "cpvs")
 data class CPVs(
-
+        @JsonIgnore
         @Id
         @Column(name = "id")
         val id: String = "",

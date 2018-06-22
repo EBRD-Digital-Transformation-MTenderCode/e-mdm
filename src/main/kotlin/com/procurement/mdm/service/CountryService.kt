@@ -9,12 +9,13 @@ interface CountryService {
 
     fun getAllCountries(internal: Boolean): ResponseDto
 
-    fun getCountriesByLanguage(lang: String, internal: Boolean): ResponseDto
+    fun getCountriesByLanguage(languageCode: String, internal: Boolean): ResponseDto
 
 }
 
 @Service
-class CountryServiceImpl(private val countryRepository: CountryRepository) : CountryService {
+class CountryServiceImpl(private val countryRepository: CountryRepository,
+                         private val validationService: ValidationService) : CountryService {
 
     override fun getAllCountries(internal: Boolean): ResponseDto {
         return getResponseDto(
@@ -23,8 +24,9 @@ class CountryServiceImpl(private val countryRepository: CountryRepository) : Cou
                 internal = internal)
     }
 
-    override fun getCountriesByLanguage(lang: String, internal: Boolean): ResponseDto {
-        val entities = countryRepository.findByLanguageCode(lang)
+    override fun getCountriesByLanguage(languageCode: String, internal: Boolean): ResponseDto {
+        val languageId = validationService.getLanguageId(languageCode, internal)
+        val entities = countryRepository.findByLanguageId(languageId)
         val defaultValue = entities.asSequence().firstOrNull { it.default }?.code
         return getResponseDto(
                 default = defaultValue,

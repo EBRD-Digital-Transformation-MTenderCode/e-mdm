@@ -10,17 +10,17 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @CrossOrigin(maxAge = 3600)
 @RequestMapping("/unit")
-class UnitController(private val validationService: ValidationService,
-                     private val unitService: UnitService) {
+class UnitController(private val unitService: UnitService) {
 
     @GetMapping
     fun getUnits(@RequestParam lang: String,
                  @RequestParam unitClass: String,
                  @RequestParam(required = false) internal: Boolean = false): ResponseEntity<ResponseDto> {
-        validationService.lang(lang.toUpperCase(), internal)
-        validationService.unitClass(unitClass.toUpperCase(), internal)
         return ResponseEntity(
-                unitService.getUnit(lang.toUpperCase(), unitClass.toUpperCase(), internal),
+                unitService.getUnit(
+                        languageCode = lang.toUpperCase(),
+                        unitClassCode = unitClass.toUpperCase(),
+                        internal = internal),
                 HttpStatus.OK)
     }
 }

@@ -8,7 +8,7 @@ import javax.persistence.*
 @Entity
 @Table(name = "holidays")
 data class Holidays(
-
+        @JsonIgnore
         @Id
         @Column(name = "id")
         val id: String = "",

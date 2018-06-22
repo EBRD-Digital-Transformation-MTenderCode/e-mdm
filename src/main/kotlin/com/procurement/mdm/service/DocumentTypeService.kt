@@ -7,16 +7,23 @@ import org.springframework.stereotype.Service
 
 interface DocumentTypeService {
 
-    fun getDocumentType(lang: String, entityKind: String, internal: Boolean): ResponseDto
+    fun getDocumentType(languageCode: String, entityKindCode: String, internal: Boolean): ResponseDto
 }
 
 @Service
-class DocumentTypeServiceImpl(private val documentTypeRepository: DocumentTypeRepository) : DocumentTypeService {
+class DocumentTypeServiceImpl(private val documentTypeRepository: DocumentTypeRepository,
+                              private val validationService: ValidationService) : DocumentTypeService {
 
-    override fun getDocumentType(lang: String, entityKind: String, internal: Boolean): ResponseDto {
+    override fun getDocumentType(languageCode: String, entityKindCode: String, internal: Boolean): ResponseDto {
+        val languageId = validationService.getLanguageId(
+                languageCode = languageCode,
+                internal = internal)
+        val entityKindId = validationService.getEntityKindId(
+                code = entityKindCode,
+                internal = internal)
         return getResponseDto(
                 default = null,
-                items = documentTypeRepository.findByLanguageCodeAndEntityKindsCode(lang, entityKind),
+                items = documentTypeRepository.findByLanguageIdAndEntityKindsId(languageId, entityKindId),
                 internal = internal)
     }
 }

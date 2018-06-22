@@ -7,7 +7,7 @@ import javax.persistence.*
 @Entity
 @Table(name = "country")
 data class Country(
-
+        @JsonIgnore
         @Id
         @Column(name = "id")
         val id: String = "",

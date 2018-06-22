@@ -9,37 +9,50 @@ import org.springframework.stereotype.Service
 
 interface AdditionalService {
 
-    fun getBank(lang: String, country: String, internal: Boolean): ResponseDto
+    fun getBank(languageCode: String, countryCode: String, internal: Boolean): ResponseDto
 
-    fun getGPAnnexes(lang: String, country: String, internal: Boolean): ResponseDto
+    fun getGPAnnexes(languageCode: String, countryCode: String, internal: Boolean): ResponseDto
 
-    fun getHolidays(lang: String, country: String, internal: Boolean): ResponseDto
+    fun getHolidays(languageCode: String, countryCode: String, internal: Boolean): ResponseDto
 }
 
 @Service
 class AdditionalServiceImpl(private val bankRepository: BankRepository,
                             private val gpaAnnexesRepository: GPAannexesRepository,
-                            private val holidaysRepository: HolidaysRepository
+                            private val holidaysRepository: HolidaysRepository,
+                            private val validationService: ValidationService
 ) : AdditionalService {
 
-    override fun getBank(lang: String, country: String, internal: Boolean): ResponseDto {
+    override fun getBank(languageCode: String, countryCode: String, internal: Boolean): ResponseDto {
+        val countryId = validationService.getCountryId(
+                languageCode = languageCode,
+                countryCode = countryCode,
+                internal = internal)
         return getResponseDto(
                 default = null,
-                items = bankRepository.findByCountry(country),
+                items = bankRepository.findByCountryId(countryId),
                 internal = internal)
     }
 
-    override fun getGPAnnexes(lang: String, country: String, internal: Boolean): ResponseDto {
+    override fun getGPAnnexes(languageCode: String, countryCode: String, internal: Boolean): ResponseDto {
+        val countryId = validationService.getCountryId(
+                languageCode = languageCode,
+                countryCode = countryCode,
+                internal = internal)
         return getResponseDto(
                 default = null,
-                items = gpaAnnexesRepository.findByCountry(country),
+                items = gpaAnnexesRepository.findByCountry(countryId),
                 internal = internal)
     }
 
-    override fun getHolidays(lang: String, country: String, internal: Boolean): ResponseDto {
+    override fun getHolidays(languageCode: String, countryCode: String, internal: Boolean): ResponseDto {
+        val countryId = validationService.getCountryId(
+                languageCode = languageCode,
+                countryCode = countryCode,
+                internal = internal)
         return getResponseDto(
                 default = null,
-                items = holidaysRepository.findByCountry(country),
+                items = holidaysRepository.findByCountryId(countryId),
                 internal = internal)
     }
 

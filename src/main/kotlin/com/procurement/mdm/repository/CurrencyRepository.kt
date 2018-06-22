@@ -9,5 +9,5 @@ import org.springframework.transaction.annotation.Transactional
 interface CurrencyRepository : JpaRepository<Currency, String> {
 
     @Transactional(readOnly = true)
-    fun findByLanguageCodeAndCountriesCode(lang: String, country: String): List<Currency>
+    fun findByLanguageIdAndCountriesId(languageId: String, countryId: String): List<Currency>
 }

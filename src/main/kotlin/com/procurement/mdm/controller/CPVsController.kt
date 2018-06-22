@@ -10,19 +10,17 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @CrossOrigin(maxAge = 3600)
 @RequestMapping("/cpvs")
-class CPVsController(private val validationService: ValidationService,
-                     private val cpvsService: CPVsService) {
+class CPVsController(private val cpvsService: CPVsService) {
 
     @GetMapping
     fun getCpvs(@RequestParam lang: String,
                 @RequestParam(required = false) code: String?,
                 @RequestParam(required = false) internal: Boolean = false): ResponseEntity<ResponseDto> {
-        validationService.lang(lang.toUpperCase(), internal)
-        code?.let {
-            validationService.cpvsCode(code.toUpperCase(), internal)
-        }
         return ResponseEntity(
-                cpvsService.getCPVs(lang.toUpperCase(), code?.toUpperCase(), internal),
+                cpvsService.getCPVs(
+                        languageCode = lang.toUpperCase(),
+                        parentCode = code?.toUpperCase(),
+                        internal = internal),
                 HttpStatus.OK)
     }
 }

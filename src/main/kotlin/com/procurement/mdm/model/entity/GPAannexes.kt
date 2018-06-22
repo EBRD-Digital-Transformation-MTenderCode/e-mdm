@@ -6,7 +6,7 @@ import javax.persistence.*
 @Entity
 @Table(name = "gpa_annexes")
 data class GPAannexes(
-
+        @JsonIgnore
         @Id
         @Column(name = "id")
         val id: String = "",

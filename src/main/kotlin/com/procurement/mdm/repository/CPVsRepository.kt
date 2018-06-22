@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Transactional
 interface CPVsRepository : JpaRepository<CPVs, String> {
 
     @Transactional(readOnly = true)
-    fun findByLanguageCodeAndParent(lang: String, parent: String = ""): List<CPVs>
+    fun findByLanguageIdAndParent(languageId: String, parentId: String = ""): List<CPVs>
 
     @Transactional(readOnly = true)
-    fun findByCode(code: String): CPVs?
+    fun findByLanguageIdAndCode(languageId: String, code: String): CPVs?
 }

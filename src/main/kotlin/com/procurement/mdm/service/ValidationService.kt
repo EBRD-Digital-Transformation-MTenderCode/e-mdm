@@ -8,17 +8,17 @@ import org.springframework.stereotype.Service
 
 interface ValidationService {
 
-    fun lang(lang: String, internal: Boolean)
+    fun getLanguageId(languageCode: String, internal: Boolean): String
 
-    fun country(lang: String, country: String, internal: Boolean)
+    fun getCountryId(languageCode: String, countryCode: String, internal: Boolean): String
 
-    fun unitClass(code: String, internal: Boolean)
+    fun getUnitClassId(code: String, internal: Boolean): String
 
-    fun entityKind(code: String, internal: Boolean)
+    fun getEntityKindId(code: String, internal: Boolean): String
 
-    fun cpvCode(code: String, internal: Boolean)
+    fun getCpvParentId(languageId: String, parentCode: String, internal: Boolean): String
 
-    fun cpvsCode(code: String, internal: Boolean)
+    fun getCpvsParentId(languageId: String, parentCode: String, internal: Boolean): String
 }
 
 @Service
@@ -29,57 +29,63 @@ class ValidationServiceImpl(private val languageRepository: LanguageRepository,
                             private val cpvRepository: CPVRepository,
                             private val cpvsRepository: CPVsRepository) : ValidationService {
 
-    override fun lang(lang: String, internal: Boolean) {
-        languageRepository.findByCode(lang) ?: if (internal) {
+    override fun getLanguageId(languageCode: String, internal: Boolean): String {
+        val entity = languageRepository.findByCode(languageCode) ?: if (internal) {
             throw InternalErrorException(ErrorType.LANG_UNKNOWN)
         } else {
             throw ExternalErrorException(ErrorType.LANG_UNKNOWN)
         }
+        return entity.id
     }
 
-    override fun country(lang: String, country: String, internal: Boolean) {
-        languageRepository.findByCode(lang) ?: if (internal) {
+    override fun getCountryId(languageCode: String, countryCode: String, internal: Boolean): String {
+        val languageEntity = languageRepository.findByCode(languageCode) ?: if (internal) {
             throw InternalErrorException(ErrorType.LANG_UNKNOWN)
         } else {
             throw ExternalErrorException(ErrorType.LANG_UNKNOWN)
         }
-        countryRepository.findByCodeAndLanguageCode(country, lang) ?: if (internal) {
+        val countryEntity = countryRepository.findByCodeAndLanguageId(countryCode, languageEntity.id) ?: if (internal) {
             throw InternalErrorException(ErrorType.COUNTRY_UNKNOWN)
         } else {
             throw ExternalErrorException(ErrorType.COUNTRY_UNKNOWN)
         }
+        return countryEntity.id
     }
 
-    override fun unitClass(code: String, internal: Boolean) {
-        unitClassRepository.findByCode(code) ?: if (internal) {
+    override fun getUnitClassId(code: String, internal: Boolean): String {
+        val unitClassEntity =  unitClassRepository.findByCode(code) ?: if (internal) {
             throw InternalErrorException(ErrorType.UNIT_CLASS_UNKNOWN)
         } else {
             throw ExternalErrorException(ErrorType.UNIT_CLASS_UNKNOWN)
         }
+        return unitClassEntity.id
     }
 
-    override fun entityKind(code: String, internal: Boolean) {
-        entityKindRepository.findByCode(code) ?: if (internal) {
+    override fun getEntityKindId(code: String, internal: Boolean): String {
+        val entityKindEntity = entityKindRepository.findByCode(code) ?: if (internal) {
             throw InternalErrorException(ErrorType.ENTITY_KIND_UNKNOWN)
         } else {
             throw ExternalErrorException(ErrorType.ENTITY_KIND_UNKNOWN)
         }
+        return entityKindEntity.id
     }
 
-    override fun cpvCode(code: String, internal: Boolean) {
-        cpvRepository.findByCode(code) ?: if (internal) {
+    override fun getCpvParentId(languageId: String, parentCode: String, internal: Boolean): String {
+        val parentEntity = cpvRepository.findByLanguageIdAndCode(languageId, parentCode) ?: if (internal) {
             throw InternalErrorException(ErrorType.CPV_CODE_UNKNOWN)
         } else {
             throw ExternalErrorException(ErrorType.CPV_CODE_UNKNOWN)
         }
+        return parentEntity.id
     }
 
-    override fun cpvsCode(code: String, internal: Boolean) {
-        cpvsRepository.findByCode(code) ?: if (internal) {
+    override fun getCpvsParentId(languageId: String, parentCode: String, internal: Boolean): String {
+        val entity = cpvsRepository.findByLanguageIdAndCode(languageId, parentCode) ?: if (internal) {
             throw InternalErrorException(ErrorType.CPVS_CODE_UNKNOWN)
         } else {
             throw ExternalErrorException(ErrorType.CPVS_CODE_UNKNOWN)
         }
+        return entity.id
     }
 }
 

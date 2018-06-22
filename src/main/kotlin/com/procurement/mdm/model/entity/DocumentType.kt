@@ -7,7 +7,7 @@ import javax.persistence.*
 @Entity
 @Table(name = "document_type")
 data class DocumentType(
-
+        @JsonIgnore
         @Id
         @Column(name = "id")
         val id: String = "",
@@ -30,9 +30,9 @@ data class DocumentType(
         @JsonIgnore
         @ManyToMany(fetch = FetchType.LAZY)
         @JoinTable(name = "document_type_entity_kind",
-                joinColumns = [JoinColumn(name = "document_type_code")],
-                inverseJoinColumns = [JoinColumn(name = "entity_kind_code")],
-                foreignKey = ForeignKey(name = "FK_document_type_code"),
-                inverseForeignKey = ForeignKey(name = "FK_entity_kind_code"))
+                joinColumns = [JoinColumn(name = "document_type_id")],
+                inverseJoinColumns = [JoinColumn(name = "entity_kind_id")],
+                foreignKey = ForeignKey(name = "FK_document_type_id"),
+                inverseForeignKey = ForeignKey(name = "FK_entity_kind_id"))
         private val entityKinds: Set<EntityKind>? = null
 )
