@@ -1,25 +1,12 @@
 package com.procurement.mdm.model.entity
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.io.Serializable
 import javax.persistence.*
 
-@Embeddable
-class CpvKey : Serializable {
-
-    @Column(name = "code", length = 255)
-    var code: String? = null
-
-    @JsonIgnore
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(foreignKey = ForeignKey(name = "FK_cpv_language"))
-    private val language: Language? = null
-}
-
 @Entity
 @Table(name = "cpv")
-data class CPV(
+data class Cpv(
 
         @EmbeddedId
         val cpvKey: CpvKey? = null,
@@ -27,20 +14,28 @@ data class CPV(
         @Column(name = "name")
         val name: String = "",
 
-        @JsonIgnore
         @Column(name = "level")
         val level: Int = 1,
 
-        @JsonIgnore
         @Column(name = "parent")
         val parent: String = "",
 
-        @JsonIgnore
         @Column(name = "description")
         val description: String = ""
 )
 
-data class CPVDto(
+@Embeddable
+class CpvKey : Serializable {
+
+    @Column(name = "code", length = 255)
+    var code: String? = null
+
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(foreignKey = ForeignKey(name = "FK_cpv_language"))
+    private val language: Language? = null
+}
+
+data class CpvDto(
 
         @JsonProperty("code")
         val code: String?,
@@ -49,5 +44,5 @@ data class CPVDto(
         val name: String?
 )
 
-fun List<CPV>.getItems(): List<CPVDto> =
-        this.asSequence().map { CPVDto(code = it.cpvKey?.code, name = it.name) }.toList()
+fun List<Cpv>.getItems(): List<CpvDto> =
+        this.asSequence().map { CpvDto(code = it.cpvKey?.code, name = it.name) }.toList()

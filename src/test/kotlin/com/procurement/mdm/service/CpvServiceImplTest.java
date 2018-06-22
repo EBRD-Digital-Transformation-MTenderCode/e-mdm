@@ -1,8 +1,8 @@
 package com.procurement.mdm.service;
 
-//import com.procurement.mdm.model.entity.CPV;
+//import com.procurement.mdm.model.entity.Cpv;
 //import com.procurement.mdm.model.entity.Language;
-//import com.procurement.mdm.repository.CPVRepository;
+//import com.procurement.mdm.repository.CpvRepository;
 //import org.junit.jupiter.api.BeforeAll;
 //import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.Test;
@@ -23,31 +23,31 @@ class CpvServiceImplTest {
 //
 //    private static CpvService cpvService;
 //
-//    private static CPV cpv;
+//    private static Cpv cpv;
 //
 //    private static Language language;
 //
 //    @BeforeAll
 //    static void setUp() {
-//        List<CPV> cpvs = new ArrayList<>();
+//        List<Cpv> cpvs = new ArrayList<>();
 //        language = new Language();
 //        language.setName("Indo-European");
 //        language.setFamily("English");
 //        language.setIso6391("en");
 //        language.setDescription("test language");
-//        cpv = new CPV();
+//        cpv = new Cpv();
 //        cpv.setCode("03000000-1");
 //        cpv.setName("Test cpv");
 //        cpv.setGroup(1);
 //        cpv.setParent("03000000-1");
 //        cpv.setLanguage(language);
 //        cpvs.add(cpv);
-//        CPVRepository cpvRepository = mock(CPVRepository.class);
+//        CpvRepository cpvRepository = mock(CpvRepository.class);
 //        when(cpvRepository.findCpvsByLanguage_Iso6391(language.getIso6391())).thenReturn(cpvs);
 //        when(cpvRepository.findCpvsByLanguage_Iso6391AndGroup(language.getIso6391(), cpv.getGroup())).thenReturn(cpvs);
 //        when(cpvRepository.findCpvsByLanguage_Iso6391AndParent(language.getIso6391(), cpv.getParent())).thenReturn(cpvs);
 //        when(cpvRepository.findCpvsByLanguage_Iso6391AndGroupAndParent(language.getIso6391(), cpv.getGroup(), cpv.getParent())).thenReturn(cpvs);
-//        cpvService = new CPVServiceImpl(cpvRepository);
+//        cpvService = new CpvServiceImpl(cpvRepository);
 //    }
 //
 //    @Test
@@ -61,31 +61,31 @@ class CpvServiceImplTest {
 //
 //    @Test
 //    void getCpvByLanguageCode() {
-//        List<CPV> cpvs = cpvService.getCpvByLanguageCode(cpv.getLanguage().getIso6391());
+//        List<Cpv> cpvs = cpvService.getCpvByLanguageCode(cpv.getLanguage().getIso6391());
 //        assertTrue(cpvs.get(0).getCode().equals(cpv.getCode()));
 //    }
 //
 //    @Test
 //    void getCpvByParamLanguageCode() {
-//        List<CPV> cpvs = cpvService.getCpvByParam(language.getIso6391());
+//        List<Cpv> cpvs = cpvService.getCpvByParam(language.getIso6391());
 //        assertTrue(cpvs.get(0).getCode().equals(cpv.getCode()));
 //    }
 //
 //    @Test
 //    void getCpvByParamsLanguageCodeAndGroup() {
-//        List<CPV> cpvs = cpvService.getCpvByParam(language.getIso6391(), cpv.getGroup());
+//        List<Cpv> cpvs = cpvService.getCpvByParam(language.getIso6391(), cpv.getGroup());
 //        assertTrue(cpvs.get(0).getCode().equals(cpv.getCode()));
 //    }
 //
 //    @Test
 //    void getCpvByParamsLanguageCodeAndParent() {
-//        List<CPV> cpvs = cpvService.getCpvByParam(language.getIso6391(), cpv.getParent());
+//        List<Cpv> cpvs = cpvService.getCpvByParam(language.getIso6391(), cpv.getParent());
 //        assertTrue(cpvs.get(0).getCode().equals(cpv.getCode()));
 //    }
 //
 //    @Test
 //    void getCpvByParamsLanguageCodeAndGroupAndParent() {
-//        List<CPV> cpvs = cpvService.getCpvByParam(language.getIso6391(), cpv.getGroup(), cpv.getParent());
+//        List<Cpv> cpvs = cpvService.getCpvByParam(language.getIso6391(), cpv.getGroup(), cpv.getParent());
 //        assertTrue(cpvs.get(0).getCode().equals(cpv.getCode()));
 //    }
 }

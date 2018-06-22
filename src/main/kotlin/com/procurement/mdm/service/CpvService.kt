@@ -3,19 +3,19 @@ package com.procurement.mdm.service
 import com.procurement.mdm.model.dto.ResponseDto
 import com.procurement.mdm.model.dto.getResponseDto
 import com.procurement.mdm.model.entity.getItems
-import com.procurement.mdm.repository.CPVRepository
+import com.procurement.mdm.repository.CpvRepository
 import org.springframework.stereotype.Service
 
-interface CPVService {
+interface CpvService {
 
-    fun getCPV(languageCode: String, parentCode: String?, internal: Boolean): ResponseDto
+    fun getCpv(languageCode: String, parentCode: String?, internal: Boolean): ResponseDto
 }
 
 @Service
-class CPVServiceImpl(private val cpvRepository: CPVRepository,
-                     private val validationService: ValidationService) : CPVService {
+class CpvServiceImpl(private val cpvRepository: CpvRepository,
+                     private val validationService: ValidationService) : CpvService {
 
-    override fun getCPV(languageCode: String, parentCode: String?, internal: Boolean): ResponseDto {
+    override fun getCpv(languageCode: String, parentCode: String?, internal: Boolean): ResponseDto {
         validationService.checkLanguage(languageCode, internal)
         val entities = when (parentCode) {
             null -> cpvRepository.findByParentAndCpvKeyLanguageCode(languageCode = languageCode)

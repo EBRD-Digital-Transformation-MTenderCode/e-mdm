@@ -3,7 +3,8 @@ package com.procurement.mdm.service
 import com.procurement.mdm.exception.ErrorType
 import com.procurement.mdm.exception.ExternalErrorException
 import com.procurement.mdm.exception.InternalErrorException
-import com.procurement.mdm.repository.CPVRepository
+import com.procurement.mdm.repository.CpvRepository
+import com.procurement.mdm.repository.CpvsRepository
 import com.procurement.mdm.repository.LanguageRepository
 import org.springframework.stereotype.Service
 
@@ -19,7 +20,7 @@ interface ValidationService {
 
     fun checkCpvParent(parentCode: String, languageCode: String, internal: Boolean)
 
-//    fun checkCpvsParent(parentCode: String, languageId: String, internal: Boolean): String
+    fun checkCpvsParent(parentCode: String, languageCode: String, internal: Boolean)
 }
 
 @Service
@@ -27,8 +28,8 @@ class ValidationServiceImpl(private val languageRepository: LanguageRepository,
 //                            private val countryRepository: CountryRepository,
 //                            private val unitClassRepository: UnitClassRepository,
 //                            private val entityKindRepository: EntityKindRepository,
-//                            private val cpvsRepository: CPVsRepository,
-                            private val cpvRepository: CPVRepository
+                            private val cpvsRepository: CpvsRepository,
+                            private val cpvRepository: CpvRepository
 ) : ValidationService {
 
     override fun checkLanguage(languageCode: String, internal: Boolean) {
@@ -80,14 +81,14 @@ class ValidationServiceImpl(private val languageRepository: LanguageRepository,
                 }
     }
 
-//    override fun checkCpvsParent(parentCode: String, languageId: String, internal: Boolean): String {
-//        val entity = cpvsRepository.findByLanguageIdAndCode(languageId, parentCode) ?: if (internal) {
-//            throw InternalErrorException(ErrorType.CPVS_CODE_UNKNOWN)
-//        } else {
-//            throw ExternalErrorException(ErrorType.CPVS_CODE_UNKNOWN)
-//        }
-//        return entity.id
-//    }
+    override fun checkCpvsParent(parentCode: String, languageCode: String, internal: Boolean) {
+        cpvsRepository.findByCpvsKeyCodeAndCpvsKeyLanguageCode(code = parentCode, languageCode = languageCode)
+                ?: if (internal) {
+                    throw InternalErrorException(ErrorType.CPV_CODE_UNKNOWN)
+                } else {
+                    throw ExternalErrorException(ErrorType.CPV_CODE_UNKNOWN)
+                }
+    }
 }
 
 

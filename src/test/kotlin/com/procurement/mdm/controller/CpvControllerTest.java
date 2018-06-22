@@ -1,6 +1,6 @@
 package com.procurement.mdm.controller;
 
-//import com.procurement.mdm.model.entity.CPV;
+//import com.procurement.mdm.model.entity.Cpv;
 //import com.procurement.mdm.model.entity.Language;
 //import com.procurement.mdm.service.CpvService;
 //import org.junit.jupiter.api.BeforeAll;
@@ -29,18 +29,18 @@ class CpvControllerTest {
 //
 //    private static MockMvc mockMvc;
 //
-//    private static CPV cpv;
+//    private static Cpv cpv;
 //    private static Language language;
 //
 //    @BeforeAll
 //    static void setUp() {
 //        final CpvService cpvService = mock(CpvService.class);
-//        final CPVController cpvController = new CPVController(cpvService);
-//        final List<CPV> cpvs = new ArrayList<>();
+//        final CpvController cpvController = new CpvController(cpvService);
+//        final List<Cpv> cpvs = new ArrayList<>();
 //        mockMvc = MockMvcBuilders.standaloneSetup(cpvController).build();
 //        language = new Language();
 //        language.setIso6391("en");
-//        cpv = new CPV();
+//        cpv = new Cpv();
 //        cpv.setCode("03000000-1");
 //        cpv.setName("Test cpv");
 //        cpv.setGroup(1);

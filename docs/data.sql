@@ -13,9 +13,13 @@ INSERT INTO cpv (language_code, code, name, level, parent) VALUES ('RO', '031100
 INSERT INTO cpv (language_code, code, name, level, parent) VALUES ('RO', '03111000-2', 'Seeds', 4, '03110000-5');
 INSERT INTO cpv (language_code, code, name, level, parent) VALUES ('RO', '03111100-3', 'Soya beans', 4, '03110000-5');
 
-INSERT INTO cpvs (id, code, name, level, parent, language_id) VALUES ('EN_030-1','030-1', 'volume', 1, '', 'EN');
-INSERT INTO cpvs (id, code, name, level, parent, language_id) VALUES ('EN_030-2','030-2', 'liter', 2, 'EN_030-1', 'EN');
-INSERT INTO cpvs (id, code, name, level, parent, language_id) VALUES ('EN_030-3','030-3', 'cbm', 2, 'EN_030-1', 'EN');
+INSERT INTO cpvs (language_code, code, name, level, parent) VALUES ('EN','030-1', 'volume', 1, '');
+INSERT INTO cpvs (language_code, code, name, level, parent) VALUES ('EN','030-2', 'liter', 2, 'EN_030-1');
+INSERT INTO cpvs (language_code, code, name, level, parent) VALUES ('EN','030-3', 'cbm', 2, 'EN_030-1');
+
+INSERT INTO cpvs (language_code, code, name, level, parent) VALUES ('RO','030-1', 'volume', 1, '');
+INSERT INTO cpvs (language_code, code, name, level, parent) VALUES ('RO','030-2', 'liter', 2, 'EN_030-1');
+INSERT INTO cpvs (language_code, code, name, level, parent) VALUES ('RO','030-3', 'cbm', 2, 'EN_030-1');
 
 INSERT INTO country (id, code, name, description, def, language_id) VALUES ('EN_MD', 'MD', 'MOLDOVA', 'MOLDOVA (REPUBLIC OF)', true, 'EN');
 INSERT INTO country (id, code, name, description, def, language_id) VALUES ('EN_UA', 'UA', 'UKRAINE', 'UKRAINE', false , 'EN');
