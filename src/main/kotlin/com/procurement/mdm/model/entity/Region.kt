@@ -22,7 +22,7 @@ data class Region(
 class RegionKey : Serializable {
 
     @Column(name = "code", length = 255)
-    var code: String? = null
+    val code: String? = null
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumns(
@@ -30,6 +30,21 @@ class RegionKey : Serializable {
             JoinColumn(name = "country_language_code"),
             foreignKey = ForeignKey(name = "FK_region_country"))
     private val country: Country? = null
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+        other as RegionKey
+        if (code != other.code) return false
+        if (country != other.country) return false
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = code?.hashCode() ?: 0
+        result = 31 * result + (country?.hashCode() ?: 0)
+        return result
+    }
 }
 
 data class RegionDto(

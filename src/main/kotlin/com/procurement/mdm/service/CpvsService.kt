@@ -13,7 +13,7 @@ interface CpvsService {
 
 @Service
 class CpvsServiceImpl(private val cpvsRepository: CpvsRepository,
-                     private val validationService: ValidationService) : CpvsService {
+                      private val validationService: ValidationService) : CpvsService {
 
     override fun getCpvs(languageCode: String, parentCode: String?, internal: Boolean): ResponseDto {
         validationService.checkLanguage(languageCode, internal)

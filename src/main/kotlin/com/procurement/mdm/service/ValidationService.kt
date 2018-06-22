@@ -4,12 +4,7 @@ import com.procurement.mdm.exception.ErrorType
 import com.procurement.mdm.exception.ExternalErrorException
 import com.procurement.mdm.exception.InternalErrorException
 import com.procurement.mdm.model.entity.Country
-import com.procurement.mdm.repository.CpvRepository
-import com.procurement.mdm.repository.CpvsRepository
-import com.procurement.mdm.repository.LanguageRepository
-import com.procurement.mdm.repository.UnitClassRepository
-import com.procurement.mdm.repository.EntityKindRepository
-import com.procurement.mdm.repository.CountryRepository
+import com.procurement.mdm.repository.*
 import org.springframework.stereotype.Service
 
 interface ValidationService {
@@ -67,7 +62,7 @@ class ValidationServiceImpl(private val languageRepository: LanguageRepository,
     }
 
     override fun checkEntityKind(code: String, internal: Boolean) {
-       entityKindRepository.findByCode(code) ?: if (internal) {
+        entityKindRepository.findByCode(code) ?: if (internal) {
             throw InternalErrorException(ErrorType.ENTITY_KIND_UNKNOWN)
         } else {
             throw ExternalErrorException(ErrorType.ENTITY_KIND_UNKNOWN)
