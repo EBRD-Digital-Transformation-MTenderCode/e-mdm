@@ -10,5 +10,5 @@ import org.springframework.transaction.annotation.Transactional
 interface UnitRepository : JpaRepository<Unit, UnitKey> {
 
     @Transactional(readOnly = true)
-    fun findByUnitClassCodeAndUnitKeyLanguageCode(unitClassCode: String = "", languageCode: String): List<Unit>
+    fun findByUnitClassCodeAndUnitKeyLanguageCode(unitClassCode: String, languageCode: String): List<Unit>
 }

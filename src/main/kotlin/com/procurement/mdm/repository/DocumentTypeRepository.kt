@@ -10,5 +10,5 @@ import org.springframework.transaction.annotation.Transactional
 interface DocumentTypeRepository : JpaRepository<DocumentType, DtKey> {
 
     @Transactional(readOnly = true)
-    fun findByEntityKindsCodeAndDtKeyLanguageCode(entityKindCode: String = "", languageCode: String): List<DocumentType>
+    fun findByEntityKindsCodeAndDtKeyLanguageCode(entityKindCode: String, languageCode: String): List<DocumentType>
 }
