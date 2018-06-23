@@ -17,7 +17,7 @@ class CpvController(private val cpvService: CpvService) {
                @RequestParam(required = false) internal: Boolean = false): ResponseEntity<ResponseDto> {
         return ResponseEntity(
                 cpvService.getCpv(
-                        languageCode = lang.toUpperCase(),
+                        languageCode = lang.toLowerCase(),
                         parentCode = code?.toUpperCase(),
                         internal = internal),
                 HttpStatus.OK)

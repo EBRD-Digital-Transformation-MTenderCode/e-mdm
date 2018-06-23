@@ -17,7 +17,7 @@ class DocumentTypeController(private val documentTypeService: DocumentTypeServic
                          @RequestParam(required = false) internal: Boolean = false): ResponseEntity<ResponseDto> {
         return ResponseEntity(
                 documentTypeService.getDocumentType(
-                        languageCode = lang.toUpperCase(),
+                        languageCode = lang.toLowerCase(),
                         entityKindCode = entityKind.toUpperCase(),
                         internal = internal),
                 HttpStatus.OK)

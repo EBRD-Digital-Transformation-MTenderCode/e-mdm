@@ -17,7 +17,7 @@ class RegionController(private val regionService: RegionService) {
                    @RequestParam(required = false) internal: Boolean = false): ResponseEntity<ResponseDto> {
         return ResponseEntity(
                 regionService.getRegion(
-                        languageCode = lang.toUpperCase(),
+                        languageCode = lang.toLowerCase(),
                         countryCode = country.toUpperCase(),
                         internal = internal),
                 HttpStatus.OK)
