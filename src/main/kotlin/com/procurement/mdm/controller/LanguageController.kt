@@ -14,7 +14,7 @@ class LanguageController(private val languageService: LanguageService) {
     @GetMapping
     fun getLanguages(@RequestParam(required = false) internal: Boolean = false): ResponseEntity<ResponseDto> {
         return ResponseEntity(
-                languageService.getLanguages(internal = internal),
+                languageService.getLanguages(internal),
                 HttpStatus.OK)
     }
 }
