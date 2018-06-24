@@ -17,7 +17,7 @@ class RegistrationSchemeController(private val registrationSchemeService: Regist
                                @RequestParam(required = false) internal: Boolean = false): ResponseEntity<ResponseDto> {
         return ResponseEntity(
                 registrationSchemeService.getRegistrationScheme(
-                        languageCode = lang.toUpperCase(),
+                        languageCode = lang.toLowerCase(),
                         countryCode = country.toUpperCase(),
                         internal = internal),
                 HttpStatus.OK)

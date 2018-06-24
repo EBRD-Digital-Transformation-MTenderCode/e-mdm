@@ -1,6 +1,10 @@
 INSERT INTO language (code, name, description) VALUES ('RO', 'Romanian', '[mo] for Moldavian has been withdrawn, recommending [ro] also for Moldavian');
 INSERT INTO language (code, name, description) VALUES ('EN', 'English', 'English');
 
+INSERT INTO cpv (code, name, level, parent, language_code) VALUES ('03000000-1','Agricultural, farming, fishing, forestry and related products',1,'Agricultural, farming, fishing, forestry and related products','','en');
+
+
+
 INSERT INTO cpv (language_code, code, name, level, parent) VALUES ('EN', '03000000-1', 'Agricultural, farming, fishing, forestry and related products', 1, '');
 INSERT INTO cpv (language_code, code, name, level, parent) VALUES ('EN', '03100000-2', 'Agricultural and horticultural products', 2, '03000000-1');
 INSERT INTO cpv (language_code, code, name, level, parent) VALUES ('EN', '03110000-5', 'Crops, products of market gardening and horticulture', 3, '03100000-2');

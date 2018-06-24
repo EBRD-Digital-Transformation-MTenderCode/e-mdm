@@ -17,7 +17,7 @@ class CurrencyController(private val currencyService: CurrencyService) {
                       @RequestParam(required = false) internal: Boolean = false): ResponseEntity<ResponseDto> {
         return ResponseEntity(
                 currencyService.getCurrencies(
-                        languageCode = lang.toUpperCase(),
+                        languageCode = lang.toLowerCase(),
                         countryCode = country.toUpperCase(),
                         internal = internal),
                 HttpStatus.OK)

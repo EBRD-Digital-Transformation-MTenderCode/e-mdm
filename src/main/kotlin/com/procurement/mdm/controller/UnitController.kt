@@ -17,7 +17,7 @@ class UnitController(private val unitService: UnitService) {
                  @RequestParam(required = false) internal: Boolean = false): ResponseEntity<ResponseDto> {
         return ResponseEntity(
                 unitService.getUnit(
-                        languageCode = lang.toUpperCase(),
+                        languageCode = lang.toLowerCase(),
                         unitClassCode = unitClass.toUpperCase(),
                         internal = internal),
                 HttpStatus.OK)
