@@ -10,12 +10,6 @@ data class EntityKind(
         @Column(name = "code")
         val code: String = "",
 
-        @Column(name = "name")
-        val name: String = "",
-
-        @Column(name = "description")
-        val description: String = "",
-
         @ManyToMany(mappedBy = "entityKinds", fetch = FetchType.LAZY)
         private val documentTypes: Set<DocumentType>? = null
 )
@@ -23,11 +17,9 @@ data class EntityKind(
 data class EntityKindDto(
 
         @JsonProperty("code")
-        val code: String?,
+        val code: String?
 
-        @JsonProperty("name")
-        val name: String?
 )
 
 fun List<EntityKind>.getItems(): List<EntityKindDto> =
-        this.asSequence().map { EntityKindDto(code = it.code, name = it.name) }.toList()
+        this.asSequence().map { EntityKindDto(code = it.code) }.toList()

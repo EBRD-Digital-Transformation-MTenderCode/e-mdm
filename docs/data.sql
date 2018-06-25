@@ -2,6 +2,10 @@ INSERT INTO language (code, description, name) VALUES ('en', '', 'English');
 INSERT INTO language (code, description, name) VALUES ('ro', '', 'Romanian; Moldavian; Moldovan');
 INSERT INTO language (code, description, name) VALUES ('ru', '', 'Russian');
 
+INSERT INTO public.currency (code, def, description, name, language_code) VALUES ('EUR', false, '', '', 'en');
+INSERT INTO public.currency (code, def, description, name, language_code) VALUES ('MDL', false, '', '', 'en');
+INSERT INTO public.currency (code, def, description, name, language_code) VALUES ('USD', false, '', '', 'en');
+
 INSERT INTO public.unit_class(code, description, name, language_code) VALUES ('L', 'length', 'length', 'en');
 INSERT INTO public.unit_class(code, description, name, language_code) VALUES ('M', 'mass', 'mass', 'en');
 INSERT INTO public.unit_class(code, description, name, language_code) VALUES ('T', 'time', 'time', 'en');
