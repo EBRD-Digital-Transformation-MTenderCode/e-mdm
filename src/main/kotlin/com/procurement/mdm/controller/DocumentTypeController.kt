@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @CrossOrigin(maxAge = 3600)
-@RequestMapping("/documentType")
+@RequestMapping("/document-type")
 class DocumentTypeController(private val documentTypeService: DocumentTypeService) {
 
     @GetMapping

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @CrossOrigin(maxAge = 3600)
-@RequestMapping("/registrationScheme")
+@RequestMapping("/registration-scheme")
 class RegistrationSchemeController(private val registrationSchemeService: RegistrationSchemeService) {
 
     @GetMapping
