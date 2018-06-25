@@ -4,6 +4,7 @@ import com.procurement.mdm.exception.ErrorType
 import com.procurement.mdm.exception.ExternalErrorException
 import com.procurement.mdm.exception.InternalErrorException
 import com.procurement.mdm.model.entity.Country
+import com.procurement.mdm.model.entity.UnitClass
 import com.procurement.mdm.repository.*
 import org.springframework.stereotype.Service
 
@@ -13,7 +14,7 @@ interface ValidationService {
 
     fun getCountry(languageCode: String, countryCode: String, internal: Boolean): Country
 
-//    fun checkUnitClass(code: String, internal: Boolean)
+    fun getUnitClass(languageCode: String, code: String, internal: Boolean): UnitClass
 
     fun checkEntityKind(code: String, internal: Boolean)
 
@@ -25,7 +26,7 @@ interface ValidationService {
 @Service
 class ValidationServiceImpl(private val languageRepository: LanguageRepository,
                             private val countryRepository: CountryRepository,
-//                            private val unitClassRepository: UnitClassRepository,
+                            private val unitClassRepository: UnitClassRepository,
                             private val entityKindRepository: EntityKindRepository,
                             private val cpvsRepository: CpvsRepository,
                             private val cpvRepository: CpvRepository
@@ -53,13 +54,19 @@ class ValidationServiceImpl(private val languageRepository: LanguageRepository,
         }
     }
 
-//    override fun checkUnitClass(code: String, internal: Boolean) {
-//        unitClassRepository.findByCode(code = code) ?: if (internal) {
-//            throw InternalErrorException(ErrorType.UNIT_CLASS_UNKNOWN)
-//        } else {
-//            throw ExternalErrorException(ErrorType.UNIT_CLASS_UNKNOWN)
-//        }
-//    }
+    override fun getUnitClass(languageCode: String, code: String, internal: Boolean): UnitClass {
+        languageRepository.findByCode(code = languageCode) ?: if (internal) {
+            throw InternalErrorException(ErrorType.LANG_UNKNOWN)
+        } else {
+            throw ExternalErrorException(ErrorType.LANG_UNKNOWN)
+        }
+        return unitClassRepository.findByUnitClassKeyCodeAndUnitClassKeyLanguageCode(
+                code = code, languageCode = languageCode) ?: if (internal) {
+            throw InternalErrorException(ErrorType.UNIT_CLASS_UNKNOWN)
+        } else {
+            throw ExternalErrorException(ErrorType.UNIT_CLASS_UNKNOWN)
+        }
+    }
 
     override fun checkEntityKind(code: String, internal: Boolean) {
         entityKindRepository.findByCode(code) ?: if (internal) {

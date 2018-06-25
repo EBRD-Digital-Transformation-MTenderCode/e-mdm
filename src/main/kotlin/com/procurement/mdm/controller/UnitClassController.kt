@@ -1,24 +1,22 @@
 package com.procurement.mdm.controller
 
 import com.procurement.mdm.model.dto.ResponseDto
-import com.procurement.mdm.service.UnitService
+import com.procurement.mdm.service.UnitClassService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @CrossOrigin(maxAge = 3600)
-@RequestMapping("/unit")
-class UnitController(private val unitService: UnitService) {
+@RequestMapping("/unit-class")
+class UnitClassController(private val unitClassService: UnitClassService) {
 
     @GetMapping
-    fun getUnits(@RequestParam lang: String,
-                 @RequestParam unitClass: String,
-                 @RequestParam(required = false) internal: Boolean = false): ResponseEntity<ResponseDto> {
+    fun getUnitClasses(@RequestParam lang: String,
+                       @RequestParam(required = false) internal: Boolean = false): ResponseEntity<ResponseDto> {
         return ResponseEntity(
-                unitService.getUnit(
+                unitClassService.getUnitClassesByLanguage(
                         languageCode = lang.toLowerCase(),
-                        unitClassCode = unitClass.toUpperCase(),
                         internal = internal),
                 HttpStatus.OK)
     }

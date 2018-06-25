@@ -21,7 +21,6 @@ data class Unit(
         val description: String = ""
 )
 
-
 @Embeddable
 class UnitKey : Serializable {
 
