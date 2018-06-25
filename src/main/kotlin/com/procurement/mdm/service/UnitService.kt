@@ -17,10 +17,11 @@ class UnitServiceImpl(private val unitRepository: UnitRepository,
 
     override fun getUnit(languageCode: String, unitClassCode: String, internal: Boolean): ResponseDto {
         validationService.checkLanguage(languageCode = languageCode, internal = internal)
-        validationService.checkUnitClass(code = unitClassCode, internal = internal)
-        val entities = unitRepository.findByUnitClassCodeAndUnitKeyLanguageCode(
-                unitClassCode = unitClassCode,
-                languageCode = languageCode)
+        val unitClass = validationService.getUnitClass(
+                languageCode = languageCode,
+                code = unitClassCode,
+                internal = internal)
+        val entities = unitRepository.findByUnitKeyUnitClass(unitClass)
         return getResponseDto(
                 default = null,
                 items = entities.getItems(),
