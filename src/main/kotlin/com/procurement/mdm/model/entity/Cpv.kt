@@ -14,8 +14,8 @@ data class Cpv(
         @Column(name = "name")
         val name: String = "",
 
-        @Column(name = "level")
-        val level: Int = 1,
+        @Column(name = "children")
+        val children: Int = 0,
 
         @Column(name = "parent")
         val parent: String = "",

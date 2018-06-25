@@ -22,3 +22,5 @@ INSERT INTO public.unit (code, description, name, unit_class_language_code, unit
 INSERT INTO public.unit (code, description, name, unit_class_language_code, unit_class_code) VALUES ('mol', 'mole', 'mole', 'en', 'N');
 INSERT INTO public.unit (code, description, name, unit_class_language_code, unit_class_code) VALUES ('cd', 'candela', 'candela', 'en', 'J');
 
+INSERT INTO public.cpv(code, parent, children, name, language_code)
+
