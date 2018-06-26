@@ -19,8 +19,6 @@ interface ValidationService {
     fun checkEntityKind(code: String, internal: Boolean)
 
     fun checkCpvParent(parentCode: String, languageCode: String, internal: Boolean)
-
-    fun checkCpvsParent(parentCode: String, languageCode: String, internal: Boolean)
 }
 
 @Service
@@ -28,7 +26,6 @@ class ValidationServiceImpl(private val languageRepository: LanguageRepository,
                             private val countryRepository: CountryRepository,
                             private val unitClassRepository: UnitClassRepository,
                             private val entityKindRepository: EntityKindRepository,
-                            private val cpvsRepository: CpvsRepository,
                             private val cpvRepository: CpvRepository
 ) : ValidationService {
 
@@ -78,15 +75,6 @@ class ValidationServiceImpl(private val languageRepository: LanguageRepository,
 
     override fun checkCpvParent(parentCode: String, languageCode: String, internal: Boolean) {
         cpvRepository.findByCpvKeyCodeAndCpvKeyLanguageCode(code = parentCode, languageCode = languageCode)
-                ?: if (internal) {
-                    throw InternalErrorException(ErrorType.CPV_CODE_UNKNOWN)
-                } else {
-                    throw ExternalErrorException(ErrorType.CPV_CODE_UNKNOWN)
-                }
-    }
-
-    override fun checkCpvsParent(parentCode: String, languageCode: String, internal: Boolean) {
-        cpvsRepository.findByCpvsKeyCodeAndCpvsKeyLanguageCode(code = parentCode, languageCode = languageCode)
                 ?: if (internal) {
                     throw InternalErrorException(ErrorType.CPV_CODE_UNKNOWN)
                 } else {
