@@ -10,5 +10,5 @@ import org.springframework.transaction.annotation.Transactional
 interface SubMetDetRepository : JpaRepository<SubMetDet, SubMetDetKey> {
 
     @Transactional(readOnly = true)
-    fun findBySmdKeyLanguageCode(languageCode: String): List<SubMetDet>
+    fun findBySubMetDetKeyLanguageCode(languageCode: String): List<SubMetDet>
 }

@@ -19,7 +19,7 @@ class SubMetDetServiceImpl(private val subMetDetRepository: SubMetDetRepository,
 
     override fun getSubMetDet(languageCode: String, internal: Boolean): ResponseDto {
         validationService.checkLanguage(languageCode, internal)
-        val entities = subMetDetRepository.findBySmdKeyLanguageCode(languageCode = languageCode)
+        val entities = subMetDetRepository.findBySubMetDetKeyLanguageCode(languageCode = languageCode)
         return getResponseDto(
             default = null,
             items = entities.getItems(),
