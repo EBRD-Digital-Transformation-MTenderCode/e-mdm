@@ -5,11 +5,11 @@ import java.io.Serializable
 import javax.persistence.*
 
 @Entity
-@Table(name = "cpvs")
-data class Cpvs(
+@Table(name = "submission_method_details")
+data class SubMetDet(
 
         @EmbeddedId
-        val cpvsKey: CpvsKey? = null,
+        val subMetDetKey: SubMetDetKey? = null,
 
         @Column(name = "name")
         val name: String = "",
@@ -19,19 +19,19 @@ data class Cpvs(
 )
 
 @Embeddable
-class CpvsKey : Serializable {
+class SubMetDetKey : Serializable {
 
     @Column(name = "code", length = 255)
     val code: String? = null
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(foreignKey = ForeignKey(name = "FK_cpvs_language"))
+    @JoinColumn(foreignKey = ForeignKey(name = "FK_submission_method_details_language"))
     private val language: Language? = null
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
-        other as CpvsKey
+        other as SubMetDetKey
         if (code != other.code) return false
         if (language != other.language) return false
         return true
@@ -44,7 +44,7 @@ class CpvsKey : Serializable {
     }
 }
 
-data class CpvsDto(
+data class SubMetDetDto(
 
         @JsonProperty("code")
         val code: String?,
@@ -53,5 +53,5 @@ data class CpvsDto(
         val name: String?
 )
 
-fun List<Cpvs>.getItems(): List<CpvsDto> =
-        this.asSequence().map { CpvsDto(code = it.cpvsKey?.code, name = it.name) }.toList()
+fun List<SubMetDet>.getItems(): List<SubMetDetDto> =
+        this.asSequence().map { SubMetDetDto(code = it.subMetDetKey?.code, name = it.name) }.toList()

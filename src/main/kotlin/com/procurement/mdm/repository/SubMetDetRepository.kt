@@ -1,14 +1,14 @@
 package com.procurement.mdm.repository
 
-import com.procurement.mdm.model.entity.Cpvs
-import com.procurement.mdm.model.entity.CpvsKey
+import com.procurement.mdm.model.entity.SubMetDet
+import com.procurement.mdm.model.entity.SubMetDetKey
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
 
 @Repository
-interface CpvsRepository : JpaRepository<Cpvs, CpvsKey> {
+interface SubMetDetRepository : JpaRepository<SubMetDet, SubMetDetKey> {
 
     @Transactional(readOnly = true)
-    fun findByCpvsKeyLanguageCode(languageCode: String): List<Cpvs>
+    fun findBySubMetDetKeyLanguageCode(languageCode: String): List<SubMetDet>
 }

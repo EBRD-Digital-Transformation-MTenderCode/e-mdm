@@ -8,22 +8,16 @@ import org.springframework.stereotype.Service
 
 interface CpvsService {
 
-    fun getCpvs(languageCode: String, parentCode: String?, internal: Boolean): ResponseDto
+    fun getCpvs(languageCode: String, internal: Boolean): ResponseDto
 }
 
 @Service
 class CpvsServiceImpl(private val cpvsRepository: CpvsRepository,
                       private val validationService: ValidationService) : CpvsService {
 
-    override fun getCpvs(languageCode: String, parentCode: String?, internal: Boolean): ResponseDto {
+    override fun getCpvs(languageCode: String, internal: Boolean): ResponseDto {
         validationService.checkLanguage(languageCode, internal)
-        val entities = when (parentCode) {
-            null -> cpvsRepository.findByParentAndCpvsKeyLanguageCode(languageCode = languageCode)
-            else -> {
-                validationService.checkCpvsParent(parentCode = parentCode, languageCode = languageCode, internal = internal)
-                cpvsRepository.findByParentAndCpvsKeyLanguageCode(parentCode = parentCode, languageCode = languageCode)
-            }
-        }
+        val entities = cpvsRepository.findByCpvsKeyLanguageCode(languageCode = languageCode)
         return getResponseDto(
                 default = null,
                 items = entities.getItems(),
