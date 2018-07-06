@@ -11,6 +11,22 @@ data class ResponseDto(
         val data: Any?
 )
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
+data class ResponseDataDto(
+
+        var default: Any?,
+
+        val items: Any?
+)
+
+data class ResponseErrorDto(
+
+        var code: String,
+
+        val description: String
+)
+
+
 fun getResponseDto(default: Any?, items: Any?): ResponseDto {
     return ResponseDto(
             errors = null,
