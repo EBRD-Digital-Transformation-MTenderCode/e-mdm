@@ -22,11 +22,12 @@ data class ResponseDataDto(
         val items: Any?
 )
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 data class ResponseErrorDto(
 
         val code: String,
 
-        val description: String
+        val description: String?
 )
 
 
@@ -44,6 +45,16 @@ fun getResponseDto(data: Any?, id: UUID? = null): ResponseDto {
             errors = null,
             data = data,
             id = id)
+}
+
+fun getExceptionResponseDto(exception: Exception): ResponseDto {
+    return ResponseDto(
+            errors = listOf(ResponseErrorDto(
+                    code = "400.20.exception",
+                    description = exception.message
+            )),
+            data = null,
+            id = null)
 }
 
 fun getErrorResponseDto(error: ErrorException, id: UUID? = null): ResponseDto {
