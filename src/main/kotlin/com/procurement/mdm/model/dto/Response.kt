@@ -2,44 +2,56 @@ package com.procurement.mdm.model.dto
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.procurement.mdm.exception.ErrorException
+import java.util.*
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class ResponseDto(
 
         val errors: List<ResponseErrorDto>?,
 
-        val data: Any?
+        val data: Any?,
+
+        val id: UUID?
 )
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class ResponseDataDto(
 
-        var default: Any?,
+        val default: Any?,
 
         val items: Any?
 )
 
 data class ResponseErrorDto(
 
-        var code: String,
+        val code: String,
 
         val description: String
 )
 
 
-fun getResponseDto(default: Any?, items: Any?): ResponseDto {
+fun getResponseDto(default: Any? = null, items: Any?, id: UUID? = null): ResponseDto {
     return ResponseDto(
             errors = null,
             data = ResponseDataDto(
                     default = default,
-                    items = items))
+                    items = items),
+            id = id)
 }
 
-fun getErrorResponseDto(error: ErrorException): ResponseDto {
+fun getResponseDto(data: Any?, id: UUID? = null): ResponseDto {
+    return ResponseDto(
+            errors = null,
+            data = data,
+            id = id)
+}
+
+fun getErrorResponseDto(error: ErrorException, id: UUID? = null): ResponseDto {
     return ResponseDto(
             errors = listOf(ResponseErrorDto(
                     code = "400.20." + error.code,
                     description = error.msg
             )),
-            data = null)
+            data = null,
+            id = id)
 }

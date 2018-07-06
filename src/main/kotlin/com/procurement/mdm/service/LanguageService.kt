@@ -15,9 +15,7 @@ interface LanguageService {
 class LanguageServiceImpl(private val languageRepository: LanguageRepository) : LanguageService {
 
     override fun getLanguages(): ResponseDto {
-        return getResponseDto(
-                default = null,
-                items = languageRepository.findAll()
+        return getResponseDto(items = languageRepository.findAll()
         )
     }
 }

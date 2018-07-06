@@ -20,8 +20,6 @@ class RegionServiceImpl(private val regionRepository: RegionRepository,
                 languageCode = languageCode,
                 countryCode = countryCode)
         val entities = regionRepository.findByRegionKeyCountry(country)
-        return getResponseDto(
-                default = null,
-                items = entities.getItems())
+        return getResponseDto(items = entities.getItems())
     }
 }
