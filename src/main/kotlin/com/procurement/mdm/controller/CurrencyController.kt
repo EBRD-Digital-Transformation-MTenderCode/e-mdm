@@ -13,13 +13,11 @@ class CurrencyController(private val currencyService: CurrencyService) {
 
     @GetMapping
     fun getCurrencies(@RequestParam lang: String,
-                      @RequestParam country: String,
-                      @RequestParam(required = false) internal: Boolean = false): ResponseEntity<ResponseDto> {
+                      @RequestParam country: String): ResponseEntity<ResponseDto> {
         return ResponseEntity(
                 currencyService.getCurrencies(
                         languageCode = lang.toLowerCase(),
-                        countryCode = country.toUpperCase(),
-                        internal = internal),
+                        countryCode = country.toUpperCase()),
                 HttpStatus.OK)
     }
 }

@@ -14,12 +14,12 @@ package com.procurement.mdm.controller
 //    @GetMapping
 //    fun getDocumentTypes(@RequestParam lang: String,
 //                         @RequestParam entityKind: String,
-//                         @RequestParam(required = false) internal: Boolean = false): ResponseEntity<ResponseDto> {
+//                         ): ResponseEntity<ResponseDto> {
 //        return ResponseEntity(
 //                documentTypeService.getDocumentType(
 //                        languageCode = lang.toLowerCase(),
 //                        entityKindCode = entityKind.toUpperCase(),
-//                        internal = internal),
+//                        ),
 //                HttpStatus.OK)
 //    }
 //}

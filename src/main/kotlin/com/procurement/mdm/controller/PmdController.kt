@@ -12,12 +12,10 @@ import org.springframework.web.bind.annotation.*
 class PmdController(private val pmdService: PmdService) {
 
     @GetMapping
-    fun getPmd(@RequestParam lang: String,
-                @RequestParam(required = false) internal: Boolean = false): ResponseEntity<ResponseDto> {
+    fun getPmd(@RequestParam lang: String): ResponseEntity<ResponseDto> {
         return ResponseEntity(
                 pmdService.getPmd(
-                        languageCode = lang.toLowerCase(),
-                        internal = internal),
+                        languageCode = lang.toLowerCase()),
                 HttpStatus.OK)
     }
 }

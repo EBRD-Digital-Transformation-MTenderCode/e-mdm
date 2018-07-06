@@ -8,20 +8,19 @@ import org.springframework.stereotype.Service
 
 interface SubMetRatService {
 
-    fun getSubMetRat(languageCode: String, internal: Boolean): ResponseDto
+    fun getSubMetRat(languageCode: String): ResponseDto
 }
 
 @Service
 class SubMetRatServiceImpl(private val subMetRatRepository: SubMetRatRepository,
-                     private val validationService: ValidationService) : SubMetRatService {
+                           private val validationService: ValidationService) : SubMetRatService {
 
-    override fun getSubMetRat(languageCode: String, internal: Boolean): ResponseDto {
-        validationService.checkLanguage(languageCode, internal)
+    override fun getSubMetRat(languageCode: String): ResponseDto {
+        validationService.checkLanguage(languageCode)
         val entities = subMetRatRepository.findBySubMetRatKeyLanguageCode(languageCode = languageCode)
         return getResponseDto(
-            default = null,
-            items = entities.getItems(),
-            internal = internal)
+                default = null,
+                items = entities.getItems())
     }
 }
 

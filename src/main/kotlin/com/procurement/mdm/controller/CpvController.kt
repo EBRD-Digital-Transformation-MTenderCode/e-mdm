@@ -13,13 +13,11 @@ class CpvController(private val cpvService: CpvService) {
 
     @GetMapping
     fun getCpv(@RequestParam lang: String,
-               @RequestParam(required = false) code: String?,
-               @RequestParam(required = false) internal: Boolean = false): ResponseEntity<ResponseDto> {
+               @RequestParam(required = false) code: String?): ResponseEntity<ResponseDto> {
         return ResponseEntity(
                 cpvService.getCpv(
                         languageCode = lang.toLowerCase(),
-                        parentCode = code?.toUpperCase(),
-                        internal = internal),
+                        parentCode = code?.toUpperCase()),
                 HttpStatus.OK)
     }
 }

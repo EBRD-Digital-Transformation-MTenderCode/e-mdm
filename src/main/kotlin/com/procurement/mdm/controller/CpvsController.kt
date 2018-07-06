@@ -12,12 +12,10 @@ import org.springframework.web.bind.annotation.*
 class CpvsController(private val cpvsService: CpvsService) {
 
     @GetMapping
-    fun getCpvs(@RequestParam lang: String,
-                @RequestParam(required = false) internal: Boolean = false): ResponseEntity<ResponseDto> {
+    fun getCpvs(@RequestParam lang: String): ResponseEntity<ResponseDto> {
         return ResponseEntity(
                 cpvsService.getCpvs(
-                        languageCode = lang.toLowerCase(),
-                        internal = internal),
+                        languageCode = lang.toLowerCase()),
                 HttpStatus.OK)
     }
 }

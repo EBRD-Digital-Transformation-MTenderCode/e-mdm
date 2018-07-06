@@ -13,13 +13,11 @@ class RegistrationSchemeController(private val registrationSchemeService: Regist
 
     @GetMapping
     fun getRegistrationSchemes(@RequestParam lang: String,
-                               @RequestParam country: String,
-                               @RequestParam(required = false) internal: Boolean = false): ResponseEntity<ResponseDto> {
+                               @RequestParam country: String): ResponseEntity<ResponseDto> {
         return ResponseEntity(
                 registrationSchemeService.getRegistrationScheme(
                         languageCode = lang.toLowerCase(),
-                        countryCode = country.toUpperCase(),
-                        internal = internal),
+                        countryCode = country.toUpperCase()),
                 HttpStatus.OK)
     }
 }

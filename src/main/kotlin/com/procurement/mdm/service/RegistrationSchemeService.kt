@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 
 interface RegistrationSchemeService {
 
-    fun getRegistrationScheme(languageCode: String, countryCode: String, internal: Boolean): ResponseDto
+    fun getRegistrationScheme(languageCode: String, countryCode: String): ResponseDto
 }
 
 @Service
@@ -16,15 +16,13 @@ class RegistrationSchemeServiceImpl(
         private val registrationSchemeRepository: RegistrationSchemeRepository,
         private val validationService: ValidationService) : RegistrationSchemeService {
 
-    override fun getRegistrationScheme(languageCode: String, countryCode: String, internal: Boolean): ResponseDto {
+    override fun getRegistrationScheme(languageCode: String, countryCode: String): ResponseDto {
         val country = validationService.getCountry(
                 languageCode = languageCode,
-                countryCode = countryCode,
-                internal = internal)
+                countryCode = countryCode)
         val entities = registrationSchemeRepository.findByRsKeyCountry(country)
         return getResponseDto(
                 default = null,
-                items = entities.getItems(),
-                internal = internal)
+                items = entities.getItems())
     }
 }

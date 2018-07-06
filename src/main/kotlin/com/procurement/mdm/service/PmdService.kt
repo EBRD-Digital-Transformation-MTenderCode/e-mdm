@@ -8,20 +8,19 @@ import org.springframework.stereotype.Service
 
 interface PmdService {
 
-    fun getPmd(languageCode: String, internal: Boolean): ResponseDto
+    fun getPmd(languageCode: String): ResponseDto
 }
 
 @Service
 class PmdServiceImpl(private val pmdRepository: PmdRepository,
                      private val validationService: ValidationService) : PmdService {
 
-    override fun getPmd(languageCode: String, internal: Boolean): ResponseDto {
-        validationService.checkLanguage(languageCode, internal)
+    override fun getPmd(languageCode: String): ResponseDto {
+        validationService.checkLanguage(languageCode)
         val entities = pmdRepository.findByPmdKeyLanguageCode(languageCode = languageCode)
         return getResponseDto(
-            default = null,
-            items = entities.getItems(),
-            internal = internal)
+                default = null,
+                items = entities.getItems())
     }
 }
 

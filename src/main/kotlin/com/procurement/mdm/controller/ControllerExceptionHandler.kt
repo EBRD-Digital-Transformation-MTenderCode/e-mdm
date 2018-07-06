@@ -1,9 +1,7 @@
 package com.procurement.mdm.controller
 
-import com.procurement.mdm.exception.ExternalErrorException
-import com.procurement.mdm.exception.InternalErrorException
-import com.procurement.mdm.model.dto.getExternalErrorResponseDto
-import com.procurement.mdm.model.dto.getInternalErrorResponseDto
+import com.procurement.mdm.exception.ErrorException
+import com.procurement.mdm.model.dto.getErrorResponseDto
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -15,11 +13,7 @@ class ControllerExceptionHandler {
 
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(ExternalErrorException::class)
-    fun externalError(e: ExternalErrorException) = getExternalErrorResponseDto(e)
+    @ExceptionHandler(ErrorException::class)
+    fun error(e: ErrorException) = getErrorResponseDto(e)
 
-    @ResponseBody
-    @ResponseStatus(HttpStatus.OK)
-    @ExceptionHandler(InternalErrorException::class)
-    fun internalError(e: InternalErrorException) = getInternalErrorResponseDto(e)
 }

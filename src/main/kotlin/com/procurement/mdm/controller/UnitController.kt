@@ -13,13 +13,11 @@ class UnitController(private val unitService: UnitService) {
 
     @GetMapping
     fun getUnits(@RequestParam lang: String,
-                 @RequestParam unitClass: String,
-                 @RequestParam(required = false) internal: Boolean = false): ResponseEntity<ResponseDto> {
+                 @RequestParam unitClass: String): ResponseEntity<ResponseDto> {
         return ResponseEntity(
                 unitService.getUnit(
                         languageCode = lang.toLowerCase(),
-                        unitClassCode = unitClass.toUpperCase(),
-                        internal = internal),
+                        unitClassCode = unitClass.toUpperCase()),
                 HttpStatus.OK)
     }
 }

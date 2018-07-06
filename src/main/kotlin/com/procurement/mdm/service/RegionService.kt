@@ -8,22 +8,20 @@ import org.springframework.stereotype.Service
 
 interface RegionService {
 
-    fun getRegion(languageCode: String, countryCode: String, internal: Boolean): ResponseDto
+    fun getRegion(languageCode: String, countryCode: String): ResponseDto
 }
 
 @Service
 class RegionServiceImpl(private val regionRepository: RegionRepository,
                         private val validationService: ValidationService) : RegionService {
 
-    override fun getRegion(languageCode: String, countryCode: String, internal: Boolean): ResponseDto {
+    override fun getRegion(languageCode: String, countryCode: String): ResponseDto {
         val country = validationService.getCountry(
                 languageCode = languageCode,
-                countryCode = countryCode,
-                internal = internal)
+                countryCode = countryCode)
         val entities = regionRepository.findByRegionKeyCountry(country)
         return getResponseDto(
                 default = null,
-                items = entities.getItems(),
-                internal = internal)
+                items = entities.getItems())
     }
 }

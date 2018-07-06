@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 
 interface CountryService {
 
-    fun getCountriesByLanguage(languageCode: String, internal: Boolean): ResponseDto
+    fun getCountriesByLanguage(languageCode: String): ResponseDto
 
 }
 
@@ -16,13 +16,10 @@ interface CountryService {
 class CountryServiceImpl(private val countryRepository: CountryRepository,
                          private val validationService: ValidationService) : CountryService {
 
-    override fun getCountriesByLanguage(languageCode: String, internal: Boolean): ResponseDto {
-        validationService.checkLanguage(languageCode, internal)
+    override fun getCountriesByLanguage(languageCode: String): ResponseDto {
+        validationService.checkLanguage(languageCode)
         val entities = countryRepository.findByCountryKeyLanguageCode(languageCode)
         val defaultValue = entities.asSequence().firstOrNull { it.default }?.countryKey?.code
-        return getResponseDto(
-                default = defaultValue,
-                items = entities.getItems(),
-                internal = internal)
+        return getResponseDto(default = defaultValue, items = entities.getItems())
     }
 }

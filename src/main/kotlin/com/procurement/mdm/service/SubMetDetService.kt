@@ -10,20 +10,19 @@ import org.springframework.stereotype.Service
 
 interface SubMetDetService {
 
-    fun getSubMetDet(languageCode: String, internal: Boolean): ResponseDto
+    fun getSubMetDet(languageCode: String): ResponseDto
 }
 
 @Service
 class SubMetDetServiceImpl(private val subMetDetRepository: SubMetDetRepository,
                            private val validationService: ValidationService) : SubMetDetService {
 
-    override fun getSubMetDet(languageCode: String, internal: Boolean): ResponseDto {
-        validationService.checkLanguage(languageCode, internal)
+    override fun getSubMetDet(languageCode: String): ResponseDto {
+        validationService.checkLanguage(languageCode)
         val entities = subMetDetRepository.findBySubMetDetKeyLanguageCode(languageCode = languageCode)
         return getResponseDto(
-            default = null,
-            items = entities.getItems(),
-            internal = internal)
+                default = null,
+                items = entities.getItems())
     }
 }
 

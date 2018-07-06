@@ -13,13 +13,11 @@ class RegionController(private val regionService: RegionService) {
 
     @GetMapping
     fun getRegions(@RequestParam lang: String,
-                   @RequestParam country: String,
-                   @RequestParam(required = false) internal: Boolean = false): ResponseEntity<ResponseDto> {
+                   @RequestParam country: String): ResponseEntity<ResponseDto> {
         return ResponseEntity(
                 regionService.getRegion(
                         languageCode = lang.toLowerCase(),
-                        countryCode = country.toUpperCase(),
-                        internal = internal),
+                        countryCode = country.toUpperCase()),
                 HttpStatus.OK)
     }
 }

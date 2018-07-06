@@ -14,12 +14,10 @@ import org.springframework.web.bind.annotation.*
 class SubMetRatController(private val subMetRatService: SubMetRatService) {
 
     @GetMapping
-    fun getSmd(@RequestParam lang: String,
-                @RequestParam(required = false) internal: Boolean = false): ResponseEntity<ResponseDto> {
+    fun getSmd(@RequestParam lang: String): ResponseEntity<ResponseDto> {
         return ResponseEntity(
                 subMetRatService.getSubMetRat(
-                        languageCode = lang.toLowerCase(),
-                        internal = internal),
+                        languageCode = lang.toLowerCase()),
                 HttpStatus.OK)
     }
 }

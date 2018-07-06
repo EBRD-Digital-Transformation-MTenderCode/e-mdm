@@ -7,17 +7,17 @@ import org.springframework.stereotype.Service
 
 interface LanguageService {
 
-    fun getLanguages(internal: Boolean): ResponseDto
+    fun getLanguages(): ResponseDto
 
 }
 
 @Service
 class LanguageServiceImpl(private val languageRepository: LanguageRepository) : LanguageService {
 
-    override fun getLanguages(internal: Boolean): ResponseDto {
+    override fun getLanguages(): ResponseDto {
         return getResponseDto(
                 default = null,
-                items = languageRepository.findAll(),
-                internal = internal)
+                items = languageRepository.findAll()
+        )
     }
 }
