@@ -3,7 +3,6 @@ package com.procurement.mdm.model.dto
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
 import com.fasterxml.jackson.databind.JsonNode
-import com.procurement.mdm.exception.EnumException
 import java.util.*
 
 data class CommandMessage @JsonCreator constructor(
