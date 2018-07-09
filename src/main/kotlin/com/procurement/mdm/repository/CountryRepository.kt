@@ -12,6 +12,9 @@ interface CountryRepository : JpaRepository<Country, String> {
     fun findByCountryKeyLanguageCode(languageCode: String): List<Country>
 
     @Transactional(readOnly = true)
-    fun findByCountryKeyCodeAndCountryKeyLanguageCode(code: String, languageCode: String): Country?
+    fun findByCountryKeyLanguageCodeAndCountryKeyCode(languageCode: String, code: String): Country?
+
+    @Transactional(readOnly = true)
+    fun findByCountryKeyLanguageCodeAndName(languageCode: String, name: String): Country?
 
 }

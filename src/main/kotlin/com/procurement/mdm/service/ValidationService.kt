@@ -37,7 +37,7 @@ class ValidationServiceImpl(private val languageRepository: LanguageRepository,
     override fun getCountry(languageCode: String, countryCode: String, internal: Boolean): Country {
         languageRepository.findByCode(code = languageCode)
                 ?: throw errorException(ErrorType.LANG_UNKNOWN, internal)
-        return countryRepository.findByCountryKeyCodeAndCountryKeyLanguageCode(code = countryCode, languageCode = languageCode)
+        return countryRepository.findByCountryKeyLanguageCodeAndCountryKeyCode(languageCode = languageCode, code = countryCode)
                 ?: throw errorException(ErrorType.COUNTRY_UNKNOWN, internal)
     }
 
