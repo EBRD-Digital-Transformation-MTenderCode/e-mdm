@@ -6,16 +6,16 @@ import com.procurement.mdm.model.entity.getItems
 import com.procurement.mdm.repository.TranslateRepository
 import org.springframework.stereotype.Service
 
-interface SubMetDetService {
+interface TranslateService {
 
-    fun getSubMetDet(languageCode: String, internal: Boolean): ResponseDto
+    fun getTranslate(languageCode: String,  code: String,  internal: Boolean): ResponseDto
 }
 
 @Service
-class SubMetDetServiceImpl(private val subMetDetRepository: TranslateRepository,
-                           private val validationService: ValidationService) : SubMetDetService {
+class TranslateServiceImpl(private val subMetDetRepository: TranslateRepository,
+                           private val validationService: ValidationService) : TranslateService {
 
-    override fun getSubMetDet(languageCode: String, internal: Boolean): ResponseDto {
+    override fun getTranslate(languageCode: String, internal: Boolean): ResponseDto {
         validationService.checkLanguage(languageCode, internal)
         val entities = subMetDetRepository.findByTranslateKeyLanguageCode(languageCode = languageCode)
         return getResponseDto(
