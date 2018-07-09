@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @CrossOrigin(maxAge = 3600)
-@RequestMapping("/smd")
+@RequestMapping("/translate")
 class TranslateController(private val subMetDetService: SubMetDetService) {
 
     @GetMapping
