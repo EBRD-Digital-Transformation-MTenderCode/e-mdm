@@ -41,7 +41,7 @@ class TenderDataServiceImpl(private val validationService: ValidationService,
         val data = getData(cm)
         data.put("mainProcurementCategory", entity.mainProcurementCategory)
         val classificationNode = data.get("classification") as ObjectNode
-        classificationNode.put("scheme", "cpv")
+        classificationNode.put("scheme", "CPV")
         classificationNode.put("description", entity.name)
         return data
     }
