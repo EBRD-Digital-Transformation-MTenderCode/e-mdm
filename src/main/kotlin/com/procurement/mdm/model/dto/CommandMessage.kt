@@ -36,21 +36,6 @@ enum class CommandType(val value: String) {
     override fun toString(): String {
         return this.value
     }
-
-    companion object {
-        private val CONSTANTS = HashMap<String, CommandType>()
-
-        init {
-            for (c in values()) {
-                CONSTANTS[c.value] = c
-            }
-        }
-
-        @JsonCreator
-        fun fromValue(value: String): CommandType {
-            return CONSTANTS[value] ?: throw EnumException(CommandType::class.java.name, value, Arrays.toString(values()))
-        }
-    }
 }
 
 enum class ApiVersion(val value: String) {
@@ -64,20 +49,5 @@ enum class ApiVersion(val value: String) {
 
     override fun toString(): String {
         return this.value
-    }
-
-    companion object {
-        private val CONSTANTS = HashMap<String, ApiVersion>()
-
-        init {
-            for (c in ApiVersion.values()) {
-                CONSTANTS[c.value] = c
-            }
-        }
-
-        @JsonCreator
-        fun fromValue(value: String): ApiVersion {
-            return CONSTANTS[value] ?: throw EnumException(ApiVersion::class.java.name, value, Arrays.toString(CommandType.values()))
-        }
     }
 }
