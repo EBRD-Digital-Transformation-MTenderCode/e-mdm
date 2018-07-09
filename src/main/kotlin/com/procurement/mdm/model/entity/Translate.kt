@@ -5,33 +5,33 @@ import java.io.Serializable
 import javax.persistence.*
 
 @Entity
-@Table(name = "submission_method_details")
-data class SubMetDet(
+@Table(name = "translate")
+data class Translate(
 
-        @EmbeddedId
-        val subMetDetKey: SubMetDetKey? = null,
+    @EmbeddedId
+        val translateKey: TranslateKey? = null,
 
-        @Column(name = "name")
+    @Column(name = "name")
         val name: String = "",
 
-        @Column(name = "description")
+    @Column(name = "description")
         val description: String = ""
 )
 
 @Embeddable
-class SubMetDetKey : Serializable {
+class TranslateKey : Serializable {
 
     @Column(name = "code", length = 255)
     val code: String? = null
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(foreignKey = ForeignKey(name = "FK_submission_method_details_language"))
+    @JoinColumn(foreignKey = ForeignKey(name = "FK_translate_language"))
     private val language: Language? = null
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
-        other as SubMetDetKey
+        other as TranslateKey
         if (code != other.code) return false
         if (language != other.language) return false
         return true
@@ -44,7 +44,7 @@ class SubMetDetKey : Serializable {
     }
 }
 
-data class SubMetDetDto(
+data class TranslateDto(
 
         @JsonProperty("code")
         val code: String?,
@@ -53,5 +53,5 @@ data class SubMetDetDto(
         val name: String?
 )
 
-fun List<SubMetDet>.getItems(): List<SubMetDetDto> =
-        this.asSequence().map { SubMetDetDto(code = it.subMetDetKey?.code, name = it.name) }.toList()
+fun List<Translate>.getItems(): List<TranslateDto> =
+        this.asSequence().map { TranslateDto(code = it.translateKey?.code, name = it.name) }.toList()

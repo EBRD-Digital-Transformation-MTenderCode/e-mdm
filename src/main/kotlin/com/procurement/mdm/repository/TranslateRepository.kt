@@ -1,14 +1,14 @@
 package com.procurement.mdm.repository
 
-import com.procurement.mdm.model.entity.SubMetDet
-import com.procurement.mdm.model.entity.SubMetDetKey
+import com.procurement.mdm.model.entity.Translate
+import com.procurement.mdm.model.entity.TranslateKey
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
 
 @Repository
-interface SubMetDetRepository : JpaRepository<SubMetDet, SubMetDetKey> {
+interface TranslateRepository : JpaRepository<Translate, TranslateKey> {
 
     @Transactional(readOnly = true)
-    fun findBySubMetDetKeyLanguageCode(languageCode: String): List<SubMetDet>
+    fun findByTranslateKeyLanguageCode(languageCode: String): List<Translate>
 }

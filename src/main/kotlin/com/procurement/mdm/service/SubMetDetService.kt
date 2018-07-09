@@ -3,9 +3,7 @@ package com.procurement.mdm.service
 import com.procurement.mdm.model.dto.ResponseDto
 import com.procurement.mdm.model.dto.getResponseDto
 import com.procurement.mdm.model.entity.getItems
-import com.procurement.mdm.repository.PmdRepository
-import com.procurement.mdm.repository.SubMetDetRepository
-import com.procurement.mdm.repository.SubMetRatRepository
+import com.procurement.mdm.repository.TranslateRepository
 import org.springframework.stereotype.Service
 
 interface SubMetDetService {
@@ -14,12 +12,12 @@ interface SubMetDetService {
 }
 
 @Service
-class SubMetDetServiceImpl(private val subMetDetRepository: SubMetDetRepository,
+class SubMetDetServiceImpl(private val subMetDetRepository: TranslateRepository,
                            private val validationService: ValidationService) : SubMetDetService {
 
     override fun getSubMetDet(languageCode: String, internal: Boolean): ResponseDto {
         validationService.checkLanguage(languageCode, internal)
-        val entities = subMetDetRepository.findBySubMetDetKeyLanguageCode(languageCode = languageCode)
+        val entities = subMetDetRepository.findByTranslateKeyLanguageCode(languageCode = languageCode)
         return getResponseDto(
             default = null,
             items = entities.getItems(),
