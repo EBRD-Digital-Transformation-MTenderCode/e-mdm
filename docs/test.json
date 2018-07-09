@@ -1,0 +1,14 @@
+{
+  "command": "tenderCPV",
+  "context": {
+    "country": "MD",
+    "language": "en"
+  },
+  "data": {
+    "classification": {
+      "id": "03100000-2"
+    }
+  },
+  "id": "95ec3f18-2b0f-4d61-96f5-4710249ed106",
+  "version": "0.1"
+}

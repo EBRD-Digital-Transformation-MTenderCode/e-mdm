@@ -24,9 +24,7 @@ class CpvServiceImpl(private val cpvRepository: CpvRepository,
                 cpvRepository.findByParentAndCpvKeyLanguageCode(parentCode = parentCode, languageCode = languageCode)
             }
         }
-        return getResponseDto(
-                default = null,
-                items = entities.getItems())
+        return getResponseDto(items = entities.getItems())
     }
 }
 

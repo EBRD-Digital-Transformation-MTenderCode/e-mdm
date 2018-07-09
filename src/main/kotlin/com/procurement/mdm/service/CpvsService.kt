@@ -18,9 +18,7 @@ class CpvsServiceImpl(private val cpvsRepository: CpvsRepository,
     override fun getCpvs(languageCode: String): ResponseDto {
         validationService.checkLanguage(languageCode)
         val entities = cpvsRepository.findByCpvsKeyLanguageCode(languageCode = languageCode)
-        return getResponseDto(
-                default = null,
-                items = entities.getItems())
+        return getResponseDto(items = entities.getItems())
     }
 }
 

@@ -18,9 +18,7 @@ class PmdServiceImpl(private val pmdRepository: PmdRepository,
     override fun getPmd(languageCode: String): ResponseDto {
         validationService.checkLanguage(languageCode)
         val entities = pmdRepository.findByPmdKeyLanguageCode(languageCode = languageCode)
-        return getResponseDto(
-                default = null,
-                items = entities.getItems())
+        return getResponseDto(items = entities.getItems())
     }
 }
 

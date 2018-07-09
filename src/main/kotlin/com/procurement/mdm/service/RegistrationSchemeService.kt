@@ -21,8 +21,6 @@ class RegistrationSchemeServiceImpl(
                 languageCode = languageCode,
                 countryCode = countryCode)
         val entities = registrationSchemeRepository.findByRsKeyCountry(country)
-        return getResponseDto(
-                default = null,
-                items = entities.getItems())
+        return getResponseDto(items = entities.getItems())
     }
 }

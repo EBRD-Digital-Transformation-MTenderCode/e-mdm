@@ -18,9 +18,7 @@ class SubMetRatServiceImpl(private val subMetRatRepository: SubMetRatRepository,
     override fun getSubMetRat(languageCode: String): ResponseDto {
         validationService.checkLanguage(languageCode)
         val entities = subMetRatRepository.findBySubMetRatKeyLanguageCode(languageCode = languageCode)
-        return getResponseDto(
-                default = null,
-                items = entities.getItems())
+        return getResponseDto(items = entities.getItems())
     }
 }
 

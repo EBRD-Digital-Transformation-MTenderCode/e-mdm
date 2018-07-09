@@ -21,8 +21,6 @@ class UnitServiceImpl(private val unitRepository: UnitRepository,
                 languageCode = languageCode,
                 code = unitClassCode)
         val entities = unitRepository.findByUnitKeyUnitClass(unitClass)
-        return getResponseDto(
-                default = null,
-                items = entities.getItems())
+        return getResponseDto(items = entities.getItems())
     }
 }

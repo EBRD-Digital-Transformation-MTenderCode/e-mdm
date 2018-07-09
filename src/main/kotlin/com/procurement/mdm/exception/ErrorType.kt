@@ -6,5 +6,6 @@ enum class ErrorType constructor(val code: String, val message: String) {
     UNIT_CLASS_UNKNOWN("00.03", "Unit class for current language not found."),
     ENTITY_KIND_UNKNOWN("00.03", "Entity kind not found."),
     CPV_CODE_UNKNOWN("00.04", "Cpv code not found."),
-    CPVS_CODE_UNKNOWN("00.05", "CPVs code not found.");
+    CPVS_CODE_UNKNOWN("00.05", "CPVs code not found."),
+    INVALID_DATA("00.06", "Invalid data."),
 }

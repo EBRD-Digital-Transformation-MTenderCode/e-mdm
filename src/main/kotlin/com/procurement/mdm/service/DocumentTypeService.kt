@@ -21,8 +21,6 @@ class DocumentTypeServiceImpl(private val documentTypeRepository: DocumentTypeRe
         val entities = documentTypeRepository.findByEntityKindsCodeAndDtKeyLanguageCode(
                 entityKindCode = entityKindCode,
                 languageCode = languageCode)
-        return getResponseDto(
-                default = null,
-                items = entities.getItems())
+        return getResponseDto(items = entities.getItems())
     }
 }
