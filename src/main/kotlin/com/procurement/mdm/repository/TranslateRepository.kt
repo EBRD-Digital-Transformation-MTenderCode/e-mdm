@@ -10,5 +10,5 @@ import org.springframework.transaction.annotation.Transactional
 interface TranslateRepository : JpaRepository<Translate, TranslateKey> {
 
     @Transactional(readOnly = true)
-    fun findByTranslateKeyLanguageCode(languageCode: String): List<Translate>
+    fun findByTranslateKeyCodeAndTranslateKeyLanguageCode(code: String, languageCode: String): Translate?
 }

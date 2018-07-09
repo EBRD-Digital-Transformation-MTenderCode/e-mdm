@@ -16,7 +16,8 @@ class CountryController(private val countryService: CountryService) {
                      @RequestParam(required = false) code: String?): ResponseEntity<ResponseDto> {
         return ResponseEntity(
                 countryService.getCountriesByLanguage(
-                        languageCode = lang.toLowerCase()),
+                        languageCode = lang.toLowerCase(),
+                        code = code),
                 HttpStatus.OK)
     }
 

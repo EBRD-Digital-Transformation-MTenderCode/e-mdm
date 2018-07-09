@@ -1,5 +1,7 @@
 package com.procurement.mdm.service
 
+import com.procurement.mdm.exception.ErrorType
+import com.procurement.mdm.exception.ExErrorException
 import com.procurement.mdm.model.dto.ResponseDto
 import com.procurement.mdm.model.dto.getResponseDto
 import com.procurement.mdm.model.entity.getItems
@@ -8,7 +10,7 @@ import org.springframework.stereotype.Service
 
 interface CountryService {
 
-    fun getCountriesByLanguage(languageCode: String): ResponseDto
+    fun getCountriesByLanguage(languageCode: String, code: String?): ResponseDto
 
 }
 
@@ -16,10 +18,17 @@ interface CountryService {
 class CountryServiceImpl(private val countryRepository: CountryRepository,
                          private val validationService: ValidationService) : CountryService {
 
-    override fun getCountriesByLanguage(languageCode: String): ResponseDto {
+    override fun getCountriesByLanguage(languageCode: String, code: String?): ResponseDto {
         validationService.checkLanguage(languageCode)
-        val entities = countryRepository.findByCountryKeyLanguageCode(languageCode)
-        val defaultValue = entities.asSequence().firstOrNull { it.default }?.countryKey?.code
-        return getResponseDto(default = defaultValue, items = entities.getItems())
+        return if (code!= null){
+            val entity = countryRepository.findByCountryKeyCodeAndCountryKeyLanguageCode(code = code, languageCode = languageCode)
+                    ?: throw ExErrorException(ErrorType.COUNTRY_UNKNOWN)
+            getResponseDto(items = listOf(entity).getItems())
+        }else{
+            val entities = countryRepository.findByCountryKeyLanguageCode(languageCode)
+            val defaultValue = entities.asSequence().firstOrNull { it.default }?.countryKey?.code
+            getResponseDto(default = defaultValue, items = entities.getItems())
+        }
+
     }
 }

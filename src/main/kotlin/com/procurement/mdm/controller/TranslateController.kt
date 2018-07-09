@@ -13,12 +13,11 @@ class TranslateController(private val translateService: TranslateService) {
 
     @GetMapping
     fun getTranslate(@RequestParam lang: String,
-                     @RequestParam code: String,
-               @RequestParam(required = false) internal: Boolean = false): ResponseEntity<ResponseDto> {
+                     @RequestParam code: String): ResponseEntity<ResponseDto> {
         return ResponseEntity(
-                translateService.getSubMetDet(
+                translateService.getTranslate(
                         languageCode = lang.toLowerCase(),
-                        internal = internal),
+                        code = code),
                 HttpStatus.OK)
     }
 }
