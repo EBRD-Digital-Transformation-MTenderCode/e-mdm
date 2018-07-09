@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.*
 class CountryController(private val countryService: CountryService) {
 
     @GetMapping
-    fun getCountries(@RequestParam lang: String): ResponseEntity<ResponseDto> {
+    fun getCountries(@RequestParam lang: String,
+                     @RequestParam(required = false) code: String?): ResponseEntity<ResponseDto> {
         return ResponseEntity(
                 countryService.getCountriesByLanguage(
                         languageCode = lang.toLowerCase()),
