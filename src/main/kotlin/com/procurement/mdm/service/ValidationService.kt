@@ -1,8 +1,8 @@
 package com.procurement.mdm.service
 
 import com.procurement.mdm.exception.ErrorType
-import com.procurement.mdm.exception.ExternalErrorException
-import com.procurement.mdm.exception.InternalErrorException
+import com.procurement.mdm.exception.ExErrorException
+import com.procurement.mdm.exception.InErrorException
 import com.procurement.mdm.model.entity.Country
 import com.procurement.mdm.model.entity.UnitClass
 import com.procurement.mdm.repository.*
@@ -10,17 +10,15 @@ import org.springframework.stereotype.Service
 
 interface ValidationService {
 
-    fun checkLanguage(languageCode: String, internal: Boolean)
+    fun checkLanguage(languageCode: String, internal: Boolean = false)
 
-    fun getCountry(languageCode: String, countryCode: String, internal: Boolean): Country
+    fun getCountry(languageCode: String, countryCode: String, internal: Boolean = false): Country
 
-    fun getUnitClass(languageCode: String, code: String, internal: Boolean): UnitClass
+    fun getUnitClass(languageCode: String, code: String, internal: Boolean = false): UnitClass
 
-    fun checkEntityKind(code: String, internal: Boolean)
+    fun checkEntityKind(code: String, internal: Boolean = false)
 
-    fun checkCpvParent(parentCode: String, languageCode: String, internal: Boolean)
-
-    fun checkCpvsParent(parentCode: String, languageCode: String, internal: Boolean)
+    fun checkCpvParent(parentCode: String, languageCode: String, internal: Boolean = false)
 }
 
 @Service
@@ -28,71 +26,46 @@ class ValidationServiceImpl(private val languageRepository: LanguageRepository,
                             private val countryRepository: CountryRepository,
                             private val unitClassRepository: UnitClassRepository,
                             private val entityKindRepository: EntityKindRepository,
-                            private val cpvsRepository: CpvsRepository,
                             private val cpvRepository: CpvRepository
 ) : ValidationService {
 
     override fun checkLanguage(languageCode: String, internal: Boolean) {
-        languageRepository.findByCode(code = languageCode) ?: if (internal) {
-            throw InternalErrorException(ErrorType.LANG_UNKNOWN)
-        } else {
-            throw ExternalErrorException(ErrorType.LANG_UNKNOWN)
-        }
+        languageRepository.findByCode(code = languageCode)
+                ?: throw errorException(ErrorType.LANG_UNKNOWN, internal)
     }
 
     override fun getCountry(languageCode: String, countryCode: String, internal: Boolean): Country {
-        languageRepository.findByCode(code = languageCode) ?: if (internal) {
-            throw InternalErrorException(ErrorType.LANG_UNKNOWN)
-        } else {
-            throw ExternalErrorException(ErrorType.LANG_UNKNOWN)
-        }
-        return countryRepository.findByCountryKeyCodeAndCountryKeyLanguageCode(
-                code = countryCode, languageCode = languageCode) ?: if (internal) {
-            throw InternalErrorException(ErrorType.COUNTRY_UNKNOWN)
-        } else {
-            throw ExternalErrorException(ErrorType.COUNTRY_UNKNOWN)
-        }
+        languageRepository.findByCode(code = languageCode)
+                ?: throw errorException(ErrorType.LANG_UNKNOWN, internal)
+        return countryRepository.findByCountryKeyCodeAndCountryKeyLanguageCode(code = countryCode, languageCode = languageCode)
+                ?: throw errorException(ErrorType.COUNTRY_UNKNOWN, internal)
     }
 
     override fun getUnitClass(languageCode: String, code: String, internal: Boolean): UnitClass {
-        languageRepository.findByCode(code = languageCode) ?: if (internal) {
-            throw InternalErrorException(ErrorType.LANG_UNKNOWN)
-        } else {
-            throw ExternalErrorException(ErrorType.LANG_UNKNOWN)
-        }
-        return unitClassRepository.findByUnitClassKeyCodeAndUnitClassKeyLanguageCode(
-                code = code, languageCode = languageCode) ?: if (internal) {
-            throw InternalErrorException(ErrorType.UNIT_CLASS_UNKNOWN)
-        } else {
-            throw ExternalErrorException(ErrorType.UNIT_CLASS_UNKNOWN)
-        }
+        languageRepository.findByCode(code = languageCode)
+                ?: throw errorException(ErrorType.LANG_UNKNOWN, internal)
+        return unitClassRepository.findByUnitClassKeyCodeAndUnitClassKeyLanguageCode(code = code, languageCode = languageCode)
+                ?: throw errorException(ErrorType.UNIT_CLASS_UNKNOWN, internal)
     }
 
     override fun checkEntityKind(code: String, internal: Boolean) {
-        entityKindRepository.findByCode(code) ?: if (internal) {
-            throw InternalErrorException(ErrorType.ENTITY_KIND_UNKNOWN)
-        } else {
-            throw ExternalErrorException(ErrorType.ENTITY_KIND_UNKNOWN)
-        }
+        entityKindRepository.findByCode(code)
+                ?: throw errorException(ErrorType.ENTITY_KIND_UNKNOWN, internal)
     }
 
     override fun checkCpvParent(parentCode: String, languageCode: String, internal: Boolean) {
         cpvRepository.findByCpvKeyCodeAndCpvKeyLanguageCode(code = parentCode, languageCode = languageCode)
-                ?: if (internal) {
-                    throw InternalErrorException(ErrorType.CPV_CODE_UNKNOWN)
-                } else {
-                    throw ExternalErrorException(ErrorType.CPV_CODE_UNKNOWN)
-                }
+                ?: throw errorException(ErrorType.CPV_CODE_UNKNOWN, internal)
     }
 
-    override fun checkCpvsParent(parentCode: String, languageCode: String, internal: Boolean) {
-        cpvsRepository.findByCpvsKeyCodeAndCpvsKeyLanguageCode(code = parentCode, languageCode = languageCode)
-                ?: if (internal) {
-                    throw InternalErrorException(ErrorType.CPV_CODE_UNKNOWN)
-                } else {
-                    throw ExternalErrorException(ErrorType.CPV_CODE_UNKNOWN)
-                }
+    private fun errorException(errorType: ErrorType, internal: Boolean): RuntimeException {
+        if (internal) {
+            throw InErrorException(errorType)
+        } else {
+            throw ExErrorException(errorType)
+        }
     }
+
 }
 
 

@@ -8,23 +8,19 @@ import org.springframework.stereotype.Service
 
 interface UnitService {
 
-    fun getUnit(languageCode: String, unitClassCode: String, internal: Boolean): ResponseDto
+    fun getUnit(languageCode: String, unitClassCode: String): ResponseDto
 }
 
 @Service
 class UnitServiceImpl(private val unitRepository: UnitRepository,
                       private val validationService: ValidationService) : UnitService {
 
-    override fun getUnit(languageCode: String, unitClassCode: String, internal: Boolean): ResponseDto {
-        validationService.checkLanguage(languageCode = languageCode, internal = internal)
+    override fun getUnit(languageCode: String, unitClassCode: String): ResponseDto {
+        validationService.checkLanguage(languageCode = languageCode)
         val unitClass = validationService.getUnitClass(
                 languageCode = languageCode,
-                code = unitClassCode,
-                internal = internal)
+                code = unitClassCode)
         val entities = unitRepository.findByUnitKeyUnitClass(unitClass)
-        return getResponseDto(
-                default = null,
-                items = entities.getItems(),
-                internal = internal)
+        return getResponseDto(items = entities.getItems())
     }
 }

@@ -14,12 +14,6 @@ data class Cpvs(
         @Column(name = "name")
         val name: String = "",
 
-        @Column(name = "level")
-        val level: Int = 1,
-
-        @Column(name = "parent")
-        val parent: String = "",
-
         @Column(name = "description")
         val description: String = ""
 )

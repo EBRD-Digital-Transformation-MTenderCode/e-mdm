@@ -12,12 +12,10 @@ import org.springframework.web.bind.annotation.*
 class UnitClassController(private val unitClassService: UnitClassService) {
 
     @GetMapping
-    fun getUnitClasses(@RequestParam lang: String,
-                       @RequestParam(required = false) internal: Boolean = false): ResponseEntity<ResponseDto> {
+    fun getUnitClasses(@RequestParam lang: String): ResponseEntity<ResponseDto> {
         return ResponseEntity(
                 unitClassService.getUnitClassesByLanguage(
-                        languageCode = lang.toLowerCase(),
-                        internal = internal),
+                        languageCode = lang.toLowerCase()),
                 HttpStatus.OK)
     }
 }

@@ -1,0 +1,903 @@
+AA01-1,Metal                                                                    ,1,Metal                                                                    ,"",en
+AA02-4,Aluminium                                                                ,1,Aluminium                                                                ,"",en
+AA03-7,Bronze                                                                   ,1,Bronze                                                                   ,"",en
+AA04-0,Copper                                                                   ,1,Copper                                                                   ,"",en
+AA05-3,Iron                                                                     ,1,Iron                                                                     ,"",en
+AA06-6,Lead                                                                     ,1,Lead                                                                     ,"",en
+AA07-9,Nickel                                                                   ,1,Nickel                                                                   ,"",en
+AA08-2,Tin                                                                      ,1,Tin                                                                      ,"",en
+AA09-5,Zinc                                                                     ,1,Zinc                                                                     ,"",en
+AA10-8,Alloy                                                                    ,1,Alloy                                                                    ,"",en
+AA11-1,Steel                                                                    ,1,Steel                                                                    ,"",en
+AA12-4,Carbon-steel                                                             ,1,Carbon-steel                                                             ,"",en
+AA13-7,Vanadium                                                                 ,1,Vanadium                                                                 ,"",en
+AA14-0,Chromium                                                                 ,1,Chromium                                                                 ,"",en
+AA15-3,Manganese                                                                ,1,Manganese                                                                ,"",en
+AA16-6,Cobalt                                                                   ,1,Cobalt                                                                   ,"",en
+AA17-9,Yttrium                                                                  ,1,Yttrium                                                                  ,"",en
+AA18-2,Zirconium                                                                ,1,Zirconium                                                                ,"",en
+AA19-5,Molybdenum                                                               ,1,Molybdenum                                                               ,"",en
+AA20-8,Technetium                                                               ,1,Technetium                                                               ,"",en
+AA21-1,Ruthenium                                                                ,1,Ruthenium                                                                ,"",en
+AA22-4,Rhodium                                                                  ,1,Rhodium                                                                  ,"",en
+AA23-7,Cadmium                                                                  ,1,Cadmium                                                                  ,"",en
+AA24-0,Lutetium                                                                 ,1,Lutetium                                                                 ,"",en
+AA25-3,Hafnium                                                                  ,1,Hafnium                                                                  ,"",en
+AA26-6,Tantalum                                                                 ,1,Tantalum                                                                 ,"",en
+AA27-9,Tungsten                                                                 ,1,Tungsten                                                                 ,"",en
+AA28-2,Iridium                                                                  ,1,Iridium                                                                  ,"",en
+AA29-5,Gallium                                                                  ,1,Gallium                                                                  ,"",en
+AA30-8,Indium                                                                   ,1,Indium                                                                   ,"",en
+AA31-1,Thallium                                                                 ,1,Thallium                                                                 ,"",en
+AA32-4,Barium                                                                   ,1,Barium                                                                   ,"",en
+AA33-7,Caesium                                                                  ,1,Caesium                                                                  ,"",en
+AA34-0,Strontium                                                                ,1,Strontium                                                                ,"",en
+AA35-3,Rubidium                                                                 ,1,Rubidium                                                                 ,"",en
+AA36-6,Calcium                                                                  ,1,Calcium                                                                  ,"",en
+AA37-9,Potassium                                                                ,1,Potassium                                                                ,"",en
+AA38-2,Sodium                                                                   ,1,Sodium                                                                   ,"",en
+AA39-5,Lithium                                                                  ,1,Lithium                                                                  ,"",en
+AA40-8,Niobium                                                                  ,1,Niobium                                                                  ,"",en
+AA41-1,Osmium                                                                   ,1,Osmium                                                                   ,"",en
+AA42-4,Rhenium                                                                  ,1,Rhenium                                                                  ,"",en
+AA43-7,Palladium                                                                ,1,Palladium                                                                ,"",en
+AA44-0,Brass                                                                    ,1,Brass                                                                    ,"",en
+AA45-3,Gold                                                                     ,1,Gold                                                                     ,"",en
+AA46-6,Silver                                                                   ,1,Silver                                                                   ,"",en
+AA47-9,Platinum                                                                 ,1,Platinum                                                                 ,"",en
+AA48-2,Magnesium                                                                ,1,Magnesium                                                                ,"",en
+AB02-5,Ceramic                                                                  ,1,Ceramic                                                                  ,"",en
+AB03-8,Porcelain or china ceramic                                               ,1,Porcelain or china ceramic                                               ,"",en
+AB04-1,Clay                                                                     ,1,Clay                                                                     ,"",en
+AB05-4,Concrete                                                                 ,1,Concrete                                                                 ,"",en
+AB06-7,Plastic                                                                  ,1,Plastic                                                                  ,"",en
+AB07-0,Polyester                                                                ,1,Polyester                                                                ,"",en
+AB08-3,Polyethene (Polyethylene)                                                ,1,Polyethene (Polyethylene)                                                ,"",en
+AB09-6,Polystyrene                                                              ,1,Polystyrene                                                              ,"",en
+AB11-2,PVC                                                                      ,1,PVC                                                                      ,"",en
+AB12-5,Rubber                                                                   ,1,Rubber                                                                   ,"",en
+AB13-8,Wooden                                                                   ,1,Wooden                                                                   ,"",en
+AB14-1,Coniferous wood                                                          ,1,Coniferous wood                                                          ,"",en
+AB15-4,Tropical wood                                                            ,1,Tropical wood                                                            ,"",en
+AB16-7,Bamboo                                                                   ,1,Bamboo                                                                   ,"",en
+AB17-0,Cork                                                                     ,1,Cork                                                                     ,"",en
+AB18-3,Paper                                                                    ,1,Paper                                                                    ,"",en
+AB19-6,Leather                                                                  ,1,Leather                                                                  ,"",en
+AB20-9,Fibreglass                                                               ,1,Fibreglass                                                               ,"",en
+AB21-2,Glass                                                                    ,1,Glass                                                                    ,"",en
+AB22-5,Glass inners                                                             ,1,Glass inners                                                             ,"",en
+AB23-8,Glass parts                                                              ,1,Glass parts                                                              ,"",en
+AB24-1,Textile                                                                  ,1,Textile                                                                  ,"",en
+AB25-4,Synthetic                                                                ,1,Synthetic                                                                ,"",en
+AB26-7,Timber                                                                   ,1,Timber                                                                   ,"",en
+AB27-0,Stone                                                                    ,1,Stone                                                                    ,"",en
+AB28-3,Marble                                                                   ,1,Marble                                                                   ,"",en
+AB29-6,Precious stones                                                          ,1,Precious stones                                                          ,"",en
+AB30-9,Wool                                                                     ,1,Wool                                                                     ,"",en
+AB31-2,Silk                                                                     ,1,Silk                                                                     ,"",en
+AB32-5,Linen                                                                    ,1,Linen                                                                    ,"",en
+AB33-8,Cotton                                                                   ,1,Cotton                                                                   ,"",en
+AB34-1,Terrazzo                                                                 ,1,Terrazzo                                                                 ,"",en
+AB35-4,Granite                                                                  ,1,Granite                                                                  ,"",en
+AB36-7,Slate                                                                    ,1,Slate                                                                    ,"",en
+AB37-0,Carbon                                                                   ,1,Carbon                                                                   ,"",en
+BA01-2,Live                                                                     ,1,Live                                                                     ,"",en
+BA02-5,Natural                                                                  ,1,Natural                                                                  ,"",en
+BA03-8,Artificial                                                               ,1,Artificial                                                               ,"",en
+BA04-1,Fresh                                                                    ,1,Fresh                                                                    ,"",en
+BA05-4,Cold                                                                     ,1,Cold                                                                     ,"",en
+BA06-7,Hot                                                                      ,1,Hot                                                                      ,"",en
+BA07-0,Liquid                                                                   ,1,Liquid                                                                   ,"",en
+BA08-3,Solid                                                                    ,1,Solid                                                                    ,"",en
+BA09-6,Gas                                                                      ,1,Gas                                                                      ,"",en
+BA10-9,Crude                                                                    ,1,Crude                                                                    ,"",en
+BA11-2,Dry                                                                      ,1,Dry                                                                      ,"",en
+BA12-5,Hard                                                                     ,1,Hard                                                                     ,"",en
+BA13-8,Soft                                                                     ,1,Soft                                                                     ,"",en
+BA14-1,Dust/powder                                                              ,1,Dust/powder                                                              ,"",en
+BA15-4,Residues                                                                 ,1,Residues                                                                 ,"",en
+BA16-7,Flakes                                                                   ,1,Flakes                                                                   ,"",en
+BA17-0,Bars                                                                     ,1,Bars                                                                     ,"",en
+BA18-3,Ash                                                                      ,1,Ash                                                                      ,"",en
+BA19-6,Granules                                                                 ,1,Granules                                                                 ,"",en
+BA20-9,Ingots                                                                   ,1,Ingots                                                                   ,"",en
+BA22-5,Rods                                                                     ,1,Rods                                                                     ,"",en
+BA23-8,Unwrought                                                                ,1,Unwrought                                                                ,"",en
+BA24-1,Frozen                                                                   ,1,Frozen                                                                   ,"",en
+BA25-4,Deep-frozen                                                              ,1,Deep-frozen                                                              ,"",en
+BA26-7,Folded                                                                   ,1,Folded                                                                   ,"",en
+BA27-0,Forged                                                                   ,1,Forged                                                                   ,"",en
+BA28-3,Freeze-dried                                                             ,1,Freeze-dried                                                             ,"",en
+BA29-6,Flat-rolled                                                              ,1,Flat-rolled                                                              ,"",en
+BA30-9,Dried                                                                    ,1,Dried                                                                    ,"",en
+BA31-2,Grated                                                                   ,1,Grated                                                                   ,"",en
+BA32-5,Concentrated                                                             ,1,Concentrated                                                             ,"",en
+BA33-8,Chilled                                                                  ,1,Chilled                                                                  ,"",en
+BA34-1,Coated                                                                   ,1,Coated                                                                   ,"",en
+BA35-4,Galvanised                                                               ,1,Galvanised                                                               ,"",en
+BA36-7,Granulated                                                               ,1,Granulated                                                               ,"",en
+BA37-0,Hot-rolled                                                               ,1,Hot-rolled                                                               ,"",en
+BA38-3,Vitrified                                                                ,1,Vitrified                                                                ,"",en
+BA39-6,Laminated                                                                ,1,Laminated                                                                ,"",en
+BA40-9,Liquefied                                                                ,1,Liquefied                                                                ,"",en
+BA41-2,Vulcanised                                                               ,1,Vulcanised                                                               ,"",en
+BA42-5,Welded                                                                   ,1,Welded                                                                   ,"",en
+BA43-8,Prepared                                                                 ,1,Prepared                                                                 ,"",en
+BA44-1,Pulverised                                                               ,1,Pulverised                                                               ,"",en
+BA45-4,Refined                                                                  ,1,Refined                                                                  ,"",en
+BA46-7,Remelted                                                                 ,1,Remelted                                                                 ,"",en
+BA47-0,Untreated                                                                ,1,Untreated                                                                ,"",en
+BA48-3,Treated                                                                  ,1,Treated                                                                  ,"",en
+BA49-6,Unliquefied                                                              ,1,Unliquefied                                                              ,"",en
+BA50-9,Unrefined                                                                ,1,Unrefined                                                                ,"",en
+BA51-2,Semi-finished                                                            ,1,Semi-finished                                                            ,"",en
+BA52-5,Processed                                                                ,1,Processed                                                                ,"",en
+BA53-8,Semi-manufactured                                                        ,1,Semi-manufactured                                                        ,"",en
+BA54-1,Solution                                                                 ,1,Solution                                                                 ,"",en
+BB01-3,Non-tubular                                                              ,1,Non-tubular                                                              ,"",en
+BB02-6,Tubular                                                                  ,1,Tubular                                                                  ,"",en
+BB03-9,Round                                                                    ,1,Round                                                                    ,"",en
+BB04-2,Rectangular                                                              ,1,Rectangular                                                              ,"",en
+BB05-5,Square                                                                   ,1,Square                                                                   ,"",en
+BB06-8,Triangle                                                                 ,1,Triangle                                                                 ,"",en
+BB07-1,Trapezoid                                                                ,1,Trapezoid                                                                ,"",en
+BC01-4,With metal frames                                                        ,1,With metal frames                                                        ,"",en
+BC02-7,With plastic frames                                                      ,1,With plastic frames                                                      ,"",en
+BC03-0,With wooden frames                                                       ,1,With wooden frames                                                       ,"",en
+BC04-3,Clad with gold                                                           ,1,Clad with gold                                                           ,"",en
+BC05-6,Clad with platinum                                                       ,1,Clad with platinum                                                       ,"",en
+BC06-9,Clad with silver                                                         ,1,Clad with silver                                                         ,"",en
+BC07-2,Steel-framed                                                             ,1,Steel-framed                                                             ,"",en
+BC08-5,Veneer                                                                   ,1,Veneer                                                                   ,"",en
+BC09-8,Non-cast                                                                 ,1,Non-cast                                                                 ,"",en
+BC10-1,Upholstered                                                              ,1,Upholstered                                                              ,"",en
+BC11-4,Printed                                                                  ,1,Printed                                                                  ,"",en
+BC12-7,Coloured                                                                 ,1,Coloured                                                                 ,"",en
+BC13-0,Impregnated                                                              ,1,Impregnated                                                              ,"",en
+BC14-3,Prefabricated                                                            ,1,Prefabricated                                                            ,"",en
+BC15-6,Plastic coated                                                           ,1,Plastic coated                                                           ,"",en
+BC16-9,In bags                                                                  ,1,In bags                                                                  ,"",en
+BC17-2,In blocks                                                                ,1,In blocks                                                                ,"",en
+BC18-5,In boards                                                                ,1,In boards                                                                ,"",en
+BC19-8,In brine                                                                 ,1,In brine                                                                 ,"",en
+BC20-1,In bulk                                                                  ,1,In bulk                                                                  ,"",en
+BC21-4,In cartons                                                               ,1,In cartons                                                               ,"",en
+BC22-7,In cartridges                                                            ,1,In cartridges                                                            ,"",en
+BC23-0,In cuts                                                                  ,1,In cuts                                                                  ,"",en
+BC24-3,In joints                                                                ,1,In joints                                                                ,"",en
+BC25-6,In lots                                                                  ,1,In lots                                                                  ,"",en
+BC26-9,In oil                                                                   ,1,In oil                                                                   ,"",en
+BC27-2,In packets                                                               ,1,In packets                                                               ,"",en
+BC28-5,In pouches                                                               ,1,In pouches                                                               ,"",en
+BC29-8,In reams                                                                 ,1,In reams                                                                 ,"",en
+BC30-1,In rods                                                                  ,1,In rods                                                                  ,"",en
+BC31-4,In rolls                                                                 ,1,In rolls                                                                 ,"",en
+BC32-7,In sachets                                                               ,1,In sachets                                                               ,"",en
+BC33-0,In sacks                                                                 ,1,In sacks                                                                 ,"",en
+BC34-3,In sheets                                                                ,1,In sheets                                                                ,"",en
+BC35-6,In slices                                                                ,1,In slices                                                                ,"",en
+BC36-9,In solution                                                              ,1,In solution                                                              ,"",en
+BC37-2,In strips                                                                ,1,In strips                                                                ,"",en
+BC38-5,In water                                                                 ,1,In water                                                                 ,"",en
+BC39-8,Flavoured                                                                ,1,Flavoured                                                                ,"",en
+BC40-1,Moulded glass                                                            ,1,Moulded glass                                                            ,"",en
+BC41-4,Canned/tinned                                                            ,1,Canned/tinned                                                            ,"",en
+BC42-7,Bottled                                                                  ,1,Bottled                                                                  ,"",en
+BC43-0,Vacuum-packed                                                            ,1,Vacuum-packed                                                            ,"",en
+BC44-3,Parboiled                                                                ,1,Parboiled                                                                ,"",en
+BC45-6,Recycled                                                                 ,1,Recycled                                                                 ,"",en
+BC46-9,Sterilised                                                               ,1,Sterilised                                                               ,"",en
+BC48-5,Toughened                                                                ,1,Toughened                                                                ,"",en
+CA01-3,Waterproof                                                               ,1,Waterproof                                                               ,"",en
+CA02-6,Windproof                                                                ,1,Windproof                                                                ,"",en
+CA03-9,Bullet-proof                                                             ,1,Bullet-proof                                                             ,"",en
+CA04-2,Fireproof/flameproof                                                     ,1,Fireproof/flameproof                                                     ,"",en
+CA05-5,Stainless                                                                ,1,Stainless                                                                ,"",en
+CA06-8,Expandable                                                               ,1,Expandable                                                               ,"",en
+CA07-1,Insulated                                                                ,1,Insulated                                                                ,"",en
+CA08-4,Non-insulated                                                            ,1,Non-insulated                                                            ,"",en
+CA09-7,Refractory                                                               ,1,Refractory                                                               ,"",en
+CA10-0,Non-refractory                                                           ,1,Non-refractory                                                           ,"",en
+CA11-3,Reinforced                                                               ,1,Reinforced                                                               ,"",en
+CA12-6,Wired                                                                    ,1,Wired                                                                    ,"",en
+CA13-9,Oil-absorbent                                                            ,1,Oil-absorbent                                                            ,"",en
+CA14-2,Self-adhesive                                                            ,1,Self-adhesive                                                            ,"",en
+CA15-5,Ductile                                                                  ,1,Ductile                                                                  ,"",en
+CA16-8,Magnetic                                                                 ,1,Magnetic                                                                 ,"",en
+CA17-1,Environmentally friendly                                                 ,1,Environmentally friendly                                                 ,"",en
+CA18-4,GMO free                                                                 ,1,GMO free                                                                 ,"",en
+CA19-7,Hormone free                                                             ,1,Hormone free                                                             ,"",en
+CA20-0,Pesticide free                                                           ,1,Pesticide free                                                           ,"",en
+CA21-3,Asbestos free                                                            ,1,Asbestos free                                                            ,"",en
+CA22-6,CFC free                                                                 ,1,CFC free                                                                 ,"",en
+CA23-9,Ozone free                                                               ,1,Ozone free                                                               ,"",en
+CA24-2,PVC free                                                                 ,1,PVC free                                                                 ,"",en
+CA25-5,Hybrid                                                                   ,1,Hybrid                                                                   ,"",en
+CA26-8,Hydrocarbon free                                                         ,1,Hydrocarbon free                                                         ,"",en
+CA27-1,NOx free                                                                 ,1,NOx free                                                                 ,"",en
+CA28-4,CO free                                                                  ,1,CO free                                                                  ,"",en
+CA29-7,CO2 free                                                                 ,1,CO2 free                                                                 ,"",en
+CA30-0,Sulphur free                                                             ,1,Sulphur free                                                             ,"",en
+CA31-3,Euro 0 (fuel)                                                            ,1,Euro 0 (fuel)                                                            ,"",en
+CA32-6,Euro 1 (fuel)                                                            ,1,Euro 1 (fuel)                                                            ,"",en
+CA33-9,Euro 2 (fuel)                                                            ,1,Euro 2 (fuel)                                                            ,"",en
+CA34-2,Euro 3 (fuel)                                                            ,1,Euro 3 (fuel)                                                            ,"",en
+CA35-5,Euro 4 (fuel)                                                            ,1,Euro 4 (fuel)                                                            ,"",en
+CA36-8,Euro 5 (fuel)                                                            ,1,Euro 5 (fuel)                                                            ,"",en
+CA37-1,Articulated                                                              ,1,Articulated                                                              ,"",en
+CA38-4,Long-life                                                                ,1,Long-life                                                                ,"",en
+CA39-7,Lightweight                                                              ,1,Lightweight                                                              ,"",en
+CA40-0,Seagoing                                                                 ,1,Seagoing                                                                 ,"",en
+CA41-3,Semi-submersible                                                         ,1,Semi-submersible                                                         ,"",en
+CA42-6,Submersible                                                              ,1,Submersible                                                              ,"",en
+CA43-9,Digital                                                                  ,1,Digital                                                                  ,"",en
+CA44-2,Portable                                                                 ,1,Portable                                                                 ,"",en
+CA45-5,High resolution                                                          ,1,High resolution                                                          ,"",en
+CA46-8,High-performance                                                         ,1,High-performance                                                         ,"",en
+CA47-1,Multitasking                                                             ,1,Multitasking                                                             ,"",en
+CA48-4,Multi-user                                                               ,1,Multi-user                                                               ,"",en
+CA49-7,Upgradeable                                                              ,1,Upgradeable                                                              ,"",en
+CA50-0,Disposable                                                               ,1,Disposable                                                               ,"",en
+CA51-3,Rechargeable                                                             ,1,Rechargeable                                                             ,"",en
+CA52-6,Fire resistant/flame resistant                                           ,1,Fire resistant/flame resistant                                           ,"",en
+CA53-9,Fire retardant                                                           ,1,Fire retardant                                                           ,"",en
+CA54-2,Heat-resistant                                                           ,1,Heat-resistant                                                           ,"",en
+CA55-5,Sterile                                                                  ,1,Sterile                                                                  ,"",en
+CA56-8,Non-sterile                                                              ,1,Non-sterile                                                              ,"",en
+CA57-1,Ecolabel                                                                 ,1,Ecolabel                                                                 ,"",en
+CA58-4,Colorants free                                                           ,1,Colorants free                                                           ,"",en
+CA59-7,Preservatives free                                                       ,1,Preservatives free                                                       ,"",en
+CA60-0,Tridimensional                                                           ,1,Tridimensional                                                           ,"",en
+CA61-3,Removable                                                                ,1,Removable                                                                ,"",en
+CA62-6,Organic                                                                  ,1,Organic                                                                  ,"",en
+CA63-9,Cultivated                                                               ,1,Cultivated                                                               ,"",en
+CA64-2,Wild                                                                     ,1,Wild                                                                     ,"",en
+CA65-5,Farmed                                                                   ,1,Farmed                                                                   ,"",en
+CA66-8,Single-use                                                               ,1,Single-use                                                               ,"",en
+CA67-1,Reusable                                                                 ,1,Reusable                                                                 ,"",en
+CA68-4,Armoured                                                                 ,1,Armoured                                                                 ,"",en
+CA69-7,Ergonomic                                                                ,1,Ergonomic                                                                ,"",en
+CB01-4,Electrically heated                                                      ,1,Electrically heated                                                      ,"",en
+CB02-7,Remote-controlled                                                        ,1,Remote-controlled                                                        ,"",en
+CB03-0,High pressure                                                            ,1,High pressure                                                            ,"",en
+CB04-3,High-voltage                                                             ,1,High-voltage                                                             ,"",en
+CB05-6,Low pressure                                                             ,1,Low pressure                                                             ,"",en
+CB06-9,Low-voltage                                                              ,1,Low-voltage                                                              ,"",en
+CB07-2,Medium pressure                                                          ,1,Medium pressure                                                          ,"",en
+CB08-5,4-wheel-drive                                                            ,1,4-wheel-drive                                                            ,"",en
+CB09-8,Diesel-powered                                                           ,1,Diesel-powered                                                           ,"",en
+CB10-1,Electrically powered                                                     ,1,Electrically powered                                                     ,"",en
+CB11-4,Hydro-electric power                                                     ,1,Hydro-electric power                                                     ,"",en
+CB12-7,Nuclear powered                                                          ,1,Nuclear powered                                                          ,"",en
+CB13-0,Solar powered                                                            ,1,Solar powered                                                            ,"",en
+CB14-3,Petrol-engined                                                           ,1,Petrol-engined                                                           ,"",en
+CB15-6,Mechanical                                                               ,1,Mechanical                                                               ,"",en
+CB16-9,Mechanical and electrical                                                ,1,Mechanical and electrical                                                ,"",en
+CB17-2,Self-drive                                                               ,1,Self-drive                                                               ,"",en
+CB18-5,Automatic                                                                ,1,Automatic                                                                ,"",en
+CB19-8,Computerised                                                             ,1,Computerised                                                             ,"",en
+CB20-1,Computer-aided                                                           ,1,Computer-aided                                                           ,"",en
+CB21-4,Computer-based                                                           ,1,Computer-based                                                           ,"",en
+CB22-7,Computer-controlled                                                      ,1,Computer-controlled                                                      ,"",en
+CB23-0,Multiprocessing                                                          ,1,Multiprocessing                                                          ,"",en
+CB24-3,Synchronous                                                              ,1,Synchronous                                                              ,"",en
+CB25-6,Asynchronous                                                             ,1,Asynchronous                                                             ,"",en
+CB26-9,Handheld                                                                 ,1,Handheld                                                                 ,"",en
+CB27-2,Integrated                                                               ,1,Integrated                                                               ,"",en
+CB28-5,Fossil-fuel-fired                                                        ,1,Fossil-fuel-fired                                                        ,"",en
+CB29-8,Coal-fired                                                               ,1,Coal-fired                                                               ,"",en
+CB30-1,Gas-fired                                                                ,1,Gas-fired                                                                ,"",en
+CB31-4,Oil-fired                                                                ,1,Oil-fired                                                                ,"",en
+CB32-7,Wood-fired                                                               ,1,Wood-fired                                                               ,"",en
+CB33-0,1-phased                                                                 ,1,1-phased                                                                 ,"",en
+CB34-3,2-phased                                                                 ,1,2-phased                                                                 ,"",en
+CB35-6,3-phased                                                                 ,1,3-phased                                                                 ,"",en
+CB36-9,Instant                                                                  ,1,Instant                                                                  ,"",en
+CB37-2,Single-phase                                                             ,1,Single-phase                                                             ,"",en
+CB38-5,Stand-alone                                                              ,1,Stand-alone                                                              ,"",en
+CB39-8,Uninterruptible                                                          ,1,Uninterruptible                                                          ,"",en
+CB40-1,Interruptible                                                            ,1,Interruptible                                                            ,"",en
+CB41-4,Hybrid powered                                                           ,1,Hybrid powered                                                           ,"",en
+CB42-7,Battery powered                                                          ,1,Battery powered                                                          ,"",en
+CB43-0,Bio-diesel powered                                                       ,1,Bio-diesel powered                                                       ,"",en
+CB44-3,Hydrogen powered                                                         ,1,Hydrogen powered                                                         ,"",en
+CB45-6,Ethanol powered                                                          ,1,Ethanol powered                                                          ,"",en
+CB46-9,Kerosene powered                                                         ,1,Kerosene powered                                                         ,"",en
+CB47-2,Gas-powered                                                              ,1,Gas-powered                                                              ,"",en
+DA01-4,International                                                            ,1,International                                                            ,"",en
+DA02-7,National                                                                 ,1,National                                                                 ,"",en
+DA03-0,Public                                                                   ,1,Public                                                                   ,"",en
+DA04-3,Private                                                                  ,1,Private                                                                  ,"",en
+DA05-6,Second-hand                                                              ,1,Second-hand                                                              ,"",en
+DA06-9,Primary                                                                  ,1,Primary                                                                  ,"",en
+DA07-2,Secondary                                                                ,1,Secondary                                                                ,"",en
+DA08-5,Tertiary                                                                 ,1,Tertiary                                                                 ,"",en
+DA09-8,Real-time                                                                ,1,Real-time                                                                ,"",en
+DA10-1,Stage                                                                    ,1,Stage                                                                    ,"",en
+DA11-4,Secretarial                                                              ,1,Secretarial                                                              ,"",en
+DA12-7,Indoor                                                                   ,1,Indoor                                                                   ,"",en
+DA13-0,Outdoor                                                                  ,1,Outdoor                                                                  ,"",en
+DA14-3,Mobile                                                                   ,1,Mobile                                                                   ,"",en
+DA15-6,Domestic                                                                 ,1,Domestic                                                                 ,"",en
+DA16-9,Non-domestic                                                             ,1,Non-domestic                                                             ,"",en
+DA17-2,Turnkey project                                                          ,1,Turnkey project                                                          ,"",en
+DA18-5,Underground                                                              ,1,Underground                                                              ,"",en
+DA19-8,Underwater                                                               ,1,Underwater                                                               ,"",en
+DA20-1,On-site                                                                  ,1,On-site                                                                  ,"",en
+DA21-4,Above-ground                                                             ,1,Above-ground                                                             ,"",en
+DA22-7,All-purpose                                                              ,1,All-purpose                                                              ,"",en
+DA23-0,Special-purpose                                                          ,1,Special-purpose                                                          ,"",en
+DA24-3,And related articles                                                     ,1,And related articles                                                     ,"",en
+DA25-6,Standard                                                                 ,1,Standard                                                                 ,"",en
+DA26-9,Management                                                               ,1,Management                                                               ,"",en
+DA27-2,Administrative                                                           ,1,Administrative                                                           ,"",en
+DA28-5,Social service                                                           ,1,Social service                                                           ,"",en
+DA29-8,Social work                                                              ,1,Social work                                                              ,"",en
+DA30-1,Counselling                                                              ,1,Counselling                                                              ,"",en
+DA31-4,Daycare                                                                  ,1,Daycare                                                                  ,"",en
+DA32-7,Family-planning                                                          ,1,Family-planning                                                          ,"",en
+DA33-0,Rehabilitation                                                           ,1,Rehabilitation                                                           ,"",en
+DA34-3,Guidance                                                                 ,1,Guidance                                                                 ,"",en
+DA35-6,From workroom                                                            ,1,From workroom                                                            ,"",en
+DA36-9,Natural resource                                                         ,1,Natural resource                                                         ,"",en
+DA37-2,Recycling                                                                ,1,Recycling                                                                ,"",en
+DA38-5,Decontamination                                                          ,1,Decontamination                                                          ,"",en
+DA39-8,Pollution tracking                                                       ,1,Pollution tracking                                                       ,"",en
+DA40-1,Quality control                                                          ,1,Quality control                                                          ,"",en
+DA41-4,Treatment                                                                ,1,Treatment                                                                ,"",en
+DA42-7,Including installation                                                   ,1,Including installation                                                   ,"",en
+DA43-0,Multipurpose                                                             ,1,Multipurpose                                                             ,"",en
+DA44-3,Spare parts                                                              ,1,Spare parts                                                              ,"",en
+EA01-5,For babies                                                               ,1,For babies                                                               ,"",en
+EA02-8,For children                                                             ,1,For children                                                             ,"",en
+EA03-1,For teenager                                                             ,1,For teenager                                                             ,"",en
+EA04-4,For men                                                                  ,1,For men                                                                  ,"",en
+EA05-7,For elderly person                                                       ,1,For elderly person                                                       ,"",en
+EA06-0,For women                                                                ,1,For women                                                                ,"",en
+EA07-3,For pregnant women                                                       ,1,For pregnant women                                                       ,"",en
+EA08-6,For unemployed person                                                    ,1,For unemployed person                                                    ,"",en
+EA09-9,For homeless                                                             ,1,For homeless                                                             ,"",en
+EA10-2,For drug user                                                            ,1,For drug user                                                            ,"",en
+EA11-5,For pensioner                                                            ,1,For pensioner                                                            ,"",en
+EA12-8,For/Adapted for disabled person                                          ,1,For/Adapted for disabled person                                          ,"",en
+EA13-1,For/Adapted for physical disabled                                        ,1,For/Adapted for physical disabled                                        ,"",en
+EA14-4,For/Adapted for paralysed person                                         ,1,For/Adapted for paralysed person                                         ,"",en
+EA15-7,For/Adapted for paralysed on one side person                             ,1,For/Adapted for paralysed on one side person                             ,"",en
+EA16-0,For/Adapted for tetraplegic person                                       ,1,For/Adapted for tetraplegic person                                       ,"",en
+EA17-3,For/Adapted for paraplegic person                                        ,1,For/Adapted for paraplegic person                                        ,"",en
+EA18-6,For/Adapted for mute person                                              ,1,For/Adapted for mute person                                              ,"",en
+EA19-9,For/Adapted for hard of hearing person                                   ,1,For/Adapted for hard of hearing person                                   ,"",en
+EA20-2,For/Adapted for deaf-mute person                                         ,1,For/Adapted for deaf-mute person                                         ,"",en
+EA21-5,For/Adapted for visually impaired person                                 ,1,For/Adapted for visually impaired person                                 ,"",en
+EA22-8,For/Adapted for mentally disabled                                        ,1,For/Adapted for mentally disabled                                        ,"",en
+EA23-1,For passenger                                                            ,1,For passenger                                                            ,"",en
+EA24-4,For restricted-clientele                                                 ,1,For restricted-clientele                                                 ,"",en
+EA25-7,For prisoners                                                            ,1,For prisoners                                                            ,"",en
+EA26-0,For patient                                                              ,1,For patient                                                              ,"",en
+EA27-3,For non-emergency patient                                                ,1,For non-emergency patient                                                ,"",en
+EA28-6,For regular passenger                                                    ,1,For regular passenger                                                    ,"",en
+EA29-9,For human use                                                            ,1,For human use                                                            ,"",en
+EA30-2,For animal use                                                           ,1,For animal use                                                           ,"",en
+FA01-6,For educational use                                                      ,1,For educational use                                                      ,"",en
+FA02-9,For kindergarten use                                                     ,1,For kindergarten use                                                     ,"",en
+FA03-2,For school use                                                           ,1,For school use                                                           ,"",en
+FA04-5,For training purposes                                                    ,1,For training purposes                                                    ,"",en
+FB01-7,For military use                                                         ,1,For military use                                                         ,"",en
+FB02-0,For weapons and ammunition                                               ,1,For weapons and ammunition                                               ,"",en
+FB03-3,For the police force                                                     ,1,For the police force                                                     ,"",en
+FB04-6,For firefighting                                                         ,1,For firefighting                                                         ,"",en
+FB05-9,For prison use                                                           ,1,For prison use                                                           ,"",en
+FB06-2,For rescue                                                               ,1,For rescue                                                               ,"",en
+FB07-5,For emergency                                                            ,1,For emergency                                                            ,"",en
+FB08-8,For fire protection                                                      ,1,For fire protection                                                      ,"",en
+FB09-1,For security system                                                      ,1,For security system                                                      ,"",en
+FB10-4,For nuclear protection                                                   ,1,For nuclear protection                                                   ,"",en
+FB11-7,In case of radiation                                                     ,1,In case of radiation                                                     ,"",en
+FB12-0,For terrorist prevention                                                 ,1,For terrorist prevention                                                 ,"",en
+FB13-3,With military specifications                                             ,1,With military specifications                                             ,"",en
+FC01-8,For waste disposal                                                       ,1,For waste disposal                                                       ,"",en
+FC02-1,For waste material                                                       ,1,For waste material                                                       ,"",en
+FC03-4,For domestic waste                                                       ,1,For domestic waste                                                       ,"",en
+FD01-9,For spring                                                               ,1,For spring                                                               ,"",en
+FD02-2,For summer                                                               ,1,For summer                                                               ,"",en
+FD03-5,For fall                                                                 ,1,For fall                                                                 ,"",en
+FD04-8,For winter                                                               ,1,For winter                                                               ,"",en
+FD05-1,For all seasons                                                          ,1,For all seasons                                                          ,"",en
+FE01-0,For packing goods                                                        ,1,For packing goods                                                        ,"",en
+FE02-3,For parcels                                                              ,1,For parcels                                                              ,"",en
+FE03-6,For post-office use                                                      ,1,For post-office use                                                      ,"",en
+FF01-1,For cleaning                                                             ,1,For cleaning                                                             ,"",en
+FF02-4,For day homes                                                            ,1,For day homes                                                            ,"",en
+FG01-2,For access                                                               ,1,For access                                                               ,"",en
+FG02-5,For exhibition use                                                       ,1,For exhibition use                                                       ,"",en
+FG03-8,For graphic purposes                                                     ,1,For graphic purposes                                                     ,"",en
+FG04-1,For heating                                                              ,1,For heating                                                              ,"",en
+FG05-4,For industrial use                                                       ,1,For industrial use                                                       ,"",en
+FG06-7,For printing                                                             ,1,For printing                                                             ,"",en
+FG07-0,For naval use                                                            ,1,For naval use                                                            ,"",en
+FG08-3,For office use                                                           ,1,For office use                                                           ,"",en
+FG09-6,For indoor use                                                           ,1,For indoor use                                                           ,"",en
+FG10-9,For outdoor use                                                          ,1,For outdoor use                                                          ,"",en
+FG11-2,For scientific purposes                                                  ,1,For scientific purposes                                                  ,"",en
+FG12-5,For storage purposes                                                     ,1,For storage purposes                                                     ,"",en
+FG13-8,For survival                                                             ,1,For survival                                                             ,"",en
+FG14-1,For technical uses                                                       ,1,For technical uses                                                       ,"",en
+FG15-4,For test purposes                                                        ,1,For test purposes                                                        ,"",en
+FG16-7,For urban use                                                            ,1,For urban use                                                            ,"",en
+FG17-0,For use in agriculture                                                   ,1,For use in agriculture                                                   ,"",en
+FG18-3,For use in horticulture                                                  ,1,For use in horticulture                                                  ,"",en
+FG19-6,For camping                                                              ,1,For camping                                                              ,"",en
+FG20-9,For kitchen use                                                          ,1,For kitchen use                                                          ,"",en
+FG21-2,For subsea use                                                           ,1,For subsea use                                                           ,"",en
+FG22-5,For cosmetics                                                            ,1,For cosmetics                                                            ,"",en
+FG23-8,For tourism                                                              ,1,For tourism                                                              ,"",en
+FG24-1,For use in artistic performances                                         ,1,For use in artistic performances                                         ,"",en
+FG25-4,For buildings or goods of particular historical or architectural interest,1,For buildings or goods of particular historical or architectural interest,"",en
+GA01-7,Specific weight required                                                 ,1,Specific weight required                                                 ,"",en
+GA02-0,Gross vehicle weight limited                                             ,1,Gross vehicle weight limited                                             ,"",en
+GA03-3,Specific tonnes per annum required                                       ,1,Specific tonnes per annum required                                       ,"",en
+GA04-6,Specific kg per annum required                                           ,1,Specific kg per annum required                                           ,"",en
+GA05-9,Specific height required                                                 ,1,Specific height required                                                 ,"",en
+GA06-2,Specific width required                                                  ,1,Specific width required                                                  ,"",en
+GA07-5,Specific thickness required                                              ,1,Specific thickness required                                              ,"",en
+GA08-8,Specific length required                                                 ,1,Specific length required                                                 ,"",en
+GA09-1,Specific diameter required                                               ,1,Specific diameter required                                               ,"",en
+GA10-4,Specific volume required                                                 ,1,Specific volume required                                                 ,"",en
+TA01-2,For books                                                                ,1,For books                                                                ,"",en
+GA11-7,Specific litres per annum required                                       ,1,Specific litres per annum required                                       ,"",en
+GA12-0,Specific size required                                                   ,1,Specific size required                                                   ,"",en
+GA13-3,Specific unit size required                                              ,1,Specific unit size required                                              ,"",en
+GA14-6,Specific capacity required                                               ,1,Specific capacity required                                               ,"",en
+GA15-9,Specific circumference required                                          ,1,Specific circumference required                                          ,"",en
+GA16-2,Specific depth required                                                  ,1,Specific depth required                                                  ,"",en
+GA17-5,Specific kWh per annum required                                          ,1,Specific kWh per annum required                                          ,"",en
+GA18-8,Specific MWh per annum required                                          ,1,Specific MWh per annum required                                          ,"",en
+GA19-1,Per annum (pa)                                                           ,1,Per annum (pa)                                                           ,"",en
+GA20-4,Specific power                                                           ,1,Specific power                                                           ,"",en
+GA21-7,Specific pressure                                                        ,1,Specific pressure                                                        ,"",en
+GA22-0,Specific voltage required                                                ,1,Specific voltage required                                                ,"",en
+GA32-0,Specific degrees Celsius required                                        ,1,Specific degrees Celsius required                                        ,"",en
+GA33-3,Specific degrees Fahrenheit required                                     ,1,Specific degrees Fahrenheit required                                     ,"",en
+GB01-8,Daily                                                                    ,1,Daily                                                                    ,"",en
+GB02-1,Weekly                                                                   ,1,Weekly                                                                   ,"",en
+GB03-4,Monthly                                                                  ,1,Monthly                                                                  ,"",en
+GB04-7,Annually                                                                 ,1,Annually                                                                 ,"",en
+GC01-9,Not exceeding                                                            ,1,Not exceeding                                                            ,"",en
+GC02-2,In excess of                                                             ,1,In excess of                                                             ,"",en
+GC03-5,A maximum of                                                             ,1,A maximum of                                                             ,"",en
+GC04-8,A minimum of                                                             ,1,A minimum of                                                             ,"",en
+GC05-1,Phase:                                                                   ,1,Phase:                                                                   ,"",en
+GC06-4,Rating:                                                                  ,1,Rating:                                                                  ,"",en
+GC07-7,Reference:                                                               ,1,Reference:                                                               ,"",en
+GC08-0,Response time                                                            ,1,Response time                                                            ,"",en
+GC09-3,Rooms:                                                                   ,1,Rooms:                                                                   ,"",en
+GC10-6,Scale of work:                                                           ,1,Scale of work:                                                           ,"",en
+GC11-9,Specifications:                                                          ,1,Specifications:                                                          ,"",en
+GC12-2,Subsidiary lot:                                                          ,1,Subsidiary lot:                                                          ,"",en
+GC13-5,Type:                                                                    ,1,Type:                                                                    ,"",en
+GC14-8,Type of architecture:                                                    ,1,Type of architecture:                                                    ,"",en
+GC15-1,Type of protocol:                                                        ,1,Type of protocol:                                                        ,"",en
+GC16-4,Type of standard:                                                        ,1,Type of standard:                                                        ,"",en
+GC17-7,Dwellings:                                                               ,1,Dwellings:                                                               ,"",en
+GC18-0,Lots:                                                                    ,1,Lots:                                                                    ,"",en
+GC19-3,Lot No                                                                   ,1,Lot No                                                                   ,"",en
+GC20-6,Main lot:                                                                ,1,Main lot:                                                                ,"",en
+GC21-9,Area:                                                                    ,1,Area:                                                                    ,"",en
+GC22-2,Commissioning in                                                         ,1,Commissioning in                                                         ,"",en
+GC23-5,Lengthening                                                              ,1,Lengthening                                                              ,"",en
+GC24-8,Whole                                                                    ,1,Whole                                                                    ,"",en
+GC25-1,Number:                                                                  ,1,Number:                                                                  ,"",en
+GC26-4,Number of channels:                                                      ,1,Number of channels:                                                      ,"",en
+GC27-7,Number of items:                                                         ,1,Number of items:                                                         ,"",en
+GC28-0,Number of phases:                                                        ,1,Number of phases:                                                        ,"",en
+GC29-3,Number of seats:                                                         ,1,Number of seats:                                                         ,"",en
+GC30-6,Number of sets:                                                          ,1,Number of sets:                                                          ,"",en
+GC31-9,Number of units:                                                         ,1,Number of units:                                                         ,"",en
+GC32-2,Number of users:                                                         ,1,Number of users:                                                         ,"",en
+GC33-5,Number of sheets:                                                        ,1,Number of sheets:                                                        ,"",en
+GC34-8,Number of copies:                                                        ,1,Number of copies:                                                        ,"",en
+HA01-8,Cook and chill                                                           ,1,Cook and chill                                                           ,"",en
+HA02-1,Cook and frozen                                                          ,1,Cook and frozen                                                          ,"",en
+HA03-4,Kosher                                                                   ,1,Kosher                                                                   ,"",en
+HA04-7,Pork free                                                                ,1,Pork free                                                                ,"",en
+HA05-0,Alcohol free                                                             ,1,Alcohol free                                                             ,"",en
+HA06-3,Diabetic meal                                                            ,1,Diabetic meal                                                            ,"",en
+HA07-6,Gluten free meal                                                         ,1,Gluten free meal                                                         ,"",en
+HA08-9,High fibre meal                                                          ,1,High fibre meal                                                          ,"",en
+HA09-2,Low calorie meal                                                         ,1,Low calorie meal                                                         ,"",en
+HA10-5,Low cholesterol/fat meal                                                 ,1,Low cholesterol/fat meal                                                 ,"",en
+HA11-8,Low protein meal                                                         ,1,Low protein meal                                                         ,"",en
+HA12-1,Low purine meal                                                          ,1,Low purine meal                                                          ,"",en
+HA13-4,Low sodium meal                                                          ,1,Low sodium meal                                                          ,"",en
+HA14-7,Non-lactose meal                                                         ,1,Non-lactose meal                                                         ,"",en
+HA15-0,Peanut allergy meal                                                      ,1,Peanut allergy meal                                                      ,"",en
+HA16-3,Vegetarian meal                                                          ,1,Vegetarian meal                                                          ,"",en
+HA17-6,Vegetarian Lacto-Ovo meal                                                ,1,Vegetarian Lacto-Ovo meal                                                ,"",en
+HA18-9,Religious meal                                                           ,1,Religious meal                                                           ,"",en
+HA19-2,Hallal                                                                   ,1,Hallal                                                                   ,"",en
+HA20-5,Carcass                                                                  ,1,Carcass                                                                  ,"",en
+HA21-8,Par-fried                                                                ,1,Par-fried                                                                ,"",en
+HA22-1,In syrup                                                                 ,1,In syrup                                                                 ,"",en
+HA23-4,In tomato sauce                                                          ,1,In tomato sauce                                                          ,"",en
+HA24-7,In natural juice                                                         ,1,In natural juice                                                         ,"",en
+HA25-0,Unsalted                                                                 ,1,Unsalted                                                                 ,"",en
+HA26-3,Salted                                                                   ,1,Salted                                                                   ,"",en
+HA27-6,Cooked                                                                   ,1,Cooked                                                                   ,"",en
+HA28-9,Baked                                                                    ,1,Baked                                                                    ,"",en
+HA29-2,Fried                                                                    ,1,Fried                                                                    ,"",en
+HA30-5,Steamed                                                                  ,1,Steamed                                                                  ,"",en
+HA31-8,Wet mix                                                                  ,1,Wet mix                                                                  ,"",en
+IA01-9,Cook and chill                                                           ,1,Cook and chill                                                           ,"",en
+IA02-2,Cook and frozen                                                          ,1,Cook and frozen                                                          ,"",en
+IA03-5,Kosher                                                                   ,1,Kosher                                                                   ,"",en
+IA04-8,Pork free                                                                ,1,Pork free                                                                ,"",en
+IA05-1,Alcohol free                                                             ,1,Alcohol free                                                             ,"",en
+IA06-4,Diabetic meal                                                            ,1,Diabetic meal                                                            ,"",en
+IA07-7,Gluten free meal                                                         ,1,Gluten free meal                                                         ,"",en
+IA08-0,High fibre meal                                                          ,1,High fibre meal                                                          ,"",en
+IA09-3,Low calorie meal                                                         ,1,Low calorie meal                                                         ,"",en
+IA10-6,Low cholesterol/fat meal                                                 ,1,Low cholesterol/fat meal                                                 ,"",en
+IA11-9,Low protein meal                                                         ,1,Low protein meal                                                         ,"",en
+IA13-5,Low purine meal                                                          ,1,Low purine meal                                                          ,"",en
+IA14-8,Low sodium meal                                                          ,1,Low sodium meal                                                          ,"",en
+IA15-1,Non-lactose meal                                                         ,1,Non-lactose meal                                                         ,"",en
+IA16-4,Peanut allergy meal                                                      ,1,Peanut allergy meal                                                      ,"",en
+IA17-7,Vegetarian meal                                                          ,1,Vegetarian meal                                                          ,"",en
+IA18-0,Vegetarian Lacto-Ovo meal                                                ,1,Vegetarian Lacto-Ovo meal                                                ,"",en
+IA19-3,Religious meal                                                           ,1,Religious meal                                                           ,"",en
+IA20-6,Hallal                                                                   ,1,Hallal                                                                   ,"",en
+IA21-9,Carcass                                                                  ,1,Carcass                                                                  ,"",en
+IA22-2,Par-fried                                                                ,1,Par-fried                                                                ,"",en
+IA23-5,In syrup                                                                 ,1,In syrup                                                                 ,"",en
+IA24-8,In tomato sauce                                                          ,1,In tomato sauce                                                          ,"",en
+IA25-1,In natural juice                                                         ,1,In natural juice                                                         ,"",en
+IA26-4,Unsalted                                                                 ,1,Unsalted                                                                 ,"",en
+IA27-7,Salted                                                                   ,1,Salted                                                                   ,"",en
+IA28-0,Cooked                                                                   ,1,Cooked                                                                   ,"",en
+IA29-3,Baked                                                                    ,1,Baked                                                                    ,"",en
+IA30-6,Fried                                                                    ,1,Fried                                                                    ,"",en
+IA31-9,Steamed                                                                  ,1,Steamed                                                                  ,"",en
+IA32-2,Wet mix                                                                  ,1,Wet mix                                                                  ,"",en
+IA33-5,""                                                                       ,1,""                                                                       ,"",en
+IA34-8,""                                                                       ,1,""                                                                       ,"",en
+IA35-1,""                                                                       ,1,""                                                                       ,"",en
+IA36-4,""                                                                       ,1,""                                                                       ,"",en
+IA37-7,""                                                                       ,1,""                                                                       ,"",en
+IA38-0,""                                                                       ,1,""                                                                       ,"",en
+IA39-3,""                                                                       ,1,""                                                                       ,"",en
+IA40-6,""                                                                       ,1,""                                                                       ,"",en
+IA41-9,""                                                                       ,1,""                                                                       ,"",en
+IA42-2,""                                                                       ,1,""                                                                       ,"",en
+JA01-1,For computer hardware                                                    ,1,For computer hardware                                                    ,"",en
+JA02-4,For computer software                                                    ,1,For computer software                                                    ,"",en
+JA03-7,For network use                                                          ,1,For network use                                                          ,"",en
+JA04-0,For design                                                               ,1,For design                                                               ,"",en
+JA05-3,Desktop                                                                  ,1,Desktop                                                                  ,"",en
+JA06-6,For development                                                          ,1,For development                                                          ,"",en
+JA07-9,Online                                                                   ,1,Online                                                                   ,"",en
+JA08-2,Upgrade                                                                  ,1,Upgrade                                                                  ,"",en
+JA09-5,Multimedia                                                               ,1,Multimedia                                                               ,"",en
+JA10-8,For Internet                                                             ,1,For Internet                                                             ,"",en
+JA11-1,For intranet                                                             ,1,For intranet                                                             ,"",en
+JA12-4,For network                                                              ,1,For network                                                              ,"",en
+JA13-7,For local area network                                                   ,1,For local area network                                                   ,"",en
+JA14-0,For wide area network                                                    ,1,For wide area network                                                    ,"",en
+JA15-3,With licence                                                             ,1,With licence                                                             ,"",en
+JA16-6,Free licence                                                             ,1,Free licence                                                             ,"",en
+JA17-9,For data                                                                 ,1,For data                                                                 ,"",en
+JA18-2,For auditing                                                             ,1,For auditing                                                             ,"",en
+JA19-5,For server                                                               ,1,For server                                                               ,"",en
+JA20-8,For back-up                                                              ,1,For back-up                                                              ,"",en
+JA21-1,For developing                                                           ,1,For developing                                                           ,"",en
+JA22-4,For programming                                                          ,1,For programming                                                          ,"",en
+JA23-7,For upgrading                                                            ,1,For upgrading                                                            ,"",en
+JA24-9,Broadband                                                                ,1,Broadband                                                                ,"",en
+KA01-2,For district heating                                                     ,1,For district heating                                                     ,"",en
+KA02-5,For drainage                                                             ,1,For drainage                                                             ,"",en
+KA03-8,For electrical equipment                                                 ,1,For electrical equipment                                                 ,"",en
+KA04-1,For electrical installations                                             ,1,For electrical installations                                             ,"",en
+KA05-4,For sewage treatment                                                     ,1,For sewage treatment                                                     ,"",en
+KA06-7,For the gas industry                                                     ,1,For the gas industry                                                     ,"",en
+KA07-0,For the oil industry                                                     ,1,For the oil industry                                                     ,"",en
+KA08-3,For the storage of natural gas                                           ,1,For the storage of natural gas                                           ,"",en
+KA09-6,For the treatment of water                                               ,1,For the treatment of water                                               ,"",en
+KA10-9,For use in the water industry                                            ,1,For use in the water industry                                            ,"",en
+KA11-2,For water utilities                                                      ,1,For water utilities                                                      ,"",en
+KA12-5,For electricity production                                               ,1,For electricity production                                               ,"",en
+KA13-8,Industrial supply                                                        ,1,Industrial supply                                                        ,"",en
+KA14-1,Foul water                                                               ,1,Foul water                                                               ,"",en
+KA15-4,Steam                                                                    ,1,Steam                                                                    ,"",en
+KA16-7,For the energy industry                                                  ,1,For the energy industry                                                  ,"",en
+LA01-3,For anaesthetics                                                         ,1,For anaesthetics                                                         ,"",en
+LA02-6,For artificial-kidney treatment                                          ,1,For artificial-kidney treatment                                          ,"",en
+LA03-9,For autopsy                                                              ,1,For autopsy                                                              ,"",en
+LA04-2,For bronchial endoscopy                                                  ,1,For bronchial endoscopy                                                  ,"",en
+LA05-5,For burns                                                                ,1,For burns                                                                ,"",en
+LA06-8,For cytostatic treatment                                                 ,1,For cytostatic treatment                                                 ,"",en
+LA07-1,For diagnostic radiology                                                 ,1,For diagnostic radiology                                                 ,"",en
+LA08-4,For dietary use                                                          ,1,For dietary use                                                          ,"",en
+LA09-7,For disinfection                                                         ,1,For disinfection                                                         ,"",en
+LA10-0,For dispensary use                                                       ,1,For dispensary use                                                       ,"",en
+LA11-3,For endovascular use                                                     ,1,For endovascular use                                                     ,"",en
+LA12-6,For gynaecology                                                          ,1,For gynaecology                                                          ,"",en
+LA13-9,For haemodialysis                                                        ,1,For haemodialysis                                                        ,"",en
+LA14-2,For haemodynamics                                                        ,1,For haemodynamics                                                        ,"",en
+LA15-5,For heart surgery                                                        ,1,For heart surgery                                                        ,"",en
+LA16-8,For hospital use                                                         ,1,For hospital use                                                         ,"",en
+LA17-1,For immunology                                                           ,1,For immunology                                                           ,"",en
+LA18-4,For infusion                                                             ,1,For infusion                                                             ,"",en
+LA19-7,For injection                                                            ,1,For injection                                                            ,"",en
+LA20-0,For intensive-care use                                                   ,1,For intensive-care use                                                   ,"",en
+LA21-3,For laboratory use                                                       ,1,For laboratory use                                                       ,"",en
+LA22-6,For medical personnel                                                    ,1,For medical personnel                                                    ,"",en
+LA23-9,For medical use                                                          ,1,For medical use                                                          ,"",en
+LA24-2,For neuro-angiographical use                                             ,1,For neuro-angiographical use                                             ,"",en
+LA25-5,For neuro-surgical use                                                   ,1,For neuro-surgical use                                                   ,"",en
+LA26-8,For nursing staff                                                        ,1,For nursing staff                                                        ,"",en
+LA27-1,For operating theatre                                                    ,1,For operating theatre                                                    ,"",en
+LA28-4,For operating-theatre use                                                ,1,For operating-theatre use                                                ,"",en
+LA29-7,For orthopaedic use                                                      ,1,For orthopaedic use                                                      ,"",en
+LA30-0,For osteosynthesis                                                       ,1,For osteosynthesis                                                       ,"",en
+LA31-3,For paediatric medicine                                                  ,1,For paediatric medicine                                                  ,"",en
+LA32-6,For paramedical use                                                      ,1,For paramedical use                                                      ,"",en
+LA33-9,For pathology                                                            ,1,For pathology                                                            ,"",en
+LA34-2,For peritoneal dialysis                                                  ,1,For peritoneal dialysis                                                  ,"",en
+LA35-5,For psychiatric purposes                                                 ,1,For psychiatric purposes                                                 ,"",en
+LA36-8,For radiodiagnosis                                                       ,1,For radiodiagnosis                                                       ,"",en
+LA37-1,For radio-immunoassay                                                    ,1,For radio-immunoassay                                                    ,"",en
+LA38-4,For radio-immunology                                                     ,1,For radio-immunology                                                     ,"",en
+LA39-7,For radiology                                                            ,1,For radiology                                                            ,"",en
+LA40-0,For radiotherapy reagents                                                ,1,For radiotherapy reagents                                                ,"",en
+LA41-3,For serology                                                             ,1,For serology                                                             ,"",en
+LA42-6,For surgical use                                                         ,1,For surgical use                                                         ,"",en
+LA43-9,For the artificial-kidney unit                                           ,1,For the artificial-kidney unit                                           ,"",en
+LA44-2,For therapeutic medicine                                                 ,1,For therapeutic medicine                                                 ,"",en
+LA45-5,For therapeutic purposes                                                 ,1,For therapeutic purposes                                                 ,"",en
+LA46-8,For transperitoneal dialysis                                             ,1,For transperitoneal dialysis                                             ,"",en
+LA47-1,For treatment of hypothermia                                             ,1,For treatment of hypothermia                                             ,"",en
+LA48-4,For urology treatment                                                    ,1,For urology treatment                                                    ,"",en
+LA49-7,For X-ray unit                                                           ,1,For X-ray unit                                                           ,"",en
+LA50-0,For cardiology                                                           ,1,For cardiology                                                           ,"",en
+LA51-3,For cardiovascular use                                                   ,1,For cardiovascular use                                                   ,"",en
+LA52-6,Medical                                                                  ,1,Medical                                                                  ,"",en
+LA53-9,For post-mortem use                                                      ,1,For post-mortem use                                                      ,"",en
+LA54-2,For vascular use                                                         ,1,For vascular use                                                         ,"",en
+LA55-5,For veterinary use                                                       ,1,For veterinary use                                                       ,"",en
+MA01-4,For aircraft                                                             ,1,For aircraft                                                             ,"",en
+MA02-7,For aircraft crews                                                       ,1,For aircraft crews                                                       ,"",en
+MA03-0,For buses                                                                ,1,For buses                                                                ,"",en
+MA04-3,For cars                                                                 ,1,For cars                                                                 ,"",en
+MA05-6,For civil aircraft                                                       ,1,For civil aircraft                                                       ,"",en
+MA06-9,For industrial vehicles                                                  ,1,For industrial vehicles                                                  ,"",en
+MA07-2,For motor vehicles                                                       ,1,For motor vehicles                                                       ,"",en
+MA08-5,For railway use                                                          ,1,For railway use                                                          ,"",en
+MA09-8,For transport                                                            ,1,For transport                                                            ,"",en
+MA10-1,For use in airports                                                      ,1,For use in airports                                                      ,"",en
+MA11-4,For vehicles                                                             ,1,For vehicles                                                             ,"",en
+MA12-7,For urban transport                                                      ,1,For urban transport                                                      ,"",en
+MA13-0,For waterways                                                            ,1,For waterways                                                            ,"",en
+MA14-3,For boats                                                                ,1,For boats                                                                ,"",en
+MB01-5,Left-hand-drive                                                          ,1,Left-hand-drive                                                          ,"",en
+MB02-8,Right-hand-drive                                                         ,1,Right-hand-drive                                                         ,"",en
+MB03-1,Subsea                                                                   ,1,Subsea                                                                   ,"",en
+MB04-4,High speed                                                               ,1,High speed                                                               ,"",en
+MD01-7,Using refrigerated vehicles                                              ,1,Using refrigerated vehicles                                              ,"",en
+MD02-0,Using tanker vehicles                                                    ,1,Using tanker vehicles                                                    ,"",en
+MD03-3,Using vehicles adapted for bulk goods                                    ,1,Using vehicles adapted for bulk goods                                    ,"",en
+MD04-6,Using container vehicles                                                 ,1,Using container vehicles                                                 ,"",en
+MD05-9,Using furniture-removal vehicles                                         ,1,Using furniture-removal vehicles                                         ,"",en
+MD06-2,Using loading trailers                                                   ,1,Using loading trailers                                                   ,"",en
+MD07-5,Using armoured car                                                       ,1,Using armoured car                                                       ,"",en
+ME01-8,Of dry bulk goods                                                        ,1,Of dry bulk goods                                                        ,"",en
+ME02-1,Of natural gas                                                           ,1,Of natural gas                                                           ,"",en
+ME03-4,Of corpse                                                                ,1,Of corpse                                                                ,"",en
+ME04-7,Of artistic objects                                                      ,1,Of artistic objects                                                      ,"",en
+ME05-0,Of toxic substances                                                      ,1,Of toxic substances                                                      ,"",en
+MF01-9,Using aircraft                                                           ,1,Using aircraft                                                           ,"",en
+MF02-2,Using tram                                                               ,1,Using tram                                                               ,"",en
+MF03-5,Using specialised vehicles                                               ,1,Using specialised vehicles                                               ,"",en
+MF04-8,Using car                                                                ,1,Using car                                                                ,"",en
+MF05-1,Using bus                                                                ,1,Using bus                                                                ,"",en
+MF06-4,Using coach                                                              ,1,Using coach                                                              ,"",en
+MF07-7,Using balloon                                                            ,1,Using balloon                                                            ,"",en
+MF08-0,Using zeppelin                                                           ,1,Using zeppelin                                                           ,"",en
+MF09-3,Using hovercraft                                                         ,1,Using hovercraft                                                         ,"",en
+MF10-6,Using zodiac                                                             ,1,Using zodiac                                                             ,"",en
+PA01-7,Hire                                                                     ,1,Hire                                                                     ,"",en
+PA02-0,Lease                                                                    ,1,Lease                                                                    ,"",en
+PA03-3,Hire-purchase                                                            ,1,Hire-purchase                                                            ,"",en
+PB01-8,With crew                                                                ,1,With crew                                                                ,"",en
+PB02-1,Without crew                                                             ,1,Without crew                                                             ,"",en
+PB03-4,With driver                                                              ,1,With driver                                                              ,"",en
+PB04-7,Without driver                                                           ,1,Without driver                                                           ,"",en
+PB05-0,With operator                                                            ,1,With operator                                                            ,"",en
+PB06-3,Without operator                                                         ,1,Without operator                                                         ,"",en
+QA01-8,For broadcast avertising                                                 ,1,For broadcast avertising                                                 ,"",en
+QA02-1,For advertising on radio                                                 ,1,For advertising on radio                                                 ,"",en
+QA03-4,For advertising on television                                            ,1,For advertising on television                                            ,"",en
+QA04-7,For advertising on the Internet                                          ,1,For advertising on the Internet                                          ,"",en
+QA05-0,For advertising in cinemas                                               ,1,For advertising in cinemas                                               ,"",en
+QA06-3,For advertising in newspapers                                            ,1,For advertising in newspapers                                            ,"",en
+QA07-6,For advertising in magazines                                             ,1,For advertising in magazines                                             ,"",en
+QA08-9,For advertising on posters                                               ,1,For advertising on posters                                               ,"",en
+QA09-2,For advertising by means of coupons                                      ,1,For advertising by means of coupons                                      ,"",en
+QA10-5,For fairs                                                                ,1,For fairs                                                                ,"",en
+QA11-8,For events                                                               ,1,For events                                                               ,"",en
+QA12-1,For conferences                                                          ,1,For conferences                                                          ,"",en
+QA13-4,For exhibitions                                                          ,1,For exhibitions                                                          ,"",en
+QB01-9,For contract law                                                         ,1,For contract law                                                         ,"",en
+QB02-2,For trade law                                                            ,1,For trade law                                                            ,"",en
+QB03-5,For company law                                                          ,1,For company law                                                          ,"",en
+QB04-8,For competition law                                                      ,1,For competition law                                                      ,"",en
+QB05-1,For administrative law                                                   ,1,For administrative law                                                   ,"",en
+QB06-4,For private law                                                          ,1,For private law                                                          ,"",en
+QB07-7,For public law                                                           ,1,For public law                                                           ,"",en
+QB08-0,For international law                                                    ,1,For international law                                                    ,"",en
+QB09-3,For national law                                                         ,1,For national law                                                         ,"",en
+QB10-6,For regional law                                                         ,1,For regional law                                                         ,"",en
+QB11-9,For employment law                                                       ,1,For employment law                                                       ,"",en
+QB12-2,For immigration law                                                      ,1,For immigration law                                                      ,"",en
+QB13-5,For taxation law                                                         ,1,For taxation law                                                         ,"",en
+QB14-8,For social law                                                           ,1,For social law                                                           ,"",en
+QB15-1,For criminal law                                                         ,1,For criminal law                                                         ,"",en
+QB16-4,For discrimination or harassment law                                     ,1,For discrimination or harassment law                                     ,"",en
+QB17-7,For juvenile justice law                                                 ,1,For juvenile justice law                                                 ,"",en
+QB18-0,For appellate procedure                                                  ,1,For appellate procedure                                                  ,"",en
+QB19-3,For defence law                                                          ,1,For defence law                                                          ,"",en
+QB20-6,For business law                                                         ,1,For business law                                                         ,"",en
+QB21-9,For government antitrust law                                             ,1,For government antitrust law                                             ,"",en
+QB23-5,For bankruptcy law                                                       ,1,For bankruptcy law                                                       ,"",en
+QB24-8,For partnership law                                                      ,1,For partnership law                                                      ,"",en
+QB25-1,For patent law                                                           ,1,For patent law                                                           ,"",en
+QB26-4,For trademark law                                                        ,1,For trademark law                                                        ,"",en
+QB27-7,For copyright law                                                        ,1,For copyright law                                                        ,"",en
+QB28-0,For liquidation law                                                      ,1,For liquidation law                                                      ,"",en
+QB29-3,For real estate law                                                      ,1,For real estate law                                                      ,"",en
+QB30-6,For mergers law                                                          ,1,For mergers law                                                          ,"",en
+QB31-9,For acquisitions law                                                     ,1,For acquisitions law                                                     ,"",en
+QB32-2,For debt collection law                                                  ,1,For debt collection law                                                  ,"",en
+QB33-5,For healthcare claim law                                                 ,1,For healthcare claim law                                                 ,"",en
+QB34-8,For personal injury law                                                  ,1,For personal injury law                                                  ,"",en
+QB35-1,For property law                                                         ,1,For property law                                                         ,"",en
+QB36-4,For employee benefits law                                                ,1,For employee benefits law                                                ,"",en
+QB37-7,For labour disputes law                                                  ,1,For labour disputes law                                                  ,"",en
+QB38-0,For family law                                                           ,1,For family law                                                           ,"",en
+QB39-3,For adoption law                                                         ,1,For adoption law                                                         ,"",en
+QB40-6,For naturalization law                                                   ,1,For naturalization law                                                   ,"",en
+QB41-9,For guardianship law                                                     ,1,For guardianship law                                                     ,"",en
+QB42-2,For custody law                                                          ,1,For custody law                                                          ,"",en
+QB43-5,On land                                                                  ,1,On land                                                                  ,"",en
+QB44-8,On water                                                                 ,1,On water                                                                 ,"",en
+QB45-1,On fisheries                                                             ,1,On fisheries                                                             ,"",en
+QB46-4,On plants                                                                ,1,On plants                                                                ,"",en
+QB47-7,On animals                                                               ,1,On animals                                                               ,"",en
+QB48-0,On food                                                                  ,1,On food                                                                  ,"",en
+QB49-3,On forestry                                                              ,1,On forestry                                                              ,"",en
+QB50-6,On wildlife                                                              ,1,On wildlife                                                              ,"",en
+QB51-9,On national park                                                         ,1,On national park                                                         ,"",en
+QB52-2,On environment                                                           ,1,On environment                                                           ,"",en
+QB53-5,On biodiversity                                                          ,1,On biodiversity                                                          ,"",en
+QB54-8,On automotive sector                                                     ,1,On automotive sector                                                     ,"",en
+QB55-1,On aeronautics sector                                                    ,1,On aeronautics sector                                                    ,"",en
+QB56-4,On space industry sector                                                 ,1,On space industry sector                                                 ,"",en
+QB57-7,On political issues                                                      ,1,On political issues                                                      ,"",en
+RA01-9,In pharmaceutics                                                         ,1,In pharmaceutics                                                         ,"",en
+RA02-2,In bacteriology                                                          ,1,In bacteriology                                                          ,"",en
+RA03-5,In biomedical                                                            ,1,In biomedical                                                            ,"",en
+RA04-8,In cardiology                                                            ,1,In cardiology                                                            ,"",en
+RA05-1,In anatomy                                                               ,1,In anatomy                                                               ,"",en
+RA06-4,In pathology                                                             ,1,In pathology                                                             ,"",en
+RA07-7,In embryology                                                            ,1,In embryology                                                            ,"",en
+RA08-0,In epidemiology                                                          ,1,In epidemiology                                                          ,"",en
+RA09-3,In genetics                                                              ,1,In genetics                                                              ,"",en
+RA10-6,In immunology                                                            ,1,In immunology                                                            ,"",en
+RA11-9,In ophthalmology                                                         ,1,In ophthalmology                                                         ,"",en
+RA12-2,In physiology                                                            ,1,In physiology                                                            ,"",en
+RA13-5,In toxicology                                                            ,1,In toxicology                                                            ,"",en
+RA14-8,In neurology                                                             ,1,In neurology                                                             ,"",en
+RA15-1,In urology                                                               ,1,In urology                                                               ,"",en
+RA16-4,In dermatology                                                           ,1,In dermatology                                                           ,"",en
+RB01-0,For micro-economics                                                      ,1,For micro-economics                                                      ,"",en
+RB02-3,For macro-economics                                                      ,1,For macro-economics                                                      ,"",en
+RB03-6,For industrial economics                                                 ,1,For industrial economics                                                 ,"",en
+RB04-9,For competition economics                                                ,1,For competition economics                                                ,"",en
+RB05-2,For regulatory economics                                                 ,1,For regulatory economics                                                 ,"",en
+RB06-5,For trade economics                                                      ,1,For trade economics                                                      ,"",en
+RB07-8,For international economics                                              ,1,For international economics                                              ,"",en
+RB08-1,For national economics                                                   ,1,For national economics                                                   ,"",en
+RB09-4,For regional economics                                                   ,1,For regional economics                                                   ,"",en
+RB10-7,For geographical economics                                               ,1,For geographical economics                                               ,"",en
+RB11-0,For banking economics                                                    ,1,For banking economics                                                    ,"",en
+RB12-3,For insurance economics                                                  ,1,For insurance economics                                                  ,"",en
+RB13-6,For econometrics                                                         ,1,For econometrics                                                         ,"",en
+RB14-9,For monetary economics                                                   ,1,For monetary economics                                                   ,"",en
+RB15-2,For foreign exchange economics                                           ,1,For foreign exchange economics                                           ,"",en
+RB16-5,For innovation economics                                                 ,1,For innovation economics                                                 ,"",en
+RB17-8,For economic forecasting                                                 ,1,For economic forecasting                                                 ,"",en
+RB18-1,For public economics                                                     ,1,For public economics                                                     ,"",en
+RB19-4,For private economics                                                    ,1,For private economics                                                    ,"",en
+RB20-7,For market economics                                                     ,1,For market economics                                                     ,"",en
+RB21-0,For planned economics                                                    ,1,For planned economics                                                    ,"",en
+RC01-1,In aerospace technology                                                  ,1,In aerospace technology                                                  ,"",en
+RC02-4,In space technology                                                      ,1,In space technology                                                      ,"",en
+RC03-7,In computer technology                                                   ,1,In computer technology                                                   ,"",en
+RC04-0,In communication technology                                              ,1,In communication technology                                              ,"",en
+RC05-3,In information technology                                                ,1,In information technology                                                ,"",en
+RC06-6,In automation technology                                                 ,1,In automation technology                                                 ,"",en
+RC07-9,In fuel technology                                                       ,1,In fuel technology                                                       ,"",en
+RC08-2,In nuclear technology                                                    ,1,In nuclear technology                                                    ,"",en
+RD01-2,In mathematics                                                           ,1,In mathematics                                                           ,"",en
+RD02-5,In natural sciences                                                      ,1,In natural sciences                                                      ,"",en
+RD03-8,In biology                                                               ,1,In biology                                                               ,"",en
+RD04-1,In chemistry                                                             ,1,In chemistry                                                             ,"",en
+RD05-4,In physics                                                               ,1,In physics                                                               ,"",en
+RD06-7,In earth sciences                                                        ,1,In earth sciences                                                        ,"",en
+RD07-0,In social sciences                                                       ,1,In social sciences                                                       ,"",en
+RD08-3,In behavioural sciences                                                  ,1,In behavioural sciences                                                  ,"",en
+RD09-6,In applied sciences                                                      ,1,In applied sciences                                                      ,"",en
+RD10-9,In health sciences                                                       ,1,In health sciences                                                       ,"",en
+RD11-2,For interdisciplinary fields                                             ,1,For interdisciplinary fields                                             ,"",en
+SA01-0,For banking                                                              ,1,For banking                                                              ,"",en
+SA02-3,For foreign exchange                                                     ,1,For foreign exchange                                                     ,"",en
+SA03-6,For loan                                                                 ,1,For loan                                                                 ,"",en
+SA04-9,For credit                                                               ,1,For credit                                                               ,"",en
+SB01-1,For insurance                                                            ,1,For insurance                                                            ,"",en
+SB02-3,For reinsurance                                                          ,1,For reinsurance                                                          ,"",en
+SC01-2,For pension                                                              ,1,For pension                                                              ,"",en
+TA02-5,For address books                                                        ,1,For address books                                                        ,"",en
+TA03-8,For exercise books                                                       ,1,For exercise books                                                       ,"",en
+TA04-1,For diaries                                                              ,1,For diaries                                                              ,"",en
+TA05-4,For personal organisers                                                  ,1,For personal organisers                                                  ,"",en
+TA06-7,For notebooks                                                            ,1,For notebooks                                                            ,"",en
+TA07-0,For booklets                                                             ,1,For booklets                                                             ,"",en
+TA08-3,For memorandum pads                                                      ,1,For memorandum pads                                                      ,"",en
+TA09-6,For letter pads                                                          ,1,For letter pads                                                          ,"",en
+TA10-9,For blotting pads                                                        ,1,For blotting pads                                                        ,"",en
+TA11-2,For trade-advertising material                                           ,1,For trade-advertising material                                           ,"",en
+TA12-5,For commercial catalogues                                                ,1,For commercial catalogues                                                ,"",en
+TA13-8,For registers                                                            ,1,For registers                                                            ,"",en
+TA14-1,For account books                                                        ,1,For account books                                                        ,"",en
+TA15-4,For order books                                                          ,1,For order books                                                          ,"",en
+TA16-7,For receipt books                                                        ,1,For receipt books                                                        ,"",en
+TA17-0,For stationery                                                           ,1,For stationery                                                           ,"",en
+TA18-3,For envelopes                                                            ,1,For envelopes                                                            ,"",en
+TA19-6,For notepaper                                                            ,1,For notepaper                                                            ,"",en
+TA20-9,For interleaved carbon sets                                              ,1,For interleaved carbon sets                                              ,"",en
+TA21-2,For albums for samples or collections                                    ,1,For albums for samples or collections                                    ,"",en
+TA22-5,For binders folders or file covers                                       ,1,For binders folders or file covers                                       ,"",en
+TA23-8,For business cards                                                       ,1,For business cards                                                       ,"",en
+TA24-1,For security printed matter                                              ,1,For security printed matter                                              ,"",en
+TA25-4,For permits                                                              ,1,For permits                                                              ,"",en
+TA26-7,For stock certificates                                                   ,1,For stock certificates                                                   ,"",en
+TA27-0,For cheque forms                                                         ,1,For cheque forms                                                         ,"",en
+TA28-3,For new stamps                                                           ,1,For new stamps                                                           ,"",en
+TA29-6,For stamp-impressed paper                                                ,1,For stamp-impressed paper                                                ,"",en
+TA30-9,For luncheon vouchers                                                    ,1,For luncheon vouchers                                                    ,"",en
+TA31-2,For forms                                                                ,1,For forms                                                                ,"",en
+TA32-5,For manifold business forms                                              ,1,For manifold business forms                                              ,"",en
+TA33-8,For continuous forms                                                     ,1,For continuous forms                                                     ,"",en
+TA34-1,For tickets                                                              ,1,For tickets                                                              ,"",en
+TA35-4,For entrance tickets                                                     ,1,For entrance tickets                                                     ,"",en
+TA36-7,For transport tickets                                                    ,1,For transport tickets                                                    ,"",en
+TA37-0,For tickets with magnetic strips                                         ,1,For tickets with magnetic strips                                         ,"",en
+TA38-3,For calendars                                                            ,1,For calendars                                                            ,"",en
+TA39-6,For timetables                                                           ,1,For timetables                                                           ,"",en
+TA40-9,For newspaper                                                            ,1,For newspaper                                                            ,"",en
+TA41-2,For posters                                                              ,1,For posters                                                              ,"",en
+TA42-5,For industrial flexography                                               ,1,For industrial flexography                                               ,"",en
+TA43-8,For industrial rotogravure                                               ,1,For industrial rotogravure                                               ,"",en
+TA44-1,For industrial screen                                                    ,1,For industrial screen                                                    ,"",en
+TA45-4,For industrial offset                                                    ,1,For industrial offset                                                    ,"",en
+TA46-7,For industrial thermal transfer                                          ,1,For industrial thermal transfer                                          ,"",en
+TA47-0,Of Braille books                                                         ,1,Of Braille books                                                         ,"",en
+TA48-3,Of paperboard                                                            ,1,Of paperboard                                                            ,"",en
+UA01-3,Food products                                                            ,1,Food products                                                            ,"",en
+UA02-6,Beverages                                                                ,1,Beverages                                                                ,"",en
+UB01-4,Furniture                                                                ,1,Furniture                                                                ,"",en
+UB02-7,Clothing                                                                 ,1,Clothing                                                                 ,"",en
+UB03-0,Construction materials                                                   ,1,Construction materials                                                   ,"",en
+UB04-3,Printed matter                                                           ,1,Printed matter                                                           ,"",en
+UB05-6,Office items                                                             ,1,Office items                                                             ,"",en
+UB06-9,Horticultural products                                                   ,1,Horticultural products                                                   ,"",en
+UB07-2,Medical products                                                         ,1,Medical products                                                         ,"",en
+UB08-5,Surplus inventory                                                        ,1,Surplus inventory                                                        ,"",en

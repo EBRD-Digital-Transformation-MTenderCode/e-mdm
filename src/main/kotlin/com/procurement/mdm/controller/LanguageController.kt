@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.*
 class LanguageController(private val languageService: LanguageService) {
 
     @GetMapping
-    fun getLanguages(@RequestParam(required = false) internal: Boolean = false): ResponseEntity<ResponseDto> {
+    fun getLanguages(): ResponseEntity<ResponseDto> {
         return ResponseEntity(
-                languageService.getLanguages(internal),
+                languageService.getLanguages(),
                 HttpStatus.OK)
     }
 }

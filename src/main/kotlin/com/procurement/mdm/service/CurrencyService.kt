@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 
 interface CurrencyService {
 
-    fun getCurrencies(languageCode: String, countryCode: String, internal: Boolean): ResponseDto
+    fun getCurrencies(languageCode: String, countryCode: String): ResponseDto
 
 }
 
@@ -16,17 +16,15 @@ interface CurrencyService {
 class CurrencyServiceImpl(private val currencyRepository: CurrencyRepository,
                           private val validationService: ValidationService) : CurrencyService {
 
-    override fun getCurrencies(languageCode: String, countryCode: String, internal: Boolean): ResponseDto {
-        validationService.checkLanguage(languageCode = languageCode, internal = internal)
+    override fun getCurrencies(languageCode: String, countryCode: String): ResponseDto {
+        validationService.checkLanguage(languageCode = languageCode)
         val country = validationService.getCountry(
                 languageCode = languageCode,
-                countryCode = countryCode,
-                internal = internal)
+                countryCode = countryCode)
         val entities = currencyRepository.findByCurrencyKeyLanguageCodeAndCountries(languageCode, country)
         val defaultValue = entities.asSequence().firstOrNull { it.default }?.currencyKey?.code
         return getResponseDto(
                 default = defaultValue,
-                items = entities.getItems(),
-                internal = internal)
+                items = entities.getItems())
     }
 }

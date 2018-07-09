@@ -5,42 +5,33 @@ import java.io.Serializable
 import javax.persistence.*
 
 @Entity
-@Table(name = "cpv")
-data class Cpv(
+@Table(name = "procurement_method_details")
+data class Pmd(
 
         @EmbeddedId
-        val cpvKey: CpvKey? = null,
+        val pmdKey: PmdKey? = null,
 
         @Column(name = "name")
         val name: String = "",
 
-        @Column(name = "children")
-        val children: Int = 0,
-
-        @Column(name = "parent")
-        val parent: String = "",
-
         @Column(name = "description")
-        val description: String = "",
-
-        @Column(name = "procurement_category")
-        val mainProcurementCategory: String = ""
+        val description: String = ""
 )
 
 @Embeddable
-class CpvKey : Serializable {
+class PmdKey : Serializable {
 
     @Column(name = "code", length = 255)
     val code: String? = null
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(foreignKey = ForeignKey(name = "FK_cpv_language"))
+    @JoinColumn(foreignKey = ForeignKey(name = "FK_procurement_method_details_language"))
     private val language: Language? = null
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
-        other as CpvKey
+        other as PmdKey
         if (code != other.code) return false
         if (language != other.language) return false
         return true
@@ -53,7 +44,7 @@ class CpvKey : Serializable {
     }
 }
 
-data class CpvDto(
+data class PmdDto(
 
         @JsonProperty("code")
         val code: String?,
@@ -62,5 +53,5 @@ data class CpvDto(
         val name: String?
 )
 
-fun List<Cpv>.getItems(): List<CpvDto> =
-        this.asSequence().map { CpvDto(code = it.cpvKey?.code, name = it.name) }.toList()
+fun List<Pmd>.getItems(): List<PmdDto> =
+        this.asSequence().map { PmdDto(code = it.pmdKey?.code, name = it.name) }.toList()

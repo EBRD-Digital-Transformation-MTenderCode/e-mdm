@@ -13,11 +13,10 @@ class CountryController(private val countryService: CountryService) {
 
     @GetMapping
     fun getCountries(@RequestParam lang: String,
-                     @RequestParam(required = false) internal: Boolean = false): ResponseEntity<ResponseDto> {
+                     @RequestParam(required = false) code: String?): ResponseEntity<ResponseDto> {
         return ResponseEntity(
                 countryService.getCountriesByLanguage(
-                        languageCode = lang.toLowerCase(),
-                        internal = internal),
+                        languageCode = lang.toLowerCase()),
                 HttpStatus.OK)
     }
 
