@@ -38,8 +38,7 @@ enum class CommandType(val value: String) {
 }
 
 enum class ApiVersion(val value: String) {
-    V_0_1("0.1"),
-    V_0_2("0.2");
+    V_0_1("0.1");
 
     @JsonValue
     fun value(): String {
