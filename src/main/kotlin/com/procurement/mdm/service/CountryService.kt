@@ -30,6 +30,5 @@ class CountryServiceImpl(private val countryRepository: CountryRepository,
             val defaultValue = entities.asSequence().firstOrNull { it.default }?.countryKey?.code
             getResponseDto(default = defaultValue, items = entities.getItems())
         }
-
     }
 }
