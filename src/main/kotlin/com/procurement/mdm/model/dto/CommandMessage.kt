@@ -7,7 +7,7 @@ import java.util.*
 
 data class CommandMessage @JsonCreator constructor(
 
-        val id: UUID,
+        val id: String,
 
         val command: CommandType,
 

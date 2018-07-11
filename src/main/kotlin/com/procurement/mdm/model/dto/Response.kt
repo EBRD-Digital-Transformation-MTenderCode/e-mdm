@@ -12,7 +12,7 @@ data class ResponseDto(
 
         val data: Any?,
 
-        val id: UUID?
+        val id: String?
 )
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -31,7 +31,7 @@ data class ResponseErrorDto(
         val description: String?
 )
 
-fun getResponseDto(default: Any? = null, items: Any?, id: UUID? = null): ResponseDto {
+fun getResponseDto(default: Any? = null, items: Any?, id: String? = null): ResponseDto {
     return ResponseDto(
             errors = null,
             data = ResponseDataDto(
@@ -40,7 +40,7 @@ fun getResponseDto(default: Any? = null, items: Any?, id: UUID? = null): Respons
             id = id)
 }
 
-fun getResponseDto(data: Any?, id: UUID? = null): ResponseDto {
+fun getResponseDto(data: Any?, id: String? = null): ResponseDto {
     return ResponseDto(
             errors = null,
             data = data,
@@ -57,7 +57,7 @@ fun getExceptionResponseDto(exception: Exception): ResponseDto {
             id = null)
 }
 
-fun getInErrorResponseDto(error: InErrorException, id: UUID? = null): ResponseDto {
+fun getInErrorResponseDto(error: InErrorException, id: String? = null): ResponseDto {
     return ResponseDto(
             errors = listOf(ResponseErrorDto(
                     code = "400.20." + error.code,

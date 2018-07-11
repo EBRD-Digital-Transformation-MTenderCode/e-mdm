@@ -1,8 +1,6 @@
 package com.procurement.mdm.exception
 
-import java.util.*
-
-data class InErrorException(private val error: ErrorType, var id: UUID? = null) : RuntimeException() {
+data class InErrorException(private val error: ErrorType, var id: String? = null) : RuntimeException() {
 
     val code: String = error.code
 
