@@ -23,7 +23,7 @@ data class Context @JsonCreator constructor(
         val language: String
 )
 
-enum class CommandType(val value: String) {
+enum class CommandType(private val value: String) {
     TENDER_CPV("tenderCPV"),
     CHECK_CURRENCY("checkCurrency");
 
@@ -37,7 +37,7 @@ enum class CommandType(val value: String) {
     }
 }
 
-enum class ApiVersion(val value: String) {
+enum class ApiVersion(private val value: String) {
     V_0_0_1("0.0.1");
 
     @JsonValue
