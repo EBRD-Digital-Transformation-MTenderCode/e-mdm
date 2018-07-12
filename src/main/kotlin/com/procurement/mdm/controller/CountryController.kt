@@ -5,6 +5,7 @@ import com.procurement.mdm.service.CountryService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import java.net.URLDecoder
 
 @RestController
 @CrossOrigin(maxAge = 3600)
@@ -24,8 +25,7 @@ class CountryController(private val countryService: CountryService) {
         return ResponseEntity(
                 countryService.getCountries(
                         languageCode = lang.toLowerCase(),
-                        codeOrName = codeOrName),
+                        codeOrName =  URLDecoder.decode(codeOrName, "UTF-8").toUpperCase()),
                 HttpStatus.OK)
     }
-
 }
