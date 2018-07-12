@@ -20,7 +20,6 @@ class BudgetDataServiceImpl(private val validationService: ValidationService,
                             private val currencyRepository: CurrencyRepository) : BudgetDataService {
 
     override fun checkCurrency(cm: CommandMessage): ResponseDto {
-        validationService.checkLanguage(languageCode = cm.context.language, internal = true)
         val country = validationService.getCountry(languageCode = cm.context.language, countryCode = cm.context.country)
         val entities = currencyRepository.findByCurrencyKeyLanguageCodeAndCountries(cm.context.language, country)
         val currencyCode = getCurrencyCode(cm)

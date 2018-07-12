@@ -1,31 +1,7 @@
-{
-  "id": "d00d041c-78c6-11e8-adc0-fa7ae02bbebc",
-  "command": "tenderCPV",
-  "context": {
-    "operationId": "d00d041c-78c6-11e8-adc0-fa7ae02bbebc",
-    "requestId": "e6543990-84fa-11e8-ba90-d34e0958b31b",
-    "cpid": null,
-    "ocid": null,
-    "stage": "EI",
-    "prevStage": null,
-    "processType": "ei",
-    "operationType": "createEI",
-    "phase": null,
-    "owner": "445f6851-c908-407d-9b45-14b92f3e964b",
-    "country": "TEST",
-    "language": "en",
-    "pmd": null,
-    "token": null,
-    "access": null,
-    "startDate": "2018-07-11T11:09:37Z",
-    "endDate": null
-  },
-  "data": {
-    "classification": {
-      "id": "79200000-6",
-      "scheme": "CPV",
-      "description": "description"
-    }
-  },
-  "version": "0.0.1"
-}
+select currency.code as cod, currency.language_code as language, currency_.def as def, currency.description as descript, currency.name as name
+from currency currency
+left outer join currency_country countries
+on currency_.code=countries_.currency_code and currency_.language_code=countries.currency_language_code
+left outer join country country2_
+on countries1_.country_code=country2_.code and countries1_.country_language_code=country2_.language_code
+where currency0_.language_code=? and (country2_.code, country2_.language_code)=(?, ?)
