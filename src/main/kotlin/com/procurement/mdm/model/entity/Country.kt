@@ -17,6 +17,9 @@ data class Country(
         @Column(name = "description")
         val description: String = "",
 
+        @Column(name = "iso_code")
+        val isoCode: String = "",
+
         @Column(name = "def")
         val default: Boolean = false,
 
@@ -27,7 +30,7 @@ data class Country(
 @Embeddable
 class CountryKey : Serializable {
 
-    @Column(name = "code", length = 2)
+    @Column(name = "code")
     val code: String? = null
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
