@@ -17,4 +17,7 @@ interface CountryRepository : JpaRepository<Country, String> {
     @Transactional(readOnly = true)
     fun findByCountryKeyLanguageCodeAndName(languageCode: String, name: String): Country?
 
+    @Transactional(readOnly = true)
+    fun findOneByName(name: String): Country?
+
 }

@@ -20,11 +20,11 @@ class CountryController(private val countryService: CountryService) {
     }
 
     @GetMapping("/{codeOrName}")
-    fun getCountries(@RequestParam lang: String,
+    fun getCountries(@RequestParam(value = "lang", required = false) lang: String?,
                      @PathVariable("codeOrName") codeOrName: String?): ResponseEntity<ResponseDto> {
         return ResponseEntity(
                 countryService.getCountries(
-                        languageCode = lang.toLowerCase(),
+                        languageCode = lang?.toLowerCase(),
                         codeOrName =  URLDecoder.decode(codeOrName, "UTF-8").toUpperCase()),
                 HttpStatus.OK)
     }
