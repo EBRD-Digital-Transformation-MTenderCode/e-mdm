@@ -4,13 +4,14 @@ import com.procurement.mdm.exception.ErrorType
 import com.procurement.mdm.exception.ExErrorException
 import com.procurement.mdm.exception.InErrorException
 import com.procurement.mdm.model.entity.Country
+import com.procurement.mdm.model.entity.Language
 import com.procurement.mdm.model.entity.UnitClass
 import com.procurement.mdm.repository.*
 import org.springframework.stereotype.Service
 
 interface ValidationService {
 
-    fun checkLanguage(languageCode: String, internal: Boolean = false)
+    fun getLanguage(languageCode: String, internal: Boolean = false): Language
 
     fun getCountry(languageCode: String, countryCode: String, internal: Boolean = false): Country
 
@@ -29,8 +30,8 @@ class ValidationServiceImpl(private val languageRepository: LanguageRepository,
                             private val cpvRepository: CpvRepository
 ) : ValidationService {
 
-    override fun checkLanguage(languageCode: String, internal: Boolean) {
-        languageRepository.findByCode(code = languageCode)
+    override fun getLanguage(languageCode: String, internal: Boolean): Language {
+        return languageRepository.findByCode(code = languageCode)
                 ?: throw errorException(ErrorType.LANG_UNKNOWN, internal)
     }
 

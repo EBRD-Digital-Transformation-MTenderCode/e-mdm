@@ -9,6 +9,9 @@ enum class ErrorType constructor(val code: String, val message: String) {
     CPVS_CODE_UNKNOWN("00.05", "CPVs code not found."),
     INVALID_DATA("00.06", "Invalid data."),
     TRANSLATION_UNKNOWN("00.07", "Translation for current language not found."),
-    CURRENCY_UNKNOWN("00.04", "Currency not found."),
-    COUNTRY_NOT_FOUND("00.05", "Country not found.");
+    CURRENCY_UNKNOWN("00.08", "Currency not found."),
+    COUNTRY_NOT_FOUND("00.09", "Country not found."),
+    INVALID_JSON_TYPE("01.01", "Invalid json type."),
+    INVALID_ITEMS("01.02", "Invalid items code."),
+    INVALID_COMMON_CPV("01.03", "Invalid common class code.");
 }

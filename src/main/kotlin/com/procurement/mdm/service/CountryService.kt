@@ -26,7 +26,7 @@ class CountryServiceImpl(private val countryRepository: CountryRepository,
                     getResponseDto(items = listOf(entity).getItems())
                 }
                 else -> {
-                    validationService.checkLanguage(languageCode)
+                    validationService.getLanguage(languageCode)
                     val entity = countryRepository.findByCountryKeyLanguageCodeAndCountryKeyCode(languageCode = languageCode, code = codeOrName)
                             ?: countryRepository.findByCountryKeyLanguageCodeAndName(languageCode = languageCode, name = codeOrName)
                             ?: throw ExErrorException(ErrorType.COUNTRY_UNKNOWN)
@@ -35,7 +35,7 @@ class CountryServiceImpl(private val countryRepository: CountryRepository,
             }
         } else {
             languageCode?:throw ExErrorException(ErrorType.LANG_UNKNOWN)
-            validationService.checkLanguage(languageCode)
+            validationService.getLanguage(languageCode)
             val entities = countryRepository.findByCountryKeyLanguageCode(languageCode)
             val defaultValue = entities.asSequence().firstOrNull { it.default }?.countryKey?.code
             getResponseDto(default = defaultValue, items = entities.getItems())

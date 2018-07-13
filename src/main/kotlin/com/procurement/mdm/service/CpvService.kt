@@ -16,7 +16,7 @@ class CpvServiceImpl(private val cpvRepository: CpvRepository,
                      private val validationService: ValidationService) : CpvService {
 
     override fun getCpv(languageCode: String, parentCode: String?): ResponseDto {
-        validationService.checkLanguage(languageCode)
+        validationService.getLanguage(languageCode)
         val entities = when (parentCode) {
             null -> cpvRepository.findByParentAndCpvKeyLanguageCode(languageCode = languageCode)
             else -> {

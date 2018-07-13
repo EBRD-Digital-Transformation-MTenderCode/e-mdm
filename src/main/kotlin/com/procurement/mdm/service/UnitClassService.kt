@@ -17,7 +17,7 @@ class UnitClassServiceImpl(private val unitClassRepository: UnitClassRepository,
                            private val validationService: ValidationService) : UnitClassService {
 
     override fun getUnitClassesByLanguage(languageCode: String): ResponseDto {
-        validationService.checkLanguage(languageCode)
+        validationService.getLanguage(languageCode)
         val entities = unitClassRepository.findByUnitClassKeyLanguageCode(languageCode)
         return getResponseDto(items = entities.getItems())
     }

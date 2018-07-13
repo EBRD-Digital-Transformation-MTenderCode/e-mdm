@@ -16,7 +16,7 @@ class UnitServiceImpl(private val unitRepository: UnitRepository,
                       private val validationService: ValidationService) : UnitService {
 
     override fun getUnit(languageCode: String, unitClassCode: String): ResponseDto {
-        validationService.checkLanguage(languageCode = languageCode)
+        validationService.getLanguage(languageCode = languageCode)
         val unitClass = validationService.getUnitClass(
                 languageCode = languageCode,
                 code = unitClassCode)

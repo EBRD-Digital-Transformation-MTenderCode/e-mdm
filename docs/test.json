@@ -1,7 +1,47 @@
-select currency.code as cod, currency.language_code as language, currency_.def as def, currency.description as descript, currency.name as name
-from currency currency
-left outer join currency_country countries
-on currency_.code=countries_.currency_code and currency_.language_code=countries.currency_language_code
-left outer join country country2_
-on countries1_.country_code=country2_.code and countries1_.country_language_code=country2_.language_code
-where currency0_.language_code=? and (country2_.code, country2_.language_code)=(?, ?)
+{
+  "id": "123",
+  "command": "tenderInfo",
+  "context": {
+    "country": "MD",
+    "language": "en",
+    "pmd": "RT"
+  },
+  "data": {
+    "tender": {
+      "items": [
+        {
+          "id": "8da82fb0-2eb8-11e8-907c-df4915b32957",
+          "description": "A description of the goods, services to be provided.",
+          "classification": {
+            "scheme": "CPV",
+            "id": "15540000-5",
+            "description": "Cheese products"
+          },
+          "additionalClassifications": [
+            {
+              "scheme": "CPVS",
+              "id": "CPVs-id-12341234",
+              "description": "A textual description or title for the code."
+            }
+          ],
+          "quantity": 10.0,
+          "unit": {
+            "name": "kg",
+            "id": "0971"
+          },
+          "relatedLot": "8da82fb1-2eb8-11e8-907c-df4915b32957"
+        }
+      ],
+      "classification": {
+        "scheme": "CPV",
+        "id": "15540000-5",
+        "description": "Cheese products"
+      },
+      "mainProcurementCategory": "goods",
+      "submissionMethodRationale": [],
+      "submissionMethodDetails": "",
+      "procurementMethodDetails": ""
+    }
+  },
+  "version": "0.0.1"
+}

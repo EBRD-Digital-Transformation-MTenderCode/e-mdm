@@ -17,7 +17,7 @@ class CurrencyServiceImpl(private val currencyRepository: CurrencyRepository,
                           private val validationService: ValidationService) : CurrencyService {
 
     override fun getCurrencies(languageCode: String, countryCode: String): ResponseDto {
-        validationService.checkLanguage(languageCode = languageCode)
+        validationService.getLanguage(languageCode = languageCode)
         val country = validationService.getCountry(
                 languageCode = languageCode,
                 countryCode = countryCode)

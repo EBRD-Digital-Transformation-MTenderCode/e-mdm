@@ -13,4 +13,7 @@ interface PmdRepository : JpaRepository<Pmd, PmdKey> {
 
     @Transactional(readOnly = true)
     fun findByPmdKeyCountry(country: Country): List<Pmd>
+
+    @Transactional(readOnly = true)
+    fun findByPmdKeyCodeAndPmdKeyCountry(code: String, country: Country): Pmd?
 }

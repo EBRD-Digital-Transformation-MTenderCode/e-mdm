@@ -16,7 +16,7 @@ class DocumentTypeServiceImpl(private val documentTypeRepository: DocumentTypeRe
                               private val validationService: ValidationService) : DocumentTypeService {
 
     override fun getDocumentType(languageCode: String, entityKindCode: String): ResponseDto {
-        validationService.checkLanguage(languageCode = languageCode)
+        validationService.getLanguage(languageCode = languageCode)
         validationService.checkEntityKind(code = entityKindCode)
         val entities = documentTypeRepository.findByEntityKindsCodeAndDtKeyLanguageCode(
                 entityKindCode = entityKindCode,

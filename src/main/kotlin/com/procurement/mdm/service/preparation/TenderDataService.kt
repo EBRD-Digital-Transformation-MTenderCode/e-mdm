@@ -2,8 +2,8 @@ package com.procurement.mdm.service.preparation
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.node.ObjectNode
+import com.procurement.access.model.dto.items.Scheme
 import com.procurement.mdm.exception.ErrorType
-import com.procurement.mdm.exception.ExErrorException
 import com.procurement.mdm.exception.InErrorException
 import com.procurement.mdm.model.dto.CommandMessage
 import com.procurement.mdm.model.dto.ResponseDto
@@ -23,7 +23,7 @@ class TenderDataServiceImpl(private val validationService: ValidationService,
                             private val cpvRepository: CpvRepository) : TenderDataService {
 
     override fun tenderCPV(cm: CommandMessage): ResponseDto {
-        validationService.checkLanguage(languageCode = cm.context.language, internal = true)
+        validationService.getLanguage(languageCode = cm.context.language, internal = true)
         val entity = cpvRepository.findByCpvKeyCodeAndCpvKeyLanguageCode(
                 code = getCpvCode(cm),
                 languageCode = cm.context.language)
@@ -37,17 +37,16 @@ class TenderDataServiceImpl(private val validationService: ValidationService,
         return data.get("classification").get("id").asText()
     }
 
-    fun setCpvData(cm: CommandMessage, entity: Cpv): JsonNode? {
+    private fun setCpvData(cm: CommandMessage, entity: Cpv): JsonNode? {
         val data = getData(cm)
         data.put("mainProcurementCategory", entity.mainProcurementCategory)
         val classificationNode = data.get("classification") as ObjectNode
-        classificationNode.put("scheme", "CPV")
+        classificationNode.put("scheme", Scheme.CPV.value())
         classificationNode.put("description", entity.name)
         return data
     }
 
-    fun getData(cm: CommandMessage): ObjectNode {
+    private fun getData(cm: CommandMessage): ObjectNode {
         return (cm.data as ObjectNode?) ?: throw InErrorException(ErrorType.INVALID_DATA, cm.id)
     }
 }
-
