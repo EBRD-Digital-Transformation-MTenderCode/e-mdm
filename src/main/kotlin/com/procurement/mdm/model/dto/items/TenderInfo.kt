@@ -65,11 +65,9 @@ data class Classification @JsonCreator constructor(
         @field:NotNull
         val id: String,
 
-        @field:NotNull
-        var description: String,
+        var description: String?,
 
-        @field:NotNull
-        var scheme: Scheme
+        var scheme: String?
 )
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -78,8 +76,7 @@ data class ItemUnit @JsonCreator constructor(
         @field:NotNull
         val id: String,
 
-        @field:NotNull
-        var name: String
+        var name: String?
 )
 
 enum class Scheme constructor(private val value: String) {

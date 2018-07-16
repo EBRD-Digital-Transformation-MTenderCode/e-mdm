@@ -13,21 +13,21 @@
           "id": "8da82fb0-2eb8-11e8-907c-df4915b32957",
           "description": "A description of the goods, services to be provided.",
           "classification": {
-            "scheme": "CPV",
-            "id": "09134231-5",
-            "description": "Biodiesel (B20)"
+            "scheme": "",
+            "id": "03111100-3",
+            "description": ""
           },
           "additionalClassifications": [
             {
-              "scheme": "CPVS",
-              "id": "CB43-0",
-              "description": "Bio-diesel powered"
+              "scheme": "",
+              "id": "CB32-7",
+              "description": ""
             }
           ],
           "quantity": 10.0,
           "unit": {
-            "name": "litre",
-            "id": "LTR"
+            "name": "",
+            "id": "TNE"
           },
           "relatedLot": "8da82fb1-2eb8-11e8-907c-df4915b32957"
         },
@@ -35,31 +35,31 @@
           "id": "8da82fb0-2eb8-11e8-907c-df4915b32957",
           "description": "A description of the goods, services to be provided.",
           "classification": {
-            "scheme": "CPV",
-            "id": "09134232-2",
-            "description": "Biodiesel (B100)"
+            "scheme": "",
+            "id": "03111200-4",
+            "description": ""
           },
           "additionalClassifications": [
             {
-              "scheme": "CPVS",
-              "id": "CB43",
-              "description": "Bio-diesel powered"
+              "scheme": "",
+              "id": "CB32-7",
+              "description": "Wood-fired"
             }
           ],
           "quantity": 10.0,
           "unit": {
-            "name": "litre",
-            "id": "LTR"
+            "name": "",
+            "id": "TNE"
           },
           "relatedLot": "8da82fb1-2eb8-11e8-907c-df4915b32957"
         }
       ],
       "classification": {
-        "scheme": "CPV",
-        "id": "15540000-5",
-        "description": "Cheese products"
+        "scheme": "",
+        "id": "",
+        "description": ""
       },
-      "mainProcurementCategory": "goods",
+      "mainProcurementCategory": "",
       "submissionMethodRationale": [],
       "submissionMethodDetails": "",
       "procurementMethodDetails": ""

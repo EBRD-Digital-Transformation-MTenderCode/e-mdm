@@ -68,8 +68,8 @@ class TenderInfoServiceImpl(private val validationService: ValidationService,
                     .forEach { seUnitData(it.unit, entity) }
         }
         //tender.classification
-//        val cpvEntity = cpvRepository.findByCpvKeyCodeAndCpvKeyLanguageCode(code = commonClass, languageCode = lang)
-//                ?: throw InErrorException(ErrorType.INVALID_COMMON_CPV, commonClass)
+        val cpvEntity = cpvRepository.findByCpvKeyCodeAndCpvKeyLanguageCode(code = commonClass, languageCode = lang)
+                ?: throw InErrorException(ErrorType.INVALID_COMMON_CPV, commonClass)
         val smrCode = "submissionMethodRationale"
         val smrEntity = translateRepository.findByTranslateKeyCodeAndTranslateKeyLanguageCode(
                 code = smrCode, languageCode = lang)
@@ -83,9 +83,9 @@ class TenderInfoServiceImpl(private val validationService: ValidationService,
         dto.tender.apply {
             classification = Classification(
                     id = commonClass,
-                    description = "", //cpvEntity.name,
-                    scheme = Scheme.CPV)
-            mainProcurementCategory = "" // cpvEntity.mainProcurementCategory
+                    description = cpvEntity.name,
+                    scheme = Scheme.CPV.value())
+            mainProcurementCategory = cpvEntity.mainProcurementCategory
             submissionMethodRationale = listOf(smrEntity.name)
             submissionMethodDetails = smdEntity.name
             procurementMethodDetails = pmdEntity.name
@@ -138,12 +138,12 @@ class TenderInfoServiceImpl(private val validationService: ValidationService,
     }
 
     private fun setCpvData(classification: Classification, entity: Cpv) {
-        classification.scheme = Scheme.CPV
+        classification.scheme = Scheme.CPV.value()
         classification.description = entity.name
     }
 
     private fun setCpvsData(classification: Classification, entity: Cpvs) {
-        classification.scheme = Scheme.CPVS
+        classification.scheme = Scheme.CPVS.value()
         classification.description = entity.name
     }
 
