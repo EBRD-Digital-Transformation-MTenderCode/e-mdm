@@ -18,6 +18,6 @@ class CommandController(private val commandService: CommandService) {
 
     @PostMapping
     fun execute(@RequestBody commandMessage: CommandMessage): ResponseEntity<ResponseDto> {
-        return ResponseEntity(commandService.execute(commandMessage), HttpStatus.CREATED)
+        return ResponseEntity(commandService.execute(commandMessage), HttpStatus.OK)
     }
 }
