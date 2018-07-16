@@ -20,7 +20,9 @@ class UnitServiceImpl(private val unitRepository: UnitRepository,
         val unitClass = validationService.getUnitClass(
                 languageCode = languageCode,
                 code = unitClassCode)
-        val entities = unitRepository.findByUnitKeyUnitClass(unitClass)
+        val entities = unitRepository.findByUnitClassCodeAndUnitKeyLanguageCode(
+                unitClass = unitClass.unitClassKey?.code,
+                languageCode = languageCode)
         return getResponseDto(items = entities.getItems())
     }
 }

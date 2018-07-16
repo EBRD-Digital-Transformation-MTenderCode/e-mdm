@@ -47,13 +47,13 @@ data class Item @JsonCreator constructor(
         val classification: Classification,
 
         @field:Valid
-        val additionalClassifications: HashSet<Classification>?,
+        val additionalClassifications: List<Classification>,
 
         @field:NotNull
         val quantity: BigDecimal,
 
         @field:Valid @field:NotNull
-        val unit: Unit,
+        val unit: ItemUnit,
 
         @field:NotNull
         var relatedLot: String
@@ -73,13 +73,13 @@ data class Classification @JsonCreator constructor(
 )
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-data class Unit @JsonCreator constructor(
+data class ItemUnit @JsonCreator constructor(
 
         @field:NotNull
         val id: String,
 
         @field:NotNull
-        val name: String
+        var name: String
 )
 
 enum class Scheme constructor(private val value: String) {

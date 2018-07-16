@@ -19,14 +19,16 @@ data class Cpvs(
 )
 
 @Embeddable
-class CpvsKey : Serializable {
+class CpvsKey(
 
-    @Column(name = "code", length = 255)
-    val code: String? = null
+        @Column(name = "code", length = 255)
+        val code: String? = null,
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(foreignKey = ForeignKey(name = "FK_cpvs_language"))
-    private val language: Language? = null
+        @ManyToOne(optional = false, fetch = FetchType.LAZY)
+        @JoinColumn(foreignKey = ForeignKey(name = "FK_cpvs_language"))
+        private val language: Language? = null
+
+): Serializable {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

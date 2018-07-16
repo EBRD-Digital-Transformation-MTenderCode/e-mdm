@@ -8,7 +8,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "unit")
-data class Unit(
+data class Units(
 
         @EmbeddedId
         val unitKey: UnitKey? = null,
@@ -18,34 +18,37 @@ data class Unit(
 
         @JsonIgnore
         @Column(name = "description")
-        val description: String = ""
+        val description: String = "",
+
+        @JsonIgnore
+        @Column(name = "unit_class_code")
+        val unitClassCode: String = ""
 )
 
 @Embeddable
-class UnitKey : Serializable {
+class UnitKey(
 
-    @Column(name = "code", length = 255)
-    val code: String? = null
+        @Column(name = "code", length = 255)
+        val code: String? = null,
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumns(
-            JoinColumn(name = "unit_class_code"),
-            JoinColumn(name = "unit_class_language_code"),
-            foreignKey = ForeignKey(name = "FK_unit_unit_class"))
-    private val unitClass: UnitClass? = null
+        @ManyToOne(optional = false, fetch = FetchType.LAZY)
+        @JoinColumn(foreignKey = ForeignKey(name = "FK_unit_language"))
+        private val language: Language? = null
+
+): Serializable {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
         other as UnitKey
         if (code != other.code) return false
-        if (unitClass != other.unitClass) return false
+        if (language != other.language) return false
         return true
     }
 
     override fun hashCode(): Int {
         var result = code?.hashCode() ?: 0
-        result = 31 * result + (unitClass?.hashCode() ?: 0)
+        result = 31 * result + (language?.hashCode() ?: 0)
         return result
     }
 }
@@ -59,5 +62,5 @@ data class UnitDto(
         val name: String?
 )
 
-fun List<Unit>.getItems(): List<UnitDto> =
+fun List<Units>.getItems(): List<UnitDto> =
         this.asSequence().map { UnitDto(code = it.unitKey?.code, name = it.name) }.toList()

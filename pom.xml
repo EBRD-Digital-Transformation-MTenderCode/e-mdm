@@ -80,6 +80,11 @@
             <artifactId>kotlin-annotation-processing-maven</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
+        <!--Jackson-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-kotlin</artifactId>
+        </dependency>
         <!--Swagger-->
         <dependency>
             <groupId>io.springfox</groupId>

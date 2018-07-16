@@ -14,20 +14,42 @@
           "description": "A description of the goods, services to be provided.",
           "classification": {
             "scheme": "CPV",
-            "id": "15540000-5",
-            "description": "Cheese products"
+            "id": "09134231-5",
+            "description": "Biodiesel (B20)"
           },
           "additionalClassifications": [
             {
               "scheme": "CPVS",
-              "id": "CPVs-id-12341234",
-              "description": "A textual description or title for the code."
+              "id": "CB43-0",
+              "description": "Bio-diesel powered"
             }
           ],
           "quantity": 10.0,
           "unit": {
-            "name": "kg",
-            "id": "0971"
+            "name": "litre",
+            "id": "LTR"
+          },
+          "relatedLot": "8da82fb1-2eb8-11e8-907c-df4915b32957"
+        },
+        {
+          "id": "8da82fb0-2eb8-11e8-907c-df4915b32957",
+          "description": "A description of the goods, services to be provided.",
+          "classification": {
+            "scheme": "CPV",
+            "id": "09134232-2",
+            "description": "Biodiesel (B100)"
+          },
+          "additionalClassifications": [
+            {
+              "scheme": "CPVS",
+              "id": "CB43",
+              "description": "Bio-diesel powered"
+            }
+          ],
+          "quantity": 10.0,
+          "unit": {
+            "name": "litre",
+            "id": "LTR"
           },
           "relatedLot": "8da82fb1-2eb8-11e8-907c-df4915b32957"
         }
