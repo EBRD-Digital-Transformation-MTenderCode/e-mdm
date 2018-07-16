@@ -35,7 +35,7 @@ class TenderInfoServiceImpl(private val validationService: ValidationService,
         checkItemCodes(dto.tender.items, 3)
         val commonChars = getCommonChars(dto.tender.items, 3, 7)
         val commonClass = addCheckSum(commonChars)
-//        //items cpv
+        //items cpv
         val cpvCodes = getCpvCodes(dto.tender.items)
         val cpvKeys = cpvCodes.asSequence().map { CpvKey(it, language) }.toList()
         val cpvEntities = cpvRepository.findAllById(cpvKeys)
@@ -70,6 +70,7 @@ class TenderInfoServiceImpl(private val validationService: ValidationService,
         //tender.classification
         val cpvEntity = cpvRepository.findByCpvKeyCodeAndCpvKeyLanguageCode(code = commonClass, languageCode = lang)
                 ?: throw InErrorException(ErrorType.INVALID_COMMON_CPV, commonClass)
+        //translate
         val smrCode = "submissionMethodRationale"
         val smrEntity = translateRepository.findByTranslateKeyCodeAndTranslateKeyLanguageCode(
                 code = smrCode, languageCode = lang)
@@ -80,6 +81,7 @@ class TenderInfoServiceImpl(private val validationService: ValidationService,
                 ?: throw InErrorException(ErrorType.TRANSLATION_UNKNOWN, smdCode)
         val pmdEntity = pmdRepository.findByPmdKeyCodeAndPmdKeyCountry(code = pmd, country = country)
                 ?: throw InErrorException(ErrorType.TRANSLATION_UNKNOWN, pmd)
+        //tender
         dto.tender.apply {
             classification = Classification(
                     id = commonClass,
