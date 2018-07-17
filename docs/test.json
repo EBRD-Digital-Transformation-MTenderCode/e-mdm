@@ -1,15 +1,56 @@
 {
-  "id": "10b7f0a2-08e9-4b66-a91a-6ba1df8f11ad",
-  "command": "tenderCPV",
+  "id": "e2a79837-7136-4b4b-a01e-6eaca33e4220",
+  "command": "tenderInfo",
   "context": {
+    "operationId": "e2a79837-7136-4b4b-a01e-6eaca33e4220",
+    "requestId": "ef9f2b40-89d7-11e8-b8ec-372768bc8b44",
+    "cpid": null,
+    "ocid": null,
+    "stage": "PS",
+    "prevStage": null,
+    "processType": "createCN",
+    "operationType": "createCN",
+    "phase": "TENDERPERIOD",
+    "owner": "445f6851-c908-407d-9b45-14b92f3e964b",
     "country": "MD",
     "language": "ro",
+    "pmd": "RT",
+    "token": null,
+    "access": null,
+    "startDate": "2018-07-17T15:41:56Z",
+    "endDate": "2018-09-17T13:52:00Z"
   },
   "data": {
-    "classification": {
-      "id": "79200000-6",
-      "scheme": "CPV",
-      "description": "Servicii de contabilitate, servicii de audit şi servicii fiscale"
+    "tender": {
+      "items": [
+        {
+          "id": "1",
+          "classification": {
+            "scheme": "CPV",
+            "description": "Books and albums",
+            "id": "79200000-6"
+          },
+          "additionalClassifications": [
+            {
+              "scheme": "CPVS",
+              "description": "A textual description or title for the code.",
+              "id": "AA08-2"
+            }
+          ],
+          "quantity": 12,
+          "unit": {
+            "id": "KGM",
+            "name": "kg"
+          },
+          "description": "description",
+          "relatedLot": "1"
+        }
+      ],
+      "classification": {
+        "scheme": "CPV",
+        "description": "Description",
+        "id": "79200000-6"
+      }
     }
   },
   "version": "0.0.1"

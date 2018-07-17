@@ -22,8 +22,7 @@ data class TenderInfo @JsonCreator constructor(
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class Tender @JsonCreator constructor(
 
-        @field:NotEmpty @field:NotNull
-        val items: HashSet<Item>,
+        val items: HashSet<Item>?,
 
         var classification: Classification?,
 

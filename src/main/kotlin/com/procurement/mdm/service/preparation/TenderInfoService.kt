@@ -27,77 +27,87 @@ class TenderInfoServiceImpl(private val validationService: ValidationService,
 
     override fun tenderInfo(cm: CommandMessage): ResponseDto {
         val lang = cm.context.language
-        val pmd = cm.context.pmd?: throw InErrorException(ErrorType.INVALID_PMD)
+        val pmd = cm.context.pmd ?: throw InErrorException(ErrorType.INVALID_PMD)
         val language = validationService.getLanguage(languageCode = lang, internal = true)
         val country = validationService.getCountry(languageCode = lang, countryCode = cm.context.country)
         val dto = getData(cm)
+        if (dto.tender.items != null) {
+            processItems(dto, language)
+        }
+        processTranslate(dto, country, lang, pmd)
+        return getResponseDto(data = dto, id = cm.id)
+    }
+
+    private fun processTranslate(dto: TenderInfo, country: Country, lang: String, pmd: String) {
+        dto.tender.apply {
+            submissionMethodRationale = listOf(getTranslate("submissionMethodRationale", lang))
+            submissionMethodDetails = getTranslate("submissionMethodDetails", lang)
+            procurementMethodDetails = getPmd(pmd, country)
+            eligibilityCriteria = getTranslate("eligibilityCriteria", lang)
+        }
+    }
+
+    private fun processItems(dto: TenderInfo, language: Language) {
+        val items = dto.tender.items ?: return
         //common Class
-        checkItemCodes(dto.tender.items, 3)
-        val commonChars = getCommonChars(dto.tender.items, 3, 7)
+        checkItemCodes(items, 3)
+        val commonChars = getCommonChars(items, 3, 7)
         val commonClass = addCheckSum(commonChars)
         //items cpv
-        val cpvCodes = getCpvCodes(dto.tender.items)
+        val cpvCodes = getCpvCodes(items)
         val cpvKeys = cpvCodes.asSequence().map { CpvKey(it, language) }.toList()
         val cpvEntities = cpvRepository.findAllById(cpvKeys)
         if (cpvEntities.isEmpty()) throw InErrorException(ErrorType.INVALID_CPV)
         cpvEntities.asSequence().forEach { entity ->
-            dto.tender.items.asSequence()
+            items.asSequence()
                     .filter { it.classification.id == entity.cpvKey?.code }
                     .forEach { setCpvData(it.classification, entity) }
         }
         //items cpvs
-        val cpvsCodes = getCpvsCodes(dto.tender.items)
+        val cpvsCodes = getCpvsCodes(items)
         val cpvsKeys = cpvsCodes.asSequence().map { CpvsKey(it, language) }.toList()
         val cpvsEntities = cpvsRepository.findAllById(cpvsKeys)
         if (cpvsEntities.isEmpty()) throw InErrorException(ErrorType.INVALID_CPVS)
         cpvsEntities.asSequence().forEach { entity ->
-            dto.tender.items.asSequence().forEach { item ->
+            items.asSequence().forEach { item ->
                 item.additionalClassifications.asSequence()
                         .filter { it.id == entity.cpvsKey?.code }
                         .forEach { setCpvsData(it, entity) }
             }
         }
         //items unit
-        val unitCodes = getUnitCodes(dto.tender.items)
+        val unitCodes = getUnitCodes(items)
         val unitKeys = unitCodes.asSequence().map { UnitKey(it, language) }.toList()
         val unitEntities = unitRepository.findAllById(unitKeys)
         if (unitEntities.isEmpty()) throw InErrorException(ErrorType.INVALID_UNIT)
         unitEntities.asSequence().forEach { entity ->
-            dto.tender.items.asSequence()
+            items.asSequence()
                     .filter { it.unit.id == entity.unitKey?.code }
                     .forEach { seUnitData(it.unit, entity) }
         }
         //tender.classification
-        val cpvEntity = cpvRepository.findByCpvKeyCodeAndCpvKeyLanguageCode(code = commonClass, languageCode = lang)
+        val cpvEntity = cpvRepository.findByCpvKeyCodeAndCpvKeyLanguageCode(code = commonClass, languageCode = language.code)
                 ?: throw InErrorException(ErrorType.INVALID_COMMON_CPV, commonClass)
-        //translate
-        val ecCode = "eligibilityCriteria"
-        val ecEntity = translateRepository.findByTranslateKeyCodeAndTranslateKeyLanguageCode(
-                code = ecCode, languageCode = lang)
-                ?: throw InErrorException(ErrorType.TRANSLATION_UNKNOWN, ecCode)
-        val smrCode = "submissionMethodRationale"
-        val smrEntity = translateRepository.findByTranslateKeyCodeAndTranslateKeyLanguageCode(
-                code = smrCode, languageCode = lang)
-                ?: throw InErrorException(ErrorType.TRANSLATION_UNKNOWN, smrCode)
-        val smdCode = "submissionMethodDetails"
-        val smdEntity = translateRepository.findByTranslateKeyCodeAndTranslateKeyLanguageCode(
-                code = smdCode, languageCode = lang)
-                ?: throw InErrorException(ErrorType.TRANSLATION_UNKNOWN, smdCode)
-        val pmdEntity = pmdRepository.findByPmdKeyCodeAndPmdKeyCountry(code = pmd, country = country)
-                ?: throw InErrorException(ErrorType.TRANSLATION_UNKNOWN, pmd)
-        //tender
         dto.tender.apply {
             classification = Classification(
                     id = commonClass,
                     description = cpvEntity.name,
                     scheme = Scheme.CPV.value())
             mainProcurementCategory = cpvEntity.mainProcurementCategory
-            submissionMethodRationale = listOf(smrEntity.name)
-            submissionMethodDetails = smdEntity.name
-            procurementMethodDetails = pmdEntity.name
-            eligibilityCriteria = ecEntity.name
         }
-        return getResponseDto(data = dto, id = cm.id)
+    }
+
+    private fun getTranslate(code: String, lang: String): String {
+        val entity = translateRepository.findByTranslateKeyCodeAndTranslateKeyLanguageCode(
+                code = code, languageCode = lang)
+                ?: throw InErrorException(ErrorType.TRANSLATION_UNKNOWN, code)
+        return entity.name
+    }
+
+    private fun getPmd(code: String, country: Country): String {
+        val entity = pmdRepository.findByPmdKeyCodeAndPmdKeyCountry(code = code, country = country)
+                ?: throw InErrorException(ErrorType.TRANSLATION_UNKNOWN, code)
+        return entity.name
     }
 
     private fun checkItemCodes(items: HashSet<Item>, charCount: Int) {
