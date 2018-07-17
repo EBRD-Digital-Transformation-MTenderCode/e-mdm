@@ -33,7 +33,9 @@ data class Tender @JsonCreator constructor(
 
         var submissionMethodDetails: String?,
 
-        var procurementMethodDetails: String?
+        var procurementMethodDetails: String?,
+
+        var eligibilityCriteria: String?
 )
 
 @JsonInclude(JsonInclude.Include.NON_NULL)

@@ -71,6 +71,10 @@ class TenderInfoServiceImpl(private val validationService: ValidationService,
         val cpvEntity = cpvRepository.findByCpvKeyCodeAndCpvKeyLanguageCode(code = commonClass, languageCode = lang)
                 ?: throw InErrorException(ErrorType.INVALID_COMMON_CPV, commonClass)
         //translate
+        val ecCode = "eligibilityCriteria"
+        val ecEntity = translateRepository.findByTranslateKeyCodeAndTranslateKeyLanguageCode(
+                code = ecCode, languageCode = lang)
+                ?: throw InErrorException(ErrorType.TRANSLATION_UNKNOWN, ecCode)
         val smrCode = "submissionMethodRationale"
         val smrEntity = translateRepository.findByTranslateKeyCodeAndTranslateKeyLanguageCode(
                 code = smrCode, languageCode = lang)
@@ -91,6 +95,7 @@ class TenderInfoServiceImpl(private val validationService: ValidationService,
             submissionMethodRationale = listOf(smrEntity.name)
             submissionMethodDetails = smdEntity.name
             procurementMethodDetails = pmdEntity.name
+            eligibilityCriteria = ecEntity.name
         }
         return getResponseDto(data = dto, id = cm.id)
     }
