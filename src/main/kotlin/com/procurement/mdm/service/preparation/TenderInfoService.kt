@@ -75,7 +75,7 @@ class TenderInfoServiceImpl(private val validationService: ValidationService,
         val smrEntity = translateRepository.findByTranslateKeyCodeAndTranslateKeyLanguageCode(
                 code = smrCode, languageCode = lang)
                 ?: throw InErrorException(ErrorType.TRANSLATION_UNKNOWN, smrCode)
-        val smdCode = "submissionMethodRationale"
+        val smdCode = "submissionMethodDetails"
         val smdEntity = translateRepository.findByTranslateKeyCodeAndTranslateKeyLanguageCode(
                 code = smdCode, languageCode = lang)
                 ?: throw InErrorException(ErrorType.TRANSLATION_UNKNOWN, smdCode)
