@@ -27,7 +27,7 @@ class TenderInfoServiceImpl(private val validationService: ValidationService,
 
     override fun tenderInfo(cm: CommandMessage): ResponseDto {
         val lang = cm.context.language
-        val pmd = cm.context.pmd
+        val pmd = cm.context.pmd?: throw InErrorException(ErrorType.INVALID_PMD)
         val language = validationService.getLanguage(languageCode = lang, internal = true)
         val country = validationService.getCountry(languageCode = lang, countryCode = cm.context.country)
         val dto = getData(cm)
