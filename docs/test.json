@@ -1,68 +1,15 @@
 {
-  "id": "123",
-  "command": "tenderInfo",
+  "id": "10b7f0a2-08e9-4b66-a91a-6ba1df8f11ad",
+  "command": "tenderCPV",
   "context": {
     "country": "MD",
-    "language": "en",
-    "pmd": "RT"
+    "language": "ro",
   },
   "data": {
-    "tender": {
-      "items": [
-        {
-          "id": "8da82fb0-2eb8-11e8-907c-df4915b32957",
-          "description": "A description of the goods, services to be provided.",
-          "classification": {
-            "scheme": "",
-            "id": "03111100-3",
-            "description": ""
-          },
-          "additionalClassifications": [
-            {
-              "scheme": "",
-              "id": "CB32-7",
-              "description": ""
-            }
-          ],
-          "quantity": 10.0,
-          "unit": {
-            "name": "",
-            "id": "TNE"
-          },
-          "relatedLot": "8da82fb1-2eb8-11e8-907c-df4915b32957"
-        },
-        {
-          "id": "8da82fb0-2eb8-11e8-907c-df4915b32957",
-          "description": "A description of the goods, services to be provided.",
-          "classification": {
-            "scheme": "",
-            "id": "03111200-4",
-            "description": ""
-          },
-          "additionalClassifications": [
-            {
-              "scheme": "",
-              "id": "CB32-7",
-              "description": "Wood-fired"
-            }
-          ],
-          "quantity": 10.0,
-          "unit": {
-            "name": "",
-            "id": "TNE"
-          },
-          "relatedLot": "8da82fb1-2eb8-11e8-907c-df4915b32957"
-        }
-      ],
-      "classification": {
-        "scheme": "",
-        "id": "",
-        "description": ""
-      },
-      "mainProcurementCategory": "",
-      "submissionMethodRationale": [],
-      "submissionMethodDetails": "",
-      "procurementMethodDetails": ""
+    "classification": {
+      "id": "79200000-6",
+      "scheme": "CPV",
+      "description": "Servicii de contabilitate, servicii de audit şi servicii fiscale"
     }
   },
   "version": "0.0.1"
