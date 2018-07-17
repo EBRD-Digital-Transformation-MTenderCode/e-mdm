@@ -21,7 +21,7 @@ data class CommandMessage @JsonCreator constructor(
 data class Context @JsonCreator constructor(
         val country: String,
         val language: String,
-        val pmd: String
+        val pmd: String?
 )
 
 enum class CommandType(private val value: String) {
