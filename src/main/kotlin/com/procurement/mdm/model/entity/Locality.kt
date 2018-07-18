@@ -9,7 +9,7 @@ import javax.persistence.*
 data class Locality(
 
         @EmbeddedId
-        val regionKey: RegionKey? = null,
+        val localityKey: LocalityKey? = null,
 
         @Column(name = "name")
         val name: String = "",
@@ -35,7 +35,7 @@ class LocalityKey : Serializable {
     @JoinColumns(
             JoinColumn(name = "country_code"),
             JoinColumn(name = "country_language_code"),
-            foreignKey = ForeignKey(name = "FK_region_country"))
+            foreignKey = ForeignKey(name = "FK_locality_country"))
     private val country: Country? = null
 
     override fun equals(other: Any?): Boolean {
@@ -64,4 +64,4 @@ data class LocalityDto(
 )
 
 fun List<Locality>.getItems(): List<LocalityDto> =
-        this.asSequence().map { LocalityDto(code = it.regionKey?.code, name = it.name) }.toList()
+        this.asSequence().map { LocalityDto(code = it.localityKey?.code, name = it.name) }.toList()
