@@ -2,18 +2,18 @@ package com.procurement.mdm.repository
 
 import com.procurement.mdm.model.entity.Country
 import com.procurement.mdm.model.entity.Locality
-import com.procurement.mdm.model.entity.RegistrationScheme
-import com.procurement.mdm.model.entity.RsKey
+import com.procurement.mdm.model.entity.LocalityKey
+import com.procurement.mdm.model.entity.Region
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
 
 @Repository
-interface RegistrationSchemeRepository : JpaRepository<RegistrationScheme, RsKey> {
+interface LocalityRepository : JpaRepository<Locality, LocalityKey> {
 
     @Transactional(readOnly = true)
-    fun findByRsKeyCountry(country: Country): List<RegistrationScheme>
+    fun findByLocalityKeyCountry(country: Country): List<Locality>
 
     @Transactional(readOnly = true)
-    fun findByRsKeyCodeAndRsKeyCountry(code: String, country: Country): RegistrationScheme?
+    fun findByLocalityKeyCodeAndLocalityKeyCountry(code: String, country: Country): Locality?
 }

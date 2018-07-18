@@ -1050,8 +1050,8 @@ INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('183
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('18321000-5', '18320000-8', 0, 'Brassieres', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('18322000-2', '18320000-8', 0, 'Corsets', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('18323000-9', '18320000-8', 0, 'Suspenders', 'en');
-INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('18330000-1', '18300000-2', 1, 'T-shirts and shirts', 'en');
-INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('18331000-8', '18330000-1', 0, 'T-shirts', 'en');
+INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('18330000-1', '18300000-2', 1, 'TD-shirts and shirts', 'en');
+INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('18331000-8', '18330000-1', 0, 'TD-shirts', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('18332000-5', '18330000-1', 0, 'Shirts', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('18333000-2', '18330000-1', 0, 'Polo shirts', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('18400000-3', '18000000-9', 1, 'Special clothing and accessories', 'en');
@@ -1200,7 +1200,7 @@ INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('191
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('19144000-7', '19140000-9', 0, 'Patent leather', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('19160000-5', '19100000-7', 0, 'Watch straps', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('19170000-8', '19100000-7', 0, 'Leather articles used in machinery or mechanical appliances', 'en');
-INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('19200000-8', '19000000-6', 1, 'Textile fabrics and related items', 'en');
+INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('19200000-8', '19000000-6', 1, 'Textile fabrics and related data', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('19210000-1', '19200000-8', 1, 'Woven fabrics', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('19211000-8', '19210000-1', 1, 'Synthetic woven fabrics', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('19211100-9', '19211000-8', 0, 'Mixed woven fabrics', 'en');
@@ -1208,7 +1208,7 @@ INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('192
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('19212100-6', '19212000-5', 0, 'Ticking', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('19212200-7', '19212000-5', 0, 'Denim', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('19212300-8', '19212000-5', 0, 'Canvas', 'en');
-INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('19212310-1', '19212000-5', 0, 'Canvas items', 'en');
+INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('19212310-1', '19212000-5', 0, 'Canvas data', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('19212400-9', '19212000-5', 0, 'Poplin', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('19212500-0', '19212000-5', 0, 'Webbing', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('19212510-3', '19212000-5', 0, 'Webbing straps', 'en');
@@ -1856,8 +1856,8 @@ INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('301
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('30194500-0', '30194000-5', 0, 'Lettering aids', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('30194600-1', '30194000-5', 0, 'Protractors', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('30194700-2', '30194000-5', 0, 'Templates', 'en');
-INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('30194800-3', '30194000-5', 0, 'T-squares and triangles', 'en');
-INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('30194810-6', '30194000-5', 0, 'T-squares', 'en');
+INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('30194800-3', '30194000-5', 0, 'TD-squares and triangles', 'en');
+INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('30194810-6', '30194000-5', 0, 'TD-squares', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('30194820-9', '30194000-5', 0, 'Triangles', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('30194900-4', '30194000-5', 0, 'Work surface protection covers', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('30195000-2', '30190000-7', 1, 'Boards', 'en');
@@ -1910,7 +1910,7 @@ INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('301
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('30197645-9', '30197000-6', 0, 'Card for printing', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('30198000-3', '30190000-7', 1, 'Lottery machines', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('30198100-4', '30198000-3', 0, 'Pulling machines', 'en');
-INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('30199000-0', '30190000-7', 1, 'Paper stationery and other items', 'en');
+INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('30199000-0', '30190000-7', 1, 'Paper stationery and other data', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('30199100-1', '30199000-0', 0, 'Carbon paper, self-copy paper, paper duplicator stencils and carbonless paper', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('30199110-4', '30199000-0', 0, 'Carbon paper', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('30199120-7', '30199000-0', 0, 'Self-copy paper', 'en');
@@ -3093,7 +3093,7 @@ INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('336
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('33651650-9', '33651000-8', 0, 'Typhus vaccines', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('33651660-2', '33651000-8', 0, 'Influenza vaccines', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('33651670-5', '33651000-8', 0, 'Polio vaccines', 'en');
-INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('33651680-8', '33651000-8', 0, 'Hepatitis B vaccines', 'en');
+INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('33651680-8', '33651000-8', 0, 'Hepatitis BD vaccines', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('33651690-1', '33651000-8', 0, 'Vaccines for veterinary medicine', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('33652000-5', '33650000-1', 1, 'Antineoplastic and immunomodulating agents', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('33652100-6', '33652000-5', 0, 'Antineoplastic agents', 'en');
@@ -4327,7 +4327,7 @@ INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('378
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('37822200-8', '37822000-6', 0, 'Drawing charcoal', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('37822300-9', '37822000-6', 0, 'Chalks', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('37822400-0', '37822000-6', 0, 'Pastels', 'en');
-INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('37823000-3', '37820000-2', 1, 'Greaseproof paper and other paper items', 'en');
+INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('37823000-3', '37820000-2', 1, 'Greaseproof paper and other paper data', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('37823100-4', '37823000-3', 0, 'Greaseproof paper', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('37823200-5', '37823000-3', 0, 'Tracing paper', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('37823300-6', '37823000-3', 0, 'Glassine paper', 'en');
@@ -4758,7 +4758,7 @@ INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('391
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('39192000-4', '39190000-0', 0, 'Textile wall coverings', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('39193000-1', '39190000-0', 0, 'Paper- or paperboard-based floor coverings', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('39200000-4', '39000000-2', 1, 'Furnishing', 'en');
-INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('39220000-0', '39200000-4', 1, 'Kitchen equipment, household and domestic items and catering supplies', 'en');
+INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('39220000-0', '39200000-4', 1, 'Kitchen equipment, household and domestic data and catering supplies', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('39221000-7', '39220000-0', 1, 'Kitchen equipment', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('39221120-4', '39221000-7', 0, 'Cups and glasses', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('39221121-1', '39221000-7', 0, 'Cups', 'en');
@@ -4877,7 +4877,7 @@ INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('392
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('39298600-3', '39298000-7', 0, 'Globes', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('39298700-4', '39298000-7', 0, 'Trophies', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('39298800-5', '39298000-7', 0, 'Aquariums', 'en');
-INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('39298900-6', '39298000-7', 0, 'Miscellaneous decoration items', 'en');
+INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('39298900-6', '39298000-7', 0, 'Miscellaneous decoration data', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('39298910-9', '39298000-7', 0, 'Christmas tree', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('39299000-4', '39290000-1', 1, 'Glassware', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('39299100-5', '39299000-4', 0, 'Glass ampoules', 'en');
@@ -5806,7 +5806,7 @@ INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('438
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('43830000-0', '43800000-1', 0, 'Power tools', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('43840000-3', '43800000-1', 0, 'Blacksmiths'' equipment', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44000000-0', null, 1, 'Construction structures and materials; auxiliary products to construction (except electric apparatus)', 'en');
-INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44100000-1', '44000000-0', 1, 'Construction materials and associated items', 'en');
+INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44100000-1', '44000000-0', 1, 'Construction materials and associated data', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44110000-4', '44100000-1', 1, 'Construction materials', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44111000-1', '44110000-4', 1, 'Building materials', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44111100-2', '44111000-1', 0, 'Bricks', 'en');
@@ -5894,7 +5894,7 @@ INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('441
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44142000-7', '44140000-3', 0, 'Frames', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44143000-4', '44140000-3', 0, 'Pallets', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44144000-1', '44140000-3', 0, 'Posts', 'en');
-INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44160000-9', '44100000-1', 1, 'Pipeline, piping, pipes, casing, tubing and related items', 'en');
+INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44160000-9', '44100000-1', 1, 'Pipeline, piping, pipes, casing, tubing and related data', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44161000-6', '44160000-9', 1, 'Pipelines', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44161100-7', '44161000-6', 0, 'Gas pipelines', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44161110-0', '44161000-6', 0, 'Gas-distribution network', 'en');
@@ -6024,7 +6024,7 @@ INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('442
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44212510-7', '44212000-9', 0, 'Angles', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44212520-0', '44212000-9', 0, 'Sections', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44220000-8', '44200000-2', 1, 'Builders'' joinery', 'en');
-INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44221000-5', '44220000-8', 1, 'Windows, doors and related items', 'en');
+INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44221000-5', '44220000-8', 1, 'Windows, doors and related data', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44221100-6', '44221000-5', 0, 'Windows', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44221110-9', '44221000-5', 0, 'Window frames', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44221111-6', '44221000-5', 0, 'Double-glazed units', 'en');
@@ -6080,7 +6080,7 @@ INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('443
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44332000-6', '44330000-2', 0, 'Rods (construction)', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44333000-3', '44330000-2', 0, 'Wire', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44334000-0', '44330000-2', 0, 'Profiles', 'en');
-INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44400000-4', '44000000-0', 1, 'Miscellaneous fabricated products and related items', 'en');
+INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44400000-4', '44000000-0', 1, 'Miscellaneous fabricated products and related data', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44410000-7', '44400000-4', 1, 'Articles for the bathroom and kitchen', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44411000-4', '44410000-7', 1, 'Sanitary ware', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44411100-5', '44411000-4', 0, 'Taps', 'en');
@@ -6115,7 +6115,7 @@ INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('444
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44423300-4', '44423000-1', 0, 'Goods-handling equipment', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44423330-3', '44423000-1', 0, 'Platforms for handling goods', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44423340-6', '44423000-1', 0, 'Wire-rope accessories for handling goods', 'en');
-INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44423400-5', '44423000-1', 0, 'Signs and related items', 'en');
+INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44423400-5', '44423000-1', 0, 'Signs and related data', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44423450-0', '44423000-1', 0, 'Nameplates', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44423460-3', '44423000-1', 0, 'Address plates', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('44423700-8', '44423000-1', 0, 'Manhole elements', 'en');
@@ -6715,7 +6715,7 @@ INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('452
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('45233124-4', '45233000-9', 0, 'Trunk road construction work', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('45233125-1', '45233000-9', 0, 'Road junction construction work', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('45233126-8', '45233000-9', 0, 'Grade-separated junction construction work', 'en');
-INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('45233127-5', '45233000-9', 0, 'T-junction construction work', 'en');
+INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('45233127-5', '45233000-9', 0, 'TD-junction construction work', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('45233128-2', '45233000-9', 0, 'Roundabout construction work', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('45233129-9', '45233000-9', 0, 'Crossroad construction work', 'en');
 INSERT INTO public.cpv(code, parent, children, name, language_code) VALUES ('45233130-9', '45233000-9', 0, 'Construction work for highways', 'en');

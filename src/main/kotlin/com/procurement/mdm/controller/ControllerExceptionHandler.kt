@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.ResponseStatus
 @ControllerAdvice
 class ControllerExceptionHandler {
 
-//    @ResponseBody
-//    @ResponseStatus(HttpStatus.OK)
-//    @ExceptionHandler(Exception::class)
-//    fun exception(ex: Exception) = getExceptionResponseDto(ex)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    @ExceptionHandler(Exception::class)
+    fun exception(ex: Exception) = getExceptionResponseDto(ex)
 
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)

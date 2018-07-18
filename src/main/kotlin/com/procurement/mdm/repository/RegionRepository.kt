@@ -1,6 +1,7 @@
 package com.procurement.mdm.repository
 
 import com.procurement.mdm.model.entity.Country
+import com.procurement.mdm.model.entity.Pmd
 import com.procurement.mdm.model.entity.Region
 import com.procurement.mdm.model.entity.RegionKey
 import org.springframework.data.jpa.repository.JpaRepository
@@ -12,4 +13,7 @@ interface RegionRepository : JpaRepository<Region, RegionKey> {
 
     @Transactional(readOnly = true)
     fun findByRegionKeyCountry(country: Country): List<Region>
+
+    @Transactional(readOnly = true)
+    fun findByRegionKeyCodeAndRegionKeyCountry(code: String, country: Country): Region?
 }

@@ -15,7 +15,13 @@ data class RegistrationScheme(
         val name: String = "",
 
         @Column(name = "description")
-        val description: String = ""
+        val description: String = "",
+
+        @Column(name = "scheme")
+        val scheme: String = "",
+
+        @Column(name = "uri")
+        val uri: String = ""
 )
 
 @Embeddable

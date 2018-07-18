@@ -487,7 +487,7 @@ INSERT INTO cpvs (code, description, level, name, parent, language_code) VALUES 
 INSERT INTO cpvs (code, description, level, name, parent, language_code) VALUES ('GC24-8', 'Whole', 1, 'Whole', '', 'en');
 INSERT INTO cpvs (code, description, level, name, parent, language_code) VALUES ('GC25-1', 'Number:', 1, 'Number:', '', 'en');
 INSERT INTO cpvs (code, description, level, name, parent, language_code) VALUES ('GC26-4', 'Number of channels:', 1, 'Number of channels:', '', 'en');
-INSERT INTO cpvs (code, description, level, name, parent, language_code) VALUES ('GC27-7', 'Number of items:', 1, 'Number of items:', '', 'en');
+INSERT INTO cpvs (code, description, level, name, parent, language_code) VALUES ('GC27-7', 'Number of data:', 1, 'Number of data:', '', 'en');
 INSERT INTO cpvs (code, description, level, name, parent, language_code) VALUES ('GC28-0', 'Number of phases:', 1, 'Number of phases:', '', 'en');
 INSERT INTO cpvs (code, description, level, name, parent, language_code) VALUES ('GC29-3', 'Number of seats:', 1, 'Number of seats:', '', 'en');
 INSERT INTO cpvs (code, description, level, name, parent, language_code) VALUES ('GC30-6', 'Number of sets:', 1, 'Number of sets:', '', 'en');
@@ -897,7 +897,7 @@ INSERT INTO cpvs (code, description, level, name, parent, language_code) VALUES 
 INSERT INTO cpvs (code, description, level, name, parent, language_code) VALUES ('UB02-7', 'Clothing', 1, 'Clothing', '', 'en');
 INSERT INTO cpvs (code, description, level, name, parent, language_code) VALUES ('UB03-0', 'Construction materials', 1, 'Construction materials', '', 'en');
 INSERT INTO cpvs (code, description, level, name, parent, language_code) VALUES ('UB04-3', 'Printed matter', 1, 'Printed matter', '', 'en');
-INSERT INTO cpvs (code, description, level, name, parent, language_code) VALUES ('UB05-6', 'Office items', 1, 'Office items', '', 'en');
+INSERT INTO cpvs (code, description, level, name, parent, language_code) VALUES ('UB05-6', 'Office data', 1, 'Office data', '', 'en');
 INSERT INTO cpvs (code, description, level, name, parent, language_code) VALUES ('UB06-9', 'Horticultural products', 1, 'Horticultural products', '', 'en');
 INSERT INTO cpvs (code, description, level, name, parent, language_code) VALUES ('UB07-2', 'Medical products', 1, 'Medical products', '', 'en');
 INSERT INTO cpvs (code, description, level, name, parent, language_code) VALUES ('UB08-5', 'Surplus inventory', 1, 'Surplus inventory', '', 'en');

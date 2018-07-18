@@ -5,11 +5,11 @@ import java.io.Serializable
 import javax.persistence.*
 
 @Entity
-@Table(name = "country")
-data class Country(
+@Table(name = "locality")
+data class Locality(
 
         @EmbeddedId
-        val countryKey: CountryKey? = null,
+        val regionKey: RegionKey? = null,
 
         @Column(name = "name")
         val name: String = "",
@@ -17,46 +17,44 @@ data class Country(
         @Column(name = "description")
         val description: String = "",
 
-        @Column(name = "def")
-        val default: Boolean = false,
-
         @Column(name = "scheme")
         val scheme: String = "",
 
         @Column(name = "uri")
-        val uri: String = "",
+        val uri: String = ""
 
-        @ManyToMany(mappedBy = "countries", fetch = FetchType.LAZY)
-        private val currencies: Set<Currency>? = null
 )
 
 @Embeddable
-class CountryKey : Serializable {
+class LocalityKey : Serializable {
 
-    @Column(name = "code", length = 2)
+    @Column(name = "code", length = 255)
     val code: String? = null
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(foreignKey = ForeignKey(name = "FK_country_language"))
-    private val language: Language? = null
+    @JoinColumns(
+            JoinColumn(name = "country_code"),
+            JoinColumn(name = "country_language_code"),
+            foreignKey = ForeignKey(name = "FK_region_country"))
+    private val country: Country? = null
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
-        other as CountryKey
+        other as LocalityKey
         if (code != other.code) return false
-        if (language != other.language) return false
+        if (country != other.country) return false
         return true
     }
 
     override fun hashCode(): Int {
         var result = code?.hashCode() ?: 0
-        result = 31 * result + (language?.hashCode() ?: 0)
+        result = 31 * result + (country?.hashCode() ?: 0)
         return result
     }
 }
 
-data class CountryDto(
+data class LocalityDto(
 
         @JsonProperty("code")
         val code: String?,
@@ -65,5 +63,5 @@ data class CountryDto(
         val name: String?
 )
 
-fun List<Country>.getItems(): List<CountryDto> =
-        this.asSequence().map { CountryDto(code = it.countryKey?.code, name = it.name) }.toList()
+fun List<Locality>.getItems(): List<LocalityDto> =
+        this.asSequence().map { LocalityDto(code = it.regionKey?.code, name = it.name) }.toList()

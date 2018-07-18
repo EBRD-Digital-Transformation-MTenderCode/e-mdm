@@ -25,9 +25,9 @@ data class Context @JsonCreator constructor(
 )
 
 enum class CommandType(private val value: String) {
-    TENDER_CPV("tenderCPV"),
-    TENDER_INFO("tenderInfo"),
-    CHECK_CURRENCY("checkCurrency");
+    CREATE_EI("createEi"),
+    CREATE_FS("createFs"),
+    CREATE_TENDER("createTender");
 
     @JsonValue
     fun value(): String {

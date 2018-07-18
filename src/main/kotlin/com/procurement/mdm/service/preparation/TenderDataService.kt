@@ -1,52 +1,177 @@
 package com.procurement.mdm.service.preparation
 
-import com.fasterxml.jackson.databind.JsonNode
-import com.fasterxml.jackson.databind.node.ObjectNode
-import com.procurement.access.model.dto.items.Scheme
+import com.procurement.access.utils.toObject
 import com.procurement.mdm.exception.ErrorType
 import com.procurement.mdm.exception.InErrorException
 import com.procurement.mdm.model.dto.CommandMessage
 import com.procurement.mdm.model.dto.ResponseDto
+import com.procurement.mdm.model.dto.data.ClassificationScheme
 import com.procurement.mdm.model.dto.getResponseDto
-import com.procurement.mdm.model.entity.Cpv
-import com.procurement.mdm.repository.CpvRepository
+import com.procurement.mdm.model.dto.data.*
+import com.procurement.mdm.model.entity.*
+import com.procurement.mdm.repository.*
 import com.procurement.mdm.service.ValidationService
 import org.springframework.stereotype.Service
 
 interface TenderDataService {
 
-    fun tenderCPV(cm: CommandMessage): ResponseDto
+    fun createTender(cm: CommandMessage): ResponseDto
 }
 
 @Service
-class TenderDataServiceImpl(private val validationService: ValidationService,
-                            private val cpvRepository: CpvRepository) : TenderDataService {
+class TenderDataServiceServiceImpl(private val validationService: ValidationService,
+                            private val cpvRepository: CpvRepository,
+                            private val cpvsRepository: CpvsRepository,
+                            private val unitRepository: UnitRepository,
+                            private val translateRepository: TranslateRepository,
+                            private val pmdRepository: PmdRepository) : TenderDataService {
 
-    override fun tenderCPV(cm: CommandMessage): ResponseDto {
-        validationService.getLanguage(languageCode = cm.context.language, internal = true)
-        val entity = cpvRepository.findByCpvKeyCodeAndCpvKeyLanguageCode(
-                code = getCpvCode(cm),
-                languageCode = cm.context.language)
-                ?: throw InErrorException(ErrorType.CPV_CODE_UNKNOWN)
-        val response = setCpvData(cm, entity)
-        return getResponseDto(data = response, id = cm.id)
+    override fun createTender(cm: CommandMessage): ResponseDto {
+        val lang = cm.context.language
+        val pmd = cm.context.pmd ?: throw InErrorException(ErrorType.INVALID_PMD)
+        val language = validationService.getLanguage(languageCode = lang, internal = true)
+        val country = validationService.getCountry(languageCode = lang, countryCode = cm.context.country)
+        val dto = getData(cm)
+        if (dto.tender.items != null) {
+            processItems(dto, language)
+        }
+        processTranslate(dto, country, lang, pmd)
+        return getResponseDto(data = dto, id = cm.id)
     }
 
-    fun getCpvCode(cm: CommandMessage): String {
-        val data = getData(cm)
-        return data.get("classification").get("id").asText()
+    private fun processTranslate(dto: TD, country: Country, lang: String, pmd: String) {
+        dto.tender.apply {
+            submissionMethodRationale = listOf(getTranslate("submissionMethodRationale", lang))
+            submissionMethodDetails = getTranslate("submissionMethodDetails", lang)
+            procurementMethodDetails = getPmd(pmd, country)
+            eligibilityCriteria = getTranslate("eligibilityCriteria", lang)
+        }
     }
 
-    private fun setCpvData(cm: CommandMessage, entity: Cpv): JsonNode? {
-        val data = getData(cm)
-        data.put("mainProcurementCategory", entity.mainProcurementCategory)
-        val classificationNode = data.get("classification") as ObjectNode
-        classificationNode.put("scheme", Scheme.CPV.value())
-        classificationNode.put("description", entity.name)
-        return data
+    private fun processItems(dto: TD, language: Language) {
+        val items = dto.tender.items ?: return
+        //common Class
+        checkItemCodes(items, 3)
+        val commonChars = getCommonChars(items, 3, 7)
+        val commonClass = addCheckSum(commonChars)
+        //data cpv
+        val cpvCodes = getCpvCodes(items)
+        val cpvKeys = cpvCodes.asSequence().map { CpvKey(it, language) }.toList()
+        val cpvEntities = cpvRepository.findAllById(cpvKeys)
+        if (cpvEntities.isEmpty()) throw InErrorException(ErrorType.INVALID_CPV)
+        cpvEntities.asSequence().forEach { entity ->
+            items.asSequence()
+                    .filter { it.classification.id == entity.cpvKey?.code }
+                    .forEach { setCpvData(it.classification, entity) }
+        }
+        //data cpvs
+        val cpvsCodes = getCpvsCodes(items)
+        val cpvsKeys = cpvsCodes.asSequence().map { CpvsKey(it, language) }.toList()
+        val cpvsEntities = cpvsRepository.findAllById(cpvsKeys)
+        if (cpvsEntities.isEmpty()) throw InErrorException(ErrorType.INVALID_CPVS)
+        cpvsEntities.asSequence().forEach { entity ->
+            items.asSequence().forEach { item ->
+                item.additionalClassifications.asSequence()
+                        .filter { it.id == entity.cpvsKey?.code }
+                        .forEach { setCpvsData(it, entity) }
+            }
+        }
+        //data unit
+        val unitCodes = getUnitCodes(items)
+        val unitKeys = unitCodes.asSequence().map { UnitKey(it, language) }.toList()
+        val unitEntities = unitRepository.findAllById(unitKeys)
+        if (unitEntities.isEmpty()) throw InErrorException(ErrorType.INVALID_UNIT)
+        unitEntities.asSequence().forEach { entity ->
+            items.asSequence()
+                    .filter { it.unit.id == entity.unitKey?.code }
+                    .forEach { seUnitData(it.unit, entity) }
+        }
+        //tender.classification
+        val cpvEntity = cpvRepository.findByCpvKeyCodeAndCpvKeyLanguageCode(code = commonClass, languageCode = language.code)
+                ?: throw InErrorException(ErrorType.INVALID_COMMON_CPV, commonClass)
+        dto.tender.apply {
+            classification = ClassificationTD(
+                    id = commonClass,
+                    description = cpvEntity.name,
+                    scheme = ClassificationScheme.CPV.value())
+            mainProcurementCategory = cpvEntity.mainProcurementCategory
+        }
     }
 
-    private fun getData(cm: CommandMessage): ObjectNode {
-        return (cm.data as ObjectNode?) ?: throw InErrorException(ErrorType.INVALID_DATA, cm.id)
+    private fun getTranslate(code: String, lang: String): String {
+        val entity = translateRepository.findByTranslateKeyCodeAndTranslateKeyLanguageCode(
+                code = code, languageCode = lang)
+                ?: throw InErrorException(ErrorType.TRANSLATION_UNKNOWN, code)
+        return entity.name
     }
+
+    private fun getPmd(code: String, country: Country): String {
+        val entity = pmdRepository.findByPmdKeyCodeAndPmdKeyCountry(code = code, country = country)
+                ?: throw InErrorException(ErrorType.TRANSLATION_UNKNOWN, code)
+        return entity.name
+    }
+
+    private fun checkItemCodes(items: HashSet<ItemTD>, charCount: Int) {
+        if (items.asSequence().map { it.classification.id.take(charCount) }.toSet().size > 1) throw InErrorException(ErrorType.INVALID_ITEMS)
+    }
+
+    private fun getCommonChars(items: HashSet<ItemTD>, countFrom: Int, countTo: Int): String {
+        var commonChars = ""
+        for (count in countFrom..countTo) {
+            val itemClass = items.asSequence().map { it.classification.id.take(count) }.toSet()
+            if (itemClass.size > 1) {
+                return commonChars
+            } else {
+                commonChars = itemClass.first()
+            }
+        }
+        return commonChars
+    }
+
+    private fun addCheckSum(commonChars: String): String {
+        val classOfItems = commonChars.padEnd(8, '0')//09134230-8?(2)
+        val n1 = classOfItems[0].toString().toInt()
+        val n2 = classOfItems[1].toString().toInt()
+        val n3 = classOfItems[2].toString().toInt()
+        val n4 = classOfItems[3].toString().toInt()
+        val n5 = classOfItems[4].toString().toInt()
+        val n6 = classOfItems[5].toString().toInt()
+        val n7 = classOfItems[6].toString().toInt()
+        val n8 = classOfItems[7].toString().toInt()
+        val checkSum: Int = (n1 * 3 + n2 * 7 + n3 * 1 + n4 * 3 + n5 * 7 + n6 * 1 + n7 * 3 + n8 * 7) % 10
+        return "$classOfItems-$checkSum"
+    }
+
+    private fun getCpvCodes(items: HashSet<ItemTD>): List<String> {
+        return items.asSequence().map { it.classification.id }.toList()
+    }
+
+    private fun getUnitCodes(items: HashSet<ItemTD>): List<String> {
+        return items.asSequence().map { it.unit.id }.toList()
+    }
+
+
+    private fun getCpvsCodes(items: HashSet<ItemTD>): List<String> {
+        return items.asSequence().flatMap { it.additionalClassifications.asSequence() }.map { it.id }.toList()
+    }
+
+    private fun setCpvData(classification: ClassificationTD, entity: Cpv) {
+        classification.scheme = ClassificationScheme.CPV.value()
+        classification.description = entity.name
+    }
+
+    private fun setCpvsData(classification: ClassificationTD, entity: Cpvs) {
+        classification.scheme = ClassificationScheme.CPVS.value()
+        classification.description = entity.name
+    }
+
+    private fun seUnitData(unit: ItemUnitTD, entity: Units) {
+        unit.name = entity.name
+    }
+
+    private fun getData(cm: CommandMessage): TD {
+        cm.data ?: throw InErrorException(ErrorType.INVALID_DATA, cm.id)
+        return toObject(TD::class.java, cm.data)
+    }
+
 }
