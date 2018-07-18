@@ -21,20 +21,17 @@ class OrganizationDataServiceImpl(private val registrationSchemeRepository: Regi
 ) : OrganizationDataService {
 
     override fun processOrganization(organization: OrganizationReference, country: Country) {
-
         //registration scheme
         registrationSchemeRepository.findByRsKeyCodeAndRsKeyCountry(code = organization.identifier.scheme, country = country)
                 ?: throw InErrorException(ErrorType.RS_UNKNOWN)
 
         val addressDetails = organization.address.addressDetails
-
         //country
         addressDetails.country.apply {
             scheme = country.scheme
             description = country.name
             uri = country.uri
         }
-
         //region
         val regionEntity = regionRepository.findByRegionKeyCodeAndRegionKeyCountry(addressDetails.region.id, country)
                 ?: throw InErrorException(ErrorType.REGION_UNKNOWN)
@@ -43,13 +40,15 @@ class OrganizationDataServiceImpl(private val registrationSchemeRepository: Regi
             description = regionEntity.name
             uri = regionEntity.uri
         }
-
         //locality
-        val localityEntity = localityRepository.findByLocalityKeyCodeAndLocalityKeyCountry(addressDetails.locality.id, country)
-                ?: throw InErrorException(ErrorType.LOCALITY_UNKNOWN)
-        addressDetails.locality.apply {
-            description = localityEntity.name
-            uri = localityEntity.uri
+        val schemeEntity = localityRepository.findOneBySchemeAndLocalityKeyCountry(addressDetails.locality.scheme, country)
+        if (schemeEntity != null) {
+            val localityEntity = localityRepository.findByLocalityKeyCodeAndLocalityKeyCountry(addressDetails.locality.id, country)
+                    ?: throw InErrorException(ErrorType.LOCALITY_UNKNOWN)
+            addressDetails.locality.apply {
+                description = localityEntity.name
+                uri = localityEntity.uri
+            }
         }
     }
 }
