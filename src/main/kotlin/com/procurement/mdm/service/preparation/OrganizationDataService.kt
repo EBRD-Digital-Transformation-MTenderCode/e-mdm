@@ -31,6 +31,7 @@ class OrganizationDataServiceImpl(private val registrationSchemeRepository: Regi
         //country
         addressDetails.country.apply {
             scheme = country.scheme
+            description = country.name
             uri = country.uri
         }
 
@@ -39,6 +40,7 @@ class OrganizationDataServiceImpl(private val registrationSchemeRepository: Regi
                 ?: throw InErrorException(ErrorType.REGION_UNKNOWN)
         addressDetails.region.apply {
             scheme = regionEntity.scheme
+            description = regionEntity.name
             uri = regionEntity.uri
         }
 
@@ -46,7 +48,7 @@ class OrganizationDataServiceImpl(private val registrationSchemeRepository: Regi
         val localityEntity = localityRepository.findByLocalityKeyCodeAndLocalityKeyCountry(addressDetails.locality.id, country)
                 ?: throw InErrorException(ErrorType.LOCALITY_UNKNOWN)
         addressDetails.locality.apply {
-            scheme = localityEntity.scheme
+            description = localityEntity.name
             uri = localityEntity.uri
         }
     }

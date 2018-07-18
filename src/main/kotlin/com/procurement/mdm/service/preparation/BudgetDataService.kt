@@ -29,22 +29,21 @@ class BudgetDataServiceImpl(private val validationService: ValidationService,
 
     override fun createEi(cm: CommandMessage): ResponseDto {
         val lang = cm.context.language
-        val language = validationService.getLanguage(languageCode = lang, internal = true)
+//        val language = validationService.getLanguage(languageCode = lang, internal = true)
         val country = validationService.getCountry(languageCode = lang, countryCode = cm.context.country)
         val dto = getData(cm)
         val cpvCode = dto.tender?.classification?.id ?: throw InErrorException(ErrorType.INVALID_CPV)
-        val entity = cpvRepository.findByCpvKeyCodeAndCpvKeyLanguageCode(
+        val cpvEntity = cpvRepository.findByCpvKeyCodeAndCpvKeyLanguageCode(
                 code = cpvCode,
                 languageCode = cm.context.language)
                 ?: throw InErrorException(ErrorType.CPV_CODE_UNKNOWN)
         dto.tender?.apply {
             classification.scheme = ClassificationScheme.CPV.value()
-            classification.description = entity.name
-            mainProcurementCategory = entity.mainProcurementCategory
+            classification.description = cpvEntity.name
+            mainProcurementCategory = cpvEntity.mainProcurementCategory
         }
-
         val buyer = dto.buyer?: throw InErrorException(ErrorType.INVALID_BUYER)
-        organizationDataService.processOrganization(buyer, language, country)
+        organizationDataService.processOrganization(buyer, country)
 
         return getResponseDto(data = dto, id = cm.id)
     }
@@ -56,7 +55,14 @@ class BudgetDataServiceImpl(private val validationService: ValidationService,
         val currencyCode = dto.planning?.budget?.amount?.currency ?: throw InErrorException(ErrorType.CURRENCY_UNKNOWN)
         entities.asSequence().firstOrNull { it.currencyKey?.code.equals(currencyCode) }
                 ?: throw InErrorException(ErrorType.CURRENCY_UNKNOWN)
-        return getResponseDto("ok", cm.id)
+
+        val buyer = dto.buyer?: throw InErrorException(ErrorType.INVALID_BUYER)
+        organizationDataService.processOrganization(buyer, country)
+
+        val procuringEntity = dto.tender?.procuringEntity?: throw InErrorException(ErrorType.INVALID_PR_ENTITY)
+        organizationDataService.processOrganization(procuringEntity, country)
+
+        return getResponseDto(data = dto, id = cm.id)
     }
 
     private fun getData(cm: CommandMessage): BD {

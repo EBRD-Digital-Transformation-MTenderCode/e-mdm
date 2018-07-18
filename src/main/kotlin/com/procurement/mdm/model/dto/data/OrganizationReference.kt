@@ -112,7 +112,7 @@ data class CountryDetails(
         @field:NotNull
         val id: String,
 
-        val description: String?,
+        var description: String?,
 
         var uri: String?
 )
@@ -125,7 +125,7 @@ data class RegionDetails(
         @field:NotNull
         val id: String,
 
-        val description: String?,
+        var description: String?,
 
         var uri: String?
 )
@@ -140,7 +140,7 @@ data class LocalityDetails(
         val id: String,
 
         @field:NotNull
-        val description: String,
+        var description: String,
 
         var uri: String?
 )

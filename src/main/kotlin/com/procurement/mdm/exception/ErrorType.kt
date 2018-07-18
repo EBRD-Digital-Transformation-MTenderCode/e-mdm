@@ -20,6 +20,7 @@ enum class ErrorType constructor(val code: String, val message: String) {
     INVALID_COMMON_CPV("01.04", "Invalid common cpv class code."),
     INVALID_CPVS("01.05", "Invalid cpvs code."),
     INVALID_UNIT("01.06", "Invalid unit code."),
-    INVALID_PMD("01.06", "Invalid pmd."),
-    INVALID_BUYER("01.03", "Invalid buyer."),;
+    INVALID_PMD("01.07", "Invalid pmd."),
+    INVALID_BUYER("01.08", "Invalid buyer."),
+    INVALID_PR_ENTITY("01.09", "Invalid procuring entity.");
 }
