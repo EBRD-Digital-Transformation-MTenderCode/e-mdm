@@ -75,7 +75,9 @@ data class Details @JsonCreator constructor(
         val mainGeneralActivity: MainGeneralActivity,
 
         @field:NotNull
-        val mainSectoralActivity: MainSectoralActivity
+        val mainSectoralActivity: MainSectoralActivity,
+
+        val scale: Scale?
 )
 
 

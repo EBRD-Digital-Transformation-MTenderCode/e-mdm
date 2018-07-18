@@ -153,3 +153,34 @@ enum class MainSectoralActivity constructor(private val value: String) {
 
 
 }
+
+enum class Scale constructor(private val value: String) {
+    MICRO("micro"),
+    SME("sme"),
+    LARGE("large"),
+    EMPTY("");
+
+    override fun toString(): String {
+        return this.value
+    }
+
+    @JsonValue
+    fun value(): String {
+        return this.value
+    }
+
+    companion object {
+        private val CONSTANTS = HashMap<String, Scale>()
+
+        init {
+            for (c in values()) {
+                CONSTANTS[c.value] = c
+            }
+        }
+
+        @JsonCreator
+        fun fromValue(value: String): Scale {
+            return CONSTANTS[value] ?: throw IllegalArgumentException(value)
+        }
+    }
+}

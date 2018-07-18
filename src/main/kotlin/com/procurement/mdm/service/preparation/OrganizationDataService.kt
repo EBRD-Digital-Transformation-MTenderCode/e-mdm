@@ -23,7 +23,7 @@ class OrganizationDataServiceImpl(private val registrationSchemeRepository: Regi
     override fun processOrganization(organization: OrganizationReference, country: Country) {
 
         //registration scheme
-        registrationSchemeRepository.findByRsKeyCodeAndRsKeyCountry(code = organization.identifier.id, country = country)
+        registrationSchemeRepository.findByRsKeyCodeAndRsKeyCountry(code = organization.identifier.scheme, country = country)
                 ?: throw InErrorException(ErrorType.RS_UNKNOWN)
 
         val addressDetails = organization.address.addressDetails

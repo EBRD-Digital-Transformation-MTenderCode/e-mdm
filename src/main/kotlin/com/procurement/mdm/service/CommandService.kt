@@ -1,5 +1,7 @@
 package com.procurement.mdm.service
 
+import com.procurement.mdm.exception.ErrorType
+import com.procurement.mdm.exception.InErrorException
 import com.procurement.mdm.model.dto.CommandMessage
 import com.procurement.mdm.model.dto.CommandType
 import com.procurement.mdm.model.dto.ResponseDto

@@ -29,7 +29,6 @@ class BudgetDataServiceImpl(private val validationService: ValidationService,
 
     override fun createEi(cm: CommandMessage): ResponseDto {
         val lang = cm.context.language
-//        val language = validationService.getLanguage(languageCode = lang, internal = true)
         val country = validationService.getCountry(languageCode = lang, countryCode = cm.context.country)
         val dto = getData(cm)
         val cpvCode = dto.tender?.classification?.id ?: throw InErrorException(ErrorType.INVALID_CPV)
