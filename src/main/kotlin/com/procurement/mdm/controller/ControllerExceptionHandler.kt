@@ -15,16 +15,6 @@ import org.springframework.web.bind.annotation.ResponseStatus
 class ControllerExceptionHandler {
 
     @ResponseBody
-    @ResponseStatus(HttpStatus.OK)
-    @ExceptionHandler(Exception::class)
-    fun exception(ex: Exception) = getExceptionResponseDto(ex)
-
-    @ResponseBody
-    @ResponseStatus(HttpStatus.OK)
-    @ExceptionHandler(InErrorException::class)
-    fun internalError(e: InErrorException) = getInErrorResponseDto(e)
-
-    @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(ExErrorException::class)
     fun externalError(e: ExErrorException) = getExErrorResponseDto(e)
