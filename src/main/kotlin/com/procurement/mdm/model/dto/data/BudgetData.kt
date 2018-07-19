@@ -17,7 +17,7 @@ data class BD @JsonCreator constructor(
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class TenderBD @JsonCreator constructor(
 
-        var classification: ClassificationBD,
+        var classification: ClassificationBD?,
 
         var mainProcurementCategory: String?,
 

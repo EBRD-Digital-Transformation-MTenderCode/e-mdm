@@ -1,55 +1,115 @@
 {
-  "id": "e2a79837-7136-4b4b-a01e-6eaca33e4220",
-  "command": "createTender",
+  "id": "489fa465-0a6b-4a69-b6c7-b55b1577f13b",
+  "command": "createFs",
   "context": {
-    "operationId": "e2a79837-7136-4b4b-a01e-6eaca33e4220",
-    "requestId": "ef9f2b40-89d7-11e8-b8ec-372768bc8b44",
-    "cpid": null,
+    "operationId": "489fa465-0a6b-4a69-b6c7-b55b1577f13b",
+    "requestId": "15e87a60-8b4d-11e8-92e3-079f13e19bc6",
+    "cpid": "ocds-t1s2t3-MD-1531909393647",
     "ocid": null,
-    "stage": "PS",
+    "stage": "FS",
     "prevStage": null,
-    "processType": "createCN",
-    "operationType": "createCN",
-    "phase": "TENDERPERIOD",
+    "processType": "fs",
+    "operationType": "createFS",
+    "phase": null,
     "owner": "445f6851-c908-407d-9b45-14b92f3e964b",
     "country": "MD",
     "language": "ro",
-    "pmd": "RT",
+    "pmd": null,
     "token": null,
     "access": null,
-    "startDate": "2018-07-17T15:41:56Z",
-    "endDate": "2018-09-17T13:52:00Z"
+    "startDate": "2018-07-19T12:13:03Z",
+    "endDate": null
   },
   "data": {
+    "planning": {
+      "budget": {
+        "amount": {
+          "currency": "MDL"
+        }
+      }
+    },
     "tender": {
-      "items": [
-        {
-          "id": "1",
-          "classification": {
-            "scheme": "CPV",
-            "description": "Books and albums",
-            "id": "79200000-6"
-          },
-          "additionalClassifications": [
-            {
-              "scheme": "CPVS",
-              "description": "A textual description or title for the code.",
-              "id": "AA08-2"
+      "procuringEntity": {
+        "name": "Edward-Company",
+        "identifier": {
+          "id": "Enotis",
+          "scheme": "MD-IDNO",
+          "legalName": "legalName",
+          "uri": "uri"
+        },
+        "address": {
+          "streetAddress": "232323",
+          "postalCode": "424422",
+          "addressDetails": {
+            "country": {
+              "id": "MD"
+            },
+            "region": {
+              "id": "MD-AN"
+            },
+            "locality": {
+              "scheme": "UN/LOCODE",
+              "id": "MD AIN",
+              "description": "Anenii Noi"
             }
-          ],
-          "quantity": 12,
-          "unit": {
-            "id": "KGM",
-            "name": "kg"
+          }
+        },
+        "additionalIdentifiers": [
+          {
+            "id": "id",
+            "scheme": "scheme",
+            "legalName": "legalName2",
+            "uri": "uri2"
+          }
+        ],
+        "contactPoint": {
+          "name": "name",
+          "email": "email",
+          "telephone": "telephone",
+          "faxNumber": "fax",
+          "url": "uri3"
+        }
+      }
+    },
+    "buyer": {
+      "name": "buyerName",
+      "identifier": {
+        "id": "id",
+        "scheme": "MD-IDNO",
+        "legalName": "legalName",
+        "uri": "uri5"
+      },
+      "address": {
+        "streetAddress": "232323",
+        "postalCode": "424422",
+        "addressDetails": {
+          "country": {
+            "id": "MD"
           },
-          "description": "description",
-          "relatedLot": "1"
+          "region": {
+            "id": "MD-AN"
+          },
+          "locality": {
+            "scheme": "UN/LOCODE",
+            "id": "MD AIN",
+            "description": "Anenii Noi"
+          }
+        }
+      },
+      "additionalIdentifiers": [
+        {
+          "id": "string",
+          "scheme": "string",
+          "legalName": "string",
+          "uri": "string"
         }
       ],
-      "classification": {
-        "scheme": "CPV",
-        "description": "Description",
-        "id": "79200000-6"
+      "contactPoint": {
+        "name": "string",
+        "email": "string",
+        "telephone": "string",
+        "faxNumber": "string",
+        "url": "string"
       }
     }
   },

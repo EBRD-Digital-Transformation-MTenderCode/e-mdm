@@ -37,8 +37,8 @@ class BudgetDataServiceImpl(private val validationService: ValidationService,
                 languageCode = cm.context.language)
                 ?: throw InErrorException(ErrorType.CPV_CODE_UNKNOWN)
         dto.tender?.apply {
-            classification.scheme = ClassificationScheme.CPV.value()
-            classification.description = cpvEntity.name
+            classification?.scheme = ClassificationScheme.CPV.value()
+            classification?.description = cpvEntity.name
             mainProcurementCategory = cpvEntity.mainProcurementCategory
         }
         val buyer = dto.buyer?: throw InErrorException(ErrorType.INVALID_BUYER)
