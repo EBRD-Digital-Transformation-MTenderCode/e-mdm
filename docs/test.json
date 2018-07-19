@@ -1,81 +1,56 @@
 {
-  "id": "dbf22407-2f5c-461b-ada8-6cf77f37d58f",
-  "command": "tenderCPV",
+  "id": "e2a79837-7136-4b4b-a01e-6eaca33e4220",
+  "command": "createTender",
   "context": {
-    "operationId": "dbf22407-2f5c-461b-ada8-6cf77f37d58f",
-    "requestId": "224598e0-8aaa-11e8-969d-45d24b1e1e59",
+    "operationId": "e2a79837-7136-4b4b-a01e-6eaca33e4220",
+    "requestId": "ef9f2b40-89d7-11e8-b8ec-372768bc8b44",
     "cpid": null,
     "ocid": null,
-    "stage": "EI",
+    "stage": "PS",
     "prevStage": null,
-    "processType": "ei",
-    "operationType": "createEi",
-    "phase": null,
+    "processType": "createCN",
+    "operationType": "createCN",
+    "phase": "TENDERPERIOD",
     "owner": "445f6851-c908-407d-9b45-14b92f3e964b",
     "country": "MD",
     "language": "ro",
-    "pmd": null,
+    "pmd": "RT",
     "token": null,
     "access": null,
-    "startDate": "2018-07-18T16:46:35Z",
-    "endDate": null
+    "startDate": "2018-07-17T15:41:56Z",
+    "endDate": "2018-09-17T13:52:00Z"
   },
   "data": {
     "tender": {
-      "classification": {
-        "id": "30100000-0",
-        "scheme": "CPV",
-        "description": "Maşini de procesare de text"
-      }
-    },
-    "buyer": {
-      "name": "Burns-Davis",
-      "identifier": {
-        "scheme": "MD-IDNO",
-        "id": "354-37-1072",
-        "legalName": "Burns-Davis PLC",
-        "uri": "http://edwards.net/"
-      },
-      "additionalIdentifiers": [
+      "items": [
         {
-          "scheme": "MD-IDNO",
-          "id": "713-49-7544",
-          "legalName": "Burns-Davis PLC",
-          "uri": "http://baker.com/posts/about.asp"
+          "id": "1",
+          "classification": {
+            "scheme": "CPV",
+            "description": "Books and albums",
+            "id": "79200000-6"
+          },
+          "additionalClassifications": [
+            {
+              "scheme": "CPVS",
+              "description": "A textual description or title for the code.",
+              "id": "AA08-2"
+            }
+          ],
+          "quantity": 12,
+          "unit": {
+            "id": "KGM",
+            "name": "kg"
+          },
+          "description": "description",
+          "relatedLot": "1"
         }
       ],
-      "address": {
-        "streetAddress": "232323",
-        "postalCode": "424422",
-        "addressDetails": {
-          "country": {
-            "id": "MD"
-          },
-          "region": {
-            "id": "MD-RI"
-          },
-          "locality": {
-            "scheme": "UN/LOCDE",
-            "id": "MD_BAS",
-            "description": "Basarabeasca"
-          }
-        }
-      },
-      "contactPoint": {
-        "name": "Jacqueline Soto",
-        "email": "tiffanygutierrez@yahoo.com",
-        "telephone": "724-095-3938x237",
-        "faxNumber": "897-612-1545",
-        "url": "http://hudson.biz/explore/list/category/"
-      },
-      "details": {
-        "typeOfBuyer": "MINISTRY",
-        "mainGeneralActivity": "HEALTH",
-        "mainSectoralActivity": "WATER",
-        "isACentralPurchasingBody": false,
-        "scale": "sme"
-      },
-      "buyerProfile": "http://ray.com/"
+      "classification": {
+        "scheme": "CPV",
+        "description": "Description",
+        "id": "79200000-6"
+      }
     }
   },
   "version": "0.0.1"

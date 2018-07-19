@@ -6,8 +6,11 @@ import com.procurement.mdm.exception.InErrorException
 import com.procurement.mdm.model.dto.CommandMessage
 import com.procurement.mdm.model.dto.ResponseDto
 import com.procurement.mdm.model.dto.data.ClassificationScheme
+import com.procurement.mdm.model.dto.data.ClassificationTD
+import com.procurement.mdm.model.dto.data.ItemTD
+import com.procurement.mdm.model.dto.data.ItemUnitTD
+import com.procurement.mdm.model.dto.data.TD
 import com.procurement.mdm.model.dto.getResponseDto
-import com.procurement.mdm.model.dto.data.*
 import com.procurement.mdm.model.entity.*
 import com.procurement.mdm.repository.*
 import com.procurement.mdm.service.ValidationService
@@ -20,11 +23,11 @@ interface TenderDataService {
 
 @Service
 class TenderDataServiceServiceImpl(private val validationService: ValidationService,
-                            private val cpvRepository: CpvRepository,
-                            private val cpvsRepository: CpvsRepository,
-                            private val unitRepository: UnitRepository,
-                            private val translateRepository: TranslateRepository,
-                            private val pmdRepository: PmdRepository) : TenderDataService {
+                                   private val cpvRepository: CpvRepository,
+                                   private val cpvsRepository: CpvsRepository,
+                                   private val unitRepository: UnitRepository,
+                                   private val translateRepository: TranslateRepository,
+                                   private val pmdRepository: PmdRepository) : TenderDataService {
 
     override fun createTender(cm: CommandMessage): ResponseDto {
         val lang = cm.context.language
@@ -53,7 +56,7 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
         //common Class
         checkItemCodes(items, 3)
         val commonChars = getCommonChars(items, 3, 7)
-        val commonClass = addCheckSum(commonChars)
+        val commonClass = getCommonClass(commonChars)
         //data cpv
         val cpvCodes = getCpvCodes(items)
         val cpvKeys = cpvCodes.asSequence().map { CpvKey(it, language) }.toList()
@@ -91,7 +94,7 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
                 ?: throw InErrorException(ErrorType.INVALID_COMMON_CPV, commonClass)
         dto.tender.apply {
             classification = ClassificationTD(
-                    id = commonClass,
+                    id = cpvEntity.cpvKey?.code!!,
                     description = cpvEntity.name,
                     scheme = ClassificationScheme.CPV.value())
             mainProcurementCategory = cpvEntity.mainProcurementCategory
@@ -112,7 +115,8 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
     }
 
     private fun checkItemCodes(items: HashSet<ItemTD>, charCount: Int) {
-        if (items.asSequence().map { it.classification.id.take(charCount) }.toSet().size > 1) throw InErrorException(ErrorType.INVALID_ITEMS)
+        if (items.asSequence().map { it.classification.id.take(charCount) }.toSet().size > 1)
+            throw InErrorException(ErrorType.INVALID_ITEMS)
     }
 
     private fun getCommonChars(items: HashSet<ItemTD>, countFrom: Int, countTo: Int): String {
@@ -128,18 +132,19 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
         return commonChars
     }
 
-    private fun addCheckSum(commonChars: String): String {
-        val classOfItems = commonChars.padEnd(8, '0')//09134230-8?(2)
-        val n1 = classOfItems[0].toString().toInt()
-        val n2 = classOfItems[1].toString().toInt()
-        val n3 = classOfItems[2].toString().toInt()
-        val n4 = classOfItems[3].toString().toInt()
-        val n5 = classOfItems[4].toString().toInt()
-        val n6 = classOfItems[5].toString().toInt()
-        val n7 = classOfItems[6].toString().toInt()
-        val n8 = classOfItems[7].toString().toInt()
-        val checkSum: Int = (n1 * 3 + n2 * 7 + n3 * 1 + n4 * 3 + n5 * 7 + n6 * 1 + n7 * 3 + n8 * 7) % 10
-        return "$classOfItems-$checkSum"
+    private fun getCommonClass(commonChars: String): String {
+        return commonChars.padEnd(8, '0')//09134230-8?(2)
+//        val classOfItems = commonChars.padEnd(8, '0')//09134230-8?(2)
+//        val n1 = classOfItems[0].toString().toInt()
+//        val n2 = classOfItems[1].toString().toInt()
+//        val n3 = classOfItems[2].toString().toInt()
+//        val n4 = classOfItems[3].toString().toInt()
+//        val n5 = classOfItems[4].toString().toInt()
+//        val n6 = classOfItems[5].toString().toInt()
+//        val n7 = classOfItems[6].toString().toInt()
+//        val n8 = classOfItems[7].toString().toInt()
+//        val checkSum: Int = (n1 * 3 + n2 * 7 + n3 * 1 + n4 * 3 + n5 * 7 + n6 * 1 + n7 * 3 + n8 * 7) % 10
+//        return "$classOfItems-$checkSum"
     }
 
     private fun getCpvCodes(items: HashSet<ItemTD>): List<String> {

@@ -41,9 +41,9 @@ class OrganizationDataServiceImpl(private val registrationSchemeRepository: Regi
             uri = regionEntity.uri
         }
         //locality
-        val schemeEntity = localityRepository.findOneBySchemeAndLocalityKeyCountry(addressDetails.locality.scheme, country)
+        val schemeEntity = localityRepository.findOneBySchemeAndLocalityKeyRegion(addressDetails.locality.scheme, regionEntity)
         if (schemeEntity != null) {
-            val localityEntity = localityRepository.findByLocalityKeyCodeAndLocalityKeyCountry(addressDetails.locality.id, country)
+            val localityEntity = localityRepository.findByLocalityKeyCodeAndLocalityKeyRegion(addressDetails.locality.id, regionEntity)
                     ?: throw InErrorException(ErrorType.LOCALITY_UNKNOWN)
             addressDetails.locality.apply {
                 description = localityEntity.name
