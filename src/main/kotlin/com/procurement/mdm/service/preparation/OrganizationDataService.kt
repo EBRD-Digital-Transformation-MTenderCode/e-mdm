@@ -27,6 +27,7 @@ class OrganizationDataServiceImpl(private val registrationSchemeRepository: Regi
 
         val addressDetails = organization.address.addressDetails
         //country
+        if (addressDetails.country.id != country.countryKey?.code) throw InErrorException(ErrorType.INVALID_COUNTRY)
         addressDetails.country.apply {
             scheme = country.scheme
             description = country.name
