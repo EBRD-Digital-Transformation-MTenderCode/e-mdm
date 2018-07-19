@@ -55,8 +55,6 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
         val items = dto.tender.items ?: return
         //common Class
         checkItemCodes(items, 3)
-        val commonChars = getCommonChars(items, 3, 7)
-        val commonClass = getCommonClass(commonChars)
         //data cpv
         val cpvCodes = getCpvCodes(items)
         val cpvKeys = cpvCodes.asSequence().map { CpvKey(it, language) }.toList()
@@ -90,7 +88,9 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
                     .forEach { seUnitData(it.unit, entity) }
         }
         //tender.classification
-        val cpvEntity = cpvRepository.findByCpvKeyCodeAndCpvKeyLanguageCode(code = commonClass, languageCode = language.code)
+        val commonChars = getCommonChars(items, 3, 7)
+        val commonClass = getCommonClass(commonChars)
+        val cpvEntity = cpvRepository.getCommonClass(code = commonClass, language = language)
                 ?: throw InErrorException(ErrorType.INVALID_COMMON_CPV, commonClass)
         dto.tender.apply {
             classification = ClassificationTD(
