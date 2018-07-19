@@ -25,7 +25,7 @@ class BudgetDataServiceImpl(private val validationService: ValidationService,
                             private val organizationDataService: OrganizationDataService,
                             private val cpvRepository: CpvRepository,
                             private val currencyRepository: CurrencyRepository
-                            ) : BudgetDataService {
+) : BudgetDataService {
 
     override fun createEi(cm: CommandMessage): ResponseDto {
         val lang = cm.context.language
@@ -41,7 +41,7 @@ class BudgetDataServiceImpl(private val validationService: ValidationService,
             classification?.description = cpvEntity.name
             mainProcurementCategory = cpvEntity.mainProcurementCategory
         }
-        val buyer = dto.buyer?: throw InErrorException(ErrorType.INVALID_BUYER)
+        val buyer = dto.buyer ?: throw InErrorException(ErrorType.INVALID_BUYER)
         organizationDataService.processOrganization(buyer, country)
 
         return getResponseDto(data = dto, id = cm.id)
@@ -55,11 +55,15 @@ class BudgetDataServiceImpl(private val validationService: ValidationService,
         entities.asSequence().firstOrNull { it.currencyKey?.code.equals(currencyCode) }
                 ?: throw InErrorException(ErrorType.CURRENCY_UNKNOWN)
 
-        val buyer = dto.buyer?: throw InErrorException(ErrorType.INVALID_BUYER)
-        organizationDataService.processOrganization(buyer, country)
+        val buyer = dto.buyer
+        if (buyer != null) {
+            organizationDataService.processOrganization(buyer, country)
+        }
 
-        val procuringEntity = dto.tender?.procuringEntity?: throw InErrorException(ErrorType.INVALID_PR_ENTITY)
-        organizationDataService.processOrganization(procuringEntity, country)
+        val procuringEntity = dto.tender?.procuringEntity
+        if (procuringEntity != null) {
+            organizationDataService.processOrganization(procuringEntity, country)
+        }
 
         return getResponseDto(data = dto, id = cm.id)
     }
