@@ -46,7 +46,7 @@ data class ItemTD @JsonCreator constructor(
         val classification: ClassificationTD,
 
         @field:Valid
-        val additionalClassifications: List<ClassificationTD>,
+        val additionalClassifications: List<ClassificationTD>?,
 
         @field:NotNull
         val quantity: BigDecimal,

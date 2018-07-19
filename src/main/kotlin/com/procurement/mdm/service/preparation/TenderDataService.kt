@@ -5,11 +5,7 @@ import com.procurement.mdm.exception.ErrorType
 import com.procurement.mdm.exception.InErrorException
 import com.procurement.mdm.model.dto.CommandMessage
 import com.procurement.mdm.model.dto.ResponseDto
-import com.procurement.mdm.model.dto.data.ClassificationScheme
-import com.procurement.mdm.model.dto.data.ClassificationTD
-import com.procurement.mdm.model.dto.data.ItemTD
-import com.procurement.mdm.model.dto.data.ItemUnitTD
-import com.procurement.mdm.model.dto.data.TD
+import com.procurement.mdm.model.dto.data.*
 import com.procurement.mdm.model.dto.getResponseDto
 import com.procurement.mdm.model.entity.*
 import com.procurement.mdm.repository.*
@@ -57,35 +53,41 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
         checkItemCodes(items, 3)
         //data cpv
         val cpvCodes = getCpvCodes(items)
-        val cpvKeys = cpvCodes.asSequence().map { CpvKey(it, language) }.toList()
-        val cpvEntities = cpvRepository.findAllById(cpvKeys)
-        if (cpvEntities.isEmpty()) throw InErrorException(ErrorType.INVALID_CPV)
-        cpvEntities.asSequence().forEach { entity ->
-            items.asSequence()
-                    .filter { it.classification.id == entity.cpvKey?.code }
-                    .forEach { setCpvData(it.classification, entity) }
+        if (cpvCodes.isNotEmpty()) {
+            val cpvKeys = cpvCodes.asSequence().map { CpvKey(it, language) }.toList()
+            val cpvEntities = cpvRepository.findAllById(cpvKeys)
+            if (cpvEntities.isEmpty()) throw InErrorException(ErrorType.INVALID_CPV)
+            cpvEntities.asSequence().forEach { entity ->
+                items.asSequence()
+                        .filter { it.classification.id == entity.cpvKey?.code }
+                        .forEach { setCpvData(it.classification, entity) }
+            }
         }
         //data cpvs
         val cpvsCodes = getCpvsCodes(items)
-        val cpvsKeys = cpvsCodes.asSequence().map { CpvsKey(it, language) }.toList()
-        val cpvsEntities = cpvsRepository.findAllById(cpvsKeys)
-        if (cpvsEntities.isEmpty()) throw InErrorException(ErrorType.INVALID_CPVS)
-        cpvsEntities.asSequence().forEach { entity ->
-            items.asSequence().forEach { item ->
-                item.additionalClassifications.asSequence()
-                        .filter { it.id == entity.cpvsKey?.code }
-                        .forEach { setCpvsData(it, entity) }
+        if (cpvsCodes.isNotEmpty()) {
+            val cpvsKeys = cpvsCodes.asSequence().map { CpvsKey(it, language) }.toList()
+            val cpvsEntities = cpvsRepository.findAllById(cpvsKeys)
+            if (cpvsEntities.isEmpty()) throw InErrorException(ErrorType.INVALID_CPVS)
+            cpvsEntities.asSequence().forEach { entity ->
+                items.asSequence().forEach { item ->
+                    item.additionalClassifications?.asSequence()
+                            ?.filter { it.id == entity.cpvsKey?.code }
+                            ?.forEach { setCpvsData(it, entity) }
+                }
             }
         }
         //data unit
         val unitCodes = getUnitCodes(items)
-        val unitKeys = unitCodes.asSequence().map { UnitKey(it, language) }.toList()
-        val unitEntities = unitRepository.findAllById(unitKeys)
-        if (unitEntities.isEmpty()) throw InErrorException(ErrorType.INVALID_UNIT)
-        unitEntities.asSequence().forEach { entity ->
-            items.asSequence()
-                    .filter { it.unit.id == entity.unitKey?.code }
-                    .forEach { seUnitData(it.unit, entity) }
+        if (unitCodes.isNotEmpty()) {
+            val unitKeys = unitCodes.asSequence().map { UnitKey(it, language) }.toList()
+            val unitEntities = unitRepository.findAllById(unitKeys)
+            if (unitEntities.isEmpty()) throw InErrorException(ErrorType.INVALID_UNIT)
+            unitEntities.asSequence().forEach { entity ->
+                items.asSequence()
+                        .filter { it.unit.id == entity.unitKey?.code }
+                        .forEach { seUnitData(it.unit, entity) }
+            }
         }
         //tender.classification
         val commonChars = getCommonChars(items, 3, 7)
@@ -157,7 +159,15 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
 
 
     private fun getCpvsCodes(items: HashSet<ItemTD>): List<String> {
-        return items.asSequence().flatMap { it.additionalClassifications.asSequence() }.map { it.id }.toList()
+        val cpvsCodes = arrayListOf<String>()
+        items.forEach { item ->
+            item.additionalClassifications?.let {
+                item.additionalClassifications.forEach { ac ->
+                    cpvsCodes.add(ac.id)
+                }
+            }
+        }
+        return cpvsCodes
     }
 
     private fun setCpvData(classification: ClassificationTD, entity: Cpv) {
