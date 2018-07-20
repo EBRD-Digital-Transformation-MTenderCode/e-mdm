@@ -43,8 +43,7 @@ data class Identifier @JsonCreator constructor(
         @field:NotNull
         val legalName: String,
 
-        @field:NotNull
-        val uri: String
+        val uri: String?
 )
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
