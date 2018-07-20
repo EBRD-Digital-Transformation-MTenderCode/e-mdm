@@ -54,9 +54,9 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
         //data cpv
         val cpvCodes = getCpvCodes(items)
         if (cpvCodes.isNotEmpty()) {
-            val cpvKeys = cpvCodes.asSequence().map { CpvKey(it, language) }.toList()
+            val cpvKeys = cpvCodes.asSequence().map { CpvKey(it, language) }.toHashSet()
             val cpvEntities = cpvRepository.findAllById(cpvKeys)
-            if (cpvEntities.isEmpty()) throw InErrorException(ErrorType.INVALID_CPV)
+            if (cpvEntities.isEmpty() || cpvEntities.size != cpvKeys.size) throw InErrorException(ErrorType.INVALID_CPV)
             cpvEntities.asSequence().forEach { entity ->
                 items.asSequence()
                         .filter { it.classification.id == entity.cpvKey?.code }
@@ -66,9 +66,9 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
         //data cpvs
         val cpvsCodes = getCpvsCodes(items)
         if (cpvsCodes.isNotEmpty()) {
-            val cpvsKeys = cpvsCodes.asSequence().map { CpvsKey(it, language) }.toList()
+            val cpvsKeys = cpvsCodes.asSequence().map { CpvsKey(it, language) }.toHashSet()
             val cpvsEntities = cpvsRepository.findAllById(cpvsKeys)
-            if (cpvsEntities.isEmpty()) throw InErrorException(ErrorType.INVALID_CPVS)
+            if (cpvsEntities.isEmpty() || cpvsEntities.size != cpvsKeys.size) throw InErrorException(ErrorType.INVALID_CPVS)
             cpvsEntities.asSequence().forEach { entity ->
                 items.asSequence().forEach { item ->
                     item.additionalClassifications?.asSequence()
@@ -80,9 +80,9 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
         //data unit
         val unitCodes = getUnitCodes(items)
         if (unitCodes.isNotEmpty()) {
-            val unitKeys = unitCodes.asSequence().map { UnitKey(it, language) }.toList()
+            val unitKeys = unitCodes.asSequence().map { UnitKey(it, language) }.toHashSet()
             val unitEntities = unitRepository.findAllById(unitKeys)
-            if (unitEntities.isEmpty()) throw InErrorException(ErrorType.INVALID_UNIT)
+            if (unitEntities.isEmpty() || unitEntities.size != unitKeys.size) throw InErrorException(ErrorType.INVALID_UNIT)
             unitEntities.asSequence().forEach { entity ->
                 items.asSequence()
                         .filter { it.unit.id == entity.unitKey?.code }
