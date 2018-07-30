@@ -1,0 +1,3 @@
+INSERT INTO public.translate (code, description, name, language_code) VALUES ('submissionMethodDetails', '', 'submissionMethodDetails', 'ro');
+INSERT INTO public.translate (code, description, name, language_code) VALUES ('submissionMethodRationale', '', 'submissionMethodRationale', 'ro');
+INSERT INTO public.translate (code, description, name, language_code) VALUES ('eligibilityCriteria', '', 'eligibilityCriteria', 'ro');

@@ -1,0 +1,3 @@
+INSERT INTO public.registration_scheme (code, description, name, scheme, uri, country_code, country_language_code) VALUES ('MD-IDNO', null, 'MD-IDNO', null, null, 'MD', 'ro');
+INSERT INTO public.registration_scheme (code, description, name, scheme, uri, country_code, country_language_code) VALUES ('MD-IDNO', null, 'MD-IDNO', null, null, 'MD', 'en');
+INSERT INTO public.registration_scheme (code, description, name, scheme, uri, country_code, country_language_code) VALUES ('MD-IDNO', null, 'MD-IDNO', null, null, 'MD', 'ru');
