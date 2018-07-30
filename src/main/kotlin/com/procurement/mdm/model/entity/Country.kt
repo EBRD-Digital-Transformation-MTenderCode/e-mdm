@@ -33,7 +33,7 @@ data class Country(
 @Embeddable
 class CountryKey : Serializable {
 
-    @Column(name = "code", length = 4)
+    @Column(name = "code", length = 2)
     val code: String? = null
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
