@@ -15,6 +15,7 @@ enum class ErrorType constructor(val code: String, val message: String) {
     RS_UNKNOWN("00.10", "Registration scheme not found."),
     REGION_UNKNOWN("00.11", "Region not found."),
     LOCALITY_UNKNOWN("00.12", "Locality not found."),
+    PMD_UNKNOWN("00.13", "Procurement method details for current language not found."),
     INVALID_JSON_TYPE("01.01", "Invalid json type."),
     INVALID_ITEMS("01.02", "Invalid data code."),
     INVALID_CPV("01.03", "Invalid cpv code."),

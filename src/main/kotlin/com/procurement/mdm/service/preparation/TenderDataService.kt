@@ -112,7 +112,7 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
 
     private fun getPmd(code: String, country: Country): String {
         val entity = pmdRepository.findByPmdKeyCodeAndPmdKeyCountry(code = code, country = country)
-                ?: throw InErrorException(ErrorType.TRANSLATION_UNKNOWN, code)
+                ?: throw InErrorException(ErrorType.PMD_UNKNOWN, code)
         return entity.name
     }
 
