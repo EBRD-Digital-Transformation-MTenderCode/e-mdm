@@ -28,7 +28,7 @@ enum class CommandType(private val value: String) {
     CREATE_EI("createEi"),
     CREATE_FS("createFs"),
     CREATE_TENDER("createTender"),
-    CREATE_BID("createBid"),;
+    CREATE_BID("createBid");
 
     @JsonValue
     fun value(): String {
