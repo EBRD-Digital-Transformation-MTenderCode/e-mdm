@@ -27,7 +27,8 @@ data class Context @JsonCreator constructor(
 enum class CommandType(private val value: String) {
     CREATE_EI("createEi"),
     CREATE_FS("createFs"),
-    CREATE_TENDER("createTender");
+    CREATE_TENDER("createTender"),
+    CREATE_BID("createBid"),;
 
     @JsonValue
     fun value(): String {
