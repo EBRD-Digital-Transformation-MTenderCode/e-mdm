@@ -1,49 +1,61 @@
 {
-  "id": "6edb81d5-c575-4304-a191-8e7f64546b0a",
-  "command": "createTender",
+  "id": "515fdc6d-7077-4076-b58f-4394b292d26e",
+  "command": "createBid",
   "context": {
-    "operationId": "6edb81d5-c575-4304-a191-8e7f64546b0a",
-    "requestId": "afd86780-8b5b-11e8-a6ec-8d8d666ffd72",
-    "cpid": null,
-    "ocid": null,
-    "stage": "PS",
-    "prevStage": null,
-    "processType": "createCN",
-    "operationType": "createCN",
-    "phase": "TENDERPERIOD",
+    "operationId": "515fdc6d-7077-4076-b58f-4394b292d26e",
+    "requestId": "a0d150a0-94af-11e8-a89d-51f8175d131b",
+    "cpid": "ocds-t1s2t3-MD-1533024973642",
+    "ocid": "ocds-t1s2t3-MD-1533024973642-EV-1533024973786",
+    "stage": "EV",
+    "prevStage": "EV",
+    "processType": "submitTheBid",
+    "operationType": "bid",
+    "phase": null,
     "owner": "445f6851-c908-407d-9b45-14b92f3e964b",
     "country": "MD",
     "language": "ro",
-    "pmd": "RT",
+    "pmd": "TEST_OT",
     "token": null,
     "access": null,
-    "startDate": "2018-07-19T13:57:34Z",
-    "endDate": "2018-09-18T08:12:00Z"
+    "startDate": "2018-07-31T10:51:07Z",
+    "endDate": null,
+    "bidId": null
   },
   "data": {
-    "tender": {
-      "items": [
-        {
-          "id": "1",
-          "classification": {
-            "scheme": "CPV",
-            "description": "Books and albums",
-            "id": "79200000-6"
-          },
-          "quantity": 12,
-          "unit": {
-            "id": "KGM",
-            "name": "kg"
-          },
-          "relatedLot": "1"
+    "tenderers": [
+      {
+        "name": "Googlehfhhfghg1",
+        "identifier": {
+          "scheme": "CPhffhghghV",
+          "id": "3010000fhfgfhgg0-0",
+          "legalName": "Google Big Brother",
+          "uri": "hhtps://google.com"
+        },
+        "address": {
+          "streetAddress": "",
+          "postalCode": "",
+          "addressDetails": {
+            "country": {
+              "id": ""
+            },
+            "region": {
+              "id": ""
+            },
+            "locality": {
+              "scheme": "",
+              "id": "",
+              "description": ""
+            }
+          }
+        },
+        "contactPoint": {
+          "name": "",
+          "email": "",
+          "telephone": "",
+          "url": ""
         }
-      ],
-      "classification": {
-        "scheme": "CPV",
-        "description": "Description",
-        "id": "79215000-6"
       }
-    }
+    ]
   },
   "version": "0.0.1"
 }
