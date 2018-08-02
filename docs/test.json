@@ -1,9 +1,9 @@
 {
-  "id": "26a9ecb8-3285-4c80-aef9-570987d80014",
+  "id": "26a9ecb8-3285-4c80-aef9-570987d80018",
   "command": "createTender",
   "context": {
-    "operationId": "26a9ecb8-3285-4c80-aef9-570987d80014",
-    "requestId": "45f28fd0-9673-11e8-a893-95a8e60c5a87",
+    "operationId": "26a9ecb8-3285-4c80-aef9-570987d80018",
+    "requestId": "37494cc0-9679-11e8-8e76-5394cf1f882d",
     "cpid": null,
     "ocid": null,
     "stage": "EV",
@@ -17,8 +17,8 @@
     "pmd": "TEST_OT",
     "token": null,
     "access": null,
-    "startDate": "2018-08-02T16:44:07Z",
-    "endDate": "2018-08-02T18:55:00Z",
+    "startDate": "2018-08-02T17:26:39Z",
+    "endDate": "2018-08-02T19:12:00Z",
     "bidId": null
   },
   "data": {
