@@ -92,7 +92,7 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
             }
         }
         //tender.classification
-        val commonClass = dto.tender.classification?.id ?: throw InErrorException(ErrorType.INVALID_COMMON_CPV)
+        val commonClass = dto.tender.classification.id
         val cpvEntity = cpvRepository.getCommonClass(code = commonClass, language = language)
                 ?: throw InErrorException(ErrorType.INVALID_COMMON_CPV, commonClass)
         dto.tender.apply {
