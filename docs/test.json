@@ -1,61 +1,98 @@
 {
-  "id": "515fdc6d-7077-4076-b58f-4394b292d26e",
-  "command": "createBid",
+  "id": "26a9ecb8-3285-4c80-aef9-570987d80018",
+  "command": "createTender",
   "context": {
-    "operationId": "515fdc6d-7077-4076-b58f-4394b292d26e",
-    "requestId": "a0d150a0-94af-11e8-a89d-51f8175d131b",
-    "cpid": "ocds-t1s2t3-MD-1533024973642",
-    "ocid": "ocds-t1s2t3-MD-1533024973642-EV-1533024973786",
+    "operationId": "26a9ecb8-3285-4c80-aef9-570987d80018",
+    "requestId": "37494cc0-9679-11e8-8e76-5394cf1f882d",
+    "cpid": null,
+    "ocid": null,
     "stage": "EV",
-    "prevStage": "EV",
-    "processType": "submitTheBid",
-    "operationType": "bid",
-    "phase": null,
+    "prevStage": null,
+    "processType": "createCN",
+    "operationType": "createCN",
+    "phase": "TENDERPERIOD",
     "owner": "445f6851-c908-407d-9b45-14b92f3e964b",
     "country": "MD",
     "language": "ro",
     "pmd": "TEST_OT",
     "token": null,
     "access": null,
-    "startDate": "2018-07-31T10:51:07Z",
-    "endDate": null,
+    "startDate": "2018-08-02T17:26:39Z",
+    "endDate": "2018-08-02T19:12:00Z",
     "bidId": null
   },
   "data": {
-    "tenderers": [
-      {
-        "name": "Googlehfhhfghg1",
-        "identifier": {
-          "scheme": "CPhffhghghV",
-          "id": "3010000fhfgfhgg0-0",
-          "legalName": "Google Big Brother",
-          "uri": "hhtps://google.com"
-        },
-        "address": {
-          "streetAddress": "",
-          "postalCode": "",
-          "addressDetails": {
-            "country": {
-              "id": ""
-            },
-            "region": {
-              "id": ""
-            },
-            "locality": {
-              "scheme": "",
-              "id": "",
-              "description": ""
+    "tender": {
+      "items": [
+        {
+          "id": "1",
+          "classification": {
+            "scheme": "CPV",
+            "description": "ggg",
+            "id": "30199220-8"
+          },
+          "additionalClassifications": [
+            {
+              "scheme": "CPVs",
+              "description": "",
+              "id": "AB06-7"
             }
-          }
+          ],
+          "quantity": 1,
+          "unit": {
+            "id": "86",
+            "name": "square"
+          },
+          "description": "",
+          "relatedLot": "1"
         },
-        "contactPoint": {
-          "name": "",
-          "email": "",
-          "telephone": "",
-          "url": ""
+        {
+          "id": "2",
+          "classification": {
+            "scheme": "CPV",
+            "description": "ggg",
+            "id": "30199230-1"
+          },
+          "additionalClassifications": [
+            {
+              "scheme": "CPVs",
+              "description": "",
+              "id": "AB06-7"
+            }
+          ],
+          "quantity": 1,
+          "unit": {
+            "id": "86",
+            "name": "square metre"
+          },
+          "description": "",
+          "relatedLot": "2"
+        },
+        {
+          "id": "3",
+          "classification": {
+            "scheme": "CPV",
+            "description": "ggg",
+            "id": "30199230-1"
+          },
+          "additionalClassifications": [
+            {
+              "scheme": "CPVs",
+              "description": "",
+              "id": "AB06-7"
+            }
+          ],
+          "quantity": 1,
+          "unit": {
+            "id": "86",
+            "name": "square metre"
+          },
+          "description": "",
+          "relatedLot": "3"
         }
-      }
-    ]
+      ],
+      "classification": null
+    }
   },
   "version": "0.0.1"
 }

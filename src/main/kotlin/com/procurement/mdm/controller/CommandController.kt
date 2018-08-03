@@ -24,12 +24,12 @@ class CommandController(private val commandService: CommandService) {
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(Exception::class)
-    fun exception(ex: Exception) = getExceptionResponseDto(ex)
-
-    @ResponseBody
-    @ResponseStatus(HttpStatus.OK)
-    @ExceptionHandler(InErrorException::class)
-    fun internalError(e: InErrorException) = getInErrorResponseDto(e)
+    fun exception(ex: Exception): ResponseDto {
+        return when (ex) {
+            is InErrorException -> getInErrorResponseDto(ex)
+            else -> getExceptionResponseDto(ex)
+        }
+    }
 }
 
 

@@ -23,6 +23,7 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
                                    private val cpvsRepository: CpvsRepository,
                                    private val unitRepository: UnitRepository,
                                    private val translateRepository: TranslateRepository,
+                                   private val organizationDataService: OrganizationDataService,
                                    private val pmdRepository: PmdRepository) : TenderDataService {
 
     override fun createTender(cm: CommandMessage): ResponseDto {
@@ -33,6 +34,9 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
         val dto = getData(cm)
         if (dto.tender.items != null) {
             processItems(dto, language)
+        }
+        dto.tender.procuringEntity?.let {
+            organizationDataService.processOrganization(dto.tender.procuringEntity, country)
         }
         processTranslate(dto, country, lang, pmd)
         return getResponseDto(data = dto, id = cm.id)
