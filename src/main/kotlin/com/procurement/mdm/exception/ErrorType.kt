@@ -17,7 +17,7 @@ enum class ErrorType constructor(val code: String, val message: String) {
     LOCALITY_UNKNOWN("00.12", "Locality not found."),
     PMD_UNKNOWN("00.13", "Procurement method details for current language not found."),
     INVALID_JSON_TYPE("01.01", "Invalid json type."),
-    INVALID_ITEMS("01.02", "Invalid data code."),
+    INVALID_ITEMS("01.02", "Invalid items code."),
     INVALID_CPV("01.03", "Invalid cpv code."),
     INVALID_COMMON_CPV("01.04", "Invalid common cpv class code."),
     INVALID_CPVS("01.05", "Invalid cpvs code."),

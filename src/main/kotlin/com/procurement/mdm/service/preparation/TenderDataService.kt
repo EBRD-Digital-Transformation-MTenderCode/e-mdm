@@ -53,8 +53,6 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
 
     private fun processItems(dto: TD, language: Language) {
         val items = dto.tender.items ?: return
-        //common Class
-        checkItemCodes(items, 3)
         //data cpv
         val cpvCodes = getCpvCodes(items)
         if (cpvCodes.isNotEmpty()) {
@@ -94,15 +92,12 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
             }
         }
         //tender.classification
-        val commonChars = getCommonChars(items, 3, 7)
-        val commonClass = getCommonClass(commonChars)
+        val commonClass = dto.tender.classification?.id ?: throw InErrorException(ErrorType.INVALID_COMMON_CPV)
         val cpvEntity = cpvRepository.getCommonClass(code = commonClass, language = language)
                 ?: throw InErrorException(ErrorType.INVALID_COMMON_CPV, commonClass)
         dto.tender.apply {
-            classification = ClassificationTD(
-                    id = cpvEntity.cpvKey?.code!!,
-                    description = cpvEntity.name,
-                    scheme = ClassificationScheme.CPV.value())
+            classification.description = cpvEntity.name
+            classification.scheme = ClassificationScheme.CPV.value()
             mainProcurementCategory = cpvEntity.mainProcurementCategory
         }
     }
@@ -118,39 +113,6 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
         val entity = pmdRepository.findByPmdKeyCodeAndPmdKeyCountry(code = code, country = country)
                 ?: throw InErrorException(ErrorType.PMD_UNKNOWN, code)
         return entity.name
-    }
-
-    private fun checkItemCodes(items: HashSet<ItemTD>, charCount: Int) {
-        if (items.asSequence().map { it.classification.id.take(charCount) }.toSet().size > 1)
-            throw InErrorException(ErrorType.INVALID_ITEMS)
-    }
-
-    private fun getCommonChars(items: HashSet<ItemTD>, countFrom: Int, countTo: Int): String {
-        var commonChars = ""
-        for (count in countFrom..countTo) {
-            val itemClass = items.asSequence().map { it.classification.id.take(count) }.toSet()
-            if (itemClass.size > 1) {
-                return commonChars
-            } else {
-                commonChars = itemClass.first()
-            }
-        }
-        return commonChars
-    }
-
-    private fun getCommonClass(commonChars: String): String {
-        return commonChars.padEnd(8, '0')//09134230-8?(2)
-//        val classOfItems = commonChars.padEnd(8, '0')//09134230-8?(2)
-//        val n1 = classOfItems[0].toString().toInt()
-//        val n2 = classOfItems[1].toString().toInt()
-//        val n3 = classOfItems[2].toString().toInt()
-//        val n4 = classOfItems[3].toString().toInt()
-//        val n5 = classOfItems[4].toString().toInt()
-//        val n6 = classOfItems[5].toString().toInt()
-//        val n7 = classOfItems[6].toString().toInt()
-//        val n8 = classOfItems[7].toString().toInt()
-//        val checkSum: Int = (n1 * 3 + n2 * 7 + n3 * 1 + n4 * 3 + n5 * 7 + n6 * 1 + n7 * 3 + n8 * 7) % 10
-//        return "$classOfItems-$checkSum"
     }
 
     private fun getCpvCodes(items: HashSet<ItemTD>): List<String> {
