@@ -62,7 +62,7 @@ data class ItemTD @JsonCreator constructor(
 data class ClassificationTD @JsonCreator constructor(
 
         @field:NotNull
-        val id: String,
+        var id: String,
 
         var description: String?,
 

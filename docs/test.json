@@ -1,98 +1,125 @@
 {
-  "id": "26a9ecb8-3285-4c80-aef9-570987d80018",
-  "command": "createTender",
-  "context": {
-    "operationId": "26a9ecb8-3285-4c80-aef9-570987d80018",
-    "requestId": "37494cc0-9679-11e8-8e76-5394cf1f882d",
-    "cpid": null,
-    "ocid": null,
-    "stage": "EV",
-    "prevStage": null,
-    "processType": "createCN",
-    "operationType": "createCN",
-    "phase": "TENDERPERIOD",
-    "owner": "445f6851-c908-407d-9b45-14b92f3e964b",
-    "country": "MD",
-    "language": "ro",
-    "pmd": "TEST_OT",
-    "token": null,
-    "access": null,
-    "startDate": "2018-08-02T17:26:39Z",
-    "endDate": "2018-08-02T19:12:00Z",
-    "bidId": null
-  },
   "data": {
     "tender": {
       "items": [
         {
-          "id": "1",
-          "classification": {
-            "scheme": "CPV",
-            "description": "ggg",
-            "id": "30199220-8"
-          },
-          "additionalClassifications": [
-            {
-              "scheme": "CPVs",
-              "description": "",
-              "id": "AB06-7"
-            }
-          ],
-          "quantity": 1,
-          "unit": {
-            "id": "86",
-            "name": "square"
-          },
-          "description": "",
-          "relatedLot": "1"
-        },
-        {
           "id": "2",
+          "description": "",
           "classification": {
-            "scheme": "CPV",
-            "description": "ggg",
-            "id": "30199230-1"
+            "id": "30199230-1",
+            "description": "Plicuri",
+            "scheme": "CPV"
           },
           "additionalClassifications": [
             {
-              "scheme": "CPVs",
-              "description": "",
-              "id": "AB06-7"
+              "id": "AB06-7",
+              "description": "Plastic",
+              "scheme": "CPVS"
             }
           ],
           "quantity": 1,
           "unit": {
             "id": "86",
-            "name": "square metre"
+            "name": " Milion metri patrati spatiu locativ "
           },
-          "description": "",
           "relatedLot": "2"
         },
         {
           "id": "3",
+          "description": "",
           "classification": {
-            "scheme": "CPV",
-            "description": "ggg",
-            "id": "30199230-1"
+            "id": "30199230-1",
+            "description": "Plicuri",
+            "scheme": "CPV"
           },
           "additionalClassifications": [
             {
-              "scheme": "CPVs",
-              "description": "",
-              "id": "AB06-7"
+              "id": "AB06-7",
+              "description": "Plastic",
+              "scheme": "CPVS"
             }
           ],
           "quantity": 1,
           "unit": {
             "id": "86",
-            "name": "square metre"
+            "name": " Milion metri patrati spatiu locativ "
           },
-          "description": "",
           "relatedLot": "3"
+        },
+        {
+          "id": "1",
+          "description": "",
+          "classification": {
+            "id": "30199220-8",
+            "description": "Cărţi poştale neilustrate",
+            "scheme": "CPV"
+          },
+          "additionalClassifications": [
+            {
+              "id": "AB06-7",
+              "description": "Plastic",
+              "scheme": "CPVS"
+            }
+          ],
+          "quantity": 1,
+          "unit": {
+            "id": "86",
+            "name": " Milion metri patrati spatiu locativ "
+          },
+          "relatedLot": "1"
         }
       ],
-      "classification": null
+      "classification": {
+        "id": "30199200-2",
+        "description": "Plicuri, cărţi poştale şi cărţi poştale neilustrate",
+        "scheme": "CPV"
+      },
+      "mainProcurementCategory": "goods",
+      "submissionMethodRationale": [
+        "submissionMethodRationale"
+      ],
+      "submissionMethodDetails": "submissionMethodDetails",
+      "procurementMethodDetails": "test",
+      "eligibilityCriteria": "eligibilityCriteria",
+      "procuringEntity": {
+        "name": "Edward-Compan",
+        "address": {
+          "streetAddress": "",
+          "addressDetails": {
+            "country": {
+              "scheme": "iso-alpha2",
+              "id": "MD",
+              "description": "MOLDOVA",
+              "uri": "http://reference.iatistandard.org/202/codelists/Country/#id1"
+            },
+            "region": {
+              "scheme": "CUATM",
+              "id": "1000000",
+              "description": "Anenii Noi",
+              "uri": "www.statistica.md/public/files/Clasificatoare/CUATM_rom.zip"
+            },
+            "locality": {
+              "scheme": "CUAM",
+              "id": "1001001",
+              "description": "dgfdfg"
+            }
+          }
+        },
+        "identifier": {
+          "id": "gggg",
+          "scheme": "MD-IDNO",
+          "legalName": "fff",
+          "uri": "hhh"
+        },
+        "contactPoint": {
+          "name": "hgfh",
+          "email": "hfgh",
+          "telephone": "hgfhfh",
+          "faxNumber": "hgfh",
+          "url": "hgfhgf"
+        }
+      }
     }
   },
-  "version": "0.0.1"
+  "id": "26a9ecb8-3685-4c80-aef9-570987d80039"
 }

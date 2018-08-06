@@ -32,9 +32,7 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
         val language = validationService.getLanguage(languageCode = lang, internal = true)
         val country = validationService.getCountry(languageCode = lang, countryCode = cm.context.country)
         val dto = getData(cm)
-        if (dto.tender.items != null) {
-            processItems(dto, language)
-        }
+        processItems(dto, language)
         dto.tender.procuringEntity?.let {
             organizationDataService.processOrganization(dto.tender.procuringEntity, country)
         }
@@ -52,7 +50,7 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
     }
 
     private fun processItems(dto: TD, language: Language) {
-        val items = dto.tender.items ?: return
+        val items = dto.tender.items
         //data cpv
         val cpvCodes = getCpvCodes(items)
         if (cpvCodes.isNotEmpty()) {
@@ -96,6 +94,7 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
         val cpvEntity = cpvRepository.getCommonClass(code = commonClass, language = language)
                 ?: throw InErrorException(ErrorType.INVALID_COMMON_CPV, commonClass)
         dto.tender.apply {
+            classification.id = cpvEntity.cpvKey?.code!!
             classification.description = cpvEntity.name
             classification.scheme = ClassificationScheme.CPV.value()
             mainProcurementCategory = cpvEntity.mainProcurementCategory
