@@ -18,9 +18,9 @@ data class TD @JsonCreator constructor(
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class TenderTD @JsonCreator constructor(
 
-        val items: HashSet<ItemTD>,
+        val items: HashSet<ItemTD>?,
 
-        var classification: ClassificationTD,
+        var classification: ClassificationTD?,
 
         var mainProcurementCategory: String?,
 
