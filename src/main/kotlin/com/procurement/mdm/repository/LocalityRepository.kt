@@ -14,8 +14,5 @@ interface LocalityRepository : JpaRepository<Locality, LocalityKey> {
     fun findByLocalityKeyRegion(region: Region): List<Locality>
 
     @Transactional(readOnly = true)
-    fun findOneBySchemeAndLocalityKeyRegion(scheme: String, region: Region): Locality?
-
-    @Transactional(readOnly = true)
-    fun findByLocalityKeyCodeAndLocalityKeyRegion(code: String, region: Region): Locality?
+    fun findByLocalityKeyCodeAndLocalityKeyRegionAndScheme(code: String, region: Region, scheme: String): Locality?
 }
