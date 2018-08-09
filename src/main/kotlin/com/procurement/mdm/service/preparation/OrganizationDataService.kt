@@ -42,14 +42,17 @@ class OrganizationDataServiceImpl(private val registrationSchemeRepository: Regi
             uri = regionEntity.uri
         }
         //locality
-        val localityEntity = localityRepository.findByLocalityKeyCodeAndLocalityKeyRegionAndScheme(
-                        addressDetails.locality.id,
-                        regionEntity,
-                        addressDetails.locality.scheme)
-                        ?: throw InErrorException(ErrorType.LOCALITY_UNKNOWN)
-        addressDetails.locality.apply {
-            description = localityEntity.name
-            uri = localityEntity.uri
+        val schemeEntity = localityRepository.findOneByScheme(addressDetails.locality.scheme)
+        if (schemeEntity != null) {
+            val localityEntity = localityRepository.findByLocalityKeyCodeAndLocalityKeyRegionAndScheme(
+                    addressDetails.locality.id,
+                    regionEntity,
+                    addressDetails.locality.scheme)
+                    ?: throw InErrorException(ErrorType.LOCALITY_UNKNOWN)
+            addressDetails.locality.apply {
+                description = localityEntity.name
+                uri = localityEntity.uri
+            }
         }
     }
 }
