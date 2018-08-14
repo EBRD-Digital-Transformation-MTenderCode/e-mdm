@@ -104,9 +104,9 @@ data class Value @JsonCreator constructor(
 
 data class ContractPeriod @JsonCreator constructor(
 
-        val startDate: LocalDateTime?,
+        val startDate: String?,
 
-        val endDate: LocalDateTime?
+        val endDate: String?
 )
 
 data class PlaceOfPerformance @JsonCreator constructor(

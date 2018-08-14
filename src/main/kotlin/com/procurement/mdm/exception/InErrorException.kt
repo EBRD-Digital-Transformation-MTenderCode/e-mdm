@@ -7,7 +7,7 @@ data class InErrorException(private val error: ErrorType,
 
     val code: String = error.code
 
-    val msg: String = error.message + " " + desc
+    val msg: String = error.message + " " + (desc ?: "")
 
 }
 
