@@ -27,7 +27,7 @@ class CommandServiceImpl(private val tenderDataService: TenderDataService,
             CommandType.CREATE_FS -> budgetDataService.createFs(cm)
             CommandType.CREATE_TENDER -> tenderDataService.createTender(cm)
             CommandType.CREATE_BID -> bidDataService.createBid(cm)
-            CommandType.CREATE_ENQUIRY->enquiryDataService.createEnquiry(cm)
+            CommandType.CREATE_ENQUIRY -> enquiryDataService.createEnquiry(cm)
         }
     }
 }
