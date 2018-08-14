@@ -3,7 +3,9 @@ package com.procurement.mdm.model.dto.data
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import java.math.BigDecimal
+import java.time.LocalDateTime
 import java.util.*
 import javax.validation.Valid
 import javax.validation.constraints.NotNull
@@ -11,7 +13,6 @@ import javax.validation.constraints.NotNull
 data class TD @JsonCreator constructor(
 
         @field:NotNull
-        @JsonProperty("tender")
         val tender: TenderTD
 )
 
@@ -19,6 +20,8 @@ data class TD @JsonCreator constructor(
 data class TenderTD @JsonCreator constructor(
 
         val items: HashSet<ItemTD>?,
+
+        val lots: HashSet<LotTD>?,
 
         var classification: ClassificationTD?,
 
@@ -72,8 +75,43 @@ data class ClassificationTD @JsonCreator constructor(
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class ItemUnitTD @JsonCreator constructor(
 
-        @field:NotNull
         val id: String,
 
         var name: String?
+)
+
+data class LotTD @JsonCreator constructor(
+
+        var id: String?,
+
+        val title: String?,
+
+        val description: String?,
+
+        val value: Value?,
+
+        val contractPeriod: ContractPeriod?,
+
+        val placeOfPerformance: PlaceOfPerformance
+)
+
+data class Value @JsonCreator constructor(
+
+        var amount: BigDecimal?,
+
+        var currency: String?
+)
+
+data class ContractPeriod @JsonCreator constructor(
+
+        val startDate: LocalDateTime?,
+
+        val endDate: LocalDateTime?
+)
+
+data class PlaceOfPerformance @JsonCreator constructor(
+
+        val address: Address,
+
+        val description: String?
 )
