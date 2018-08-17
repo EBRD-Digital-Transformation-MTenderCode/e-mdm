@@ -96,6 +96,8 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
                             .forEach { seUnitData(it.unit, entity) }
                 }
             }
+        } else {
+            dto.tender.classification = null
         }
         //tender.classification
         if (dto.tender.classification != null) {
