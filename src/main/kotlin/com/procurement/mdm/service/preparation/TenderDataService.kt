@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service
 
 interface TenderDataService {
 
-    fun createTender(cm: CommandMessage): ResponseDto
+    fun processTenderData(cm: CommandMessage): ResponseDto
 }
 
 @Service
@@ -27,7 +27,7 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
                                    private val addressDataService: AddressDataService,
                                    private val pmdRepository: PmdRepository) : TenderDataService {
 
-    override fun createTender(cm: CommandMessage): ResponseDto {
+    override fun processTenderData(cm: CommandMessage): ResponseDto {
         val lang = cm.context.language
         val pmd = cm.context.pmd ?: throw InErrorException(ErrorType.INVALID_PMD)
         val language = validationService.getLanguage(languageCode = lang, internal = true)
@@ -96,8 +96,6 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
                             .forEach { seUnitData(it.unit, entity) }
                 }
             }
-        } else {
-            dto.tender.classification = null
         }
         //tender.classification
         if (dto.tender.classification != null) {

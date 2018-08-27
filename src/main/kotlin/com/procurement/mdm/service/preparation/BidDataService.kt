@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service
 
 interface BidDataService {
 
-    fun createBid(cm: CommandMessage): ResponseDto
+    fun processBidData(cm: CommandMessage): ResponseDto
 }
 
 @Service
@@ -20,7 +20,7 @@ class BidDataServiceImpl(private val validationService: ValidationService,
                          private val organizationDataService: OrganizationDataService
 ) : BidDataService {
 
-    override fun createBid(cm: CommandMessage): ResponseDto {
+    override fun processBidData(cm: CommandMessage): ResponseDto {
         val lang = cm.context.language
         val country = validationService.getCountry(languageCode = lang, countryCode = cm.context.country)
         val dto = getData(cm)

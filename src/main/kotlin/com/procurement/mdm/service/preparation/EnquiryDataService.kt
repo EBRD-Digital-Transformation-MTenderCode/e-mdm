@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service
 
 interface EnquiryDataService {
 
-    fun createEnquiry(cm: CommandMessage): ResponseDto
+    fun processEnquiryData(cm: CommandMessage): ResponseDto
 }
 
 @Service
@@ -21,7 +21,7 @@ class EnquiryDataServiceImpl(private val validationService: ValidationService,
                              private val organizationDataService: OrganizationDataService
 ) : EnquiryDataService {
 
-    override fun createEnquiry(cm: CommandMessage): ResponseDto {
+    override fun processEnquiryData(cm: CommandMessage): ResponseDto {
         val lang = cm.context.language
         val country = validationService.getCountry(languageCode = lang, countryCode = cm.context.country)
         val dto = getData(cm)

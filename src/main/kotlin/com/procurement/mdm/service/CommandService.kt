@@ -23,11 +23,11 @@ class CommandServiceImpl(private val tenderDataService: TenderDataService,
 
     override fun execute(cm: CommandMessage): ResponseDto {
         return when (cm.command) {
-            CommandType.CREATE_EI -> budgetDataService.createEi(cm)
-            CommandType.CREATE_FS -> budgetDataService.createFs(cm)
-            CommandType.CREATE_TENDER -> tenderDataService.createTender(cm)
-            CommandType.CREATE_BID -> bidDataService.createBid(cm)
-            CommandType.CREATE_ENQUIRY -> enquiryDataService.createEnquiry(cm)
+            CommandType.PROCESS_EI_DATA -> budgetDataService.processEiData(cm)
+            CommandType.PROCESS_FS_DATA -> budgetDataService.processFsData(cm)
+            CommandType.PROCESS_TENDER_DATA -> tenderDataService.processTenderData(cm)
+            CommandType.PROCESS_BID_DATA -> bidDataService.processBidData(cm)
+            CommandType.PROCESS_ENQUIRY_DATA -> enquiryDataService.processEnquiryData(cm)
         }
     }
 }

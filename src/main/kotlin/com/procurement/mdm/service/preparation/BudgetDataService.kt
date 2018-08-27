@@ -15,9 +15,9 @@ import org.springframework.stereotype.Service
 
 interface BudgetDataService {
 
-    fun createEi(cm: CommandMessage): ResponseDto
+    fun processEiData(cm: CommandMessage): ResponseDto
 
-    fun createFs(cm: CommandMessage): ResponseDto
+    fun processFsData(cm: CommandMessage): ResponseDto
 }
 
 @Service
@@ -27,7 +27,7 @@ class BudgetDataServiceImpl(private val validationService: ValidationService,
                             private val currencyRepository: CurrencyRepository
 ) : BudgetDataService {
 
-    override fun createEi(cm: CommandMessage): ResponseDto {
+    override fun processEiData(cm: CommandMessage): ResponseDto {
         val lang = cm.context.language
         val country = validationService.getCountry(languageCode = lang, countryCode = cm.context.country)
         val dto = getData(cm)
@@ -47,7 +47,7 @@ class BudgetDataServiceImpl(private val validationService: ValidationService,
         return getResponseDto(data = dto, id = cm.id)
     }
 
-    override fun createFs(cm: CommandMessage): ResponseDto {
+    override fun processFsData(cm: CommandMessage): ResponseDto {
         val country = validationService.getCountry(languageCode = cm.context.language, countryCode = cm.context.country)
         val entities = currencyRepository.findByCurrencyKeyLanguageCodeAndCountries(cm.context.language, country)
         val dto = getData(cm)
