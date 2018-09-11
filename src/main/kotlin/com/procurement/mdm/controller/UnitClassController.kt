@@ -18,4 +18,14 @@ class UnitClassController(private val unitClassService: UnitClassService) {
                         languageCode = lang.toLowerCase()),
                 HttpStatus.OK)
     }
+
+    @GetMapping("/by-unit")
+    fun getUnitClassByUnit(@RequestParam lang: String,
+                           @RequestParam unitCode: String): ResponseEntity<ResponseDto> {
+        return ResponseEntity(
+                unitClassService.getUnitClassByUnit(
+                        languageCode = lang.toLowerCase(),
+                        unitCode = unitCode),
+                HttpStatus.OK)
+    }
 }
