@@ -19,9 +19,9 @@ class UnitClassController(private val unitClassService: UnitClassService) {
                 HttpStatus.OK)
     }
 
-    @GetMapping("/by-unit")
-    fun getUnitClassByUnit(@RequestParam lang: String,
-                           @RequestParam unitCode: String): ResponseEntity<ResponseDto> {
+    @GetMapping("/{unitCode}")
+    fun getCountries(@RequestParam lang: String,
+                     @PathVariable("unitCode") unitCode: String): ResponseEntity<ResponseDto> {
         return ResponseEntity(
                 unitClassService.getUnitClassByUnit(
                         languageCode = lang.toLowerCase(),
