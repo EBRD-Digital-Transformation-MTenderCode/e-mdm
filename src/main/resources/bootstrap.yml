@@ -3,8 +3,8 @@ server:
 
 spring:
   application:
-    name: e-mdm
+    name: mdm
   cloud:
     config:
       failFast: true
-      name: e-mdm
+      name: mdm

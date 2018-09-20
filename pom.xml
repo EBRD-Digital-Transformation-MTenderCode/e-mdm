@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.procurement</groupId>
-    <artifactId>e-mdm</artifactId>
+    <artifactId>mdm</artifactId>
     <version>18.06.1</version>
 
     <parent>
