@@ -27,5 +27,5 @@ enum class ErrorType constructor(val code: String, val message: String) {
     INVALID_BUYER("01.08", "Invalid buyer."),
     INVALID_PR_ENTITY("01.09", "Invalid procuring entity."),
     INVALID_COUNTRY("01.10", "Invalid country."),
-    INVALID_JSON("01.03", "Invalid json data."),;
+    INVALID_URI("01.11", "Invalid uri.");
 }
