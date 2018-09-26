@@ -7,9 +7,9 @@ import javax.validation.constraints.NotNull
 
 data class BD @JsonCreator constructor(
 
-        var tender: TenderBD?,
+        var tender: TenderBD,
 
-        var planning: PlanningBD?,
+        var planning: PlanningBD,
 
         val buyer: OrganizationReference?
 )

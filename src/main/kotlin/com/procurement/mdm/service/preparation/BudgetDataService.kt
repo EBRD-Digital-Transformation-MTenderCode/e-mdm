@@ -31,12 +31,12 @@ class BudgetDataServiceImpl(private val validationService: ValidationService,
         val lang = cm.context.language
         val country = validationService.getCountry(languageCode = lang, countryCode = cm.context.country)
         val dto = getData(cm)
-        val cpvCode = dto.tender?.classification?.id ?: throw InErrorException(ErrorType.INVALID_CPV)
+        val cpvCode = dto.tender.classification?.id ?: throw InErrorException(ErrorType.INVALID_CPV)
         val cpvEntity = cpvRepository.findByCpvKeyCodeAndCpvKeyLanguageCode(
                 code = cpvCode,
                 languageCode = cm.context.language)
                 ?: throw InErrorException(ErrorType.CPV_CODE_UNKNOWN)
-        dto.tender?.apply {
+        dto.tender.apply {
             classification?.scheme = ClassificationScheme.CPV.value()
             classification?.description = cpvEntity.name
             mainProcurementCategory = cpvEntity.mainProcurementCategory
@@ -51,7 +51,7 @@ class BudgetDataServiceImpl(private val validationService: ValidationService,
         val country = validationService.getCountry(languageCode = cm.context.language, countryCode = cm.context.country)
         val entities = currencyRepository.findByCurrencyKeyLanguageCodeAndCountries(cm.context.language, country)
         val dto = getData(cm)
-        val currencyCode = dto.planning?.budget?.amount?.currency ?: throw InErrorException(ErrorType.CURRENCY_UNKNOWN)
+        val currencyCode = dto.planning.budget.amount.currency
         entities.asSequence().firstOrNull { it.currencyKey?.code.equals(currencyCode) }
                 ?: throw InErrorException(ErrorType.CURRENCY_UNKNOWN)
 
@@ -60,7 +60,7 @@ class BudgetDataServiceImpl(private val validationService: ValidationService,
             organizationDataService.processOrganization(buyer, country)
         }
 
-        val procuringEntity = dto.tender?.procuringEntity
+        val procuringEntity = dto.tender.procuringEntity
         if (procuringEntity != null) {
             organizationDataService.processOrganization(procuringEntity, country)
         }
