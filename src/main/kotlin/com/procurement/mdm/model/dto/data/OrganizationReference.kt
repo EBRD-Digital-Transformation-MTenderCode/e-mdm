@@ -13,19 +13,14 @@ data class OrganizationReference @JsonCreator constructor(
 
         val name: String?,
 
-        @field:Valid
         val address: Address,
 
-        @field:Valid
         val identifier: Identifier,
 
-        @field:Valid
         val additionalIdentifiers: HashSet<Identifier>?,
 
-        @field:Valid
         val contactPoint: ContactPoint?,
 
-        @field:Valid
         val details: Details?,
 
         val buyerProfile: String?
@@ -77,20 +72,16 @@ data class Address @JsonCreator constructor(
 
         val postalCode: String?,
 
-        @field:Valid
         val addressDetails: AddressDetails
 )
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class AddressDetails(
 
-        @field:Valid
         val country: CountryDetails,
 
-        @field:Valid
         val region: RegionDetails,
 
-        @field:Valid
         val locality: LocalityDetails
 )
 

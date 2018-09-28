@@ -11,6 +11,5 @@ import javax.validation.constraints.NotNull
 
 data class EnquiryData @JsonCreator constructor(
 
-        @field:Valid @field:NotEmpty @field:NotNull
         val author: OrganizationReference
 )

@@ -11,6 +11,5 @@ import javax.validation.constraints.NotNull
 
 data class BidData @JsonCreator constructor(
 
-        @field:Valid @field:NotEmpty @field:NotNull
         val tenderers: List<OrganizationReference>
 )
