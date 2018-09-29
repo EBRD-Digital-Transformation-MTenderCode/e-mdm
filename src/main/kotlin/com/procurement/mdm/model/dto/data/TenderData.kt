@@ -85,7 +85,7 @@ data class LotTD @JsonCreator constructor(
 
         val contractPeriod: ContractPeriod?,
 
-        val placeOfPerformance: PlaceOfPerformance
+        val placeOfPerformance: PlaceOfPerformance?
 )
 
 data class Value @JsonCreator constructor(

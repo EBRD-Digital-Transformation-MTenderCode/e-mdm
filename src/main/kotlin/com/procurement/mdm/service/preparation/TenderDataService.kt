@@ -38,9 +38,9 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
             organizationDataService.processOrganization(dto.tender.procuringEntity, country)
         }
         if (dto.tender.lots != null) {
-            dto.tender.lots.forEach { lot ->
-                addressDataService.processAddress(lot.placeOfPerformance.address, country)
-            }
+            dto.tender.lots.asSequence()
+                    .filter { it.placeOfPerformance != null }
+                    .forEach { addressDataService.processAddress(it.placeOfPerformance!!.address, country) }
         }
         processTranslate(dto, country, lang, pmd)
         return getResponseDto(data = dto, id = cm.id)
