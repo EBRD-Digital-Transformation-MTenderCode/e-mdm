@@ -21,9 +21,10 @@
         <project.service.port>8080</project.service.port>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <docker-image-profile>-swarm</docker-image-profile>
+        <!--Docker-->
+        <docker-registry>docker.io/eprocurementsystems</docker-registry>
+        <docker-image-profile></docker-image-profile>
         <docker-maven-plugin.version>0.24.0</docker-maven-plugin.version>
-        <docker-registry>dev.docker-registry.eprocurement.systems</docker-registry>
     </properties>
 
     <dependencyManagement>
