@@ -1,0 +1,9 @@
+INSERT INTO public.currency (code, def, description, name, language_code) VALUES ('EUR', false, '', 'EUR', 'en');
+INSERT INTO public.currency (code, def, description, name, language_code) VALUES ('EUR', false, '', 'EUR', 'ru');
+INSERT INTO public.currency (code, def, description, name, language_code) VALUES ('EUR', false, '', 'EUR', 'ro');
+INSERT INTO public.currency (code, def, description, name, language_code) VALUES ('MDL', false, '', 'MDL', 'en');
+INSERT INTO public.currency (code, def, description, name, language_code) VALUES ('MDL', false, '', 'MDL', 'ru');
+INSERT INTO public.currency (code, def, description, name, language_code) VALUES ('MDL', false, '', 'MDL', 'ro');
+INSERT INTO public.currency (code, def, description, name, language_code) VALUES ('USD', false, '', 'USD', 'en');
+INSERT INTO public.currency (code, def, description, name, language_code) VALUES ('USD', false, '', 'USD', 'ru');
+INSERT INTO public.currency (code, def, description, name, language_code) VALUES ('USD', false, '', 'USD', 'ro');
