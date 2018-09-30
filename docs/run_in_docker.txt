@@ -1,10 +1,4 @@
-mvn clean package docker:build
-docker login https://dev.docker-registry.eprocurement.systems
-Username: docker
-Password: EGrH4rOVQrcwXCtM
-docker push dev.docker-registry.eprocurement.systems/e-mdm:18.06.1
-
-https://hub.docker.com/r/eprocurementsystems/forms-service/
-
+mvn clean package docker:build docker:push
+docker login docker.io/eprocurementsystems
 Docker ID: eprocurementsystems
 pass: uStudioeProcurement
