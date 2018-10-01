@@ -49,7 +49,7 @@ data class ContactPoint @JsonCreator constructor(
 
         val faxNumber: String?,
 
-        val url: String
+        val url: String?
 )
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
