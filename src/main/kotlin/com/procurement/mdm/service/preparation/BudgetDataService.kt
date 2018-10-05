@@ -63,7 +63,6 @@ class BudgetDataServiceImpl(private val validationService: ValidationService,
 
         val procuringEntity = dto.tender.procuringEntity
         if (procuringEntity != null) {
-            procuringEntity.identifier.uri ?: throw InErrorException(ErrorType.INVALID_URI)
             organizationDataService.processOrganization(procuringEntity, country)
         }
 
