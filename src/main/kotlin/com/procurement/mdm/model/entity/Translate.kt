@@ -8,13 +8,13 @@ import javax.persistence.*
 @Table(name = "translate")
 data class Translate(
 
-    @EmbeddedId
+        @EmbeddedId
         val translateKey: TranslateKey? = null,
 
-    @Column(name = "name")
+        @Column(name = "name")
         val name: String = "",
 
-    @Column(name = "description")
+        @Column(name = "description")
         val description: String = ""
 )
 

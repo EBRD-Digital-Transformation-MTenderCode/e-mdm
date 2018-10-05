@@ -1,7 +1,6 @@
 package com.procurement.mdm.repository
 
 import com.procurement.mdm.model.entity.Country
-import com.procurement.mdm.model.entity.Locality
 import com.procurement.mdm.model.entity.RegistrationScheme
 import com.procurement.mdm.model.entity.RsKey
 import org.springframework.data.jpa.repository.JpaRepository

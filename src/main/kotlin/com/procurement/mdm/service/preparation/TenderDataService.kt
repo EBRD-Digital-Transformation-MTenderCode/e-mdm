@@ -163,7 +163,7 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
     }
 
     private fun getData(cm: CommandMessage): TD {
-        if(cm.data.size() == 0) throw InErrorException(ErrorType.INVALID_DATA, null, cm.id)
+        if (cm.data.size() == 0) throw InErrorException(ErrorType.INVALID_DATA, null, cm.id)
         return toObject(TD::class.java, cm.data)
     }
 

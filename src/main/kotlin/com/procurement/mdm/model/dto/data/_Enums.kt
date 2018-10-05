@@ -37,7 +37,8 @@ enum class ClassificationScheme constructor(private val value: String) {
 
         @JsonCreator
         fun fromValue(value: String): ClassificationScheme {
-            return CONSTANTS[value] ?: throw InErrorException(ErrorType.INVALID_JSON_TYPE, ClassificationScheme::class.java.name)
+            return CONSTANTS[value]
+                    ?: throw InErrorException(ErrorType.INVALID_JSON_TYPE, ClassificationScheme::class.java.name)
         }
     }
 }

@@ -5,7 +5,6 @@ import com.procurement.mdm.exception.ErrorType
 import com.procurement.mdm.exception.InErrorException
 import com.procurement.mdm.model.dto.CommandMessage
 import com.procurement.mdm.model.dto.ResponseDto
-import com.procurement.mdm.model.dto.data.BidData
 import com.procurement.mdm.model.dto.data.EnquiryData
 import com.procurement.mdm.model.dto.getResponseDto
 import com.procurement.mdm.service.ValidationService

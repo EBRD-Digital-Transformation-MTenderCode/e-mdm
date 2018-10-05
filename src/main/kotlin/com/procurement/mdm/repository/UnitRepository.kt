@@ -1,7 +1,7 @@
 package com.procurement.mdm.repository
 
-import com.procurement.mdm.model.entity.Units
 import com.procurement.mdm.model.entity.UnitKey
+import com.procurement.mdm.model.entity.Units
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional

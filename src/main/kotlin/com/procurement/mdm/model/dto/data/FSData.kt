@@ -2,8 +2,6 @@ package com.procurement.mdm.model.dto.data
 
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonInclude
-import javax.validation.Valid
-import javax.validation.constraints.NotNull
 
 data class FS @JsonCreator constructor(
 

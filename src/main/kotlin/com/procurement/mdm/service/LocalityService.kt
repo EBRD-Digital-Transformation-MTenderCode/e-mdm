@@ -4,7 +4,6 @@ import com.procurement.mdm.model.dto.ResponseDto
 import com.procurement.mdm.model.dto.getResponseDto
 import com.procurement.mdm.model.entity.getItems
 import com.procurement.mdm.repository.LocalityRepository
-import com.procurement.mdm.repository.RegionRepository
 import org.springframework.stereotype.Service
 
 interface LocalityService {

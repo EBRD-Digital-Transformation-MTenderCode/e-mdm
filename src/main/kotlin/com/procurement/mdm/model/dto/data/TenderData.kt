@@ -2,13 +2,8 @@ package com.procurement.mdm.model.dto.data
 
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonInclude
-import com.fasterxml.jackson.annotation.JsonProperty
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import java.math.BigDecimal
-import java.time.LocalDateTime
 import java.util.*
-import javax.validation.Valid
-import javax.validation.constraints.NotNull
 
 data class TD @JsonCreator constructor(
 

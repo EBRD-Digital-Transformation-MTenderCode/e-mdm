@@ -2,9 +2,7 @@ package com.procurement.mdm.model.dto.data
 
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonInclude
-import java.util.HashSet
-import javax.validation.Valid
-import javax.validation.constraints.NotNull
+import java.util.*
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class OrganizationReference @JsonCreator constructor(
