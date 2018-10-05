@@ -31,7 +31,7 @@ class EnquiryDataServiceImpl(private val validationService: ValidationService,
     }
 
     private fun getData(cm: CommandMessage): EnquiryData {
-        cm.data ?: throw InErrorException(ErrorType.INVALID_DATA, cm.id)
+        if (cm.data.size() == 0) throw InErrorException(ErrorType.INVALID_DATA, null, cm.id)
         return toObject(EnquiryData::class.java, cm.data)
     }
 

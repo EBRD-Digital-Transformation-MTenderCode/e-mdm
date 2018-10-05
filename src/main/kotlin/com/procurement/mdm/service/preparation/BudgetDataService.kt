@@ -31,7 +31,7 @@ class BudgetDataServiceImpl(private val validationService: ValidationService,
     override fun processEiData(cm: CommandMessage): ResponseDto {
         val lang = cm.context.language
         val country = validationService.getCountry(languageCode = lang, countryCode = cm.context.country)
-        val dto = toObject(EI::class.java, cm.data!!)
+        val dto = getEiData(cm)
         val cpvCode = dto.tender.classification.id
         val cpvEntity = cpvRepository.findByCpvKeyCodeAndCpvKeyLanguageCode(
                 code = cpvCode,
@@ -51,7 +51,7 @@ class BudgetDataServiceImpl(private val validationService: ValidationService,
     override fun processFsData(cm: CommandMessage): ResponseDto {
         val country = validationService.getCountry(languageCode = cm.context.language, countryCode = cm.context.country)
         val entities = currencyRepository.findByCurrencyKeyLanguageCodeAndCountries(cm.context.language, country)
-        val dto = toObject(FS::class.java, cm.data!!)
+        val dto = getFsData(cm)
         val currencyCode = dto.planning.budget.amount.currency
         entities.asSequence().firstOrNull { it.currencyKey?.code.equals(currencyCode) }
                 ?: throw InErrorException(ErrorType.CURRENCY_UNKNOWN)
@@ -63,12 +63,20 @@ class BudgetDataServiceImpl(private val validationService: ValidationService,
 
         val procuringEntity = dto.tender.procuringEntity
         if (procuringEntity != null) {
-            procuringEntity.identifier.uri ?: throw InErrorException(ErrorType.INVALID_URI)
             organizationDataService.processOrganization(procuringEntity, country)
         }
 
         return getResponseDto(data = dto, id = cm.id)
     }
 
+    private fun getEiData(cm: CommandMessage): EI {
+        if (cm.data.size() == 0) throw InErrorException(ErrorType.INVALID_DATA, null, cm.id)
+        return toObject(EI::class.java, cm.data)
+    }
+
+    private fun getFsData(cm: CommandMessage): FS {
+        if (cm.data.size() == 0) throw InErrorException(ErrorType.INVALID_DATA, null, cm.id)
+        return toObject(FS::class.java, cm.data)
+    }
 }
 
