@@ -35,7 +35,7 @@ class UnitKey(
         @JoinColumn(foreignKey = ForeignKey(name = "FK_unit_language"))
         private val language: Language? = null
 
-): Serializable {
+) : Serializable {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

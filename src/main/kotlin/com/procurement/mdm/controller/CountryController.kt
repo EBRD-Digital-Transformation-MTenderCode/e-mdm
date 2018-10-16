@@ -25,7 +25,7 @@ class CountryController(private val countryService: CountryService) {
         return ResponseEntity(
                 countryService.getCountries(
                         languageCode = lang?.toLowerCase(),
-                        codeOrName =  URLDecoder.decode(codeOrName, "UTF-8").toUpperCase()),
+                        codeOrName = URLDecoder.decode(codeOrName, "UTF-8").toUpperCase()),
                 HttpStatus.OK)
     }
 }

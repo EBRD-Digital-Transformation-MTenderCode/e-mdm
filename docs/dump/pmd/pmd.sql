@@ -1,0 +1,15 @@
+INSERT INTO public.pmd (code, description, name, country_code, country_language_code) VALUES ('OT', '', 'Open Tender', 'MD', 'en');
+INSERT INTO public.pmd (code, description, name, country_code, country_language_code) VALUES ('RT', '', 'Restricted Tender', 'MD', 'en');
+INSERT INTO public.pmd (code, description, name, country_code, country_language_code) VALUES ('OT', '', 'Открытый тендер', 'MD', 'ru');
+INSERT INTO public.pmd (code, description, name, country_code, country_language_code) VALUES ('RT', '', 'Ограниченный тендер', 'MD', 'ru');
+INSERT INTO public.pmd (code, description, name, country_code, country_language_code) VALUES ('TEST_OT', '', 'TEST Open Tender', 'MD', 'en');
+INSERT INTO public.pmd (code, description, name, country_code, country_language_code) VALUES ('TEST_OT', '', 'TEST Licitatia deschisa', 'MD', 'ro');
+INSERT INTO public.pmd (code, description, name, country_code, country_language_code) VALUES ('TEST_OT', '', 'TEST Открытый тендер', 'MD', 'ru');
+INSERT INTO public.pmd (code, description, name, country_code, country_language_code) VALUES ('OT', '', 'Licitație deschisă', 'MD', 'ro');
+INSERT INTO public.pmd (code, description, name, country_code, country_language_code) VALUES ('RT', '', 'Licitație restrânsă', 'MD', 'ro');
+INSERT INTO public.pmd (code, description, name, country_code, country_language_code) VALUES ('DA', null, 'Achiziție din o singură sursă', 'MD', 'ro');
+INSERT INTO public.pmd (code, description, name, country_code, country_language_code) VALUES ('DA', null, 'Закупка из одного источника', 'MD', 'ru');
+INSERT INTO public.pmd (code, description, name, country_code, country_language_code) VALUES ('DA', null, 'Direct award', 'MD', 'en');
+INSERT INTO public.pmd (code, description, name, country_code, country_language_code) VALUES ('MV', null, 'Achiziție de valoare mica', 'MD', 'ro');
+INSERT INTO public.pmd (code, description, name, country_code, country_language_code) VALUES ('MV', null, 'Закупка малой стоимости', 'MD', 'ru');
+INSERT INTO public.pmd (code, description, name, country_code, country_language_code) VALUES ('MV', null, 'Micro-value tender', 'MD', 'en');

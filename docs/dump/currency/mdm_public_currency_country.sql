@@ -1,9 +1,0 @@
-INSERT INTO public.currency_country (currency_code, currency_language_code, country_code, country_language_code) VALUES ('MDL', 'en', 'MD', 'en');
-INSERT INTO public.currency_country (currency_code, currency_language_code, country_code, country_language_code) VALUES ('MDL', 'ro', 'MD', 'ro');
-INSERT INTO public.currency_country (currency_code, currency_language_code, country_code, country_language_code) VALUES ('MDL', 'ru', 'MD', 'ru');
-INSERT INTO public.currency_country (currency_code, currency_language_code, country_code, country_language_code) VALUES ('USD', 'en', 'MD', 'en');
-INSERT INTO public.currency_country (currency_code, currency_language_code, country_code, country_language_code) VALUES ('USD', 'ro', 'MD', 'ro');
-INSERT INTO public.currency_country (currency_code, currency_language_code, country_code, country_language_code) VALUES ('EUR', 'en', 'MD', 'en');
-INSERT INTO public.currency_country (currency_code, currency_language_code, country_code, country_language_code) VALUES ('EUR', 'ro', 'MD', 'ro');
-INSERT INTO public.currency_country (currency_code, currency_language_code, country_code, country_language_code) VALUES ('EUR', 'ru', 'MD', 'ru');
-INSERT INTO public.currency_country (currency_code, currency_language_code, country_code, country_language_code) VALUES ('USD', 'ru', 'MD', 'ru');

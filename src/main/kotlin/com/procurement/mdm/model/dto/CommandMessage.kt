@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonValue
 import com.fasterxml.jackson.databind.JsonNode
 import com.procurement.mdm.exception.ExErrorException
 import com.procurement.mdm.exception.InErrorException
-import java.util.*
 
 data class CommandMessage @JsonCreator constructor(
 
@@ -16,7 +15,7 @@ data class CommandMessage @JsonCreator constructor(
 
         val context: Context,
 
-        val data: JsonNode?,
+        val data: JsonNode,
 
         val version: ApiVersion
 )
@@ -110,14 +109,14 @@ fun getExceptionResponseDto(exception: Exception): ResponseDto {
             id = null)
 }
 
-fun getInErrorResponseDto(error: InErrorException, id: String? = null): ResponseDto {
+fun getInErrorResponseDto(error: InErrorException): ResponseDto {
     return ResponseDto(
             errors = listOf(ResponseErrorDto(
                     code = "400.20." + error.code,
                     description = error.msg
             )),
             data = null,
-            id = id)
+            id = error.id)
 }
 
 fun getExErrorResponseDto(error: ExErrorException): ResponseDto {

@@ -28,7 +28,7 @@ class CpvsKey(
         @JoinColumn(foreignKey = ForeignKey(name = "FK_cpvs_language"))
         private val language: Language? = null
 
-): Serializable {
+) : Serializable {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

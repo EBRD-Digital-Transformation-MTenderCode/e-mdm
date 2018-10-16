@@ -38,9 +38,9 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
             organizationDataService.processOrganization(dto.tender.procuringEntity, country)
         }
         if (dto.tender.lots != null) {
-            dto.tender.lots.forEach { lot ->
-                addressDataService.processAddress(lot.placeOfPerformance.address, country)
-            }
+            dto.tender.lots.asSequence()
+                    .filter { it.placeOfPerformance != null }
+                    .forEach { addressDataService.processAddress(it.placeOfPerformance!!.address, country) }
         }
         processTranslate(dto, country, lang, pmd)
         return getResponseDto(data = dto, id = cm.id)
@@ -163,7 +163,7 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
     }
 
     private fun getData(cm: CommandMessage): TD {
-        cm.data ?: throw InErrorException(ErrorType.INVALID_DATA, cm.id)
+        if (cm.data.size() == 0) throw InErrorException(ErrorType.INVALID_DATA, null, cm.id)
         return toObject(TD::class.java, cm.data)
     }
 

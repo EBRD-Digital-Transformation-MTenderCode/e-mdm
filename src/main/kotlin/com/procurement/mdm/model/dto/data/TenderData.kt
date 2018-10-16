@@ -2,17 +2,11 @@ package com.procurement.mdm.model.dto.data
 
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonInclude
-import com.fasterxml.jackson.annotation.JsonProperty
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import java.math.BigDecimal
-import java.time.LocalDateTime
 import java.util.*
-import javax.validation.Valid
-import javax.validation.constraints.NotNull
 
 data class TD @JsonCreator constructor(
 
-        @field:NotNull
         val tender: TenderTD
 )
 
@@ -45,26 +39,20 @@ data class ItemTD @JsonCreator constructor(
 
         val description: String?,
 
-        @field:Valid @field:NotNull
         val classification: ClassificationTD,
 
-        @field:Valid
         val additionalClassifications: List<ClassificationTD>?,
 
-        @field:NotNull
         val quantity: BigDecimal,
 
-        @field:Valid @field:NotNull
         val unit: ItemUnitTD,
 
-        @field:NotNull
         var relatedLot: String
 )
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class ClassificationTD @JsonCreator constructor(
 
-        @field:NotNull
         var id: String,
 
         var description: String?,
@@ -92,7 +80,7 @@ data class LotTD @JsonCreator constructor(
 
         val contractPeriod: ContractPeriod?,
 
-        val placeOfPerformance: PlaceOfPerformance
+        val placeOfPerformance: PlaceOfPerformance?
 )
 
 data class Value @JsonCreator constructor(
