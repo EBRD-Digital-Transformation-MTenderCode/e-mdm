@@ -31,7 +31,8 @@ enum class CommandType(private val value: String) {
     PROCESS_FS_DATA("processFsData"),
     PROCESS_TENDER_DATA("processTenderData"),
     PROCESS_BID_DATA("processBidData"),
-    PROCESS_ENQUIRY_DATA("processEnquiryData");
+    PROCESS_ENQUIRY_DATA("processEnquiryData"),
+    PROCESS_CONTRACT_DATA("processContractData");
 
     @JsonValue
     fun value(): String {
