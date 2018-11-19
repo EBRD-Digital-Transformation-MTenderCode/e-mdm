@@ -24,10 +24,6 @@ data class ItemCD @JsonCreator constructor(
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class UnitUpdate @JsonCreator constructor(
 
-        val id: String,
-
-        val name: String,
-
         val value: ValueUpdate
 )
 
