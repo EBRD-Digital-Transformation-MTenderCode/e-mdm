@@ -1,18 +1,58 @@
 {
-  "id": "a0bed000-b00d-0000-b0e0-4b00000b0067",
-  "command": "processFsData",
+  "id": "8e791520-ec32-11e8-9eff-0fc982aa1c6d",
+  "command": "processContractData",
   "context": {
-    "operationId": "a0bed000-b00d-0000-b0e0-4b00000b0067",
-    "requestId": "75ad21b0-c664-11e8-8095-6fcfdbc36b30",
-    "cpid": "ocds-t1s2t3-MD-1538379373026",
-    "stage": "FS",
-    "processType": "fs",
-    "operationType": "createFS",
+    "operationId": "2217257c-31d9-4347-ad75-c2f81fdf9789",
+    "requestId": "8e791520-ec32-11e8-9eff-0fc982aa1c6d",
+    "cpid": "ocds-t1s2t3-MD-1542649756688",
+    "ocid": "ocds-t1s2t3-MD-1542649756688-AC-1543656767420",
+    "stage": "AC",
+    "prevStage": "AC",
+    "processType": "updateAC",
+    "operationType": "updateAC",
+    "phase": "contractPreparation",
     "owner": "445f6851-c908-407d-9b45-14b92f3e964b",
     "country": "MD",
     "language": "ro",
-    "startDate": "2018-10-02T16:59:00Z"
+    "pmd": "TEST_OT",
+    "token": "3343a87d-fb8b-4360-8a65-fe87f8b8640f",
+    "startDate": "2018-11-19T19:37:31Z",
+    "timeStamp": 1542656251762,
+    "isAuction": false,
+    "mainProcurementCategory": "goods"
   },
-  "data": null,
+  "data": {
+    "items": [
+      {
+        "id": "6f1b7102-ec23-11e8-9cb9-6bf876bfa65b",
+        "quantity": 1,
+        "unit": {
+          "value": {
+            "amount": "127.22",
+            "amountNet": "127.22",
+            "valueAddedTaxIncluded": true,
+            "currency": "MDL"
+          }
+        },
+        "deliveryAddress": {
+          "streetAddress": "313 Graves Center",
+          "postalCode": "18882",
+          "addressDetails": {
+            "country": {
+              "id": "MD"
+            },
+            "region": {
+              "id": "3100000"
+            },
+            "locality": {
+              "scheme": "CUATM",
+              "id": "3110001",
+              "description": "s.Mălăieşti (r-l Criuleni)"
+            }
+          }
+        }
+      }
+    ]
+  },
   "version": "0.0.1"
 }
