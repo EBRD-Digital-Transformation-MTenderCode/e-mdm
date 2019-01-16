@@ -34,6 +34,7 @@
         <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
 
         <!--Plugins-->
+        <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
         <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
     </properties>
 
@@ -254,6 +255,13 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+
+            <!--Compiler-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
             </plugin>
 
             <!--Spring Boot-->
