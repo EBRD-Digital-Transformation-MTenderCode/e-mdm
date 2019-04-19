@@ -127,16 +127,16 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
         return entity.name
     }
 
-    private fun getCpvCodes(items: HashSet<ItemTD>): List<String> {
+    private fun getCpvCodes(items: List<ItemTD>): List<String> {
         return items.asSequence().map { it.classification.id }.toList()
     }
 
-    private fun getUnitCodes(items: HashSet<ItemTD>): List<String> {
+    private fun getUnitCodes(items: List<ItemTD>): List<String> {
         return items.asSequence().map { it.unit.id }.toList()
     }
 
 
-    private fun getCpvsCodes(items: HashSet<ItemTD>): List<String> {
+    private fun getCpvsCodes(items: List<ItemTD>): List<String> {
         val cpvsCodes = arrayListOf<String>()
         items.forEach { item ->
             item.additionalClassifications?.let {
