@@ -1,4 +1,4 @@
-package com.procurement.access.utils
+package com.procurement.mdm.utils
 
 import com.fasterxml.jackson.core.JsonProcessingException
 import com.fasterxml.jackson.databind.DeserializationFeature

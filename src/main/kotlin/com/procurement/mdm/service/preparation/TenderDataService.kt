@@ -1,6 +1,6 @@
 package com.procurement.mdm.service.preparation
 
-import com.procurement.access.utils.toObject
+import com.procurement.mdm.utils.toObject
 import com.procurement.mdm.exception.ErrorType
 import com.procurement.mdm.exception.InErrorException
 import com.procurement.mdm.model.dto.CommandMessage
