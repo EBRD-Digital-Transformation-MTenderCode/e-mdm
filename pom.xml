@@ -49,7 +49,7 @@
         <hamcrest.version>2.1</hamcrest.version>
         <liquibase.version>3.6.3</liquibase.version>
         <mockito-kotlin.version>1.6.0</mockito-kotlin.version>
-        <mockito.version>2.28.2</mockito.version>
+        <mockito.version>2.23.4</mockito.version>
         <pitest-maven.version>1.4.9</pitest-maven.version>
         <pitest-junit5-plugin.version>0.8</pitest-junit5-plugin.version>
         <testcontainers.version>1.11.3</testcontainers.version>
