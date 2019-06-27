@@ -9,3 +9,6 @@ class CountryNotFoundException : ApplicationException {
 
     constructor(language: String) : super("The countries by language '$language' not found.")
 }
+
+class RegionNotFoundException(region: String, country: String, language: String) :
+    ApplicationException("The region by code '$region', country '$country', language '$language' not found.")

@@ -27,7 +27,13 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
      * Country.
      */
     INVALID_COUNTRY_CODE(status = HttpStatus.BAD_REQUEST, group = Groups.COUNTRY, id = "01"),
-    COUNTRY_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.COUNTRY, id = "02");
+    COUNTRY_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.COUNTRY, id = "02"),
+
+    /**
+     * Region.
+     */
+    INVALID_REGION_CODE(status = HttpStatus.BAD_REQUEST, group = Groups.REGION, id = "01"),
+    REGION_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.REGION, id = "02");
 
     @JsonValue
     val code: String = "${status.value()}.${GlobalProperties.serviceId}.$group.$id"
@@ -37,7 +43,8 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
         REQUEST_PARAMETER_MISSING(code = "01"),
         REQUEST_PARAMETER_UNKNOWN(code = "02"),
         LANGUAGE(code = "10"),
-        COUNTRY(code = "11");
+        COUNTRY(code = "11"),
+        REGION(code = "12");
 
         override fun toString(): String = code
     }

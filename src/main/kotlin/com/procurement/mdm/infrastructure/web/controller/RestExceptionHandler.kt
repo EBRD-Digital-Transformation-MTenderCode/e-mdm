@@ -2,9 +2,11 @@ package com.procurement.mdm.infrastructure.web.controller
 
 import com.procurement.mdm.application.exception.ApplicationException
 import com.procurement.mdm.application.exception.CountryNotFoundException
+import com.procurement.mdm.application.exception.RegionNotFoundException
 import com.procurement.mdm.domain.exception.DomainException
 import com.procurement.mdm.domain.exception.InvalidCountryCodeException
 import com.procurement.mdm.domain.exception.InvalidLanguageCodeException
+import com.procurement.mdm.domain.exception.InvalidRegionCodeException
 import com.procurement.mdm.domain.exception.LanguageUnknownException
 import com.procurement.mdm.infrastructure.exception.InfrastructureException
 import com.procurement.mdm.infrastructure.exception.LanguageRequestParameterMissingException
@@ -14,8 +16,10 @@ import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INTERNAL_SERVER_ERROR
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_COUNTRY_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_LANGUAGE_CODE
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_REGION_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LANGUAGE_REQUEST_PARAMETER_MISSING
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LANGUAGE_REQUEST_PARAMETER_UNKNOWN
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REGION_NOT_FOUND
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
@@ -38,6 +42,9 @@ class RestExceptionHandler : ResponseEntityExceptionHandler() {
             is InvalidCountryCodeException ->
                 exception.handler(errorCode = INVALID_COUNTRY_CODE)
 
+            is InvalidRegionCodeException ->
+                exception.handler(errorCode = INVALID_REGION_CODE)
+
             is LanguageUnknownException ->
                 exception.handler(errorCode = LANGUAGE_REQUEST_PARAMETER_UNKNOWN)
         }
@@ -50,6 +57,9 @@ class RestExceptionHandler : ResponseEntityExceptionHandler() {
         val apiError: ApiError = when (exception) {
             is CountryNotFoundException ->
                 exception.handler(errorCode = COUNTRY_NOT_FOUND)
+
+            is RegionNotFoundException ->
+                exception.handler(errorCode = REGION_NOT_FOUND)
         }
 
         return ResponseEntity.status(apiError.status).body(apiError)
