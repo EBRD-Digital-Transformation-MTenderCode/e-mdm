@@ -7,6 +7,7 @@ import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.times
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
+import com.procurement.mdm.application.exception.RegionNotFoundException
 import com.procurement.mdm.application.service.address.AddressRegionService
 import com.procurement.mdm.domain.exception.InvalidCountryCodeException
 import com.procurement.mdm.domain.exception.InvalidLanguageCodeException
@@ -19,6 +20,7 @@ import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_LANGUAGE_COD
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_REGION_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LANGUAGE_REQUEST_PARAMETER_MISSING
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LANGUAGE_REQUEST_PARAMETER_UNKNOWN
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REGION_NOT_FOUND
 import org.hamcrest.core.IsEqual.equalTo
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -287,6 +289,33 @@ class AddressRegionControllerTest {
                     equalTo("Invalid region code: '$INVALID_REGION' (wrong length: '${INVALID_REGION.length}' required: '2').")
                 )
             )
+
+        verify(addressRegionService, times(1))
+            .getBy(region = any(), country = any(), language = any())
+    }
+
+    @Test
+    fun `Getting the region by code is error (region is not found)`() {
+        doThrow(RegionNotFoundException(region = REGION, country = COUNTRY, language = LANGUAGE))
+            .whenever(addressRegionService)
+            .getBy(region = eq(REGION), country = eq(COUNTRY), language = eq(LANGUAGE))
+
+        val url = getUrl(region = REGION, country = COUNTRY)
+        mockMvc.perform(
+            get(url)
+                .param("language", LANGUAGE)
+        )
+            .andExpect(status().isNotFound)
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.errors.length()", equalTo(1)))
+            .andExpect(jsonPath("$.errors[0].code", equalTo(REGION_NOT_FOUND.code)))
+            .andExpect(
+                jsonPath(
+                    "$.errors[0].description",
+                    equalTo("The region by code '$REGION', country '$COUNTRY', language '$LANGUAGE' not found.")
+                )
+            )
+
 
         verify(addressRegionService, times(1))
             .getBy(region = any(), country = any(), language = any())
