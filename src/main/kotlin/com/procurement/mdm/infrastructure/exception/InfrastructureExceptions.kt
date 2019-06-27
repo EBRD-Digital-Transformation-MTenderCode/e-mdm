@@ -4,3 +4,6 @@ sealed class InfrastructureException(val description: String) : RuntimeException
 
 class LanguageRequestParameterMissingException :
     InfrastructureException("The request is missing a required query parameter - 'language'.")
+
+class CountryRequestParameterMissingException :
+    InfrastructureException("The request is missing a required query parameter - 'country'.")

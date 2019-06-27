@@ -15,3 +15,6 @@ class RegionNotFoundException(region: String, country: String, language: String)
 
 class LocalityNotFoundException(locality: String, country: String, region: String, language: String) :
     ApplicationException("The locality by code '$locality', country '$country', region '$region', language '$language' not found.")
+
+class OrganizationSchemeNotFoundException(country: String) :
+    ApplicationException("The organization schemes for country '$country' not found.")

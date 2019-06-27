@@ -12,11 +12,13 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
      * Request parameter is missing.
      */
     LANGUAGE_REQUEST_PARAMETER_MISSING(status = HttpStatus.BAD_REQUEST, group = Groups.REQUEST_PARAMETER_MISSING, id = "01"),
+    COUNTRY_REQUEST_PARAMETER_MISSING(status = HttpStatus.BAD_REQUEST, group = Groups.REQUEST_PARAMETER_MISSING, id = "02"),
 
     /**
      * Request parameter is unknown.
      */
     LANGUAGE_REQUEST_PARAMETER_UNKNOWN(status = HttpStatus.BAD_REQUEST, group = Groups.REQUEST_PARAMETER_UNKNOWN, id = "01"),
+    COUNTRY_REQUEST_PARAMETER_UNKNOWN(status = HttpStatus.BAD_REQUEST, group = Groups.REQUEST_PARAMETER_UNKNOWN, id = "02"),
 
     /**
      * Language.
@@ -29,6 +31,7 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
     INVALID_COUNTRY_CODE(status = HttpStatus.BAD_REQUEST, group = Groups.COUNTRY, id = "01"),
     COUNTRY_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.COUNTRY, id = "02"),
 
+
     /**
      * Region.
      */
@@ -39,7 +42,12 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
      * Locality.
      */
     INVALID_LOCALITY_CODE(status = HttpStatus.BAD_REQUEST, group = Groups.LOCALITY, id = "01"),
-    LOCALITY_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.LOCALITY, id = "02");
+    LOCALITY_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.LOCALITY, id = "02"),
+
+    /**
+     * Organization scheme
+     */
+    ORGANIZATION_SCHEME_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.ORGANIZATION_SCHEME, id = "01");
 
     @JsonValue
     val code: String = "${status.value()}.${GlobalProperties.serviceId}.$group.$id"
@@ -51,7 +59,8 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
         LANGUAGE(code = "10"),
         COUNTRY(code = "11"),
         REGION(code = "12"),
-        LOCALITY(code = "13");
+        LOCALITY(code = "13"),
+        ORGANIZATION_SCHEME(code = "14");
 
         override fun toString(): String = code
     }

@@ -64,6 +64,20 @@ object ModelDescription {
         }
     }
 
+    object Organization {
+        object Scheme {
+            fun codes(): List<FieldDescriptor> {
+                return listOf(
+                    getFieldDescriptor("data", "The data of response."),
+                    getFieldDescriptor(
+                        "data.schemes",
+                        "The scheme is used to indicate the list or register from which the identifier is drawn."
+                    )
+                )
+            }
+        }
+    }
+
     fun responseError(): List<FieldDescriptor> {
         return listOf(
             getFieldDescriptor("errors", "List of errors."),

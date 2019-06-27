@@ -1,6 +1,8 @@
 package com.procurement.mdm.domain.model.code
 
+import com.procurement.mdm.domain.exception.CountryUnknownException
 import com.procurement.mdm.domain.exception.InvalidCountryCodeException
+import com.procurement.mdm.domain.repository.address.AddressCountryRepository
 import kotlin.jvm.internal.Intrinsics
 
 class CountryCode private constructor(val value: String) {
@@ -16,6 +18,11 @@ class CountryCode private constructor(val value: String) {
                 )
             return CountryCode(code)
         }
+    }
+
+    fun validation(addressCountryRepository: AddressCountryRepository) {
+        if (addressCountryRepository.exists(this).not())
+            throw CountryUnknownException(country = this.value)
     }
 
     override fun toString(): String = value
