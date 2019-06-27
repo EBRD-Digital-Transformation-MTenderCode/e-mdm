@@ -51,6 +51,7 @@
         <mockito-kotlin.version>1.6.0</mockito-kotlin.version>
         <mockito.version>2.27.0</mockito.version>
         <testcontainers.version>1.11.2</testcontainers.version>
+        <equalsverifier.version>3.1.9</equalsverifier.version>
 
         <!--Plugins-->
         <asciidoctor-maven-plugin.version>1.5.6</asciidoctor-maven-plugin.version>
@@ -325,6 +326,12 @@
             <groupId>com.jayway.jsonpath</groupId>
             <artifactId>json-path</artifactId>
             <version>${json-path.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>nl.jqno.equalsverifier</groupId>
+            <artifactId>equalsverifier</artifactId>
+            <version>${equalsverifier.version}</version>
             <scope>test</scope>
         </dependency>
 
