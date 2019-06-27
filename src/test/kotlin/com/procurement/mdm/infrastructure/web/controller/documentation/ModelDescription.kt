@@ -47,6 +47,21 @@ object ModelDescription {
                 )
             }
         }
+
+        object Locality {
+            fun one(): List<FieldDescriptor> {
+                return listOf(
+                    getFieldDescriptor("data", "The data of response."),
+                    getFieldDescriptor(
+                        "data.scheme",
+                        "The scheme is used to indicate the list or register from which the identifier is drawn."
+                    ),
+                    getFieldDescriptor("data.id", "The identifier of the locality in the selected scheme."),
+                    getFieldDescriptor("data.description", "The description of the locality."),
+                    getFieldDescriptor("data.uri", "A URI to identify the locality.")
+                )
+            }
+        }
     }
 
     fun responseError(): List<FieldDescriptor> {

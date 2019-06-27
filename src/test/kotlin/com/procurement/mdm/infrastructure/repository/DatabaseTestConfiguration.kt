@@ -2,8 +2,10 @@ package com.procurement.mdm.infrastructure.repository
 
 import com.procurement.mdm.domain.repository.AdvancedLanguageRepository
 import com.procurement.mdm.domain.repository.address.AddressCountryRepository
+import com.procurement.mdm.domain.repository.address.AddressLocalityRepository
 import com.procurement.mdm.domain.repository.address.AddressRegionRepository
 import com.procurement.mdm.infrastructure.repository.address.PostgresAddressCountryRepository
+import com.procurement.mdm.infrastructure.repository.address.PostgresAddressLocalityRepository
 import com.procurement.mdm.infrastructure.repository.address.PostgresAddressRegionRepository
 import com.procurement.mdm.infrastructure.repository.language.PostgresLanguageRepository
 import com.zaxxer.hikari.HikariConfig
@@ -63,6 +65,10 @@ class DatabaseTestConfiguration {
     @Bean
     fun addressRegionRepository(): AddressRegionRepository =
         PostgresAddressRegionRepository(jdbcTemplate())
+
+    @Bean
+    fun addressLocalityRepository(): AddressLocalityRepository =
+        PostgresAddressLocalityRepository(jdbcTemplate())
 
     @Bean
     fun liquibase() = Liquibase(changeLogFile, FileSystemResourceAccessor(liquibaseDir()), database(dataSource()))

@@ -12,3 +12,6 @@ class CountryNotFoundException : ApplicationException {
 
 class RegionNotFoundException(region: String, country: String, language: String) :
     ApplicationException("The region by code '$region', country '$country', language '$language' not found.")
+
+class LocalityNotFoundException(locality: String, country: String, region: String, language: String) :
+    ApplicationException("The locality by code '$locality', country '$country', region '$region', language '$language' not found.")
