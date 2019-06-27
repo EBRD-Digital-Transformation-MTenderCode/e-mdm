@@ -18,3 +18,6 @@ class LocalityNotFoundException(locality: String, country: String, region: Strin
 
 class OrganizationSchemeNotFoundException(country: String) :
     ApplicationException("The organization schemes for country '$country' not found.")
+
+class OrganizationScaleNotFoundException(country: String) :
+    ApplicationException("The organization scale for country '$country' not found.")

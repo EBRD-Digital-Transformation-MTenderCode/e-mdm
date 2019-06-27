@@ -76,6 +76,18 @@ object ModelDescription {
                 )
             }
         }
+
+        object Scale {
+            fun codes(): List<FieldDescriptor> {
+                return listOf(
+                    getFieldDescriptor("data", "The data of response."),
+                    getFieldDescriptor(
+                        "data.scales",
+                        "The scales is used to indicate the list or register from which the identifier is drawn."
+                    )
+                )
+            }
+        }
     }
 
     fun responseError(): List<FieldDescriptor> {

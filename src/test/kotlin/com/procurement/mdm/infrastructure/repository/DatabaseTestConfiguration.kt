@@ -4,11 +4,13 @@ import com.procurement.mdm.domain.repository.AdvancedLanguageRepository
 import com.procurement.mdm.domain.repository.address.AddressCountryRepository
 import com.procurement.mdm.domain.repository.address.AddressLocalityRepository
 import com.procurement.mdm.domain.repository.address.AddressRegionRepository
+import com.procurement.mdm.domain.repository.organization.OrganizationScaleRepository
 import com.procurement.mdm.domain.repository.organization.OrganizationSchemeRepository
 import com.procurement.mdm.infrastructure.repository.address.PostgresAddressCountryRepository
 import com.procurement.mdm.infrastructure.repository.address.PostgresAddressLocalityRepository
 import com.procurement.mdm.infrastructure.repository.address.PostgresAddressRegionRepository
 import com.procurement.mdm.infrastructure.repository.language.PostgresLanguageRepository
+import com.procurement.mdm.infrastructure.repository.organization.PostgresOrganizationScaleRepository
 import com.procurement.mdm.infrastructure.repository.organization.PostgresOrganizationSchemeRepository
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
@@ -75,6 +77,10 @@ class DatabaseTestConfiguration {
     @Bean
     fun organizationSchemeRepository(): OrganizationSchemeRepository =
         PostgresOrganizationSchemeRepository(jdbcTemplate())
+
+    @Bean
+    fun organizationScaleRepository(): OrganizationScaleRepository =
+        PostgresOrganizationScaleRepository(jdbcTemplate())
 
     @Bean
     fun liquibase() = Liquibase(changeLogFile, FileSystemResourceAccessor(liquibaseDir()), database(dataSource()))
