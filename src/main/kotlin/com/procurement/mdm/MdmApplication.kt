@@ -7,6 +7,6 @@ import org.springframework.boot.runApplication
 @SpringBootApplication(scanBasePackageClasses = [ApplicationConfig::class])
 class MdmApplication
 
-fun main(args: Array<String>) {
-    runApplication<MdmApplication>(*args)
+fun main() {
+    runApplication<MdmApplication>()
 }

@@ -6,5 +6,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
 
 @Configuration
 @EnableSwagger2
-@ComponentScan(basePackages = ["com.procurement.mdm.controller"])
+@ComponentScan(
+    basePackages = [
+        "com.procurement.mdm.controller",
+        "com.procurement.mdm.infrastructure.web.controller"
+    ]
+)
 class WebConfig
