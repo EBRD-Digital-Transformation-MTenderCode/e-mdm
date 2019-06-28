@@ -29,5 +29,5 @@ class PostgresLanguageRepository(
                 "code" to code.value.toUpperCase()
             ),
             Boolean::class.java
-        ) ?: throw IllegalStateException("Type value is not boolean.")
+        )!!
 }

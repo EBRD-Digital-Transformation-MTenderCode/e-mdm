@@ -70,7 +70,7 @@ class PostgresAddressCountryRepository(
             "code" to code.value.toUpperCase()
         ),
         Boolean::class.java
-    ) ?: throw IllegalStateException("The value of the type is not the boolean.")
+    )!!
 
     override fun findAll(language: LanguageCode): List<CountryEntity> = getListObjects(
         sql = FIND_ALL_SQL,
