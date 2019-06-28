@@ -15,6 +15,7 @@ import com.procurement.mdm.domain.exception.InvalidRegionCodeException
 import com.procurement.mdm.domain.exception.LanguageUnknownException
 import com.procurement.mdm.domain.model.identifier.RegionIdentifier
 import com.procurement.mdm.infrastructure.web.controller.RestExceptionHandler
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INTERNAL_SERVER_ERROR
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_COUNTRY_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_LANGUAGE_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_REGION_CODE
@@ -316,6 +317,27 @@ class AddressRegionControllerTest {
                 )
             )
 
+
+        verify(addressRegionService, times(1))
+            .getBy(region = any(), country = any(), language = any())
+    }
+
+    @Test
+    fun `Getting the region by code is error (internal server error)`() {
+        doThrow(RuntimeException())
+            .whenever(addressRegionService)
+            .getBy(region = eq(REGION), country = eq(COUNTRY), language = eq(LANGUAGE))
+
+        val url = getUrl(region = REGION, country = COUNTRY)
+        mockMvc.perform(
+            get(url)
+                .param("language", LANGUAGE)
+        )
+            .andExpect(status().isInternalServerError)
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.errors.length()", equalTo(1)))
+            .andExpect(jsonPath("$.errors[0].code", equalTo(INTERNAL_SERVER_ERROR.code)))
+            .andExpect(jsonPath("$.errors[0].description", equalTo("Internal server error.")))
 
         verify(addressRegionService, times(1))
             .getBy(region = any(), country = any(), language = any())

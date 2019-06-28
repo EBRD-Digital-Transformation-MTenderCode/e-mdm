@@ -15,6 +15,8 @@ import com.procurement.mdm.domain.exception.InvalidLocalityCodeException
 import com.procurement.mdm.domain.exception.InvalidRegionCodeException
 import com.procurement.mdm.domain.exception.LanguageUnknownException
 import com.procurement.mdm.domain.model.identifier.LocalityIdentifier
+import com.procurement.mdm.infrastructure.web.controller.RestExceptionHandler
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INTERNAL_SERVER_ERROR
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_COUNTRY_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_LANGUAGE_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_LOCALITY_CODE
@@ -22,7 +24,6 @@ import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_REGION_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LANGUAGE_REQUEST_PARAMETER_MISSING
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LANGUAGE_REQUEST_PARAMETER_UNKNOWN
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LOCALITY_NOT_FOUND
-import com.procurement.mdm.infrastructure.web.controller.RestExceptionHandler
 import org.hamcrest.core.IsEqual.equalTo
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -325,6 +326,28 @@ class AddressLocalityControllerTest {
                     equalTo("The locality by code '$LOCALITY', country '$COUNTRY', region '$REGION', language '$LANGUAGE' not found.")
                 )
             )
+
+
+        verify(addressLocalityService, times(1))
+            .getBy(locality = any(), country = any(), region = any(), language = any())
+    }
+
+    @Test
+    fun `Getting the locality by code is error (internal server error)`() {
+        doThrow(RuntimeException())
+            .whenever(addressLocalityService)
+            .getBy(locality = eq(LOCALITY), country = eq(COUNTRY), region = eq(REGION), language = eq(LANGUAGE))
+
+        val url = getUrl(locality = LOCALITY, country = COUNTRY, region = REGION)
+        mockMvc.perform(
+            get(url)
+                .param("language", LANGUAGE)
+        )
+            .andExpect(status().isInternalServerError)
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.errors.length()", equalTo(1)))
+            .andExpect(jsonPath("$.errors[0].code", equalTo(INTERNAL_SERVER_ERROR.code)))
+            .andExpect(jsonPath("$.errors[0].description", equalTo("Internal server error.")))
 
 
         verify(addressLocalityService, times(1))

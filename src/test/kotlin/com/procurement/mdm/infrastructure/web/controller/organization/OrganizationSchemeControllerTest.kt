@@ -14,6 +14,7 @@ import com.procurement.mdm.domain.exception.InvalidCountryCodeException
 import com.procurement.mdm.infrastructure.web.controller.RestExceptionHandler
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_REQUEST_PARAMETER_MISSING
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_REQUEST_PARAMETER_UNKNOWN
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INTERNAL_SERVER_ERROR
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_COUNTRY_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.ORGANIZATION_SCHEME_NOT_FOUND
 import org.hamcrest.core.IsEqual.equalTo
@@ -192,6 +193,27 @@ class OrganizationSchemeControllerTest {
                     equalTo("The organization schemes for country '$COUNTRY' not found.")
                 )
             )
+
+        verify(organizationSchemeService, times(1))
+            .findAllOnlyCode(country = any())
+    }
+
+    @Test
+    fun `Getting the organization schemes for country is error (internal server error)`() {
+        doThrow(RuntimeException())
+            .whenever(organizationSchemeService)
+            .findAllOnlyCode(country = eq(COUNTRY))
+
+        val url = getUrl()
+        mockMvc.perform(
+            get(url)
+                .param("country", COUNTRY)
+        )
+            .andExpect(status().isInternalServerError)
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.errors.length()", equalTo(1)))
+            .andExpect(jsonPath("$.errors[0].code", equalTo(INTERNAL_SERVER_ERROR.code)))
+            .andExpect(jsonPath("$.errors[0].description", equalTo("Internal server error.")))
 
         verify(organizationSchemeService, times(1))
             .findAllOnlyCode(country = any())

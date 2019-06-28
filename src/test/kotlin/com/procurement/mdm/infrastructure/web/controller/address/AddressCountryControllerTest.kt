@@ -13,12 +13,13 @@ import com.procurement.mdm.domain.exception.InvalidCountryCodeException
 import com.procurement.mdm.domain.exception.InvalidLanguageCodeException
 import com.procurement.mdm.domain.exception.LanguageUnknownException
 import com.procurement.mdm.domain.model.identifier.CountryIdentifier
+import com.procurement.mdm.infrastructure.web.controller.RestExceptionHandler
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_NOT_FOUND
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INTERNAL_SERVER_ERROR
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_COUNTRY_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_LANGUAGE_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LANGUAGE_REQUEST_PARAMETER_MISSING
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LANGUAGE_REQUEST_PARAMETER_UNKNOWN
-import com.procurement.mdm.infrastructure.web.controller.RestExceptionHandler
 import org.hamcrest.core.IsEqual.equalTo
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -225,6 +226,27 @@ class AddressCountryControllerTest {
     }
 
     @Test
+    fun `Getting all of the countries is error (internal server error)`() {
+        doThrow(RuntimeException())
+            .whenever(addressCountryService)
+            .getAll(language = eq(LANGUAGE))
+
+        val url = getUrl()
+        mockMvc.perform(
+            get(url)
+                .param("language", LANGUAGE)
+        )
+            .andExpect(status().isInternalServerError)
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.errors.length()", equalTo(1)))
+            .andExpect(jsonPath("$.errors[0].code", equalTo(INTERNAL_SERVER_ERROR.code)))
+            .andExpect(jsonPath("$.errors[0].description", equalTo("Internal server error.")))
+
+        verify(addressCountryService, times(1))
+            .getAll(language = any())
+    }
+
+    @Test
     fun `Getting the country by code is successful`() {
         whenever(addressCountryService.getBy(country = eq(COUNTRY), language = eq(LANGUAGE)))
             .thenReturn(COUNTRY_IDENTIFIER_FIRST)
@@ -419,6 +441,27 @@ class AddressCountryControllerTest {
                     equalTo("The country by code '$COUNTRY' and language '$LANGUAGE' not found.")
                 )
             )
+
+        verify(addressCountryService, times(1))
+            .getBy(country = any(), language = any())
+    }
+
+    @Test
+    fun `Getting the country by code is error (internal server error)`() {
+        doThrow(RuntimeException())
+            .whenever(addressCountryService)
+            .getBy(country = eq(COUNTRY), language = eq(LANGUAGE))
+
+        val url = getUrl(country = COUNTRY)
+        mockMvc.perform(
+            get(url)
+                .param("language", LANGUAGE)
+        )
+            .andExpect(status().isInternalServerError)
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.errors.length()", equalTo(1)))
+            .andExpect(jsonPath("$.errors[0].code", equalTo(INTERNAL_SERVER_ERROR.code)))
+            .andExpect(jsonPath("$.errors[0].description", equalTo("Internal server error.")))
 
         verify(addressCountryService, times(1))
             .getBy(country = any(), language = any())

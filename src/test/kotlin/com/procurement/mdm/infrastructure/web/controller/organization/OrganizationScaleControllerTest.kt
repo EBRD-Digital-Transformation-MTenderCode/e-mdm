@@ -11,11 +11,12 @@ import com.procurement.mdm.application.exception.OrganizationScaleNotFoundExcept
 import com.procurement.mdm.application.service.organization.OrganizationScaleService
 import com.procurement.mdm.domain.exception.CountryUnknownException
 import com.procurement.mdm.domain.exception.InvalidCountryCodeException
+import com.procurement.mdm.infrastructure.web.controller.RestExceptionHandler
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_REQUEST_PARAMETER_MISSING
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_REQUEST_PARAMETER_UNKNOWN
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INTERNAL_SERVER_ERROR
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_COUNTRY_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.ORGANIZATION_SCALE_NOT_FOUND
-import com.procurement.mdm.infrastructure.web.controller.RestExceptionHandler
 import org.hamcrest.core.IsEqual.equalTo
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -192,6 +193,27 @@ class OrganizationScaleControllerTest {
                     equalTo("The organization scale for country '$COUNTRY' not found.")
                 )
             )
+
+        verify(organizationScaleService, times(1))
+            .findAllOnlyCode(country = any())
+    }
+
+    @Test
+    fun `Getting the organization scales for country is error (internal server error)`() {
+        doThrow(RuntimeException())
+            .whenever(organizationScaleService)
+            .findAllOnlyCode(country = eq(COUNTRY))
+
+        val url = getUrl()
+        mockMvc.perform(
+            get(url)
+                .param("country", COUNTRY)
+        )
+            .andExpect(status().isInternalServerError)
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.errors.length()", equalTo(1)))
+            .andExpect(jsonPath("$.errors[0].code", equalTo(INTERNAL_SERVER_ERROR.code)))
+            .andExpect(jsonPath("$.errors[0].description", equalTo("Internal server error.")))
 
         verify(organizationScaleService, times(1))
             .findAllOnlyCode(country = any())
