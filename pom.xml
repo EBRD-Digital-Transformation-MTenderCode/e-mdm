@@ -184,6 +184,10 @@
                                 <param>com.procurement.mdm.domain.service.*</param>
                                 <param>com.procurement.mdm.infrastructure.web.controller.*Test</param>
                             </targetTests>
+                            <avoidCallsTo>
+                                <avoidCallsTo>kotlin.jvm.internal</avoidCallsTo>
+                                <avoidCallsTo>org.slf4j</avoidCallsTo>
+                            </avoidCallsTo>
                             <outputFormats>
                                 <param>XML</param>
                                 <param>HTML</param>
