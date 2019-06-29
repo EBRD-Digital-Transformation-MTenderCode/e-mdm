@@ -4,7 +4,6 @@ import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
 import com.procurement.mdm.application.exception.CountryNotFoundException
-import com.procurement.mdm.domain.entity.CountriesEntity
 import com.procurement.mdm.domain.entity.CountryEntity
 import com.procurement.mdm.domain.exception.LanguageUnknownException
 import com.procurement.mdm.domain.model.code.CountryCode
@@ -56,22 +55,21 @@ class AddressCountryServiceTest {
     fun `Getting all of the countries is successful`() {
         whenever(advancedLanguageRepository.exists(eq(LANGUAGE_CODE)))
             .thenReturn(true)
-        val countriesEntity = CountriesEntity(
-            listOf(
-                CountryEntity(
-                    scheme = "scheme-1",
-                    id = "id-1",
-                    description = "description-1",
-                    uri = "https://example-1.com"
-                ),
-                CountryEntity(
-                    scheme = "scheme-2",
-                    id = "id-2",
-                    description = "description-2",
-                    uri = "https://example-2.com"
-                )
+        val countriesEntity = listOf(
+            CountryEntity(
+                scheme = "scheme-1",
+                id = "id-1",
+                description = "description-1",
+                uri = "https://example-1.com"
+            ),
+            CountryEntity(
+                scheme = "scheme-2",
+                id = "id-2",
+                description = "description-2",
+                uri = "https://example-2.com"
             )
         )
+
         whenever(addressCountryRepository.findAll(eq(LANGUAGE_CODE)))
             .thenReturn(countriesEntity)
 
