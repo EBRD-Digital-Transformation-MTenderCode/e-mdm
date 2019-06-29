@@ -28,16 +28,10 @@ class CountryCode private constructor(val value: String) {
     override fun toString(): String = value
 
     override fun equals(other: Any?): Boolean {
-        if (this !== other) {
-            if (other is CountryCode) {
-                if (Intrinsics.areEqual(this.value, other.value)) {
-                    return true
-                }
-            }
-            return false
-        } else {
-            return true
-        }
+        return if (this !== other) {
+            other is CountryCode && Intrinsics.areEqual(this.value, other.value)
+        } else
+            true
     }
 
     override fun hashCode(): Int = value.hashCode()

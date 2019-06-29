@@ -17,16 +17,10 @@ class RegionCode private constructor(val value: String) {
     override fun toString(): String = value
 
     override fun equals(other: Any?): Boolean {
-        if (this !== other) {
-            if (other is RegionCode) {
-                if (Intrinsics.areEqual(this.value, other.value)) {
-                    return true
-                }
-            }
-            return false
-        } else {
-            return true
-        }
+        return if (this !== other) {
+            other is RegionCode && Intrinsics.areEqual(this.value, other.value)
+        } else
+            true
     }
 
     override fun hashCode(): Int = value.hashCode()
