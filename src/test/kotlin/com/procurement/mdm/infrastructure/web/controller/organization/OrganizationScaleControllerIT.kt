@@ -1,26 +1,23 @@
 package com.procurement.mdm.infrastructure.web.controller.organization
 
-import com.nhaarman.mockito_kotlin.any
-import com.nhaarman.mockito_kotlin.doThrow
-import com.nhaarman.mockito_kotlin.eq
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.times
-import com.nhaarman.mockito_kotlin.verify
-import com.nhaarman.mockito_kotlin.whenever
-import com.procurement.mdm.application.exception.OrganizationScaleNotFoundException
 import com.procurement.mdm.application.service.organization.OrganizationScaleService
-import com.procurement.mdm.domain.exception.CountryUnknownException
-import com.procurement.mdm.domain.exception.InvalidCountryCodeException
+import com.procurement.mdm.application.service.organization.OrganizationScaleServiceImpl
+import com.procurement.mdm.domain.repository.address.AddressCountryRepository
+import com.procurement.mdm.domain.repository.organization.OrganizationScaleRepository
+import com.procurement.mdm.infrastructure.repository.AbstractRepositoryTest
+import com.procurement.mdm.infrastructure.repository.loadSql
 import com.procurement.mdm.infrastructure.web.controller.RestExceptionHandler
 import com.procurement.mdm.infrastructure.web.controller.documentation.ModelDescription
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_REQUEST_PARAMETER_MISSING
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_REQUEST_PARAMETER_UNKNOWN
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_COUNTRY_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.ORGANIZATION_SCALE_NOT_FOUND
+import org.hamcrest.Matchers.contains
 import org.hamcrest.core.IsEqual.equalTo
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.restdocs.RestDocumentationContextProvider
 import org.springframework.restdocs.RestDocumentationExtension
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
@@ -36,24 +33,29 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.test.web.servlet.setup.StandaloneMockMvcBuilder
 
 @ExtendWith(RestDocumentationExtension::class)
-class OrganizationScaleControllerIT {
+class OrganizationScaleControllerIT : AbstractRepositoryTest() {
     companion object {
         private const val COUNTRY = "md"
         private const val EMPTY_COUNTRY = "   "
         private const val INVALID_COUNTRY = "INVALID_COUNTRY"
         private const val UNKNOWN_COUNTRY = "uc"
-
-        private const val SCALE_CODE_FIRST = "MICRO"
-        private const val SCALE_CODE_SECOND = "LARGE"
-        private val SCALES_CODES = listOf(SCALE_CODE_FIRST, SCALE_CODE_SECOND)
     }
 
     private lateinit var mockMvc: MockMvc
     private lateinit var organizationScaleService: OrganizationScaleService
 
+    @Autowired
+    private lateinit var organizationScaleRepository: OrganizationScaleRepository
+
+    @Autowired
+    private lateinit var addressCountryRepository: AddressCountryRepository
+
     @BeforeEach
     fun init(restDocumentation: RestDocumentationContextProvider) {
-        organizationScaleService = mock()
+        organizationScaleService = OrganizationScaleServiceImpl(
+            organizationScaleRepository = organizationScaleRepository,
+            addressCountryRepository = addressCountryRepository
+        )
 
         val controller = OrganizationScaleController(organizationScaleService)
         val restExceptionHandler = RestExceptionHandler()
@@ -76,8 +78,7 @@ class OrganizationScaleControllerIT {
 
     @Test
     fun `Getting the organization scales for country is successful`() {
-        whenever(organizationScaleService.findAllOnlyCode(country = eq(COUNTRY)))
-            .thenReturn(SCALES_CODES)
+        initData()
 
         val url = getUrl()
         mockMvc.perform(
@@ -86,21 +87,19 @@ class OrganizationScaleControllerIT {
         )
             .andExpect(status().isOk)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
-            .andExpect(jsonPath("$.data.scales[0]", equalTo(SCALE_CODE_FIRST)))
-            .andExpect(jsonPath("$.data.scales[1]", equalTo(SCALE_CODE_SECOND)))
+            .andExpect(jsonPath("$.data.scales[*]", contains("MICRO", "SME")))
             .andDo(
                 document(
                     "organization/scales/find_all_only_code/success",
                     responseFields(ModelDescription.Organization.Scale.codes())
                 )
             )
-
-        verify(organizationScaleService, times(1))
-            .findAllOnlyCode(country = any())
     }
 
     @Test
     fun `Getting the organization scales for country is error (country request parameter is missing)`() {
+        initData()
+
         val url = getUrl()
         mockMvc.perform(
             get(url)
@@ -121,16 +120,11 @@ class OrganizationScaleControllerIT {
                     responseFields(ModelDescription.responseError())
                 )
             )
-
-        verify(organizationScaleService, times(0))
-            .findAllOnlyCode(country = any())
     }
 
     @Test
     fun `Getting the organization scales for country is error (country code is empty)`() {
-        doThrow(InvalidCountryCodeException(description = "Invalid country code (value is blank)."))
-            .whenever(organizationScaleService)
-            .findAllOnlyCode(country = eq(EMPTY_COUNTRY))
+        initData()
 
         val url = getUrl()
         mockMvc.perform(
@@ -153,17 +147,11 @@ class OrganizationScaleControllerIT {
                     responseFields(ModelDescription.responseError())
                 )
             )
-
-        verify(organizationScaleService, times(1))
-            .findAllOnlyCode(country = any())
     }
 
     @Test
     fun `Getting the organization scales for country is error (country code is invalid)`() {
-
-        doThrow(InvalidCountryCodeException(description = "Invalid country code: '$INVALID_COUNTRY' (wrong length: '${INVALID_COUNTRY.length}' required: '2')."))
-            .whenever(organizationScaleService)
-            .findAllOnlyCode(country = eq(INVALID_COUNTRY))
+        initData()
 
         val url = getUrl()
         mockMvc.perform(
@@ -186,16 +174,11 @@ class OrganizationScaleControllerIT {
                     responseFields(ModelDescription.responseError())
                 )
             )
-
-        verify(organizationScaleService, times(1))
-            .findAllOnlyCode(country = any())
     }
 
     @Test
     fun `Getting the organization scales for country is error (country request parameter is unknown)`() {
-        doThrow(CountryUnknownException(country = UNKNOWN_COUNTRY))
-            .whenever(organizationScaleService)
-            .findAllOnlyCode(country = eq(UNKNOWN_COUNTRY))
+        initData()
 
         val url = getUrl()
         mockMvc.perform(
@@ -218,16 +201,12 @@ class OrganizationScaleControllerIT {
                     responseFields(ModelDescription.responseError())
                 )
             )
-
-        verify(organizationScaleService, times(1))
-            .findAllOnlyCode(country = any())
     }
 
     @Test
     fun `Getting the organization scales for country is error (organization schemes not found)`() {
-        doThrow(OrganizationScaleNotFoundException(country = COUNTRY))
-            .whenever(organizationScaleService)
-            .findAllOnlyCode(country = eq(COUNTRY))
+        initSchemes()
+        initCountries()
 
         val url = getUrl()
         mockMvc.perform(
@@ -250,9 +229,25 @@ class OrganizationScaleControllerIT {
                     responseFields(ModelDescription.responseError())
                 )
             )
+    }
 
-        verify(organizationScaleService, times(1))
-            .findAllOnlyCode(country = any())
+    private fun initData() {
+        initSchemes()
+
+        initCountries()
+
+        val sqlScales = loadSql("sql/organization/scale_init_data.sql")
+        executeSQLScript(sqlScales)
+    }
+
+    private fun initSchemes() {
+        val sqlSchemes = loadSql("sql/list_schemes_init_data.sql")
+        executeSQLScript(sqlSchemes)
+    }
+
+    private fun initCountries() {
+        val sqlCountries = loadSql("sql/address/countries_init_data.sql")
+        executeSQLScript(sqlCountries)
     }
 
     private fun getUrl(): String = String.format("/organization/scales")
