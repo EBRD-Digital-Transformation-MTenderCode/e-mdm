@@ -184,6 +184,10 @@
                                 <param>com.procurement.mdm.domain.service.*</param>
                                 <param>com.procurement.mdm.infrastructure.web.controller.*Test</param>
                             </targetTests>
+                            <outputFormats>
+                                <param>XML</param>
+                                <param>HTML</param>
+                            </outputFormats>
                         </configuration>
                         <executions>
                             <execution>
