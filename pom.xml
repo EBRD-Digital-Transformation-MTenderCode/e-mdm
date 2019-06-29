@@ -60,9 +60,24 @@
         <jacoco-maven-plugin.version>0.8.3</jacoco-maven-plugin.version>
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
         <maven-enforcer-plugin.version>3.0.0-M2</maven-enforcer-plugin.version>
+        <maven-sonar-plugin.version>3.6.0.1398</maven-sonar-plugin.version>
         <maven-surefire-plugin.version>3.0.0-M1</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>3.0.0-M3</maven-failsafe-plugin.version>
         <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
+
+        <!--Sonar-->
+        <sonar.projectName>${project.artifactId}</sonar.projectName>
+        <sonar.projectDescription>${project.description}</sonar.projectDescription>
+        <sonar.projectVersion>${project.version}</sonar.projectVersion>
+        <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
+        <sonar.sources>src/main</sonar.sources>
+        <sonar.tests>src/test</sonar.tests>
+        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+        <sonar.scm.disabled>true</sonar.scm.disabled>
+        <sonar.junit.reportPaths>${project.build.directory}/surefire-reports</sonar.junit.reportPaths>
+        <sonar.coverage.jacoco.xmlReportPaths>
+            ${project.build.directory}/site/jacoco/jacoco.xml
+        </sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
     <profiles>
@@ -584,6 +599,13 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+
+            <!--Sonar-->
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>${maven-sonar-plugin.version}</version>
             </plugin>
 
             <!--Documentation-->
