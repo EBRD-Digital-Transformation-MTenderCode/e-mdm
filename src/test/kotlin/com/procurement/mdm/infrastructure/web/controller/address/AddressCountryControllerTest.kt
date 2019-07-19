@@ -80,7 +80,7 @@ class AddressCountryControllerTest {
         val url = getUrl()
         mockMvc.perform(
             get(url)
-                .param("language", LANGUAGE)
+                .param("lang", LANGUAGE)
         )
             .andExpect(status().isOk)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -129,7 +129,7 @@ class AddressCountryControllerTest {
         val url = getUrl()
         mockMvc.perform(
             get(url)
-                .param("language", EMPTY_LANGUAGE)
+                .param("lang", EMPTY_LANGUAGE)
         )
             .andExpect(status().isBadRequest)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -156,7 +156,7 @@ class AddressCountryControllerTest {
         val url = getUrl()
         mockMvc.perform(
             get(url)
-                .param("language", INVALID_LANGUAGE)
+                .param("lang", INVALID_LANGUAGE)
         )
             .andExpect(status().isBadRequest)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -182,7 +182,7 @@ class AddressCountryControllerTest {
         val url = getUrl()
         mockMvc.perform(
             get(url)
-                .param("language", UNKNOWN_LANGUAGE)
+                .param("lang", UNKNOWN_LANGUAGE)
         )
             .andExpect(status().isBadRequest)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -208,7 +208,7 @@ class AddressCountryControllerTest {
         val url = getUrl()
         mockMvc.perform(
             get(url)
-                .param("language", LANGUAGE)
+                .param("lang", LANGUAGE)
         )
             .andExpect(status().isNotFound)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -234,7 +234,7 @@ class AddressCountryControllerTest {
         val url = getUrl()
         mockMvc.perform(
             get(url)
-                .param("language", LANGUAGE)
+                .param("lang", LANGUAGE)
         )
             .andExpect(status().isInternalServerError)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -254,7 +254,7 @@ class AddressCountryControllerTest {
         val url = getUrl(country = COUNTRY)
         mockMvc.perform(
             get(url)
-                .param("language", LANGUAGE)
+                .param("lang", LANGUAGE)
         )
             .andExpect(status().isOk)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -297,7 +297,7 @@ class AddressCountryControllerTest {
         val url = getUrl(country = COUNTRY)
         mockMvc.perform(
             get(url)
-                .param("language", EMPTY_LANGUAGE)
+                .param("lang", EMPTY_LANGUAGE)
         )
             .andExpect(status().isBadRequest)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -324,7 +324,7 @@ class AddressCountryControllerTest {
         val url = getUrl(country = COUNTRY)
         mockMvc.perform(
             get(url)
-                .param("language", INVALID_LANGUAGE)
+                .param("lang", INVALID_LANGUAGE)
         )
             .andExpect(status().isBadRequest)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -350,7 +350,7 @@ class AddressCountryControllerTest {
         val url = getUrl(country = COUNTRY)
         mockMvc.perform(
             get(url)
-                .param("language", UNKNOWN_LANGUAGE)
+                .param("lang", UNKNOWN_LANGUAGE)
         )
             .andExpect(status().isBadRequest)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -376,7 +376,7 @@ class AddressCountryControllerTest {
         val url = getUrl(country = EMPTY_COUNTRY)
         mockMvc.perform(
             get(url)
-                .param("language", LANGUAGE)
+                .param("lang", LANGUAGE)
         )
             .andExpect(status().isBadRequest)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -403,7 +403,7 @@ class AddressCountryControllerTest {
         val url = getUrl(country = INVALID_COUNTRY)
         mockMvc.perform(
             get(url)
-                .param("language", LANGUAGE)
+                .param("lang", LANGUAGE)
         )
             .andExpect(status().isBadRequest)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -429,7 +429,7 @@ class AddressCountryControllerTest {
         val url = getUrl(country = COUNTRY)
         mockMvc.perform(
             get(url)
-                .param("language", LANGUAGE)
+                .param("lang", LANGUAGE)
         )
             .andExpect(status().isNotFound)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -455,7 +455,7 @@ class AddressCountryControllerTest {
         val url = getUrl(country = COUNTRY)
         mockMvc.perform(
             get(url)
-                .param("language", LANGUAGE)
+                .param("lang", LANGUAGE)
         )
             .andExpect(status().isInternalServerError)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
