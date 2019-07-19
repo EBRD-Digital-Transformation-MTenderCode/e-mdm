@@ -18,12 +18,12 @@ class AddressCountryController(private val addressCountryService: AddressCountry
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    fun getAllCountries(@RequestParam(value = "language", required = false) language: String?): CountriesApiResponse {
+    fun getAllCountries(@RequestParam(value = "lang", required = false) lang: String?): CountriesApiResponse {
 
-        if (language == null)
+        if (lang == null)
             throw LanguageRequestParameterMissingException()
 
-        return addressCountryService.getAll(language = language)
+        return addressCountryService.getAll(language = lang)
             .map {
                 Country(
                     id = it.id,
@@ -39,13 +39,13 @@ class AddressCountryController(private val addressCountryService: AddressCountry
     @ResponseStatus(HttpStatus.OK)
     fun getCountryById(
         @PathVariable(value = "id") id: String,
-        @RequestParam(value = "language", required = false) language: String?
+        @RequestParam(value = "lang", required = false) lang: String?
     ): CountryApiResponse {
 
-        if (language == null)
+        if (lang == null)
             throw LanguageRequestParameterMissingException()
 
-        val countryIdentifier = addressCountryService.getBy(country = id, language = language)
+        val countryIdentifier = addressCountryService.getBy(country = id, language = lang)
 
         return CountryApiResponse(
             country = Country(

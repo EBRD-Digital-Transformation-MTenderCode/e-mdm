@@ -22,17 +22,17 @@ class AddressLocalityController(private val addressLocalityService: AddressLocal
         @PathVariable(value = "countryId") countryId: String,
         @PathVariable(value = "regionId") regionId: String,
         @PathVariable(value = "localityId") localityId: String,
-        @RequestParam(value = "language", required = false) language: String?
+        @RequestParam(value = "lang", required = false) lang: String?
     ): LocalityApiResponse {
 
-        if (language == null)
+        if (lang == null)
             throw LanguageRequestParameterMissingException()
 
         val localityIdentifier = addressLocalityService.getBy(
             locality = localityId,
             country = countryId,
             region = regionId,
-            language = language
+            language = lang
         )
 
         return LocalityApiResponse(

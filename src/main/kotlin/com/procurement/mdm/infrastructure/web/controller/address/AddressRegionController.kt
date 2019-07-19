@@ -21,16 +21,16 @@ class AddressRegionController(private val addressRegionService: AddressRegionSer
     fun getCountryById(
         @PathVariable(value = "countryId") countryId: String,
         @PathVariable(value = "regionId") regionId: String,
-        @RequestParam(value = "language", required = false) language: String?
+        @RequestParam(value = "lang", required = false) lang: String?
     ): RegionApiResponse {
 
-        if (language == null)
+        if (lang == null)
             throw LanguageRequestParameterMissingException()
 
         val regionIdentifier = addressRegionService.getBy(
             region = regionId,
             country = countryId,
-            language = language
+            language = lang
         )
 
         return RegionApiResponse(
