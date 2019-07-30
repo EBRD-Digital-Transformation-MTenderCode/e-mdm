@@ -113,7 +113,7 @@ class AddressLocalityControllerTest {
             .andExpect(
                 jsonPath(
                     "$.errors[0].description",
-                    equalTo("The request is missing a required query parameter - 'language'.")
+                    equalTo("The request is missing a required query parameter - 'lang'.")
                 )
             )
 
