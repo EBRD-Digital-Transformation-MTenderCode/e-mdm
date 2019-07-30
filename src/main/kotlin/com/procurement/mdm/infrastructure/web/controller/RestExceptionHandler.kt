@@ -107,7 +107,7 @@ class RestExceptionHandler : ResponseEntityExceptionHandler() {
 
     @ExceptionHandler(value = [Exception::class])
     fun exceptionHandler(exception: Exception): ResponseEntity<ApiError> {
-        log.error("Internal server error.", this)
+        log.error("Internal server error.", exception)
         val apiError: ApiError = apiError(errorCode = INTERNAL_SERVER_ERROR, description = "Internal server error.")
         return ResponseEntity.status(apiError.status).body(apiError)
     }
