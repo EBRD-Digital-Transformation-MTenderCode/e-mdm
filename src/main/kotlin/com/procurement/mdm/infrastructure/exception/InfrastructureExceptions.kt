@@ -7,3 +7,6 @@ class LanguageRequestParameterMissingException :
 
 class CountryRequestParameterMissingException :
     InfrastructureException("The request is missing a required query parameter - 'country'.")
+
+class NoHandlerUrlException(url: String) :
+    InfrastructureException("Unknown url: '$url'.")

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus
 enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
 
     INTERNAL_SERVER_ERROR(status = HttpStatus.INTERNAL_SERVER_ERROR, group = Groups.SERVER, id = "00"),
+    INVALID_URL(status = HttpStatus.NOT_FOUND, group = Groups.SERVER, id = "01"),
 
     /**
      * Request parameter is missing.

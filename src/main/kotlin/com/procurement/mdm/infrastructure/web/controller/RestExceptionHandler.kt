@@ -16,6 +16,7 @@ import com.procurement.mdm.domain.exception.LanguageUnknownException
 import com.procurement.mdm.infrastructure.exception.CountryRequestParameterMissingException
 import com.procurement.mdm.infrastructure.exception.InfrastructureException
 import com.procurement.mdm.infrastructure.exception.LanguageRequestParameterMissingException
+import com.procurement.mdm.infrastructure.exception.NoHandlerUrlException
 import com.procurement.mdm.infrastructure.web.dto.ApiError
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_NOT_FOUND
@@ -26,6 +27,7 @@ import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_COUNTRY_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_LANGUAGE_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_LOCALITY_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_REGION_CODE
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_URL
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LANGUAGE_REQUEST_PARAMETER_MISSING
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LANGUAGE_REQUEST_PARAMETER_UNKNOWN
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LOCALITY_NOT_FOUND
@@ -95,6 +97,9 @@ class RestExceptionHandler : ResponseEntityExceptionHandler() {
     @ExceptionHandler(value = [InfrastructureException::class])
     fun infrastructureExceptionHandler(exception: InfrastructureException): ResponseEntity<ApiError> {
         val apiError: ApiError = when (exception) {
+            is NoHandlerUrlException ->
+                exception.handler(errorCode = INVALID_URL)
+
             is LanguageRequestParameterMissingException ->
                 exception.handler(errorCode = LANGUAGE_REQUEST_PARAMETER_MISSING)
 
