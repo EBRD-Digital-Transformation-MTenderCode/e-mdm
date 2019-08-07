@@ -175,4 +175,21 @@ class AddressLocalityRepositoryIT : AbstractRepositoryTest() {
 
         assertNull(locality)
     }
+
+    @Test
+    fun `Finding all schemes of localities is successful`() {
+        initData()
+
+        val actual = repository.findAllSchemes(country = COUNTRY_CODE, region = REGION_CODE)
+
+        assertEquals(1, actual.size)
+        assertThat(actual, containsInAnyOrder(SCHEME_CODE))
+    }
+
+    @Test
+    fun `Finding all schemes of localities is successful(list of using schemes are empty)`() {
+        val actual = repository.findAllSchemes(country = COUNTRY_CODE, region = REGION_CODE)
+
+        assertTrue(actual.isEmpty())
+    }
 }

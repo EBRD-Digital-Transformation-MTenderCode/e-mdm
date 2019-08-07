@@ -52,6 +52,8 @@ class AddressLocalityControllerIT : AbstractRepositoryTest() {
         private const val EMPTY_LANGUAGE = "   "
         private const val INVALID_LANGUAGE = "INVALID_LANGUAGE"
         private const val UNKNOWN_LANGUAGE = "ul"
+
+        private const val SCHEME = "CUATM"
     }
 
     private lateinit var mockMvc: MockMvc
@@ -442,6 +444,48 @@ class AddressLocalityControllerIT : AbstractRepositoryTest() {
             )
     }
 
+    @Test
+    fun `Getting all schemes of localities is successful`() {
+        initData()
+
+        val url = getUrlSchemesAttribute(country = COUNTRY, region = REGION)
+        mockMvc.perform(
+            get(url)
+        )
+            .andExpect(status().isOk)
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.data.schemes.length()", equalTo(1)))
+            .andExpect(jsonPath("$.data.schemes[0]", equalTo(SCHEME)))
+            .andDo(
+                document(
+                    "address/locality/get_schemes/success",
+                    responseFields(ModelDescription.Address.Locality.schemesCollection())
+                )
+            )
+    }
+
+    @Test
+    fun `Getting all schemes of localities is successful (list of using schemes are empty)`() {
+        initLanguages()
+        initSchemes()
+        initCountries()
+        initRegions()
+
+        val url = getUrlSchemesAttribute(country = COUNTRY, region = REGION)
+        mockMvc.perform(
+            get(url)
+        )
+            .andExpect(status().isOk)
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.data.schemes.length()", equalTo(0)))
+            .andDo(
+                document(
+                    "address/locality/get_schemes/success",
+                    responseFields(ModelDescription.Address.Locality.schemesCollection())
+                )
+            )
+    }
+
     private fun initData() {
         initLanguages()
         initSchemes()
@@ -480,4 +524,7 @@ class AddressLocalityControllerIT : AbstractRepositoryTest() {
             String.format("/addresses/countries/%s/regions/%s/localities", country, region)
         else
             String.format("/addresses/countries/%s/regions/%s/localities/%s", country, region, locality)
+
+    private fun getUrlSchemesAttribute(country: String, region: String): String =
+        String.format("/addresses/countries/%s/regions/%s/localities/attributes/schemes", country, region)
 }

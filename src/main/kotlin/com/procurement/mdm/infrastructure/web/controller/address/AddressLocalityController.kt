@@ -72,9 +72,25 @@ class AddressLocalityController(private val addressLocalityService: AddressLocal
         )
     }
 
+    @GetMapping("/attributes/schemes")
+    @ResponseStatus(HttpStatus.OK)
+    fun getSchemes(
+        @PathVariable(value = "countryId") countryId: String,
+        @PathVariable(value = "regionId") regionId: String
+    ): SchemesApiResponse {
+        val schemes = addressLocalityService.getAllSchemes(country = countryId, region = regionId)
+        return SchemesApiResponse(schemes = Schemes(schemes))
+    }
+
     class LocalityApiResponse(locality: Locality) : ApiResponse<Locality>(locality)
 
     class LocalitiesApiResponse(localities: List<Locality>) : ApiResponse<List<Locality>>(localities)
+
+    class SchemesApiResponse(schemes: Schemes) : ApiResponse<Schemes>(schemes)
+
+    data class Schemes(
+        @field:JsonProperty("schemes") @param:JsonProperty("schemes") val scheme: List<String>
+    )
 
     data class Locality(
         @field:JsonProperty("scheme") @param:JsonProperty("scheme") val scheme: String,

@@ -19,4 +19,6 @@ interface AddressLocalityRepository {
         region: RegionCode,
         language: LanguageCode
     ): LocalityEntity?
+
+    fun findAllSchemes(country: CountryCode, region: RegionCode): List<String>
 }

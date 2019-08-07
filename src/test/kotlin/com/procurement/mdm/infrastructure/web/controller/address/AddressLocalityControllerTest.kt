@@ -50,6 +50,8 @@ class AddressLocalityControllerTest {
         private const val EMPTY_LANGUAGE = "   "
         private const val INVALID_LANGUAGE = "INVALID_LANGUAGE"
         private const val UNKNOWN_LANGUAGE = "ul"
+
+        private const val SCHEME = "scheme-1"
     }
 
     private lateinit var mockMvc: MockMvc
@@ -420,9 +422,47 @@ class AddressLocalityControllerTest {
             .getBy(locality = any(), country = any(), region = any(), language = any())
     }
 
+    @Test
+    fun `Getting all schemes of localities is successful`() {
+        whenever(addressLocalityService.getAllSchemes(country = eq(COUNTRY), region = eq(REGION)))
+            .thenReturn(listOf(SCHEME))
+
+        val url = getUrlSchemesAttribute(country = COUNTRY, region = REGION)
+        mockMvc.perform(
+            get(url)
+        )
+            .andExpect(status().isOk)
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.data.schemes.length()", equalTo(1)))
+            .andExpect(jsonPath("$.data.schemes[0]", equalTo(SCHEME)))
+
+        verify(addressLocalityService, times(1))
+            .getAllSchemes(country = any(), region = any())
+    }
+
+    @Test
+    fun `Getting all schemes of localities is successful (list of using schemes are empty)`() {
+        whenever(addressLocalityService.getAllSchemes(country = eq(COUNTRY), region = eq(REGION)))
+            .thenReturn(listOf())
+
+        val url = getUrlSchemesAttribute(country = COUNTRY, region = REGION)
+        mockMvc.perform(
+            get(url)
+        )
+            .andExpect(status().isOk)
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.data.schemes.length()", equalTo(0)))
+
+        verify(addressLocalityService, times(1))
+            .getAllSchemes(country = any(), region = any())
+    }
+
     private fun getUrl(locality: String? = null, country: String, region: String): String =
         if (locality == null)
             String.format("/addresses/countries/%s/regions/%s/localities", country, region)
         else
             String.format("/addresses/countries/%s/regions/%s/localities/%s", country, region, locality)
+
+    private fun getUrlSchemesAttribute(country: String, region: String): String =
+        String.format("/addresses/countries/%s/regions/%s/localities/attributes/schemes", country, region)
 }

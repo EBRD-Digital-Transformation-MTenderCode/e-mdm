@@ -79,6 +79,15 @@ object ModelDescription {
                     getFieldDescriptor("data", "Empty data of response.")
                 )
             }
+            fun schemesCollection(): List<FieldDescriptor> {
+                return listOf(
+                    getFieldDescriptor("data", "The data of response."),
+                    getFieldDescriptor(
+                        "data.schemes[]",
+                        "The scheme is used to indicate the list or register from which the identifier is drawn."
+                    )
+                )
+            }
         }
     }
 

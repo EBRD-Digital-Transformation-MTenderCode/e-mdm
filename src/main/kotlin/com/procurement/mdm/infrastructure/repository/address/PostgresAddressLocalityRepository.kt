@@ -58,6 +58,16 @@ class PostgresAddressLocalityRepository(
                AND als.region_code = :region_code
                AND alsi18n.language_code = :language_code
             """
+
+        @Language("PostgreSQL")
+        private const val GET_ALL_SCHEMES_SQL = """
+            SELECT ls.code AS scheme
+              FROM public.list_schemes AS ls
+        INNER JOIN public.address_locality_scheme_used AS alsu
+                ON ls.id = alsu.list_schemes_id
+             WHERE alsu.country_code = :country_code
+               AND alsu.region_code = :region_code
+            """
     }
 
     override fun findAll(country: CountryCode, region: RegionCode, language: LanguageCode): List<LocalityEntity> =
@@ -87,6 +97,15 @@ class PostgresAddressLocalityRepository(
         mapper = localityRowMapper
     )
 
+    override fun findAllSchemes(country: CountryCode, region: RegionCode): List<String> = getListObjects(
+        sql = GET_ALL_SCHEMES_SQL,
+        params = mapOf(
+            "country_code" to country.value.toUpperCase(),
+            "region_code" to region.value.toUpperCase()
+        ),
+        mapper = schemeRowMapper
+    )
+
     private val localityRowMapper: (ResultSet, Int) -> LocalityEntity = { rs, _ ->
         LocalityEntity(
             scheme = rs.getString("scheme"),
@@ -94,5 +113,9 @@ class PostgresAddressLocalityRepository(
             description = rs.getString("description"),
             uri = rs.getString("uri")
         )
+    }
+
+    private val schemeRowMapper: (ResultSet, Int) -> String = { rs, _ ->
+        rs.getString("scheme")
     }
 }

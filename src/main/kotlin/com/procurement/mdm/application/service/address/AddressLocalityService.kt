@@ -14,6 +14,8 @@ interface AddressLocalityService {
     fun getBy(locality: String, country: String, region: String, language: String): LocalityIdentifier
 
     fun getBy(country: String, region: String, language: String): List<LocalityIdentifier>
+
+    fun getAllSchemes(country: String, region: String): List<String>
 }
 
 @Service
@@ -72,5 +74,12 @@ class AddressLocalityServiceImpl(
             description = localityEntity.description,
             uri = localityEntity.uri
         )
+    }
+
+    override fun getAllSchemes(country: String, region: String): List<String> {
+        val countryCode = CountryCode(country)
+        val regionCode = RegionCode(region)
+
+        return addressLocalityRepository.findAllSchemes(country = countryCode, region = regionCode)
     }
 }

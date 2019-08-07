@@ -174,4 +174,17 @@ class AddressLocalityServiceTest {
             exception.description
         )
     }
+
+    @Test
+    fun `Getting all schemes of localities is successful`() {
+        whenever(advancedLanguageRepository.exists(eq(LANGUAGE_CODE)))
+            .thenReturn(true)
+        whenever(addressLocalityRepository.findAllSchemes(country = eq(COUNTRY_CODE), region = eq(REGION_CODE)))
+            .thenReturn(listOf(SCHEME))
+
+        val result = service.getAllSchemes(country = COUNTRY, region = REGION)
+
+        assertEquals(1, result.size)
+        assertEquals(SCHEME, result[0])
+    }
 }
