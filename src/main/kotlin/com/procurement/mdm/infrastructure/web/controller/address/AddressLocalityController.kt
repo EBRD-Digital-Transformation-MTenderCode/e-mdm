@@ -13,12 +13,39 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping
+@RequestMapping("/addresses/countries/{countryId}/regions/{regionId}/localities")
 class AddressLocalityController(private val addressLocalityService: AddressLocalityService) {
 
-    @GetMapping("/addresses/countries/{countryId}/regions/{regionId}/localities/{localityId}")
+    @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    fun getCountryById(
+    fun getAll(
+        @PathVariable(value = "countryId") countryId: String,
+        @PathVariable(value = "regionId") regionId: String,
+        @RequestParam(value = "lang", required = false) lang: String?
+    ): LocalitiesApiResponse {
+
+        if (lang == null)
+            throw LanguageRequestParameterMissingException()
+
+        val localities = addressLocalityService.getBy(
+            country = countryId,
+            region = regionId,
+            language = lang
+        ).map { localityIdentifier ->
+            Locality(
+                id = localityIdentifier.id,
+                description = localityIdentifier.description,
+                scheme = localityIdentifier.scheme,
+                uri = localityIdentifier.uri
+            )
+        }
+
+        return LocalitiesApiResponse(localities = localities)
+    }
+
+    @GetMapping("/{localityId}")
+    @ResponseStatus(HttpStatus.OK)
+    fun getById(
         @PathVariable(value = "countryId") countryId: String,
         @PathVariable(value = "regionId") regionId: String,
         @PathVariable(value = "localityId") localityId: String,
@@ -46,6 +73,8 @@ class AddressLocalityController(private val addressLocalityService: AddressLocal
     }
 
     class LocalityApiResponse(locality: Locality) : ApiResponse<Locality>(locality)
+
+    class LocalitiesApiResponse(localities: List<Locality>) : ApiResponse<List<Locality>>(localities)
 
     data class Locality(
         @field:JsonProperty("scheme") @param:JsonProperty("scheme") val scheme: String,

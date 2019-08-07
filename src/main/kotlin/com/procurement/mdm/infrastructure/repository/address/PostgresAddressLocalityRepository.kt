@@ -18,6 +18,25 @@ class PostgresAddressLocalityRepository(
 ) : AbstractRepository(jdbcTemplate), AddressLocalityRepository {
 
     companion object {
+        @Language("PostgreSQL")
+        private const val FIND_ALL_SQL = """
+            SELECT ls.code AS scheme,
+                   als.code AS id,
+                   alsi18n.description,
+                   ls.uri
+              FROM public.list_schemes AS ls
+        INNER JOIN public.address_locality_schemes AS als
+                ON ls.id = als.list_schemes_id
+        INNER JOIN public.address_locality_schemes_i18n AS alsi18n
+                ON als.id = alsi18n.address_locality_schemes_id
+             WHERE ls.id = (SELECT list_schemes_id
+                              FROM public.address_locality_scheme_used
+                             WHERE country_code = :country_code
+                               AND region_code = :region_code)
+               AND als.country_code = :country_code
+               AND als.region_code = :region_code
+               AND alsi18n.language_code = :language_code
+            """
 
         @Language("PostgreSQL")
         private const val FIND_BY_ID_SQL = """
@@ -40,6 +59,17 @@ class PostgresAddressLocalityRepository(
                AND alsi18n.language_code = :language_code
             """
     }
+
+    override fun findAll(country: CountryCode, region: RegionCode, language: LanguageCode): List<LocalityEntity> =
+        getListObjects(
+            sql = FIND_ALL_SQL,
+            params = mapOf(
+                "country_code" to country.value.toUpperCase(),
+                "region_code" to region.value.toUpperCase(),
+                "language_code" to language.value.toUpperCase()
+            ),
+            mapper = localityRowMapper
+        )
 
     override fun findBy(
         locality: LocalityCode,

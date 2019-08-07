@@ -67,6 +67,72 @@ class AddressLocalityControllerTest {
     }
 
     @Test
+    fun `Getting all localities is successful`() {
+        val expected = LocalityIdentifier(
+            scheme = "scheme-1",
+            id = LOCALITY,
+            description = "description-1",
+            uri = "https://example-1.com"
+        )
+
+        whenever(addressLocalityService.getBy(country = eq(COUNTRY), region = eq(REGION), language = eq(LANGUAGE)))
+            .thenReturn(listOf(expected))
+
+        val url = getUrl(country = COUNTRY, region = REGION)
+        mockMvc.perform(
+            get(url)
+                .param("lang", LANGUAGE)
+        )
+            .andExpect(status().isOk)
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.data.length()", equalTo(1)))
+            .andExpect(jsonPath("$.data[0].scheme", equalTo(expected.scheme)))
+            .andExpect(jsonPath("$.data[0].id", equalTo(expected.id)))
+            .andExpect(jsonPath("$.data[0].description", equalTo(expected.description)))
+            .andExpect(jsonPath("$.data[0].uri", equalTo(expected.uri)))
+
+        verify(addressLocalityService, times(1))
+            .getBy(country = any(), region = any(), language = any())
+    }
+
+    @Test
+    fun `Getting all localities is successful (list of localities is empty)`() {
+        whenever(addressLocalityService.getBy(country = eq(COUNTRY), region = eq(REGION), language = eq(LANGUAGE)))
+            .thenReturn(emptyList())
+
+        val url = getUrl(country = COUNTRY, region = REGION)
+        mockMvc.perform(
+            get(url)
+                .param("lang", LANGUAGE)
+        )
+            .andExpect(status().isOk)
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.data.length()", equalTo(0)))
+
+        verify(addressLocalityService, times(1))
+            .getBy(country = any(), region = any(), language = any())
+    }
+
+    @Test
+    fun `Getting all localities is successful (language request parameter is missing)`() {
+        val url = getUrl(country = COUNTRY, region = REGION)
+        mockMvc.perform(get(url))
+            .andExpect(status().isBadRequest)
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.errors.length()", equalTo(1)))
+            .andExpect(jsonPath("$.errors[0].code", equalTo(LANGUAGE_REQUEST_PARAMETER_MISSING.code)))
+            .andExpect(
+                jsonPath(
+                    "$.errors[0].description",
+                    equalTo("The request is missing a required query parameter - 'lang'.")
+                )
+            )
+
+        verify(addressLocalityService, times(0))
+            .getBy(country = any(), region = any(), language = any())
+    }
+
+    @Test
     fun `Getting the locality by code is successful`() {
         val expected = LocalityIdentifier(
             scheme = "scheme-1",
@@ -354,6 +420,9 @@ class AddressLocalityControllerTest {
             .getBy(locality = any(), country = any(), region = any(), language = any())
     }
 
-    private fun getUrl(locality: String, country: String, region: String): String =
-        String.format("/addresses/countries/%s/regions/%s/localities/%s", country, region, locality)
+    private fun getUrl(locality: String? = null, country: String, region: String): String =
+        if (locality == null)
+            String.format("/addresses/countries/%s/regions/%s/localities", country, region)
+        else
+            String.format("/addresses/countries/%s/regions/%s/localities/%s", country, region, locality)
 }

@@ -8,8 +8,11 @@ import com.procurement.mdm.domain.model.code.RegionCode
 import com.procurement.mdm.domain.repository.address.AddressLocalityRepository
 import com.procurement.mdm.infrastructure.repository.AbstractRepositoryTest
 import com.procurement.mdm.infrastructure.repository.loadSql
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.Matchers.containsInAnyOrder
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
@@ -25,10 +28,12 @@ class AddressLocalityRepositoryIT : AbstractRepositoryTest() {
         private val UNKNOWN_REGION_CODE = RegionCode("UNKNOWN")
 
         private val LOCALITY_CODE = LocalityCode("locality-1")
+        private val LOCALITY_CODE_2 = LocalityCode("locality-3")
         private val UNKNOWN_LOCALITY_CODE = LocalityCode("UNKNOWN")
 
         private const val SCHEME_CODE = "CUATM"
         private const val DESCRIPTION = "mun.Chişinău RO"
+        private const val DESCRIPTION_2 = "or.Sîngera RO"
         private const val URI = "http://statistica.md"
     }
 
@@ -50,6 +55,36 @@ class AddressLocalityRepositoryIT : AbstractRepositoryTest() {
 
         val sqlLocalities = loadSql("sql/address/localities_init_data.sql")
         executeSQLScript(sqlLocalities)
+    }
+
+    @Test
+    fun `Finding all localities is successful`() {
+        initData()
+
+        val actual = repository.findAll(country = COUNTRY_CODE, region = REGION_CODE, language = LANGUAGE_CODE)
+
+        val expected1 = LocalityEntity(
+            scheme = SCHEME_CODE,
+            id = LOCALITY_CODE.value.toUpperCase(),
+            description = DESCRIPTION,
+            uri = URI
+        )
+        val expected2 = LocalityEntity(
+            scheme = SCHEME_CODE,
+            id = LOCALITY_CODE_2.value.toUpperCase(),
+            description = DESCRIPTION_2,
+            uri = URI
+        )
+
+        assertEquals(2, actual.size)
+        assertThat(actual, containsInAnyOrder(expected1, expected2))
+    }
+
+    @Test
+    fun `Finding all localities is successful (list of localities is empty)`() {
+        val actual = repository.findAll(country = COUNTRY_CODE, region = REGION_CODE, language = LANGUAGE_CODE)
+
+        assertTrue(actual.isEmpty())
     }
 
     @Test

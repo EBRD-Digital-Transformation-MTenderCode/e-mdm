@@ -7,6 +7,12 @@ import com.procurement.mdm.domain.model.code.LocalityCode
 import com.procurement.mdm.domain.model.code.RegionCode
 
 interface AddressLocalityRepository {
+    fun findAll(
+        country: CountryCode,
+        region: RegionCode,
+        language: LanguageCode
+    ): List<LocalityEntity>
+
     fun findBy(
         locality: LocalityCode,
         country: CountryCode,

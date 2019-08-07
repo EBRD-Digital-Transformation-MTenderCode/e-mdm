@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service
 
 interface AddressLocalityService {
     fun getBy(locality: String, country: String, region: String, language: String): LocalityIdentifier
+
+    fun getBy(country: String, region: String, language: String): List<LocalityIdentifier>
 }
 
 @Service
@@ -19,6 +21,24 @@ class AddressLocalityServiceImpl(
     private val addressLocalityRepository: AddressLocalityRepository,
     private val advancedLanguageRepository: AdvancedLanguageRepository
 ) : AddressLocalityService {
+
+    override fun getBy(country: String, region: String, language: String): List<LocalityIdentifier> {
+        val countryCode = CountryCode(country)
+        val regionCode = RegionCode(region)
+        val languageCode = LanguageCode(language).apply {
+            validation(advancedLanguageRepository)
+        }
+
+        return addressLocalityRepository.findAll(country = countryCode, region = regionCode, language = languageCode)
+            .map { localityEntity ->
+                LocalityIdentifier(
+                    scheme = localityEntity.scheme,
+                    id = localityEntity.id,
+                    description = localityEntity.description,
+                    uri = localityEntity.uri
+                )
+            }
+    }
 
     override fun getBy(
         locality: String,

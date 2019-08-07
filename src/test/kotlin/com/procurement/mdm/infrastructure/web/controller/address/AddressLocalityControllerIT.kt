@@ -90,6 +90,87 @@ class AddressLocalityControllerIT : AbstractRepositoryTest() {
     }
 
     @Test
+    fun `Getting all localities is successful`() {
+        initData()
+
+        val expected = LocalityIdentifier(
+            scheme = "CUATM",
+            id = LOCALITY.toUpperCase(),
+            description = "mun.Chişinău RO",
+            uri = "http://statistica.md"
+        )
+
+        val url = getUrl(country = COUNTRY, region = REGION)
+        mockMvc.perform(
+            get(url)
+                .param("lang", LANGUAGE)
+        )
+            .andExpect(status().isOk)
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.data.length()", equalTo(2)))
+            .andExpect(jsonPath("$.data[0].scheme", equalTo(expected.scheme)))
+            .andExpect(jsonPath("$.data[0].id", equalTo(expected.id)))
+            .andExpect(jsonPath("$.data[0].description", equalTo(expected.description)))
+            .andExpect(jsonPath("$.data[0].uri", equalTo(expected.uri)))
+            .andDo(
+                document(
+                    "address/locality/get_all/success",
+                    responseFields(ModelDescription.Address.Locality.collection())
+                )
+            )
+    }
+
+    @Test
+    fun `Getting all localities is successful (list of localities is empty)`() {
+        initLanguages()
+        initSchemes()
+        initCountries()
+        initRegions()
+
+        val url = getUrl(country = COUNTRY, region = REGION)
+        mockMvc.perform(
+            get(url)
+                .param("lang", LANGUAGE)
+        )
+            .andExpect(status().isOk)
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.data.length()", equalTo(0)))
+            .andDo(
+                document(
+                    "address/locality/get_all/success_empty",
+                    responseFields(ModelDescription.Address.Locality.emptyCollection())
+                )
+            )
+    }
+
+    @Test
+    fun `Getting all localities is successful (language request parameter is missing)`() {
+        initLanguages()
+        initSchemes()
+        initCountries()
+        initRegions()
+
+        val url = getUrl(country = COUNTRY, region = REGION)
+        mockMvc.perform(get(url))
+            .andExpect(status().isBadRequest)
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.errors.length()", equalTo(1)))
+            .andExpect(jsonPath("$.errors[0].code", equalTo(LANGUAGE_REQUEST_PARAMETER_MISSING.code)))
+            .andExpect(
+                jsonPath(
+                    "$.errors[0].description",
+                    equalTo("The request is missing a required query parameter - 'lang'.")
+                )
+            )
+            .andDo(
+                document(
+                    "address/locality/get_all/errors/no_lang_query_param",
+                    responseFields(ModelDescription.responseError())
+                )
+            )
+    }
+
+    @Test
     fun `Getting the locality by code is successful`() {
         initData()
 
@@ -363,18 +444,10 @@ class AddressLocalityControllerIT : AbstractRepositoryTest() {
 
     private fun initData() {
         initLanguages()
-
-        val sqlSchemes = loadSql("sql/list_schemes_init_data.sql")
-        executeSQLScript(sqlSchemes)
-
-        val sqlCountries = loadSql("sql/address/countries_init_data.sql")
-        executeSQLScript(sqlCountries)
-
-        val sqlRegions = loadSql("sql/address/regions_init_data.sql")
-        executeSQLScript(sqlRegions)
-
-        val sqlLocalities = loadSql("sql/address/localities_init_data.sql")
-        executeSQLScript(sqlLocalities)
+        initSchemes()
+        initCountries()
+        initRegions()
+        initLocalities()
     }
 
     private fun initLanguages() {
@@ -382,6 +455,29 @@ class AddressLocalityControllerIT : AbstractRepositoryTest() {
         executeSQLScript(sqlLanguages)
     }
 
-    private fun getUrl(locality: String, country: String, region: String): String =
-        String.format("/addresses/countries/%s/regions/%s/localities/%s", country, region, locality)
+    private fun initSchemes() {
+        val sqlSchemes = loadSql("sql/list_schemes_init_data.sql")
+        executeSQLScript(sqlSchemes)
+    }
+
+    private fun initCountries() {
+        val sqlCountries = loadSql("sql/address/countries_init_data.sql")
+        executeSQLScript(sqlCountries)
+    }
+
+    private fun initRegions() {
+        val sqlRegions = loadSql("sql/address/regions_init_data.sql")
+        executeSQLScript(sqlRegions)
+    }
+
+    private fun initLocalities() {
+        val sqlLocalities = loadSql("sql/address/localities_init_data.sql")
+        executeSQLScript(sqlLocalities)
+    }
+
+    private fun getUrl(locality: String? = null, country: String, region: String): String =
+        if (locality == null)
+            String.format("/addresses/countries/%s/regions/%s/localities", country, region)
+        else
+            String.format("/addresses/countries/%s/regions/%s/localities/%s", country, region, locality)
 }
