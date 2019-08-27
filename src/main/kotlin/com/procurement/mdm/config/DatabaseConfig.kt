@@ -6,7 +6,12 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import org.springframework.transaction.annotation.EnableTransactionManagement
 
 @Configuration
-@ComponentScan(basePackages = ["com.procurement.mdm.model.entity"])
+@ComponentScan(
+    basePackages = [
+        "com.procurement.mdm.model.entity",
+        "com.procurement.mdm.infrastructure.repository"
+    ]
+)
 @EnableJpaRepositories(basePackages = ["com.procurement.mdm.repository"])
 @EnableTransactionManagement
 class DatabaseConfig

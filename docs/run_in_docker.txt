@@ -1,7 +1,0 @@
-mvn clean package docker:build docker:push
-docker login docker.io/eprocurementsystems
-Docker ID: eprocurementsystems
-pass: uStudioeProcurement
-
-
---env __PROP_spring_jpa_hibernate_ddl-auto=update \
