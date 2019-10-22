@@ -2,6 +2,11 @@ package com.procurement.mdm.model.dto.data
 
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonInclude
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import com.fasterxml.jackson.databind.annotation.JsonSerialize
+import com.procurement.mdm.model.dto.databinding.JsonDateDeserializer
+import com.procurement.mdm.model.dto.databinding.JsonDateSerializer
+import java.time.LocalDateTime
 import java.util.*
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -11,9 +16,11 @@ data class OrganizationReference @JsonCreator constructor(
 
         val name: String?,
 
-        val address: Address,
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        val address: Address?,
 
-        val identifier: Identifier,
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        val identifier: Identifier?,
 
         val additionalIdentifiers: List<Identifier>?,
 
@@ -21,18 +28,66 @@ data class OrganizationReference @JsonCreator constructor(
 
         val details: Details?,
 
-        val buyerProfile: String?
+        val buyerProfile: String?,
+
+        @JsonInclude(JsonInclude.Include.NON_EMPTY)
+        val persones: List<Persone>?
 )
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+data class Persone @JsonCreator constructor(
+
+        val title: String,
+
+        val name: String,
+
+        val identifier: Identifier,
+
+        val businessFunctions: List<BusinessFunction>
+)
+
+data class BusinessFunction @JsonCreator constructor (
+
+        val id: String,
+
+        val type: BusinessFunctionType,
+
+        val jobTitle: String,
+
+        val period: Period,
+
+        @JsonInclude(JsonInclude.Include.NON_EMPTY)
+        val documents: List<Document>?
+)
+
+data class Period(
+        @JsonDeserialize(using = JsonDateDeserializer::class)
+        @JsonSerialize(using = JsonDateSerializer::class)
+        val startDate: LocalDateTime
+)
+
+data class Document(
+
+        val id: String,
+
+        val documentType: BusinessFunctionDocumentType,
+
+        val title: String,
+
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        val description: String?
+)
+
+
 data class Identifier @JsonCreator constructor(
 
         val id: String,
 
         val scheme: String,
 
-        val legalName: String,
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        val legalName: String?,
 
+        @JsonInclude(JsonInclude.Include.NON_NULL)
         val uri: String?
 )
 

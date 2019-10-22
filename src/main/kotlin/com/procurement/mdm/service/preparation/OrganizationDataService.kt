@@ -17,10 +17,12 @@ class OrganizationDataServiceImpl(private val registrationSchemeRepository: Regi
                                   private val addressDataService: AddressDataService) : OrganizationDataService {
 
     override fun processOrganization(organization: OrganizationReference, country: Country) {
-        registrationSchemeRepository.findByRsKeyCodeAndRsKeyCountry(code = organization.identifier.scheme, country = country)
+        organization.identifier?.let {
+            registrationSchemeRepository.findByRsKeyCodeAndRsKeyCountry(code = it.scheme, country = country)
                 ?: throw InErrorException(ErrorType.RS_UNKNOWN)
+        }
 
-        addressDataService.processAddress(organization.address, country)
+        organization.address?.let { addressDataService.processAddress(it, country) }
     }
 }
 

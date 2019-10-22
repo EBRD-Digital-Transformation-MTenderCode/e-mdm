@@ -185,3 +185,20 @@ enum class Scale constructor(private val value: String) {
         }
     }
 }
+
+enum class BusinessFunctionType(val value: String) {
+    AUTHORITY("authority");
+
+    override fun toString(): String {
+        return this.value
+    }
+}
+
+enum class BusinessFunctionDocumentType(@JsonValue val value: String) {
+    REGULATORY_DOCUMENT("regulatoryDocument");
+
+    override fun toString(): String {
+        return this.value
+    }
+}
+
