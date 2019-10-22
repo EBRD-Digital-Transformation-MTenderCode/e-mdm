@@ -186,7 +186,7 @@ enum class Scale constructor(private val value: String) {
     }
 }
 
-enum class BusinessFunctionType(val value: String) {
+enum class BusinessFunctionType(@JsonValue val value: String) {
     AUTHORITY("authority");
 
     override fun toString(): String {
