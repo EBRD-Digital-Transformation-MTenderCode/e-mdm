@@ -107,9 +107,11 @@ data class ContactPoint @JsonCreator constructor(
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class Details @JsonCreator constructor(
 
-        val typeOfSupplier: String,
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        val typeOfSupplier: String?,
 
-        val mainEconomicActivities: List<String>,
+        @JsonInclude(JsonInclude.Include.NON_EMPTY)
+        val mainEconomicActivities: List<String>?,
 
         val typeOfBuyer: TypeOfBuyer?,
 
