@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.fasterxml.jackson.databind.annotation.JsonSerialize
+import com.procurement.mdm.domain.model.enums.TypeOfSupplier
 import com.procurement.mdm.model.dto.databinding.JsonDateDeserializer
 import com.procurement.mdm.model.dto.databinding.JsonDateSerializer
 import java.time.LocalDateTime
@@ -108,7 +109,7 @@ data class ContactPoint @JsonCreator constructor(
 data class Details @JsonCreator constructor(
 
         @JsonInclude(JsonInclude.Include.NON_NULL)
-        val typeOfSupplier: String?,
+        val typeOfSupplier: TypeOfSupplier?,
 
         @JsonInclude(JsonInclude.Include.NON_EMPTY)
         val mainEconomicActivities: List<String>?,
