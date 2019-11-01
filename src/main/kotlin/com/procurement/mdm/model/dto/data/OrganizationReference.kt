@@ -49,7 +49,7 @@ data class BusinessFunction @JsonCreator constructor (
 
         val id: String,
 
-        val type: BusinessFunctionType,
+        val type: String,
 
         val jobTitle: String,
 
