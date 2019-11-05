@@ -37,6 +37,8 @@ data class ItemTD @JsonCreator constructor(
 
         var id: String?,
 
+        val internalId: String?,
+
         val description: String?,
 
         val classification: ClassificationTD,
@@ -71,6 +73,8 @@ data class ItemUnitTD @JsonCreator constructor(
 data class LotTD @JsonCreator constructor(
 
         var id: String?,
+
+        val internalId: String?,
 
         val title: String?,
 
