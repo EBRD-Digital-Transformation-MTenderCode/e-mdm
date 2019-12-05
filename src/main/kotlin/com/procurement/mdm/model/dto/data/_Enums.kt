@@ -2,6 +2,7 @@ package com.procurement.mdm.model.dto.data
 
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.procurement.mdm.exception.ErrorType
 import com.procurement.mdm.exception.InErrorException
 import java.util.*
@@ -180,6 +181,7 @@ enum class Scale constructor(private val value: String) {
         }
 
         @JsonCreator
+        @JvmStatic
         fun fromValue(value: String): Scale {
             return CONSTANTS[value.toUpperCase()] ?: throw IllegalArgumentException(value)
         }
