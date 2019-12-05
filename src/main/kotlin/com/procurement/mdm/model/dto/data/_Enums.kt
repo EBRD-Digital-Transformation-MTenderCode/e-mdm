@@ -175,13 +175,13 @@ enum class Scale constructor(private val value: String) {
 
         init {
             for (c in values()) {
-                CONSTANTS[c.value] = c
+                CONSTANTS[c.value.toUpperCase()] = c
             }
         }
 
         @JsonCreator
         fun fromValue(value: String): Scale {
-            return CONSTANTS[value] ?: throw IllegalArgumentException(value)
+            return CONSTANTS[value.toUpperCase()] ?: throw IllegalArgumentException(value)
         }
     }
 }
