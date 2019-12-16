@@ -2,6 +2,7 @@ package com.procurement.mdm.model.dto.data
 
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.procurement.mdm.exception.ErrorType
 import com.procurement.mdm.exception.InErrorException
 import java.util.*
@@ -175,13 +176,14 @@ enum class Scale constructor(private val value: String) {
 
         init {
             for (c in values()) {
-                CONSTANTS[c.value] = c
+                CONSTANTS[c.value.toUpperCase()] = c
             }
         }
 
         @JsonCreator
+        @JvmStatic
         fun fromValue(value: String): Scale {
-            return CONSTANTS[value] ?: throw IllegalArgumentException(value)
+            return CONSTANTS[value.toUpperCase()] ?: throw IllegalArgumentException(value)
         }
     }
 }
