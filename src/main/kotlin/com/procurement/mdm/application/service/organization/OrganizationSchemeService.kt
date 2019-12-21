@@ -7,7 +7,7 @@ import com.procurement.mdm.domain.repository.organization.OrganizationSchemeRepo
 import org.springframework.stereotype.Service
 
 interface OrganizationSchemeService {
-    fun findAllOnlyCode(country: String): List<String>
+    fun find(country: String): List<String>
 }
 
 @Service
@@ -16,7 +16,7 @@ class OrganizationSchemeServiceImpl(
     private val addressCountryRepository: AddressCountryRepository
 ) : OrganizationSchemeService {
 
-    override fun findAllOnlyCode(country: String): List<String> {
+    override fun find(country: String): List<String> {
         val countryCode = CountryCode(country)
             .apply {
                 validation(addressCountryRepository)

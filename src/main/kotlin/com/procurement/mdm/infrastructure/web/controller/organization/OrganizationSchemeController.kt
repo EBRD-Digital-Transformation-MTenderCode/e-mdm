@@ -24,7 +24,7 @@ class OrganizationSchemeController(private val organizationSchemeService: Organi
         if (country == null)
             throw CountryRequestParameterMissingException()
 
-        val schemesCodes = organizationSchemeService.findAllOnlyCode(country = country)
+        val schemesCodes = organizationSchemeService.find(country = country)
         return OrganizationSchemesApiResponse(
             OrganizationSchemes(
                 schemes = schemesCodes

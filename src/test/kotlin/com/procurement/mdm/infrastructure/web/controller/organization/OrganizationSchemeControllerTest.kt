@@ -55,7 +55,7 @@ class OrganizationSchemeControllerTest {
 
     @Test
     fun `Getting the organization schemes for country is successful`() {
-        whenever(organizationSchemeService.findAllOnlyCode(country = eq(COUNTRY)))
+        whenever(organizationSchemeService.find(country = eq(COUNTRY)))
             .thenReturn(SCHEMES_CODES)
 
         val url = getUrl()
@@ -69,7 +69,7 @@ class OrganizationSchemeControllerTest {
             .andExpect(jsonPath("$.data.schemes[1]", equalTo(SCHEME_CODE_SECOND)))
 
         verify(organizationSchemeService, times(1))
-            .findAllOnlyCode(country = any())
+            .find(country = any())
     }
 
     @Test
@@ -90,14 +90,14 @@ class OrganizationSchemeControllerTest {
             )
 
         verify(organizationSchemeService, times(0))
-            .findAllOnlyCode(country = any())
+            .find(country = any())
     }
 
     @Test
     fun `Getting the organization schemes for country is error (country code is empty)`() {
         doThrow(InvalidCountryCodeException(description = "Invalid country code (value is blank)."))
             .whenever(organizationSchemeService)
-            .findAllOnlyCode(country = eq(EMPTY_COUNTRY))
+            .find(country = eq(EMPTY_COUNTRY))
 
         val url = getUrl()
         mockMvc.perform(
@@ -116,7 +116,7 @@ class OrganizationSchemeControllerTest {
             )
 
         verify(organizationSchemeService, times(1))
-            .findAllOnlyCode(country = any())
+            .find(country = any())
     }
 
     @Test
@@ -124,7 +124,7 @@ class OrganizationSchemeControllerTest {
 
         doThrow(InvalidCountryCodeException(description = "Invalid country code: '$INVALID_COUNTRY' (wrong length: '${INVALID_COUNTRY.length}' required: '2')."))
             .whenever(organizationSchemeService)
-            .findAllOnlyCode(country = eq(INVALID_COUNTRY))
+            .find(country = eq(INVALID_COUNTRY))
 
         val url = getUrl()
         mockMvc.perform(
@@ -143,14 +143,14 @@ class OrganizationSchemeControllerTest {
             )
 
         verify(organizationSchemeService, times(1))
-            .findAllOnlyCode(country = any())
+            .find(country = any())
     }
 
     @Test
     fun `Getting the organization schemes for country is error (country request parameter is unknown)`() {
         doThrow(CountryUnknownException(country = UNKNOWN_COUNTRY))
             .whenever(organizationSchemeService)
-            .findAllOnlyCode(country = eq(UNKNOWN_COUNTRY))
+            .find(country = eq(UNKNOWN_COUNTRY))
 
         val url = getUrl()
         mockMvc.perform(
@@ -169,14 +169,14 @@ class OrganizationSchemeControllerTest {
             )
 
         verify(organizationSchemeService, times(1))
-            .findAllOnlyCode(country = any())
+            .find(country = any())
     }
 
     @Test
     fun `Getting the organization schemes for country is error (organization schemes not found)`() {
         doThrow(OrganizationSchemeNotFoundException(country = COUNTRY))
             .whenever(organizationSchemeService)
-            .findAllOnlyCode(country = eq(COUNTRY))
+            .find(country = eq(COUNTRY))
 
         val url = getUrl()
         mockMvc.perform(
@@ -195,14 +195,14 @@ class OrganizationSchemeControllerTest {
             )
 
         verify(organizationSchemeService, times(1))
-            .findAllOnlyCode(country = any())
+            .find(country = any())
     }
 
     @Test
     fun `Getting the organization schemes for country is error (internal server error)`() {
         doThrow(RuntimeException())
             .whenever(organizationSchemeService)
-            .findAllOnlyCode(country = eq(COUNTRY))
+            .find(country = eq(COUNTRY))
 
         val url = getUrl()
         mockMvc.perform(
@@ -216,7 +216,7 @@ class OrganizationSchemeControllerTest {
             .andExpect(jsonPath("$.errors[0].description", equalTo("Internal server error.")))
 
         verify(organizationSchemeService, times(1))
-            .findAllOnlyCode(country = any())
+            .find(country = any())
     }
 
     private fun getUrl(): String = String.format("/organization/schemes")

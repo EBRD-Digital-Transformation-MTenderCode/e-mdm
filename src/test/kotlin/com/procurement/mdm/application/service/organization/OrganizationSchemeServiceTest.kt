@@ -43,7 +43,7 @@ class OrganizationSchemeServiceTest {
         whenever(organizationSchemeRepository.find(country = eq(COUNTRY_CODE)))
             .thenReturn(SCHEMES_CODES)
 
-        val actual = service.findAllOnlyCode(country = COUNTRY)
+        val actual = service.find(country = COUNTRY)
 
         assertEquals(SCHEMES_CODES.toSet(), actual.toSet())
     }
@@ -54,7 +54,7 @@ class OrganizationSchemeServiceTest {
             .thenReturn(false)
 
         val exception = assertThrows<CountryUnknownException> {
-            service.findAllOnlyCode(country = COUNTRY)
+            service.find(country = COUNTRY)
         }
 
         assertEquals("The unknown code of a country '$COUNTRY'.", exception.description)
@@ -68,7 +68,7 @@ class OrganizationSchemeServiceTest {
             .thenReturn(emptyList())
 
         val exception = assertThrows<OrganizationSchemeNotFoundException> {
-            service.findAllOnlyCode(country = COUNTRY)
+            service.find(country = COUNTRY)
         }
 
         assertEquals("The organization schemes for country '$COUNTRY' not found.", exception.description)
