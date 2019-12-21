@@ -22,7 +22,7 @@ class OrganizationSchemeServiceImpl(
                 validation(addressCountryRepository)
             }
 
-        val schemesCodes = organizationSchemeRepository.findAllOnlyCode(country = countryCode)
+        val schemesCodes = organizationSchemeRepository.find(country = countryCode)
         if (schemesCodes.isEmpty())
             throw OrganizationSchemeNotFoundException(country = countryCode.value)
 

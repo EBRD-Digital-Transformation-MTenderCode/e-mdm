@@ -34,7 +34,7 @@ class OrganizationSchemeRepositoryIT : AbstractRepositoryTest() {
         initData()
 
         val expect = setOf("ISO", "CUATM")
-        val actual = repository.findAllOnlyCode(country = COUNTRY_CODE)
+        val actual = repository.find(country = COUNTRY_CODE)
 
         assertEquals(2, actual.size)
         assertEquals(expect, actual.toSet())
@@ -44,14 +44,14 @@ class OrganizationSchemeRepositoryIT : AbstractRepositoryTest() {
     fun `Finding all of the organization schemes is error (unknown country)`() {
         initData()
 
-        val schemesCodes = repository.findAllOnlyCode(country = UNKNOWN_COUNTRY_CODE)
+        val schemesCodes = repository.find(country = UNKNOWN_COUNTRY_CODE)
 
         assertTrue(schemesCodes.isEmpty())
     }
 
     @Test
     fun `Finding all of the organization schemes is error (database is empty)`() {
-        val schemesCodes = repository.findAllOnlyCode(country = COUNTRY_CODE)
+        val schemesCodes = repository.find(country = COUNTRY_CODE)
 
         assertTrue(schemesCodes.isEmpty())
     }

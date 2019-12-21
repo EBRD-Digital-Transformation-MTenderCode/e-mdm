@@ -40,7 +40,7 @@ class OrganizationSchemeServiceTest {
     fun test1() {
         whenever(addressCountryRepository.exists(code = eq(COUNTRY_CODE)))
             .thenReturn(true)
-        whenever(organizationSchemeRepository.findAllOnlyCode(country = eq(COUNTRY_CODE)))
+        whenever(organizationSchemeRepository.find(country = eq(COUNTRY_CODE)))
             .thenReturn(SCHEMES_CODES)
 
         val actual = service.findAllOnlyCode(country = COUNTRY)
@@ -64,7 +64,7 @@ class OrganizationSchemeServiceTest {
     fun `Getting the organization schemes is error (schemes codes by country is not found)`() {
         whenever(addressCountryRepository.exists(code = eq(COUNTRY_CODE)))
             .thenReturn(true)
-        whenever(organizationSchemeRepository.findAllOnlyCode(country = eq(COUNTRY_CODE)))
+        whenever(organizationSchemeRepository.find(country = eq(COUNTRY_CODE)))
             .thenReturn(emptyList())
 
         val exception = assertThrows<OrganizationSchemeNotFoundException> {
