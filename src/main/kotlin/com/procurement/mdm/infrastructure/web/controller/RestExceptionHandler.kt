@@ -17,6 +17,7 @@ import com.procurement.mdm.infrastructure.exception.CountryRequestParameterMissi
 import com.procurement.mdm.infrastructure.exception.InfrastructureException
 import com.procurement.mdm.infrastructure.exception.LanguageRequestParameterMissingException
 import com.procurement.mdm.infrastructure.exception.NoHandlerUrlException
+import com.procurement.mdm.infrastructure.exception.RequestPayloadMissingException
 import com.procurement.mdm.infrastructure.web.dto.ApiError
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_NOT_FOUND
@@ -34,6 +35,7 @@ import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LOCALITY_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.ORGANIZATION_SCALE_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.ORGANIZATION_SCHEME_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REGION_NOT_FOUND
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REQUEST_PAYLOAD_MISSING
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
@@ -105,6 +107,9 @@ class RestExceptionHandler : ResponseEntityExceptionHandler() {
 
             is CountryRequestParameterMissingException ->
                 exception.handler(errorCode = COUNTRY_REQUEST_PARAMETER_MISSING)
+
+            is RequestPayloadMissingException ->
+                exception.handler(errorCode = REQUEST_PAYLOAD_MISSING)
         }
 
         return ResponseEntity.status(apiError.status).body(apiError)

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service
 
 interface OrganizationSchemeService {
     fun find(country: String): List<String>
+
+    fun find(countries: List<String>): Map<CountryCode, List<String>>
 }
 
 @Service
@@ -17,15 +19,33 @@ class OrganizationSchemeServiceImpl(
 ) : OrganizationSchemeService {
 
     override fun find(country: String): List<String> {
-        val countryCode = CountryCode(country)
-            .apply {
-                validation(addressCountryRepository)
-            }
-
-        val schemesCodes = organizationSchemeRepository.find(country = countryCode)
-        if (schemesCodes.isEmpty())
-            throw OrganizationSchemeNotFoundException(country = countryCode.value)
-
-        return schemesCodes
+        val code = getCountryCode(country)
+        return getSchemesByCountry(code = code)
     }
+
+    override fun find(countries: List<String>): Map<CountryCode, List<String>> {
+        val codes = countries.map { country ->
+            getCountryCode(country)
+        }
+
+        return codes.asSequence()
+            .map { code ->
+                val schemes = getSchemesByCountry(code = code)
+                code to schemes
+            }
+            .toMap()
+    }
+
+    private fun getSchemesByCountry(code: CountryCode): List<String> {
+        return organizationSchemeRepository.find(country = code)
+            .also {
+                if (it.isEmpty())
+                    throw OrganizationSchemeNotFoundException(country = code.value)
+            }
+    }
+
+    private fun getCountryCode(country: String) = CountryCode(country)
+        .also {
+            it.validation(addressCountryRepository)
+        }
 }

@@ -22,6 +22,11 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
     COUNTRY_REQUEST_PARAMETER_UNKNOWN(status = HttpStatus.BAD_REQUEST, group = Groups.REQUEST_PARAMETER_UNKNOWN, id = "02"),
 
     /**
+     * Request payload is missing.
+     */
+    REQUEST_PAYLOAD_MISSING(status = HttpStatus.BAD_REQUEST, group = Groups.REQUEST_PAYLOAD_UNKNOWN, id = "01"),
+
+    /**
      * Language.
      */
     INVALID_LANGUAGE_CODE(status = HttpStatus.BAD_REQUEST, group = Groups.LANGUAGE, id = "01"),
@@ -62,6 +67,7 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
         SERVER(code = "00"),
         REQUEST_PARAMETER_MISSING(code = "01"),
         REQUEST_PARAMETER_UNKNOWN(code = "02"),
+        REQUEST_PAYLOAD_UNKNOWN(code = "03"),
         LANGUAGE(code = "10"),
         COUNTRY(code = "11"),
         REGION(code = "12"),
