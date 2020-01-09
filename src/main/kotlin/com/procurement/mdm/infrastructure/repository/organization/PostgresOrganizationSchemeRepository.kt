@@ -11,8 +11,7 @@ import java.sql.ResultSet
 @Repository
 class PostgresOrganizationSchemeRepository(
     jdbcTemplate: NamedParameterJdbcTemplate
-) : AbstractRepository(jdbcTemplate),
-    OrganizationSchemeRepository {
+) : AbstractRepository(jdbcTemplate), OrganizationSchemeRepository {
 
     companion object {
 
@@ -26,7 +25,7 @@ class PostgresOrganizationSchemeRepository(
             """
     }
 
-    override fun findAllOnlyCode(country: CountryCode): List<String> = getListObjects(
+    override fun find(country: CountryCode): List<String> = getListObjects(
         sql = FIND_ALL_ONLY_CODE_SQL,
         params = mapOf(
             "country_code" to country.value.toUpperCase()
