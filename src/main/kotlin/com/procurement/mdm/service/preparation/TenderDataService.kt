@@ -135,7 +135,6 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
         return items.asSequence().map { it.unit.id }.toList()
     }
 
-
     private fun getCpvsCodes(items: List<ItemTD>): List<String> {
         val cpvsCodes = arrayListOf<String>()
         items.forEach { item ->
@@ -164,7 +163,10 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
 
     private fun getData(cm: CommandMessage): TD {
         if (cm.data.size() == 0) throw InErrorException(ErrorType.INVALID_DATA, null, cm.id)
-        return toObject(TD::class.java, cm.data)
+        val data = toObject(TD::class.java, cm.data)
+        val persones = data.tender.procuringEntity?.persones
+        if (persones != null && persones.isEmpty())
+            throw InErrorException(error = ErrorType.EMPTY_PERSONES, id = cm.id)
+        return data
     }
-
 }
