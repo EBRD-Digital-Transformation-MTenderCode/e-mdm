@@ -112,7 +112,7 @@ data class Details @JsonCreator constructor(
         val typeOfSupplier: TypeOfSupplier?,
 
         @JsonInclude(JsonInclude.Include.NON_EMPTY)
-        val mainEconomicActivities: List<MainEconomicActivities>?,
+        val mainEconomicActivities: List<MainEconomicActivity>?,
 
         val typeOfBuyer: TypeOfBuyer?,
 
@@ -132,7 +132,7 @@ data class Details @JsonCreator constructor(
         val legalForm: LegalForm?
 )
 
-data class MainEconomicActivities(
+data class MainEconomicActivity(
         val id: String,
         val description: String,
         val scheme: String,
