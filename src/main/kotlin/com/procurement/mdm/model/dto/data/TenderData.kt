@@ -3,7 +3,6 @@ package com.procurement.mdm.model.dto.data
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonInclude
 import java.math.BigDecimal
-import java.util.*
 
 data class TD @JsonCreator constructor(
 
@@ -70,9 +69,10 @@ data class ItemUnitTD @JsonCreator constructor(
         var name: String?
 )
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 data class LotTD @JsonCreator constructor(
 
-        var id: String?,
+        val id: String?,
 
         val internalId: String?,
 

@@ -13,3 +13,5 @@ INSERT INTO public.pmd (code, description, name, country_code, country_language_
 INSERT INTO public.pmd (code, description, name, country_code, country_language_code) VALUES ('MV', null, 'Achiziție de valoare mica', 'MD', 'ro');
 INSERT INTO public.pmd (code, description, name, country_code, country_language_code) VALUES ('MV', null, 'Закупка малой стоимости', 'MD', 'ru');
 INSERT INTO public.pmd (code, description, name, country_code, country_language_code) VALUES ('MV', null, 'Micro-value tender', 'MD', 'en');
+INSERT INTO public.pmd (code, description, name, country_code, country_language_code) VALUES ('GPA', null, 'governmentProcurementAgreement', 'MD', 'en');
+INSERT INTO public.pmd (code, description, name, country_code, country_language_code) VALUES ('GPA', null, 'governmentProcurementAgreement', 'MD', 'ro');

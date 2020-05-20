@@ -102,6 +102,24 @@ object ModelDescription {
                     )
                 )
             }
+
+            fun elements(): List<FieldDescriptor> {
+                return listOf(
+                    getFieldDescriptor("data", "The data of response."),
+                    getFieldDescriptor(
+                        "data.elements[]",
+                        "An array of the relations countries to schemes."
+                    ),
+                    getFieldDescriptor(
+                        "data.elements[].country",
+                        "A country."
+                    ),
+                    getFieldDescriptor(
+                        "data.elements[].schemes",
+                        "A list of schemes that are used to indicate the list or register from which the identifier is drawn."
+                    )
+                )
+            }
         }
 
         object Scale {
