@@ -6,6 +6,8 @@ class InvalidLanguageCodeException(description: String) : DomainException(descri
 
 class InvalidCountryCodeException(description: String) : DomainException(description)
 
+class InvalidCountrySchemeException(description: String) : DomainException(description)
+
 class InvalidRegionCodeException(description: String) : DomainException(description)
 
 class InvalidLocalityCodeException(description: String) : DomainException(description)
