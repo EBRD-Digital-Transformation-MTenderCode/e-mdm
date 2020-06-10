@@ -22,8 +22,8 @@ class PostgresCountrySchemeRepository(
             SELECT EXISTS(
                 SELECT ls.code
                   FROM public.list_schemes AS ls
-            INNER JOIN public.countries AS c
-                    ON ls.id = c.list_schemes_id                    
+            INNER JOIN public.country_schemes AS cs
+                    ON ls.id = cs.list_schemes_id                    
                  WHERE ls.code = :scheme
              )
             """
@@ -31,29 +31,29 @@ class PostgresCountrySchemeRepository(
         @Language("PostgreSQL")
         private const val COUNTRY_EXISTS_BY_SCHEME_SQL = """
             SELECT EXISTS(
-                SELECT c.code
+                SELECT cs.code
                   FROM public.list_schemes AS ls
-            INNER JOIN public.countries AS c
-                    ON ls.id = c.list_schemes_id                    
+            INNER JOIN public.country_schemes AS cs
+                    ON ls.id = cs.list_schemes_id                    
                  WHERE ls.code = :scheme
-                   AND c.code = :country
+                   AND cs.code = :country
              )
             """
 
         @Language("PostgreSQL")
         private const val FIND_BY_COUNTRY_SCHEME_AND_LANGUAGE_SQL = """
             SELECT ls.code AS scheme,
-                   c.code AS id,
-                   ci18n.description,
+                   cs.code AS id,
+                   csi18n.description,
                    ls.uri
               FROM public.list_schemes AS ls
-        INNER JOIN public.countries AS c
-                ON ls.id = c.list_schemes_id
-        INNER JOIN public.countries_i18n AS ci18n
-                ON c.id = ci18n.country_id
+        INNER JOIN public.country_schemes AS cs
+                ON ls.id = cs.list_schemes_id
+        INNER JOIN public.country_schemes_i18n AS csi18n
+                ON cs.id = csi18n.country_scheme_id
              WHERE ls.code = :scheme
-               AND c.code = :country
-               AND ci18n.language_code = :language
+               AND cs.code = :country
+               AND csi18n.language_code = :language
             """
     }
 
