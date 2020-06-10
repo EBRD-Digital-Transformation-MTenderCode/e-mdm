@@ -5,6 +5,7 @@ import com.procurement.mdm.application.service.address.AddressCountryServiceImpl
 import com.procurement.mdm.domain.model.identifier.CountryIdentifier
 import com.procurement.mdm.domain.repository.AdvancedLanguageRepository
 import com.procurement.mdm.domain.repository.address.AddressCountryRepository
+import com.procurement.mdm.domain.repository.scheme.CountrySchemeRepository
 import com.procurement.mdm.infrastructure.repository.AbstractRepositoryTest
 import com.procurement.mdm.infrastructure.repository.loadSql
 import com.procurement.mdm.infrastructure.web.controller.RestExceptionHandler
@@ -69,11 +70,15 @@ class AddressCountryControllerIT : AbstractRepositoryTest() {
     @Autowired
     private lateinit var advancedLanguageRepository: AdvancedLanguageRepository
 
+    @Autowired
+    private lateinit var countrySchemeRepository: CountrySchemeRepository
+
     @BeforeEach
     fun init(restDocumentation: RestDocumentationContextProvider) {
         addressCountryService = AddressCountryServiceImpl(
             addressCountryRepository = addressCountryRepository,
-            advancedLanguageRepository = advancedLanguageRepository
+            advancedLanguageRepository = advancedLanguageRepository,
+            countrySchemeRepository = countrySchemeRepository
         )
 
         val controller = AddressCountryController(addressCountryService)
