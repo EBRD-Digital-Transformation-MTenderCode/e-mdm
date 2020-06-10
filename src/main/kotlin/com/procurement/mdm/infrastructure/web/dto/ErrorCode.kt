@@ -58,7 +58,19 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
     /**
      * Organization scale
      */
-    ORGANIZATION_SCALE_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.ORGANIZATION_SCALE, id = "01");
+    ORGANIZATION_SCALE_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.ORGANIZATION_SCALE, id = "01"),
+
+    /**
+     * Address scheme
+     */
+    SCHEME_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.SCHEME, id = "01"),
+    INVALID_COUNTRY_SCHEME(status = HttpStatus.BAD_REQUEST, group = Groups.COUNTRY, id = "02"),
+
+
+    /**
+     * Id (code)
+     */
+    ID_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.ID, id = "01");
 
     @JsonValue
     val code: String = "${status.value()}.${GlobalProperties.serviceId}.$group.$id"
@@ -73,7 +85,9 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
         REGION(code = "12"),
         LOCALITY(code = "13"),
         ORGANIZATION_SCHEME(code = "14"),
-        ORGANIZATION_SCALE(code = "15");
+        ORGANIZATION_SCALE(code = "15"),
+        SCHEME(code = "16"),
+        ID(code = "17");
 
         override fun toString(): String = code
     }
