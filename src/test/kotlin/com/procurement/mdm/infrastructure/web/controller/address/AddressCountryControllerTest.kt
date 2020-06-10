@@ -12,6 +12,8 @@ import com.procurement.mdm.application.service.address.AddressCountryService
 import com.procurement.mdm.domain.exception.InvalidCountryCodeException
 import com.procurement.mdm.domain.exception.InvalidLanguageCodeException
 import com.procurement.mdm.domain.exception.LanguageUnknownException
+import com.procurement.mdm.domain.model.code.CountryCode
+import com.procurement.mdm.domain.model.code.LanguageCode
 import com.procurement.mdm.domain.model.identifier.CountryIdentifier
 import com.procurement.mdm.infrastructure.web.controller.RestExceptionHandler
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_NOT_FOUND
@@ -40,6 +42,8 @@ class AddressCountryControllerTest {
         private const val EMPTY_LANGUAGE = "   "
         private const val INVALID_LANGUAGE = "invalid"
         private const val UNKNOWN_LANGUAGE = "ul"
+
+        private const val SCHEME = "iso"
 
         private val COUNTRY_IDENTIFIER_FIRST = CountryIdentifier(
             scheme = "scheme-1",
@@ -72,6 +76,35 @@ class AddressCountryControllerTest {
 
     @Test
     fun `Getting all of the countries is successful`() {
+        whenever(addressCountryService.getAll(language = eq(LANGUAGE)))
+            .thenReturn(
+                listOf(COUNTRY_IDENTIFIER_FIRST, COUNTRY_IDENTIFIER_SECOND)
+            )
+
+        val url = getUrl()
+        mockMvc.perform(
+            get(url)
+                .param("lang", LANGUAGE)
+                .param("scheme", SCHEME)
+        )
+            .andExpect(status().isOk)
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.data.length()", equalTo(2)))
+            .andExpect(jsonPath("$.data[0].scheme", equalTo(COUNTRY_IDENTIFIER_FIRST.scheme)))
+            .andExpect(jsonPath("$.data[0].id", equalTo(COUNTRY_IDENTIFIER_FIRST.id)))
+            .andExpect(jsonPath("$.data[0].description", equalTo(COUNTRY_IDENTIFIER_FIRST.description)))
+            .andExpect(jsonPath("$.data[0].uri", equalTo(COUNTRY_IDENTIFIER_FIRST.uri)))
+            .andExpect(jsonPath("$.data[1].scheme", equalTo(COUNTRY_IDENTIFIER_SECOND.scheme)))
+            .andExpect(jsonPath("$.data[1].id", equalTo(COUNTRY_IDENTIFIER_SECOND.id)))
+            .andExpect(jsonPath("$.data[1].description", equalTo(COUNTRY_IDENTIFIER_SECOND.description)))
+            .andExpect(jsonPath("$.data[1].uri", equalTo(COUNTRY_IDENTIFIER_SECOND.uri)))
+
+        verify(addressCountryService, times(1))
+            .getAll(language = any())
+    }
+
+    @Test
+    fun `Getting all of the countries is successful (without scheme)`() {
         whenever(addressCountryService.getAll(language = eq(LANGUAGE)))
             .thenReturn(
                 listOf(COUNTRY_IDENTIFIER_FIRST, COUNTRY_IDENTIFIER_SECOND)
@@ -248,13 +281,14 @@ class AddressCountryControllerTest {
 
     @Test
     fun `Getting the country by code is successful`() {
-        whenever(addressCountryService.getBy(country = eq(COUNTRY), language = eq(LANGUAGE)))
+        whenever(addressCountryService.getBy(country = eq(COUNTRY), language = eq(LANGUAGE), scheme = eq(SCHEME)))
             .thenReturn(COUNTRY_IDENTIFIER_FIRST)
 
         val url = getUrl(country = COUNTRY)
         mockMvc.perform(
             get(url)
                 .param("lang", LANGUAGE)
+                .param("scheme", SCHEME)
         )
             .andExpect(status().isOk)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -264,7 +298,7 @@ class AddressCountryControllerTest {
             .andExpect(jsonPath("$.data.uri", equalTo(COUNTRY_IDENTIFIER_FIRST.uri)))
 
         verify(addressCountryService, times(1))
-            .getBy(country = any(), language = any())
+            .getBy(country = any(), language = any(), scheme = any())
     }
 
     @Test
@@ -285,19 +319,20 @@ class AddressCountryControllerTest {
             )
 
         verify(addressCountryService, times(0))
-            .getBy(country = any(), language = any())
+            .getBy(country = any(), language = any(), scheme = any())
     }
 
     @Test
     fun `Getting the country by code is error (language request parameter is empty)`() {
         doThrow(InvalidLanguageCodeException(description = "Invalid language code (value is blank)."))
             .whenever(addressCountryService)
-            .getBy(country = eq(COUNTRY), language = eq(EMPTY_LANGUAGE))
+            .getBy(country = eq(COUNTRY), language = eq(EMPTY_LANGUAGE), scheme = eq(SCHEME))
 
         val url = getUrl(country = COUNTRY)
         mockMvc.perform(
             get(url)
                 .param("lang", EMPTY_LANGUAGE)
+                .param("scheme", SCHEME)
         )
             .andExpect(status().isBadRequest)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -311,7 +346,7 @@ class AddressCountryControllerTest {
             )
 
         verify(addressCountryService, times(1))
-            .getBy(country = any(), language = any())
+            .getBy(country = any(), language = any(), scheme = any())
     }
 
     @Test
@@ -319,12 +354,13 @@ class AddressCountryControllerTest {
 
         doThrow(InvalidLanguageCodeException(description = "Invalid language code: '$INVALID_LANGUAGE' (wrong length: '${INVALID_LANGUAGE.length}' required: '2')."))
             .whenever(addressCountryService)
-            .getBy(country = eq(COUNTRY), language = eq(INVALID_LANGUAGE))
+            .getBy(country = eq(COUNTRY), language = eq(INVALID_LANGUAGE), scheme = eq(SCHEME))
 
         val url = getUrl(country = COUNTRY)
         mockMvc.perform(
             get(url)
                 .param("lang", INVALID_LANGUAGE)
+                .param("scheme", SCHEME)
         )
             .andExpect(status().isBadRequest)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -338,19 +374,20 @@ class AddressCountryControllerTest {
             )
 
         verify(addressCountryService, times(1))
-            .getBy(country = any(), language = any())
+            .getBy(country = any(), language = any(), scheme = any())
     }
 
     @Test
     fun `Getting the country by code is error (language request parameter is unknown)`() {
         doThrow(LanguageUnknownException(language = UNKNOWN_LANGUAGE))
             .whenever(addressCountryService)
-            .getBy(country = eq(COUNTRY), language = eq(UNKNOWN_LANGUAGE))
+            .getBy(country = eq(COUNTRY), language = eq(UNKNOWN_LANGUAGE), scheme = eq(SCHEME))
 
         val url = getUrl(country = COUNTRY)
         mockMvc.perform(
             get(url)
                 .param("lang", UNKNOWN_LANGUAGE)
+                .param("scheme", SCHEME)
         )
             .andExpect(status().isBadRequest)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -364,19 +401,20 @@ class AddressCountryControllerTest {
             )
 
         verify(addressCountryService, times(1))
-            .getBy(country = any(), language = any())
+            .getBy(country = any(), language = any(), scheme = any())
     }
 
     @Test
     fun `Getting the country by code is error (country code is empty)`() {
         doThrow(InvalidCountryCodeException(description = "Invalid country code (value is blank)."))
             .whenever(addressCountryService)
-            .getBy(country = eq(EMPTY_COUNTRY), language = eq(LANGUAGE))
+            .getBy(country = eq(EMPTY_COUNTRY), language = eq(LANGUAGE), scheme = eq(SCHEME))
 
         val url = getUrl(country = EMPTY_COUNTRY)
         mockMvc.perform(
             get(url)
                 .param("lang", LANGUAGE)
+                .param("scheme", SCHEME)
         )
             .andExpect(status().isBadRequest)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -390,7 +428,7 @@ class AddressCountryControllerTest {
             )
 
         verify(addressCountryService, times(1))
-            .getBy(country = any(), language = any())
+            .getBy(country = any(), language = any(), scheme = any())
     }
 
     @Test
@@ -398,12 +436,13 @@ class AddressCountryControllerTest {
 
         doThrow(InvalidCountryCodeException(description = "Invalid country code: '$INVALID_COUNTRY' (wrong length: '${INVALID_COUNTRY.length}' required: '2')."))
             .whenever(addressCountryService)
-            .getBy(country = eq(INVALID_COUNTRY), language = eq(LANGUAGE))
+            .getBy(country = eq(INVALID_COUNTRY), language = eq(LANGUAGE), scheme = eq(SCHEME))
 
         val url = getUrl(country = INVALID_COUNTRY)
         mockMvc.perform(
             get(url)
                 .param("lang", LANGUAGE)
+                .param("scheme", SCHEME)
         )
             .andExpect(status().isBadRequest)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -417,19 +456,20 @@ class AddressCountryControllerTest {
             )
 
         verify(addressCountryService, times(1))
-            .getBy(country = any(), language = any())
+            .getBy(country = any(), language = any(), scheme = any())
     }
 
     @Test
     fun `Getting the country by code is error (country by code is not found)`() {
-        doThrow(CountryNotFoundException(country = COUNTRY, language = LANGUAGE))
+        doThrow(CountryNotFoundException(country = CountryCode(COUNTRY), language = LanguageCode(LANGUAGE)))
             .whenever(addressCountryService)
-            .getBy(country = eq(COUNTRY), language = eq(LANGUAGE))
+            .getBy(country = eq(COUNTRY), language = eq(LANGUAGE), scheme = eq(SCHEME))
 
         val url = getUrl(country = COUNTRY)
         mockMvc.perform(
             get(url)
                 .param("lang", LANGUAGE)
+                .param("scheme", SCHEME)
         )
             .andExpect(status().isNotFound)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -443,19 +483,20 @@ class AddressCountryControllerTest {
             )
 
         verify(addressCountryService, times(1))
-            .getBy(country = any(), language = any())
+            .getBy(country = any(), language = any(), scheme = any())
     }
 
     @Test
     fun `Getting the country by code is error (internal server error)`() {
         doThrow(RuntimeException())
             .whenever(addressCountryService)
-            .getBy(country = eq(COUNTRY), language = eq(LANGUAGE))
+            .getBy(country = eq(COUNTRY), language = eq(LANGUAGE), scheme = eq(SCHEME))
 
         val url = getUrl(country = COUNTRY)
         mockMvc.perform(
             get(url)
                 .param("lang", LANGUAGE)
+                .param("scheme", SCHEME)
         )
             .andExpect(status().isInternalServerError)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -464,7 +505,7 @@ class AddressCountryControllerTest {
             .andExpect(jsonPath("$.errors[0].description", equalTo("Internal server error.")))
 
         verify(addressCountryService, times(1))
-            .getBy(country = any(), language = any())
+            .getBy(country = any(), language = any(), scheme = any())
     }
 
     private fun getUrl(country: String? = null): String =
