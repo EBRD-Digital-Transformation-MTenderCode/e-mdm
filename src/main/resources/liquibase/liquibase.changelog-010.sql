@@ -1,7 +1,7 @@
 --liquibase formatted sql
 
---changeset kateshaidurova:localities
-CREATE TABLE public.localities (
+--changeset kateshaidurova:locality_schemes
+CREATE TABLE public.locality_schemes (
   id              BIGINT     NOT NULL PRIMARY KEY,
   list_schemes_id BIGINT     NOT NULL REFERENCES list_schemes (id),
   region_code     TEXT       NOT NULL,
@@ -9,8 +9,8 @@ CREATE TABLE public.localities (
   UNIQUE (list_schemes_id, region_code, code)
 );
 
---changeset kateshaidurova:localities_filling_data context:!test
-INSERT INTO public.localities(id, list_schemes_id, region_code, code)
+--changeset kateshaidurova:locality_schemes_filling_data context:!test
+INSERT INTO public.locality_schemes(id, list_schemes_id, region_code, code)
 VALUES (1, 2 /* CUATM */, '0101000', '0101000'),
        (2, 2 /* CUATM */, '0101000', '0111000'),
        (3, 2 /* CUATM */, '0101000', '0111001'),
@@ -1695,17 +1695,17 @@ VALUES (1, 2 /* CUATM */, '0101000', '0101000'),
        (1682, 2 /* CUATM */, '9800000', '9879002');
 
 
---changeset kateshaidurova:localities_i18n
-CREATE TABLE public.localities_i18n (
+--changeset kateshaidurova:locality_schemes_i18n
+CREATE TABLE public.locality_schemes_i18n (
   id                          BIGINT     NOT NULL PRIMARY KEY,
-  locality_id BIGINT          NOT NULL REFERENCES localities (id),
+  locality_scheme_id BIGINT          NOT NULL REFERENCES locality_schemes (id),
   language_code               VARCHAR(2) NOT NULL,
   description                 TEXT       NOT NULL,
-  UNIQUE (locality_id, language_code)
+  UNIQUE (locality_scheme_id, language_code)
 );
 
---changeset kateshaidurova:localities_i18n_filling_data context:!test
-INSERT INTO public.localities_i18n(id, locality_id, language_code, description)
+--changeset kateshaidurova:locality_schemes_i18n_filling_data context:!test
+INSERT INTO public.locality_schemes_i18n(id, locality_scheme_id, language_code, description)
 VALUES (1, 1, 'RU', 'мун.Кишинэу'),
        (2, 1, 'RO', 'mun.Chişinău'),
        (3, 1, 'EN', 'mun.Chisinau'),
