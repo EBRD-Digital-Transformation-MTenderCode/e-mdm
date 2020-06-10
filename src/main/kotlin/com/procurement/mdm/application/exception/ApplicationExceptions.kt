@@ -1,10 +1,14 @@
 package com.procurement.mdm.application.exception
 
+import com.procurement.mdm.domain.model.code.CountryCode
+import com.procurement.mdm.domain.model.code.LanguageCode
+import com.procurement.mdm.domain.model.scheme.CountryScheme
+
 sealed class ApplicationException(val description: String) : RuntimeException(description)
 
 class CountryNotFoundException : ApplicationException {
 
-    constructor(country: String, language: String) :
+    constructor(country: CountryCode, language: LanguageCode) :
         super("The country by code '$country' and language '$language' not found.")
 
     constructor(language: String) : super("The countries by language '$language' not found.")
@@ -21,3 +25,11 @@ class OrganizationSchemeNotFoundException(country: String) :
 
 class OrganizationScaleNotFoundException(country: String) :
     ApplicationException("The organization scale for country '$country' not found.")
+
+class SchemeNotFoundException(scheme: CountryScheme) :
+    ApplicationException("Scheme '$scheme' not found.")
+
+class IdNotFoundException : ApplicationException{
+    constructor(country: CountryCode, scheme: CountryScheme) :
+        super("Country id '$country' by scheme '$scheme' not found.")
+}
