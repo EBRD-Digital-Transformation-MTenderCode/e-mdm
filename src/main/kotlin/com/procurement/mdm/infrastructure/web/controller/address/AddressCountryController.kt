@@ -39,13 +39,14 @@ class AddressCountryController(private val addressCountryService: AddressCountry
     @ResponseStatus(HttpStatus.OK)
     fun getCountryById(
         @PathVariable(value = "id") id: String,
-        @RequestParam(value = "lang", required = false) lang: String?
+        @RequestParam(value = "lang", required = false) lang: String?,
+        @RequestParam(value = "scheme", required = false) scheme: String?
     ): CountryApiResponse {
 
         if (lang == null)
             throw LanguageRequestParameterMissingException()
 
-        val countryIdentifier = addressCountryService.getBy(country = id, language = lang)
+        val countryIdentifier = addressCountryService.getBy(country = id, language = lang, scheme = scheme)
 
         return CountryApiResponse(
             country = Country(
