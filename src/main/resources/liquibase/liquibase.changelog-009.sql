@@ -1,7 +1,7 @@
 --liquibase formatted sql
 
---changeset kateshaidurova:regions
-CREATE TABLE public.regions (
+--changeset kateshaidurova:region_schemes
+CREATE TABLE public.region_schemes (
   id              BIGINT     NOT NULL PRIMARY KEY,
   list_schemes_id BIGINT     NOT NULL REFERENCES list_schemes (id),
   country_code    VARCHAR(2) NOT NULL,
@@ -9,8 +9,8 @@ CREATE TABLE public.regions (
   UNIQUE (list_schemes_id, country_code, code)
 );
 
---changeset kateshaidurova:regions_filling_data context:!test
-INSERT INTO public.regions(id, list_schemes_id, country_code, code)
+--changeset kateshaidurova:region_schemes_filling_data context:!test
+INSERT INTO public.region_schemes(id, list_schemes_id, country_code, code)
 VALUES (1, 2 /* CUATM */, 'MD', '0101000'),
        (2, 2 /* CUATM */, 'MD', '0301000'),
        (3, 2 /* CUATM */, 'MD', '0501000'),
@@ -50,17 +50,17 @@ VALUES (1, 2 /* CUATM */, 'MD', '0101000'),
        (37, 2 /* CUATM */, 'MD', '9800000');
 
 
---changeset kateshaidurova:regions_i18n
-CREATE TABLE public.regions_i18n (
+--changeset kateshaidurova:region_schemes_i18n
+CREATE TABLE public.region_schemes_i18n (
   id                         BIGINT     NOT NULL PRIMARY KEY,
-  region_id BIGINT           NOT NULL REFERENCES regions (id),
+  region_scheme_id BIGINT           NOT NULL REFERENCES region_schemes (id),
   language_code              VARCHAR(2) NOT NULL,
   description                TEXT       NOT NULL,
-  UNIQUE (region_id, language_code)
+  UNIQUE (region_scheme_id, language_code)
 );
 
---changeset kateshaidurova:regions_i18n_filling_data context:!test
-INSERT INTO public.regions_i18n(id, region_id, language_code, description)
+--changeset kateshaidurova:region_schemes_i18n_filling_data context:!test
+INSERT INTO public.region_schemes_i18n(id, region_scheme_id, language_code, description)
 VALUES (1, 1, 'EN', 'mun.Chisinau'),
        (2, 2, 'EN', 'mun.Balti'),
        (3, 3, 'EN', 'mun.Bender'),
