@@ -5,6 +5,7 @@ import com.procurement.mdm.application.service.address.AddressRegionServiceImpl
 import com.procurement.mdm.domain.model.identifier.RegionIdentifier
 import com.procurement.mdm.domain.repository.AdvancedLanguageRepository
 import com.procurement.mdm.domain.repository.address.AddressRegionRepository
+import com.procurement.mdm.domain.repository.scheme.RegionSchemeRepository
 import com.procurement.mdm.infrastructure.repository.AbstractRepositoryTest
 import com.procurement.mdm.infrastructure.repository.loadSql
 import com.procurement.mdm.infrastructure.web.controller.RestExceptionHandler
@@ -57,12 +58,16 @@ class AddressRegionControllerIT : AbstractRepositoryTest() {
     private lateinit var addressRegionRepository: AddressRegionRepository
 
     @Autowired
+    private lateinit var regionSchemeRepository: RegionSchemeRepository
+
+    @Autowired
     private lateinit var advancedLanguageRepository: AdvancedLanguageRepository
 
     @BeforeEach
     fun init(restDocumentation: RestDocumentationContextProvider) {
         addressRegionService = AddressRegionServiceImpl(
             addressRegionRepository = addressRegionRepository,
+            regionSchemeRepository = regionSchemeRepository,
             advancedLanguageRepository = advancedLanguageRepository
         )
 
