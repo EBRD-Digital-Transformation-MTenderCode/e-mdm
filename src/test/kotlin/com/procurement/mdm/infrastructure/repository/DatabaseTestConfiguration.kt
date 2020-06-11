@@ -7,6 +7,7 @@ import com.procurement.mdm.domain.repository.address.AddressRegionRepository
 import com.procurement.mdm.domain.repository.organization.OrganizationScaleRepository
 import com.procurement.mdm.domain.repository.organization.OrganizationSchemeRepository
 import com.procurement.mdm.domain.repository.scheme.CountrySchemeRepository
+import com.procurement.mdm.domain.repository.scheme.RegionSchemeRepository
 import com.procurement.mdm.infrastructure.repository.address.PostgresAddressCountryRepository
 import com.procurement.mdm.infrastructure.repository.address.PostgresAddressLocalityRepository
 import com.procurement.mdm.infrastructure.repository.address.PostgresAddressRegionRepository
@@ -14,6 +15,7 @@ import com.procurement.mdm.infrastructure.repository.language.PostgresLanguageRe
 import com.procurement.mdm.infrastructure.repository.organization.PostgresOrganizationScaleRepository
 import com.procurement.mdm.infrastructure.repository.organization.PostgresOrganizationSchemeRepository
 import com.procurement.mdm.infrastructure.repository.scheme.PostgresCountrySchemeRepository
+import com.procurement.mdm.infrastructure.repository.scheme.PostgresRegionSchemeRepository
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import liquibase.Liquibase
@@ -71,6 +73,10 @@ class DatabaseTestConfiguration {
     @Bean
     fun addressRegionRepository(): AddressRegionRepository =
         PostgresAddressRegionRepository(jdbcTemplate())
+
+    @Bean
+    fun regionSchemeRepository(): RegionSchemeRepository =
+        PostgresRegionSchemeRepository(jdbcTemplate())
 
     @Bean
     fun addressLocalityRepository(): AddressLocalityRepository =
