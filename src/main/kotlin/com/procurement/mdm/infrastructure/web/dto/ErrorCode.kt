@@ -43,6 +43,7 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
      */
     INVALID_REGION_CODE(status = HttpStatus.BAD_REQUEST, group = Groups.REGION, id = "01"),
     REGION_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.REGION, id = "02"),
+    REGION_NOT_LINKED_TO_COUNTRY(status = HttpStatus.NOT_FOUND, group = Groups.REGION, id = "03"),
 
     /**
      * Locality.
@@ -65,6 +66,7 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
      */
     SCHEME_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.SCHEME, id = "01"),
     INVALID_COUNTRY_SCHEME(status = HttpStatus.BAD_REQUEST, group = Groups.COUNTRY, id = "02"),
+    INVALID_REGION_SCHEME(status = HttpStatus.BAD_REQUEST, group = Groups.COUNTRY, id = "03"),
 
 
     /**
