@@ -26,8 +26,10 @@ class OrganizationSchemeNotFoundException(country: String) :
 class OrganizationScaleNotFoundException(country: String) :
     ApplicationException("The organization scale for country '$country' not found.")
 
-class SchemeNotFoundException(scheme: CountryScheme) :
-    ApplicationException("Scheme '$scheme' not found.")
+class SchemeNotFoundException: ApplicationException{
+    constructor (scheme: CountryScheme) :
+        super("Country scheme '$scheme' not found.")
+}
 
 class IdNotFoundException : ApplicationException{
     constructor(country: CountryCode, scheme: CountryScheme) :

@@ -201,7 +201,7 @@ class AddressCountryServiceTest {
             service.getBy(country = COUNTRY, language = LANGUAGE, scheme = SCHEME)
         }
 
-        assertEquals("Scheme '$SCHEME' not found.", exception.description)
+        assertEquals("Country scheme '$SCHEME' not found.", exception.description)
     }
 
     @Test

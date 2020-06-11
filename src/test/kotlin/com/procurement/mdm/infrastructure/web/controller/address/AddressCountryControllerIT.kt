@@ -605,7 +605,7 @@ class AddressCountryControllerIT : AbstractRepositoryTest() {
             .andExpect(
                 jsonPath(
                     "$.errors[0].description",
-                    equalTo("Scheme '$UNKNOWN_SCHEME' not found.")
+                    equalTo("Country scheme '$UNKNOWN_SCHEME' not found.")
                 )
             )
             .andDo(
