@@ -18,10 +18,11 @@ class AddressRegionController(private val addressRegionService: AddressRegionSer
 
     @GetMapping("/addresses/countries/{countryId}/regions/{regionId}")
     @ResponseStatus(HttpStatus.OK)
-    fun getCountryById(
+    fun getRegionById(
         @PathVariable(value = "countryId") countryId: String,
         @PathVariable(value = "regionId") regionId: String,
-        @RequestParam(value = "lang", required = false) lang: String?
+        @RequestParam(value = "lang", required = false) lang: String?,
+        @RequestParam(value = "scheme", required = false) scheme: String?
     ): RegionApiResponse {
 
         if (lang == null)
@@ -30,7 +31,8 @@ class AddressRegionController(private val addressRegionService: AddressRegionSer
         val regionIdentifier = addressRegionService.getBy(
             region = regionId,
             country = countryId,
-            language = lang
+            language = lang,
+            scheme = scheme
         )
 
         return RegionApiResponse(
