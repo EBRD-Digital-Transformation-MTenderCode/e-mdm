@@ -2,7 +2,7 @@ package com.procurement.mdm.application.service.address
 
 import com.procurement.mdm.application.exception.IdNotFoundException
 import com.procurement.mdm.application.exception.RegionNotFoundException
-import com.procurement.mdm.application.exception.RegionNotLinkedToCountry
+import com.procurement.mdm.application.exception.RegionNotLinkedToCountryException
 import com.procurement.mdm.domain.model.code.CountryCode
 import com.procurement.mdm.domain.model.code.LanguageCode
 import com.procurement.mdm.domain.model.code.RegionCode
@@ -88,6 +88,6 @@ class AddressRegionServiceImpl(
 
     private fun checkCountryCode(region: RegionCode, scheme: RegionScheme, country: CountryCode) {
         if (regionSchemeRepository.existsBy(region = region, scheme = scheme, country = country).not())
-            throw RegionNotLinkedToCountry(region = region, scheme = scheme, country = country)
+            throw RegionNotLinkedToCountryException(region = region, scheme = scheme, country = country)
     }
 }

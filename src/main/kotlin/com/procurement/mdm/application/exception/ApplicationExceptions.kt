@@ -24,7 +24,7 @@ class RegionNotFoundException : ApplicationException {
         super("The region by code '$region', scheme '$scheme', country '$country', language '$language' not found.")
 }
 
-class RegionNotLinkedToCountry(region: RegionCode, scheme: RegionScheme, country: CountryCode) :
+class RegionNotLinkedToCountryException(region: RegionCode, scheme: RegionScheme, country: CountryCode) :
     ApplicationException("The region by code '$region' and scheme '$scheme' is not linked to country '$country'.")
 
 class LocalityNotFoundException(locality: String, country: String, region: String, language: String) :
