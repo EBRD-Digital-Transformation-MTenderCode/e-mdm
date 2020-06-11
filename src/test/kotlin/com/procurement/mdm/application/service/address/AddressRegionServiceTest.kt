@@ -12,6 +12,7 @@ import com.procurement.mdm.domain.model.code.RegionCode
 import com.procurement.mdm.domain.model.identifier.RegionIdentifier
 import com.procurement.mdm.domain.repository.AdvancedLanguageRepository
 import com.procurement.mdm.domain.repository.address.AddressRegionRepository
+import com.procurement.mdm.domain.repository.scheme.RegionSchemeRepository
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -58,6 +59,7 @@ class AddressRegionServiceTest {
     }
 
     private lateinit var addressRegionRepository: AddressRegionRepository
+    private lateinit var regionSchemeRepository: RegionSchemeRepository
     private lateinit var advancedLanguageRepository: AdvancedLanguageRepository
     private lateinit var service: AddressRegionService
 
@@ -65,8 +67,13 @@ class AddressRegionServiceTest {
     fun init() {
         addressRegionRepository = mock()
         advancedLanguageRepository = mock()
+        regionSchemeRepository = mock()
 
-        service = AddressRegionServiceImpl(addressRegionRepository, advancedLanguageRepository)
+        service = AddressRegionServiceImpl(
+            addressRegionRepository = addressRegionRepository,
+            regionSchemeRepository = regionSchemeRepository,
+            advancedLanguageRepository = advancedLanguageRepository
+        )
     }
 
     @Test
@@ -81,7 +88,7 @@ class AddressRegionServiceTest {
             )
         ).thenReturn(REGION_ENTITY_FIRST)
 
-        val result = service.getBy(region = REGION, country = COUNTRY, language = LANGUAGE)
+        val result = service.getBy(region = REGION, country = COUNTRY, language = LANGUAGE, scheme = null)
 
         assertEquals(REGION_IDENTIFIER_FIRST, result)
     }
@@ -92,7 +99,7 @@ class AddressRegionServiceTest {
             .thenReturn(false)
 
         val exception = assertThrows<LanguageUnknownException> {
-            service.getBy(region = REGION, country = COUNTRY, language = UNKNOWN_LANGUAGE)
+            service.getBy(region = REGION, country = COUNTRY, language = UNKNOWN_LANGUAGE, scheme = null)
         }
 
         assertEquals("The unknown code of a language '$UNKNOWN_LANGUAGE'.", exception.description)
@@ -112,7 +119,7 @@ class AddressRegionServiceTest {
         ).thenReturn(null)
 
         val exception = assertThrows<RegionNotFoundException> {
-            service.getBy(region = UNKNOWN_REGION, country = COUNTRY, language = LANGUAGE)
+            service.getBy(region = UNKNOWN_REGION, country = COUNTRY, language = LANGUAGE, scheme = null)
         }
 
         assertEquals(
@@ -135,7 +142,7 @@ class AddressRegionServiceTest {
         ).thenReturn(null)
 
         val exception = assertThrows<RegionNotFoundException> {
-            service.getBy(region = REGION, country = UNKNOWN_COUNTRY, language = LANGUAGE)
+            service.getBy(region = REGION, country = UNKNOWN_COUNTRY, language = LANGUAGE, scheme = null)
         }
 
         assertEquals(
@@ -158,7 +165,7 @@ class AddressRegionServiceTest {
         ).thenReturn(null)
 
         val exception = assertThrows<RegionNotFoundException> {
-            service.getBy(region = REGION, country = COUNTRY, language = UNKNOWN_LANGUAGE)
+            service.getBy(region = REGION, country = COUNTRY, language = UNKNOWN_LANGUAGE, scheme = null)
         }
 
         assertEquals(
