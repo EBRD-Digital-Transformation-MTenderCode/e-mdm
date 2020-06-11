@@ -7,7 +7,7 @@ import com.procurement.mdm.application.exception.LocalityNotFoundException
 import com.procurement.mdm.application.exception.OrganizationScaleNotFoundException
 import com.procurement.mdm.application.exception.OrganizationSchemeNotFoundException
 import com.procurement.mdm.application.exception.RegionNotFoundException
-import com.procurement.mdm.application.exception.RegionNotLinkedToCountry
+import com.procurement.mdm.application.exception.RegionNotLinkedToCountryException
 import com.procurement.mdm.application.exception.SchemeNotFoundException
 import com.procurement.mdm.domain.exception.CountryUnknownException
 import com.procurement.mdm.domain.exception.DomainException
@@ -115,7 +115,7 @@ class RestExceptionHandler : ResponseEntityExceptionHandler() {
             is IdNotFoundException ->
                 exception.handler(errorCode = ID_NOT_FOUND)
 
-            is RegionNotLinkedToCountry ->
+            is RegionNotLinkedToCountryException ->
                 exception.handler(errorCode = REGION_NOT_LINKED_TO_COUNTRY)
         }
 
