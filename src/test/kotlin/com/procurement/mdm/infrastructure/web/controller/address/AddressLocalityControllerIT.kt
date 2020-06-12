@@ -5,6 +5,8 @@ import com.procurement.mdm.application.service.address.AddressLocalityServiceImp
 import com.procurement.mdm.domain.model.identifier.LocalityIdentifier
 import com.procurement.mdm.domain.repository.AdvancedLanguageRepository
 import com.procurement.mdm.domain.repository.address.AddressLocalityRepository
+import com.procurement.mdm.domain.repository.scheme.LocalitySchemeRepository
+import com.procurement.mdm.domain.repository.scheme.RegionSchemeRepository
 import com.procurement.mdm.infrastructure.repository.AbstractRepositoryTest
 import com.procurement.mdm.infrastructure.repository.loadSql
 import com.procurement.mdm.infrastructure.web.controller.RestExceptionHandler
@@ -65,11 +67,19 @@ class AddressLocalityControllerIT : AbstractRepositoryTest() {
     @Autowired
     private lateinit var advancedLanguageRepository: AdvancedLanguageRepository
 
+    @Autowired
+    private lateinit var regionSchemeRepository: RegionSchemeRepository
+
+    @Autowired
+    private lateinit var localitySchemeRepository: LocalitySchemeRepository
+
     @BeforeEach
     fun init(restDocumentation: RestDocumentationContextProvider) {
         addressLocalityService = AddressLocalityServiceImpl(
             addressLocalityRepository = addressLocalityRepository,
-            advancedLanguageRepository = advancedLanguageRepository
+            advancedLanguageRepository = advancedLanguageRepository,
+            regionSchemeRepository = regionSchemeRepository,
+            localitySchemeRepository = localitySchemeRepository
         )
 
         val controller = AddressLocalityController(addressLocalityService)
