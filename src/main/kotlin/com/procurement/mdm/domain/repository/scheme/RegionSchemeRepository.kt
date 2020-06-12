@@ -15,4 +15,6 @@ interface RegionSchemeRepository {
     fun existsBy(region: RegionCode, scheme: RegionScheme): Boolean
 
     fun existsBy(region: RegionCode, scheme: RegionScheme, country: CountryCode): Boolean
+
+    fun existsBy(region: RegionCode, country: CountryCode): Boolean
 }

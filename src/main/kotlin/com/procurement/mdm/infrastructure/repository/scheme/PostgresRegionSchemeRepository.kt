@@ -56,6 +56,16 @@ class PostgresRegionSchemeRepository(
         """
 
         @Language("PostgreSQL")
+        private const val REGION_EXISTS_BY_COUNTRY_SQL = """
+            SELECT EXISTS(
+                SELECT rs.code
+                  FROM public.region_schemes AS rs
+                 WHERE rs.country_code = :country
+                   AND rs.code = :region                   
+           )
+        """
+
+        @Language("PostgreSQL")
         private const val FIND_BY_SQL = """
             SELECT ls.code AS scheme,
                    rs.code AS id,
@@ -95,6 +105,16 @@ class PostgresRegionSchemeRepository(
             REGION_EXISTS_BY_SCHEME_AND_COUNTRY_SQL,
             mapOf(
                 "scheme" to scheme.value.toUpperCase(),
+                "country" to country.value.toUpperCase(),
+                "region" to region.value.toUpperCase()
+            ),
+            Boolean::class.java
+        )!!
+
+    override fun existsBy(region: RegionCode, country: CountryCode): Boolean =
+        jdbcTemplate.queryForObject(
+            REGION_EXISTS_BY_COUNTRY_SQL,
+            mapOf(
                 "country" to country.value.toUpperCase(),
                 "region" to region.value.toUpperCase()
             ),
