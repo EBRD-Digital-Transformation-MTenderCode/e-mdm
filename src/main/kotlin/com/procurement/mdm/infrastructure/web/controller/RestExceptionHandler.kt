@@ -4,6 +4,7 @@ import com.procurement.mdm.application.exception.ApplicationException
 import com.procurement.mdm.application.exception.CountryNotFoundException
 import com.procurement.mdm.application.exception.IdNotFoundException
 import com.procurement.mdm.application.exception.LocalityNotFoundException
+import com.procurement.mdm.application.exception.LocalityNotLinkedToRegionException
 import com.procurement.mdm.application.exception.OrganizationScaleNotFoundException
 import com.procurement.mdm.application.exception.OrganizationSchemeNotFoundException
 import com.procurement.mdm.application.exception.RegionNotFoundException
@@ -15,6 +16,7 @@ import com.procurement.mdm.domain.exception.InvalidCountryCodeException
 import com.procurement.mdm.domain.exception.InvalidCountrySchemeException
 import com.procurement.mdm.domain.exception.InvalidLanguageCodeException
 import com.procurement.mdm.domain.exception.InvalidLocalityCodeException
+import com.procurement.mdm.domain.exception.InvalidLocalitySchemeException
 import com.procurement.mdm.domain.exception.InvalidRegionCodeException
 import com.procurement.mdm.domain.exception.InvalidRegionSchemeException
 import com.procurement.mdm.domain.exception.LanguageUnknownException
@@ -34,12 +36,14 @@ import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_COUNTRY_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_COUNTRY_SCHEME
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_LANGUAGE_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_LOCALITY_CODE
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_LOCALITY_SCHEME
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_REGION_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_REGION_SCHEME
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_URL
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LANGUAGE_REQUEST_PARAMETER_MISSING
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LANGUAGE_REQUEST_PARAMETER_UNKNOWN
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LOCALITY_NOT_FOUND
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LOCALITY_NOT_LINKED_TO_COUNTRY
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.ORGANIZATION_SCALE_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.ORGANIZATION_SCHEME_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REGION_NOT_FOUND
@@ -86,6 +90,8 @@ class RestExceptionHandler : ResponseEntityExceptionHandler() {
             is InvalidRegionSchemeException ->
                 exception.handler(errorCode = INVALID_REGION_SCHEME)
 
+            is InvalidLocalitySchemeException ->
+                exception.handler(errorCode = INVALID_LOCALITY_SCHEME)
         }
 
         return ResponseEntity.status(apiError.status).body(apiError)
@@ -117,6 +123,9 @@ class RestExceptionHandler : ResponseEntityExceptionHandler() {
 
             is RegionNotLinkedToCountryException ->
                 exception.handler(errorCode = REGION_NOT_LINKED_TO_COUNTRY)
+
+            is LocalityNotLinkedToRegionException ->
+                exception.handler(errorCode = LOCALITY_NOT_LINKED_TO_COUNTRY)
         }
 
         return ResponseEntity.status(apiError.status).body(apiError)
