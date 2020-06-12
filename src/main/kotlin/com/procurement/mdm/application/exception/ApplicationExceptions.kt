@@ -45,7 +45,7 @@ class LocalityNotFoundException : ApplicationException {
         region: RegionCode,
         language: LanguageCode
     ) :
-        super("The locality by code '$locality', scheme $scheme, country '$country', region '$region', language '$language' not found.")
+        super("The locality by code '$locality', scheme '$scheme', country '$country', region '$region', language '$language' not found.")
 }
 
 class LocalityNotLinkedToRegionException(locality: LocalityCode, scheme: LocalityScheme, region: RegionCode) :
