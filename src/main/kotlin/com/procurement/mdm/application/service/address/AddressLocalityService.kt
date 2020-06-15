@@ -1,6 +1,5 @@
 package com.procurement.mdm.application.service.address
 
-import com.procurement.mdm.application.exception.IdNotFoundException
 import com.procurement.mdm.application.exception.LocalityNotFoundException
 import com.procurement.mdm.application.exception.LocalityNotLinkedToRegionException
 import com.procurement.mdm.application.exception.RegionNotLinkedToCountryException
@@ -116,7 +115,7 @@ class AddressLocalityServiceImpl(
 
     private fun checkExists(locality: LocalityCode, scheme: LocalityScheme) {
         if (localitySchemeRepository.existsBy(locality = locality, scheme = scheme).not())
-            throw IdNotFoundException(locality = locality, scheme = scheme)
+            throw LocalityNotFoundException(locality = locality, scheme = scheme)
     }
 
     private fun checkRegionCode(locality: LocalityCode, scheme: LocalityScheme, region: RegionCode) {

@@ -1,7 +1,6 @@
 package com.procurement.mdm.application.service.address
 
 import com.procurement.mdm.application.exception.CountryNotFoundException
-import com.procurement.mdm.application.exception.IdNotFoundException
 import com.procurement.mdm.domain.model.code.CountryCode
 import com.procurement.mdm.domain.model.code.LanguageCode
 import com.procurement.mdm.domain.model.identifier.CountryIdentifier
@@ -92,6 +91,6 @@ class AddressCountryServiceImpl(
 
     private fun checkExists(scheme: CountryScheme, country: CountryCode) {
         if (countrySchemeRepository.existsBy(scheme, country).not())
-            throw IdNotFoundException(scheme = scheme, country = country)
+            throw CountryNotFoundException(scheme = scheme, country = country)
     }
 }
