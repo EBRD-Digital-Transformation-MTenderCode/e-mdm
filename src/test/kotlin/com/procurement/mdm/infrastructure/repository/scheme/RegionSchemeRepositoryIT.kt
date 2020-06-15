@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
 class RegionSchemeRepositoryIT : AbstractRepositoryTest() {
+
     companion object {
         private val LANGUAGE_CODE = LanguageCode("en")
         private val UNKNOWN_LANGUAGE_CODE = LanguageCode("ul")
@@ -204,5 +205,28 @@ class RegionSchemeRepositoryIT : AbstractRepositoryTest() {
         )
 
         assertTrue(actual == null)
+    }
+
+    @Test
+    fun `Region by country exists`() {
+        initData()
+        assertTrue(repository.existsBy(region = REGION_CODE, country = COUNTRY_CODE))
+    }
+
+    @Test
+    fun `Region by country does not exist (unknown region code)`() {
+        initData()
+        assertFalse(repository.existsBy(region = UNKNOWN_REGION_CODE, country = COUNTRY_CODE))
+    }
+
+    @Test
+    fun `Region by country does not exist (unknown country code)`() {
+        initData()
+        assertFalse(repository.existsBy(region = REGION_CODE, country = UNKNOWN_COUNTRY_CODE))
+    }
+
+    @Test
+    fun `Region by country does not exist (database is empty)`() {
+        assertFalse(repository.existsBy(region = REGION_CODE, country = COUNTRY_CODE))
     }
 }
