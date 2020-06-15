@@ -1,6 +1,6 @@
 package com.procurement.mdm.domain.model.scheme
 
-import com.procurement.mdm.application.exception.SchemeNotFoundException
+import com.procurement.mdm.application.exception.RegionSchemeNotFoundException
 import com.procurement.mdm.domain.exception.InvalidRegionSchemeException
 import com.procurement.mdm.domain.repository.scheme.RegionSchemeRepository
 import kotlin.jvm.internal.Intrinsics
@@ -17,7 +17,7 @@ class RegionScheme private constructor(val value: String) {
 
     fun validation(regionSchemeRepository: RegionSchemeRepository) {
         if (regionSchemeRepository.existsBy(this).not())
-            throw SchemeNotFoundException(scheme = this)
+            throw RegionSchemeNotFoundException(scheme = this)
     }
 
     override fun toString(): String = value

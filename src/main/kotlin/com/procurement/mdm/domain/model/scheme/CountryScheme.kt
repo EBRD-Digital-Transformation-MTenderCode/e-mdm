@@ -1,6 +1,6 @@
 package com.procurement.mdm.domain.model.scheme
 
-import com.procurement.mdm.application.exception.SchemeNotFoundException
+import com.procurement.mdm.application.exception.CountrySchemeNotFoundException
 import com.procurement.mdm.domain.exception.InvalidCountrySchemeException
 import com.procurement.mdm.domain.repository.scheme.CountrySchemeRepository
 import kotlin.jvm.internal.Intrinsics
@@ -17,7 +17,7 @@ class CountryScheme private constructor(val value: String) {
 
     fun validation(countrySchemeRepository: CountrySchemeRepository) {
         if (countrySchemeRepository.existsBy(this).not())
-            throw SchemeNotFoundException(scheme = this)
+            throw CountrySchemeNotFoundException(scheme = this)
     }
 
     override fun toString(): String = value

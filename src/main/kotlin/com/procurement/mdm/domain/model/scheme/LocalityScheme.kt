@@ -1,6 +1,6 @@
 package com.procurement.mdm.domain.model.scheme
 
-import com.procurement.mdm.application.exception.SchemeNotFoundException
+import com.procurement.mdm.application.exception.LocalitySchemeNotFoundException
 import com.procurement.mdm.domain.exception.InvalidLocalitySchemeException
 import com.procurement.mdm.domain.repository.scheme.LocalitySchemeRepository
 import kotlin.jvm.internal.Intrinsics
@@ -17,7 +17,7 @@ class LocalityScheme private constructor(val value: String) {
 
     fun validation(LocalitySchemeRepository: LocalitySchemeRepository) {
         if (LocalitySchemeRepository.existsBy(this).not())
-            throw SchemeNotFoundException(scheme = this)
+            throw LocalitySchemeNotFoundException(scheme = this)
     }
 
     override fun toString(): String = value
