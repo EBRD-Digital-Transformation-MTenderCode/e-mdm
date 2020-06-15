@@ -43,7 +43,7 @@ import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_URL
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LANGUAGE_REQUEST_PARAMETER_MISSING
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LANGUAGE_REQUEST_PARAMETER_UNKNOWN
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LOCALITY_NOT_FOUND
-import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LOCALITY_NOT_LINKED_TO_COUNTRY
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LOCALITY_NOT_LINKED_TO_REGION
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.ORGANIZATION_SCALE_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.ORGANIZATION_SCHEME_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REGION_NOT_FOUND
@@ -125,7 +125,7 @@ class RestExceptionHandler : ResponseEntityExceptionHandler() {
                 exception.handler(errorCode = REGION_NOT_LINKED_TO_COUNTRY)
 
             is LocalityNotLinkedToRegionException ->
-                exception.handler(errorCode = LOCALITY_NOT_LINKED_TO_COUNTRY)
+                exception.handler(errorCode = LOCALITY_NOT_LINKED_TO_REGION)
         }
 
         return ResponseEntity.status(apiError.status).body(apiError)
