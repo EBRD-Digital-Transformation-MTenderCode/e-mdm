@@ -3,11 +3,10 @@ package com.procurement.mdm.application.service.address
 import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
-import com.procurement.mdm.application.exception.IdNotFoundException
 import com.procurement.mdm.application.exception.LocalityNotFoundException
 import com.procurement.mdm.application.exception.LocalityNotLinkedToRegionException
+import com.procurement.mdm.application.exception.LocalitySchemeNotFoundException
 import com.procurement.mdm.application.exception.RegionNotLinkedToCountryException
-import com.procurement.mdm.application.exception.SchemeNotFoundException
 import com.procurement.mdm.domain.entity.LocalityEntity
 import com.procurement.mdm.domain.exception.LanguageUnknownException
 import com.procurement.mdm.domain.model.code.CountryCode
@@ -248,7 +247,7 @@ class AddressLocalityServiceTest {
         whenever(localitySchemeRepository.existsBy(eq(LOCALITY_SCHEME)))
             .thenReturn(false)
 
-        val exception = assertThrows<SchemeNotFoundException> {
+        val exception = assertThrows<LocalitySchemeNotFoundException> {
             service.getBy(
                 locality = LOCALITY, country = COUNTRY, region = REGION, language = LANGUAGE, scheme = SCHEME
             )
@@ -267,14 +266,14 @@ class AddressLocalityServiceTest {
         whenever(localitySchemeRepository.existsBy(eq(LOCALITY_SCHEME), eq(LOCALITY_CODE)))
             .thenReturn(false)
 
-        val exception = assertThrows<IdNotFoundException> {
+        val exception = assertThrows<LocalityNotFoundException> {
             service.getBy(
                 locality = LOCALITY, country = COUNTRY, region = REGION, language = LANGUAGE, scheme = SCHEME
             )
         }
 
         assertEquals(
-            "Locality id '$LOCALITY' by scheme '$SCHEME' not found.",
+            "The locality by code '$LOCALITY' and scheme '$SCHEME' not found.",
             exception.description
         )
     }

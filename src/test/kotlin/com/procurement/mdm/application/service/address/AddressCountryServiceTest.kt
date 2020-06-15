@@ -4,8 +4,7 @@ import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
 import com.procurement.mdm.application.exception.CountryNotFoundException
-import com.procurement.mdm.application.exception.IdNotFoundException
-import com.procurement.mdm.application.exception.SchemeNotFoundException
+import com.procurement.mdm.application.exception.CountrySchemeNotFoundException
 import com.procurement.mdm.domain.entity.CountryEntity
 import com.procurement.mdm.domain.exception.LanguageUnknownException
 import com.procurement.mdm.domain.model.code.CountryCode
@@ -197,7 +196,7 @@ class AddressCountryServiceTest {
         whenever(countrySchemeRepository.existsBy(eq(COUNTRY_SCHEME)))
             .thenReturn(false)
 
-        val exception = assertThrows<SchemeNotFoundException> {
+        val exception = assertThrows<CountrySchemeNotFoundException> {
             service.getBy(country = COUNTRY, language = LANGUAGE, scheme = SCHEME)
         }
 
@@ -205,17 +204,17 @@ class AddressCountryServiceTest {
     }
 
     @Test
-    fun `Getting the country by code with scheme is error (unknown country id)`() {
+    fun `Getting the country by code with scheme is error (unknown country code)`() {
         whenever(countrySchemeRepository.existsBy(eq(COUNTRY_SCHEME)))
             .thenReturn(true)
         whenever(countrySchemeRepository.existsBy(scheme = eq(COUNTRY_SCHEME),country = eq(COUNTRY_CODE)))
             .thenReturn(false)
 
-        val exception = assertThrows<IdNotFoundException> {
+        val exception = assertThrows<CountryNotFoundException> {
             service.getBy(country = COUNTRY, language = LANGUAGE, scheme = SCHEME)
         }
 
-        assertEquals("Country id '$COUNTRY' by scheme '$SCHEME' not found.", exception.description)
+        assertEquals("The country by code '$COUNTRY' and scheme '$SCHEME' not found.", exception.description)
     }
 
     @Test

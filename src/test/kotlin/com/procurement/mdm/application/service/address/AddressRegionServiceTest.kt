@@ -3,10 +3,9 @@ package com.procurement.mdm.application.service.address
 import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
-import com.procurement.mdm.application.exception.IdNotFoundException
 import com.procurement.mdm.application.exception.RegionNotFoundException
 import com.procurement.mdm.application.exception.RegionNotLinkedToCountryException
-import com.procurement.mdm.application.exception.SchemeNotFoundException
+import com.procurement.mdm.application.exception.RegionSchemeNotFoundException
 import com.procurement.mdm.domain.entity.RegionEntity
 import com.procurement.mdm.domain.exception.LanguageUnknownException
 import com.procurement.mdm.domain.model.code.CountryCode
@@ -212,7 +211,7 @@ class AddressRegionServiceTest {
         whenever(regionSchemeRepository.existsBy(eq(REGION_SCHEME)))
             .thenReturn(false)
 
-        val exception = assertThrows<SchemeNotFoundException> {
+        val exception = assertThrows<RegionSchemeNotFoundException> {
             service.getBy(region = REGION, country = COUNTRY, language = LANGUAGE, scheme = SCHEME)
         }
 
@@ -220,18 +219,18 @@ class AddressRegionServiceTest {
     }
 
     @Test
-    fun `Getting the region by code with scheme is error (unknown region id)`() {
+    fun `Getting the region by code with scheme is error (unknown region code)`() {
         whenever(regionSchemeRepository.existsBy(eq(REGION_SCHEME)))
             .thenReturn(true)
 
         whenever(regionSchemeRepository.existsBy(region = eq(REGION_CODE), scheme = eq(REGION_SCHEME)))
             .thenReturn(false)
 
-        val exception = assertThrows<IdNotFoundException> {
+        val exception = assertThrows<RegionNotFoundException> {
             service.getBy(region = REGION, country = COUNTRY, language = LANGUAGE, scheme = SCHEME)
         }
 
-        assertEquals("Region id '$REGION' by scheme '$SCHEME' not found.", exception.description)
+        assertEquals("The region by code '$REGION' and scheme '$SCHEME' not found.", exception.description)
     }
 
     @Test
