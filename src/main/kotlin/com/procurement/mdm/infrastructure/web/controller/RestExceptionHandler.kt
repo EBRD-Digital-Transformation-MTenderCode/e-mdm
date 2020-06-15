@@ -18,6 +18,8 @@ import com.procurement.mdm.domain.exception.InvalidCountrySchemeException
 import com.procurement.mdm.domain.exception.InvalidLanguageCodeException
 import com.procurement.mdm.domain.exception.InvalidLocalityCodeException
 import com.procurement.mdm.domain.exception.InvalidLocalitySchemeException
+import com.procurement.mdm.domain.exception.InvalidPhaseException
+import com.procurement.mdm.domain.exception.InvalidPmdException
 import com.procurement.mdm.domain.exception.InvalidRegionCodeException
 import com.procurement.mdm.domain.exception.InvalidRegionSchemeException
 import com.procurement.mdm.domain.exception.LanguageUnknownException
@@ -25,6 +27,8 @@ import com.procurement.mdm.infrastructure.exception.CountryRequestParameterMissi
 import com.procurement.mdm.infrastructure.exception.InfrastructureException
 import com.procurement.mdm.infrastructure.exception.LanguageRequestParameterMissingException
 import com.procurement.mdm.infrastructure.exception.NoHandlerUrlException
+import com.procurement.mdm.infrastructure.exception.PhaseRequestParameterMissingException
+import com.procurement.mdm.infrastructure.exception.PmdRequestParameterMissingException
 import com.procurement.mdm.infrastructure.exception.RequestPayloadMissingException
 import com.procurement.mdm.infrastructure.web.dto.ApiError
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode
@@ -38,6 +42,8 @@ import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_COUNTRY_SCHE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_LANGUAGE_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_LOCALITY_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_LOCALITY_SCHEME
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_PHASE
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_PMD
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_REGION_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_REGION_SCHEME
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_URL
@@ -48,6 +54,8 @@ import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LOCALITY_NOT_LINKED_
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LOCALITY_SCHEME_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.ORGANIZATION_SCALE_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.ORGANIZATION_SCHEME_NOT_FOUND
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.PHASE_REQUEST_PARAMETER_MISSING
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.PMD_REQUEST_PARAMETER_MISSING
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REGION_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REGION_NOT_LINKED_TO_COUNTRY
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REGION_SCHEME_NOT_FOUND
@@ -94,6 +102,12 @@ class RestExceptionHandler : ResponseEntityExceptionHandler() {
 
             is InvalidLocalitySchemeException ->
                 exception.handler(errorCode = INVALID_LOCALITY_SCHEME)
+
+            is InvalidPhaseException ->
+                exception.handler(errorCode = INVALID_PHASE)
+
+            is InvalidPmdException ->
+                exception.handler(errorCode = INVALID_PMD)
         }
 
         return ResponseEntity.status(apiError.status).body(apiError)
@@ -150,6 +164,12 @@ class RestExceptionHandler : ResponseEntityExceptionHandler() {
 
             is RequestPayloadMissingException ->
                 exception.handler(errorCode = REQUEST_PAYLOAD_MISSING)
+
+            is PmdRequestParameterMissingException ->
+                exception.handler(errorCode = PMD_REQUEST_PARAMETER_MISSING)
+
+            is PhaseRequestParameterMissingException ->
+                exception.handler(errorCode = PHASE_REQUEST_PARAMETER_MISSING)
         }
 
         return ResponseEntity.status(apiError.status).body(apiError)
