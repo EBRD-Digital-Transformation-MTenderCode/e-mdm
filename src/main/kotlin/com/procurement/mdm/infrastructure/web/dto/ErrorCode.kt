@@ -36,6 +36,8 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
      */
     INVALID_COUNTRY_CODE(status = HttpStatus.BAD_REQUEST, group = Groups.COUNTRY, id = "01"),
     COUNTRY_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.COUNTRY, id = "02"),
+    COUNTRY_SCHEME_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.COUNTRY, id = "03"),
+    INVALID_COUNTRY_SCHEME(status = HttpStatus.BAD_REQUEST, group = Groups.COUNTRY, id = "04"),
 
 
     /**
@@ -43,14 +45,18 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
      */
     INVALID_REGION_CODE(status = HttpStatus.BAD_REQUEST, group = Groups.REGION, id = "01"),
     REGION_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.REGION, id = "02"),
-    REGION_NOT_LINKED_TO_COUNTRY(status = HttpStatus.NOT_FOUND, group = Groups.REGION, id = "03"),
+    REGION_SCHEME_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.REGION, id = "03"),
+    INVALID_REGION_SCHEME(status = HttpStatus.BAD_REQUEST, group = Groups.REGION, id = "04"),
+    REGION_NOT_LINKED_TO_COUNTRY(status = HttpStatus.NOT_FOUND, group = Groups.REGION, id = "05"),
 
     /**
      * Locality.
      */
     INVALID_LOCALITY_CODE(status = HttpStatus.BAD_REQUEST, group = Groups.LOCALITY, id = "01"),
     LOCALITY_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.LOCALITY, id = "02"),
-    LOCALITY_NOT_LINKED_TO_REGION(status = HttpStatus.NOT_FOUND, group = Groups.LOCALITY, id = "03"),
+    LOCALITY_SCHEME_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.LOCALITY, id = "03"),
+    INVALID_LOCALITY_SCHEME(status = HttpStatus.BAD_REQUEST, group = Groups.LOCALITY, id = "04"),
+    LOCALITY_NOT_LINKED_TO_REGION(status = HttpStatus.NOT_FOUND, group = Groups.LOCALITY, id = "05"),
 
     /**
      * Organization scheme
@@ -60,21 +66,7 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
     /**
      * Organization scale
      */
-    ORGANIZATION_SCALE_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.ORGANIZATION_SCALE, id = "01"),
-
-    /**
-     * Address scheme
-     */
-    SCHEME_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.SCHEME, id = "01"),
-    INVALID_COUNTRY_SCHEME(status = HttpStatus.BAD_REQUEST, group = Groups.SCHEME, id = "02"),
-    INVALID_REGION_SCHEME(status = HttpStatus.BAD_REQUEST, group = Groups.SCHEME, id = "03"),
-    INVALID_LOCALITY_SCHEME(status = HttpStatus.BAD_REQUEST, group = Groups.SCHEME, id = "04"),
-
-
-    /**
-     * Id (code)
-     */
-    ID_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.ID, id = "01");
+    ORGANIZATION_SCALE_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.ORGANIZATION_SCALE, id = "01");
 
     @JsonValue
     val code: String = "${status.value()}.${GlobalProperties.serviceId}.$group.$id"
@@ -89,9 +81,7 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
         REGION(code = "12"),
         LOCALITY(code = "13"),
         ORGANIZATION_SCHEME(code = "14"),
-        ORGANIZATION_SCALE(code = "15"),
-        SCHEME(code = "16"),
-        ID(code = "17");
+        ORGANIZATION_SCALE(code = "15");
 
         override fun toString(): String = code
     }
