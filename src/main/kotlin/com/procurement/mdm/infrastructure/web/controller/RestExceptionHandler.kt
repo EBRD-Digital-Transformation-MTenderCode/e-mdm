@@ -2,14 +2,15 @@ package com.procurement.mdm.infrastructure.web.controller
 
 import com.procurement.mdm.application.exception.ApplicationException
 import com.procurement.mdm.application.exception.CountryNotFoundException
-import com.procurement.mdm.application.exception.IdNotFoundException
+import com.procurement.mdm.application.exception.CountrySchemeNotFoundException
 import com.procurement.mdm.application.exception.LocalityNotFoundException
 import com.procurement.mdm.application.exception.LocalityNotLinkedToRegionException
+import com.procurement.mdm.application.exception.LocalitySchemeNotFoundException
 import com.procurement.mdm.application.exception.OrganizationScaleNotFoundException
 import com.procurement.mdm.application.exception.OrganizationSchemeNotFoundException
 import com.procurement.mdm.application.exception.RegionNotFoundException
 import com.procurement.mdm.application.exception.RegionNotLinkedToCountryException
-import com.procurement.mdm.application.exception.SchemeNotFoundException
+import com.procurement.mdm.application.exception.RegionSchemeNotFoundException
 import com.procurement.mdm.domain.exception.CountryUnknownException
 import com.procurement.mdm.domain.exception.DomainException
 import com.procurement.mdm.domain.exception.InvalidCountryCodeException
@@ -30,7 +31,7 @@ import com.procurement.mdm.infrastructure.web.dto.ErrorCode
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_REQUEST_PARAMETER_MISSING
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_REQUEST_PARAMETER_UNKNOWN
-import com.procurement.mdm.infrastructure.web.dto.ErrorCode.ID_NOT_FOUND
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_SCHEME_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INTERNAL_SERVER_ERROR
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_COUNTRY_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_COUNTRY_SCHEME
@@ -44,12 +45,13 @@ import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LANGUAGE_REQUEST_PAR
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LANGUAGE_REQUEST_PARAMETER_UNKNOWN
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LOCALITY_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LOCALITY_NOT_LINKED_TO_REGION
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LOCALITY_SCHEME_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.ORGANIZATION_SCALE_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.ORGANIZATION_SCHEME_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REGION_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REGION_NOT_LINKED_TO_COUNTRY
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REGION_SCHEME_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REQUEST_PAYLOAD_MISSING
-import com.procurement.mdm.infrastructure.web.dto.ErrorCode.SCHEME_NOT_FOUND
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
@@ -115,11 +117,14 @@ class RestExceptionHandler : ResponseEntityExceptionHandler() {
             is OrganizationScaleNotFoundException ->
                 exception.handler(errorCode = ORGANIZATION_SCALE_NOT_FOUND)
 
-            is SchemeNotFoundException ->
-                exception.handler(errorCode = SCHEME_NOT_FOUND)
+            is CountrySchemeNotFoundException ->
+                exception.handler(errorCode = COUNTRY_SCHEME_NOT_FOUND)
 
-            is IdNotFoundException ->
-                exception.handler(errorCode = ID_NOT_FOUND)
+            is RegionSchemeNotFoundException ->
+                exception.handler(errorCode = REGION_SCHEME_NOT_FOUND)
+
+            is LocalitySchemeNotFoundException ->
+                exception.handler(errorCode = LOCALITY_SCHEME_NOT_FOUND)
 
             is RegionNotLinkedToCountryException ->
                 exception.handler(errorCode = REGION_NOT_LINKED_TO_COUNTRY)
