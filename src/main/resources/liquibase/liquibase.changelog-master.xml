@@ -25,4 +25,6 @@
 
     <include file="liquibase.changelog-010.sql" relativeToChangelogFile="true"/>
 
+    <include file="liquibase.changelog-011.sql" relativeToChangelogFile="true"/>
+
 </databaseChangeLog>
