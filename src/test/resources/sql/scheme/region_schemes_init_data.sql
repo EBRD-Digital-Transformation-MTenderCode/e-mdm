@@ -1,6 +1,6 @@
 INSERT INTO public.region_schemes(id, list_schemes_id, country_code, code)
-VALUES (1, 2 /* CUATM */, 'MD', '0101000'),
-       (2, 2 /* CUATM */, 'MD', '0301000');
+VALUES (1, 2 /* CUATM */, 'MD', 'REGION-1'),
+       (2, 2 /* CUATM */, 'MD', 'REGION-2');
 
 INSERT INTO public.region_schemes_i18n(id, region_scheme_id, language_code, description)
 VALUES (1, 1, 'EN', 'mun.Chisinau'),

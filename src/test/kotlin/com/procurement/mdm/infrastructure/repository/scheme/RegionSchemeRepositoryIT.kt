@@ -22,9 +22,9 @@ class RegionSchemeRepositoryIT : AbstractRepositoryTest() {
         private val COUNTRY_CODE = CountryCode("md")
         private val UNKNOWN_COUNTRY_CODE = CountryCode("ua")
 
-        private val REGION_CODE = RegionCode("0101000")
+        private val REGION_CODE = RegionCode("REGION-1")
         private val UNKNOWN_REGION_CODE = RegionCode("0000000")
-        private val REGION_WITH_NO_DESCRIPTION = RegionCode("0301000")
+        private val REGION_WITH_NO_DESCRIPTION = RegionCode("REGION-2")
 
         private val REGION_SCHEME = RegionScheme("CUATM")
         private val UNKNOWN_REGION_SCHEME = RegionScheme("ISO")
