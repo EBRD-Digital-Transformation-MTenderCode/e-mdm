@@ -16,6 +16,9 @@ class CountryNotFoundException : ApplicationException {
         super("The country by code '$country' and language '$language' not found.")
 
     constructor(language: String) : super("The countries by language '$language' not found.")
+
+    constructor(country: CountryCode, scheme: CountryScheme) :
+        super("The country by code '$country' and scheme '$scheme' not found.")
 }
 
 class RegionNotFoundException : ApplicationException {
@@ -24,6 +27,9 @@ class RegionNotFoundException : ApplicationException {
 
     constructor(region: RegionCode, scheme: RegionScheme, country: CountryCode, language: LanguageCode) :
         super("The region by code '$region', scheme '$scheme', country '$country', language '$language' not found.")
+
+    constructor(region: RegionCode, scheme: RegionScheme) :
+        super("The region by code '$region' and scheme '$scheme' not found.")
 }
 
 class RegionNotLinkedToCountryException : ApplicationException {
@@ -37,6 +43,9 @@ class RegionNotLinkedToCountryException : ApplicationException {
 class LocalityNotFoundException : ApplicationException {
     constructor(locality: LocalityCode, country: CountryCode, region: RegionCode, language: LanguageCode) :
         super("The locality by code '$locality', country '$country', region '$region', language '$language' not found.")
+
+    constructor(locality: LocalityCode, scheme: LocalityScheme) :
+        super("The locality by code '$locality' and scheme '$scheme' not found.")
 
     constructor(
         locality: LocalityCode,
@@ -57,25 +66,10 @@ class OrganizationSchemeNotFoundException(country: String) :
 class OrganizationScaleNotFoundException(country: String) :
     ApplicationException("The organization scale for country '$country' not found.")
 
-class SchemeNotFoundException : ApplicationException {
-    constructor (scheme: CountryScheme) :
-        super("Country scheme '$scheme' not found.")
+class CountrySchemeNotFoundException (scheme: CountryScheme) : ApplicationException("Country scheme '$scheme' not found.")
 
-    constructor (scheme: RegionScheme) :
-        super("Region scheme '$scheme' not found.")
+class RegionSchemeNotFoundException (scheme: RegionScheme) : ApplicationException("Region scheme '$scheme' not found.")
 
-    constructor (scheme: LocalityScheme) :
-        super("Locality scheme '$scheme' not found.")
-}
+class LocalitySchemeNotFoundException (scheme: LocalityScheme) : ApplicationException("Locality scheme '$scheme' not found.")
 
-class IdNotFoundException : ApplicationException {
-    constructor(country: CountryCode, scheme: CountryScheme) :
-        super("Country id '$country' by scheme '$scheme' not found.")
-
-    constructor(region: RegionCode, scheme: RegionScheme) :
-        super("Region id '$region' by scheme '$scheme' not found.")
-
-    constructor(locality: LocalityCode, scheme: LocalityScheme) :
-        super("Locality id '$locality' by scheme '$scheme' not found.")
-}
 
