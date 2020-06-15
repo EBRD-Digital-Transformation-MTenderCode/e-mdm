@@ -19,7 +19,7 @@ import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_REGION_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LANGUAGE_REQUEST_PARAMETER_MISSING
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LANGUAGE_REQUEST_PARAMETER_UNKNOWN
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LOCALITY_NOT_FOUND
-import com.procurement.mdm.infrastructure.web.dto.ErrorCode.SCHEME_NOT_FOUND
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LOCALITY_SCHEME_NOT_FOUND
 import org.hamcrest.core.IsEqual.equalTo
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -546,7 +546,7 @@ class AddressLocalityControllerIT : AbstractRepositoryTest() {
             .andExpect(status().isNotFound)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
             .andExpect(jsonPath("$.errors.length()", equalTo(1)))
-            .andExpect(jsonPath("$.errors[0].code", equalTo(SCHEME_NOT_FOUND.code)))
+            .andExpect(jsonPath("$.errors[0].code", equalTo(LOCALITY_SCHEME_NOT_FOUND.code)))
             .andExpect(
                 jsonPath(
                     "$.errors[0].description",
@@ -574,11 +574,11 @@ class AddressLocalityControllerIT : AbstractRepositoryTest() {
             .andExpect(status().isNotFound)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
             .andExpect(jsonPath("$.errors.length()", equalTo(1)))
-            .andExpect(jsonPath("$.errors[0].code", equalTo(ErrorCode.ID_NOT_FOUND.code)))
+            .andExpect(jsonPath("$.errors[0].code", equalTo(LOCALITY_NOT_FOUND.code)))
             .andExpect(
                 jsonPath(
                     "$.errors[0].description",
-                    equalTo("Locality id '$UNKNOWN_LOCALITY' by scheme '$SCHEME' not found.")
+                    equalTo("The locality by code '$UNKNOWN_LOCALITY' and scheme '$SCHEME' not found.")
                 )
             )
             .andDo(

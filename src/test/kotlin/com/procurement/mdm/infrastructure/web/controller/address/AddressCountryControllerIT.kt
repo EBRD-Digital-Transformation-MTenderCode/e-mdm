@@ -601,7 +601,7 @@ class AddressCountryControllerIT : AbstractRepositoryTest() {
             .andExpect(status().isNotFound)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
             .andExpect(jsonPath("$.errors.length()", equalTo(1)))
-            .andExpect(jsonPath("$.errors[0].code", equalTo(ErrorCode.SCHEME_NOT_FOUND.code)))
+            .andExpect(jsonPath("$.errors[0].code", equalTo(ErrorCode.COUNTRY_SCHEME_NOT_FOUND.code)))
             .andExpect(
                 jsonPath(
                     "$.errors[0].description",
@@ -629,11 +629,11 @@ class AddressCountryControllerIT : AbstractRepositoryTest() {
             .andExpect(status().isNotFound)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
             .andExpect(jsonPath("$.errors.length()", equalTo(1)))
-            .andExpect(jsonPath("$.errors[0].code", equalTo(ErrorCode.ID_NOT_FOUND.code)))
+            .andExpect(jsonPath("$.errors[0].code", equalTo(COUNTRY_NOT_FOUND.code)))
             .andExpect(
                 jsonPath(
                     "$.errors[0].description",
-                    equalTo("Country id '$UNKNOWN_COUNTRY' by scheme '$SCHEME' not found.")
+                    equalTo("The country by code '$UNKNOWN_COUNTRY' and scheme '$SCHEME' not found.")
                 )
             )
             .andDo(
@@ -671,7 +671,6 @@ class AddressCountryControllerIT : AbstractRepositoryTest() {
                 )
             )
     }
-
 
     private fun initData() {
         initLanguages()
