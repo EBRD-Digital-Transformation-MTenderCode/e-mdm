@@ -19,3 +19,7 @@ class InvalidLocalitySchemeException(description: String) : DomainException(desc
 class LanguageUnknownException(language: String) : DomainException("The unknown code of a language '$language'.")
 
 class CountryUnknownException(country: String) : DomainException("The unknown code of a country '$country'.")
+
+class InvalidPmdException(description: String) : DomainException(description)
+
+class InvalidPhaseException(description: String) : DomainException(description)
