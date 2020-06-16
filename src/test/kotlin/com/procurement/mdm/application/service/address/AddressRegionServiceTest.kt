@@ -180,6 +180,8 @@ class AddressRegionServiceTest {
 
     @Test
     fun `Getting the region by code with scheme is successful`() {
+        whenever(advancedLanguageRepository.exists(eq(LANGUAGE_CODE)))
+            .thenReturn(true)
         whenever(regionSchemeRepository.existsBy(eq(REGION_SCHEME)))
             .thenReturn(true)
         whenever(regionSchemeRepository.existsBy(region = eq(REGION_CODE), scheme = eq(REGION_SCHEME)))
@@ -207,7 +209,21 @@ class AddressRegionServiceTest {
     }
 
     @Test
+    fun `Getting the region by code with scheme is error (unknown language)`() {
+        whenever(advancedLanguageRepository.exists(eq(UNKNOWN_LANGUAGE_CODE)))
+            .thenReturn(false)
+
+        val exception = assertThrows<LanguageUnknownException> {
+            service.getBy(region = REGION, country = COUNTRY, language = UNKNOWN_LANGUAGE, scheme = SCHEME)
+        }
+
+        assertEquals("The unknown code of a language '$UNKNOWN_LANGUAGE'.", exception.description)
+    }
+
+    @Test
     fun `Getting the region by code with scheme is error (unknown scheme)`() {
+        whenever(advancedLanguageRepository.exists(eq(LANGUAGE_CODE)))
+            .thenReturn(true)
         whenever(regionSchemeRepository.existsBy(eq(REGION_SCHEME)))
             .thenReturn(false)
 
@@ -220,6 +236,9 @@ class AddressRegionServiceTest {
 
     @Test
     fun `Getting the region by code with scheme is error (unknown region code)`() {
+        whenever(advancedLanguageRepository.exists(eq(LANGUAGE_CODE)))
+            .thenReturn(true)
+
         whenever(regionSchemeRepository.existsBy(eq(REGION_SCHEME)))
             .thenReturn(true)
 
@@ -235,6 +254,9 @@ class AddressRegionServiceTest {
 
     @Test
     fun `Getting the region by code with scheme is error (wrong country code)`() {
+        whenever(advancedLanguageRepository.exists(eq(LANGUAGE_CODE)))
+            .thenReturn(true)
+
         whenever(regionSchemeRepository.existsBy(eq(REGION_SCHEME)))
             .thenReturn(true)
 
@@ -261,6 +283,9 @@ class AddressRegionServiceTest {
 
     @Test
     fun `Getting the region by code with scheme is error (wrong language)`() {
+        whenever(advancedLanguageRepository.exists(eq(LANGUAGE_CODE)))
+            .thenReturn(true)
+
         whenever(regionSchemeRepository.existsBy(eq(REGION_SCHEME)))
             .thenReturn(true)
 

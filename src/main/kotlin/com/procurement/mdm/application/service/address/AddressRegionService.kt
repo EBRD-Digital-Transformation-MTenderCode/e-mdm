@@ -26,7 +26,9 @@ class AddressRegionServiceImpl(
     override fun getBy(region: String, country: String, language: String, scheme: String?): RegionIdentifier {
         val countryCode = CountryCode(country)
         val regionCode = RegionCode(region)
-        val languageCode = LanguageCode(language)
+        val languageCode = LanguageCode(language).apply {
+            validation(advancedLanguageRepository)
+        }
 
         return if (scheme == null)
             getByDefaultScheme(countryCode, regionCode, languageCode)
@@ -37,10 +39,6 @@ class AddressRegionServiceImpl(
     private fun getByDefaultScheme(
         country: CountryCode, region: RegionCode, language: LanguageCode
     ): RegionIdentifier {
-        language.apply {
-            validation(advancedLanguageRepository)
-        }
-
         val regionEntity = addressRegionRepository.findBy(
             region = region,
             country = country,
