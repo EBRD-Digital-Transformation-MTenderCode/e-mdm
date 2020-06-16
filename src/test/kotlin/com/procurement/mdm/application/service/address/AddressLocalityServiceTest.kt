@@ -3,6 +3,7 @@ package com.procurement.mdm.application.service.address
 import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
+import com.procurement.mdm.application.exception.LocalityDescriptionNotFoundException
 import com.procurement.mdm.application.exception.LocalityNotFoundException
 import com.procurement.mdm.application.exception.LocalityNotLinkedToRegionException
 import com.procurement.mdm.application.exception.LocalitySchemeNotFoundException
@@ -370,15 +371,12 @@ class AddressLocalityServiceTest {
             )
         ).thenReturn(null)
 
-        val exception = assertThrows<LocalityNotFoundException> {
+        val exception = assertThrows<LocalityDescriptionNotFoundException> {
             service.getBy(
                 locality = LOCALITY, country = COUNTRY, region = REGION, language = LANGUAGE, scheme = SCHEME
             )
         }
 
-        assertEquals(
-            "The locality by code '$LOCALITY', scheme '$SCHEME', country '$COUNTRY', region '$REGION', language '$LANGUAGE' not found.",
-            exception.description
-        )
+        assertEquals("The locality '$LOCALITY' description in language '$LANGUAGE' not found.", exception.description)
     }
 }
