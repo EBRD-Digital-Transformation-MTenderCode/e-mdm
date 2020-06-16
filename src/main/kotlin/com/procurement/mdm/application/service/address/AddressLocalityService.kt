@@ -60,7 +60,9 @@ class AddressLocalityServiceImpl(
         val localityCode = LocalityCode(locality)
         val countryCode = CountryCode(country)
         val regionCode = RegionCode(region)
-        val languageCode = LanguageCode(language)
+        val languageCode = LanguageCode(language).apply {
+            validation(advancedLanguageRepository)
+        }
 
         return if (scheme == null)
             getByDefaultScheme(localityCode, countryCode, regionCode, languageCode)
@@ -71,10 +73,6 @@ class AddressLocalityServiceImpl(
     private fun getByDefaultScheme(
         locality: LocalityCode, country: CountryCode, region: RegionCode, language: LanguageCode
     ): LocalityIdentifier {
-        language.apply {
-            validation(advancedLanguageRepository)
-        }
-
         val localityEntity = addressLocalityRepository.findBy(
             locality = locality, country = country, region = region, language = language
         ) ?: throw LocalityNotFoundException(
