@@ -20,7 +20,7 @@ class CriteriaController(private val criteriaService: CriteriaService) {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    fun getCountryById(
+    fun getCriteriaById(
         @RequestParam(value = "lang", required = false) lang: String?,
         @RequestParam(value = "country", required = false) country: String?,
         @RequestParam(value = "pmd", required = false) pmd: String?,
