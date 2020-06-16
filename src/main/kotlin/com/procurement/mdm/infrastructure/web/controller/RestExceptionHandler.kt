@@ -9,6 +9,7 @@ import com.procurement.mdm.application.exception.LocalityNotLinkedToRegionExcept
 import com.procurement.mdm.application.exception.LocalitySchemeNotFoundException
 import com.procurement.mdm.application.exception.OrganizationScaleNotFoundException
 import com.procurement.mdm.application.exception.OrganizationSchemeNotFoundException
+import com.procurement.mdm.application.exception.RegionDescriptionNotFoundException
 import com.procurement.mdm.application.exception.RegionNotFoundException
 import com.procurement.mdm.application.exception.RegionNotLinkedToCountryException
 import com.procurement.mdm.application.exception.RegionSchemeNotFoundException
@@ -50,6 +51,7 @@ import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LOCALITY_NOT_LINKED_
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LOCALITY_SCHEME_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.ORGANIZATION_SCALE_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.ORGANIZATION_SCHEME_NOT_FOUND
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REGION_DESCRIPTION_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REGION_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REGION_NOT_LINKED_TO_COUNTRY
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REGION_SCHEME_NOT_FOUND
@@ -136,6 +138,9 @@ class RestExceptionHandler : ResponseEntityExceptionHandler() {
 
             is CountryDescriptionNotFoundException ->
                 exception.handler(errorCode = COUNTRY_DESCRIPTION_NOT_FOUND)
+
+            is RegionDescriptionNotFoundException ->
+                exception.handler(errorCode = REGION_DESCRIPTION_NOT_FOUND)
         }
 
         return ResponseEntity.status(apiError.status).body(apiError)

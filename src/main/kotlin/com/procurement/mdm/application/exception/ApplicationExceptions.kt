@@ -28,12 +28,13 @@ class RegionNotFoundException : ApplicationException {
     constructor(region: RegionCode, country: CountryCode, language: LanguageCode) :
         super("The region by code '$region', country '$country', language '$language' not found.")
 
-    constructor(region: RegionCode, scheme: RegionScheme, country: CountryCode, language: LanguageCode) :
-        super("The region by code '$region', scheme '$scheme', country '$country', language '$language' not found.")
-
     constructor(region: RegionCode, scheme: RegionScheme) :
         super("The region by code '$region' and scheme '$scheme' not found.")
 }
+
+class RegionDescriptionNotFoundException(region: RegionCode, language: LanguageCode) :
+    ApplicationException("The region '$region' description in language '$language' not found.")
+
 
 class RegionNotLinkedToCountryException : ApplicationException {
     constructor(region: RegionCode, scheme: RegionScheme, country: CountryCode) :
