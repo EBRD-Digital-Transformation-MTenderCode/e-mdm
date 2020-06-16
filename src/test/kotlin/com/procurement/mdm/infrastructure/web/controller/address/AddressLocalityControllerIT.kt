@@ -527,7 +527,7 @@ class AddressLocalityControllerIT : AbstractRepositoryTest() {
             .andExpect(jsonPath("$.data.uri", equalTo(expected.uri)))
             .andDo(
                 document(
-                    "address/locality/get_by_code/success",
+                    "address/locality/get_by_code_and_scheme/success",
                     responseFields(ModelDescription.Address.Locality.one())
                 )
             )
@@ -555,7 +555,7 @@ class AddressLocalityControllerIT : AbstractRepositoryTest() {
             )
             .andDo(
                 document(
-                    "address/locality/get_by_code/errors/empty_lang",
+                    "address/locality/get_by_code_and_scheme/errors/unknown_scheme",
                     responseFields(ModelDescription.responseError())
                 )
             )
@@ -583,7 +583,7 @@ class AddressLocalityControllerIT : AbstractRepositoryTest() {
             )
             .andDo(
                 document(
-                    "address/locality/get_by_code/errors/empty_lang",
+                    "address/locality/get_by_code_and_scheme/errors/unknown_location",
                     responseFields(ModelDescription.responseError())
                 )
             )
@@ -611,7 +611,7 @@ class AddressLocalityControllerIT : AbstractRepositoryTest() {
             )
             .andDo(
                 document(
-                    "address/locality/get_by_code/errors/empty_lang",
+                    "address/locality/get_by_code_and_scheme/errors/region_not_linked_to_locality",
                     responseFields(ModelDescription.responseError())
                 )
             )
