@@ -499,7 +499,7 @@ class AddressCountryControllerIT : AbstractRepositoryTest() {
             .andExpect(jsonPath("$.data.uri", equalTo(COUNTRY_IDENTIFIER_FIRST.uri)))
             .andDo(
                 document(
-                    "address/country/get_by_code/success",
+                    "address/country/get_by_code_and_scheme/success",
                     responseFields(ModelDescription.Address.Country.one())
                 )
             )
@@ -527,7 +527,7 @@ class AddressCountryControllerIT : AbstractRepositoryTest() {
             )
             .andDo(
                 document(
-                    "address/country/get_all/errors/empty_lang",
+                    "address/country/get_by_code_and_scheme/errors/empty_lang",
                     responseFields(ModelDescription.responseError())
                 )
             )
@@ -555,7 +555,7 @@ class AddressCountryControllerIT : AbstractRepositoryTest() {
             )
             .andDo(
                 document(
-                    "address/country/get_all/errors/invalid_lang",
+                    "address/country/get_by_code_and_scheme/errors/invalid_lang",
                     responseFields(ModelDescription.responseError())
                 )
             )
@@ -583,7 +583,7 @@ class AddressCountryControllerIT : AbstractRepositoryTest() {
             )
             .andDo(
                 document(
-                    "address/country/get_all/errors/empty_lang",
+                    "address/country/get_by_code_and_scheme/errors/empty_scheme",
                     responseFields(ModelDescription.responseError())
                 )
             )
@@ -611,7 +611,7 @@ class AddressCountryControllerIT : AbstractRepositoryTest() {
             )
             .andDo(
                 document(
-                    "address/country/get_all/errors/empty_lang",
+                    "address/country/get_by_code_and_scheme/errors/unknown_lang",
                     responseFields(ModelDescription.responseError())
                 )
             )
@@ -639,7 +639,7 @@ class AddressCountryControllerIT : AbstractRepositoryTest() {
             )
             .andDo(
                 document(
-                    "address/country/get_all/errors/empty_lang",
+                    "address/country/get_by_code_and_scheme/errors/unknown_country",
                     responseFields(ModelDescription.responseError())
                 )
             )
@@ -667,7 +667,7 @@ class AddressCountryControllerIT : AbstractRepositoryTest() {
             )
             .andDo(
                 document(
-                    "address/country/get_all/errors/empty_lang",
+                    "address/country/get_by_code_and_scheme/errors/no_description",
                     responseFields(ModelDescription.responseError())
                 )
             )
