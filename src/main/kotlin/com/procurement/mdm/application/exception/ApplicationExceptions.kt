@@ -22,7 +22,7 @@ class CountryNotFoundException : ApplicationException {
 }
 
 class CountryDescriptionNotFoundException(country: CountryCode, language: LanguageCode) :
-    ApplicationException("The country '$country' description in language '$language' bot found.")
+    ApplicationException("The country '$country' description in language '$language' not found.")
 
 class RegionNotFoundException : ApplicationException {
     constructor(region: RegionCode, country: CountryCode, language: LanguageCode) :

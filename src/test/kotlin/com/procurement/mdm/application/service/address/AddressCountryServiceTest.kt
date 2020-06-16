@@ -255,6 +255,6 @@ class AddressCountryServiceTest {
             service.getBy(country = COUNTRY, language = LANGUAGE, scheme = SCHEME)
         }
 
-        assertEquals("The country '$COUNTRY' description in language '$LANGUAGE' bot found.", exception.description)
+        assertEquals("The country '$COUNTRY' description in language '$LANGUAGE' not found.", exception.description)
     }
 }

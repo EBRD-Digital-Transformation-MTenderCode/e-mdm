@@ -662,7 +662,7 @@ class AddressCountryControllerIT : AbstractRepositoryTest() {
             .andExpect(
                 jsonPath(
                     "$.errors[0].description",
-                    equalTo("The country '$COUNTRY_WITHOUT_DESCRIPTION' description in language '$LANGUAGE' bot found.")
+                    equalTo("The country '$COUNTRY_WITHOUT_DESCRIPTION' description in language '$LANGUAGE' not found.")
                 )
             )
             .andDo(
