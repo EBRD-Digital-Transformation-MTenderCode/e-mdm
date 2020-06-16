@@ -1,5 +1,6 @@
 package com.procurement.mdm.application.service.address
 
+import com.procurement.mdm.application.exception.RegionDescriptionNotFoundException
 import com.procurement.mdm.application.exception.RegionNotFoundException
 import com.procurement.mdm.application.exception.RegionNotLinkedToCountryException
 import com.procurement.mdm.domain.model.code.CountryCode
@@ -66,9 +67,7 @@ class AddressRegionServiceImpl(
         val regionEntity = regionSchemeRepository.findBy(
             region = region, scheme = regionScheme, language = language, country = country
         )
-            ?: throw RegionNotFoundException(
-                region = region, scheme = regionScheme, country = country, language = language
-            )
+            ?: throw RegionDescriptionNotFoundException(region = region, language = language)
 
         return RegionIdentifier(
             scheme = regionEntity.scheme,
