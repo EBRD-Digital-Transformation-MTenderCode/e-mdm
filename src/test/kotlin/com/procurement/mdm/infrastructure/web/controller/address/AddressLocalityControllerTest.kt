@@ -14,7 +14,12 @@ import com.procurement.mdm.domain.exception.InvalidLanguageCodeException
 import com.procurement.mdm.domain.exception.InvalidLocalityCodeException
 import com.procurement.mdm.domain.exception.InvalidRegionCodeException
 import com.procurement.mdm.domain.exception.LanguageUnknownException
+import com.procurement.mdm.domain.model.code.CountryCode
+import com.procurement.mdm.domain.model.code.LanguageCode
+import com.procurement.mdm.domain.model.code.LocalityCode
+import com.procurement.mdm.domain.model.code.RegionCode
 import com.procurement.mdm.domain.model.identifier.LocalityIdentifier
+import com.procurement.mdm.domain.model.scheme.LocalityScheme
 import com.procurement.mdm.infrastructure.web.controller.RestExceptionHandler
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INTERNAL_SERVER_ERROR
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_COUNTRY_CODE
@@ -148,7 +153,8 @@ class AddressLocalityControllerTest {
                 locality = eq(LOCALITY),
                 country = eq(COUNTRY),
                 region = eq(REGION),
-                language = eq(LANGUAGE)
+                language = eq(LANGUAGE),
+                scheme = eq(SCHEME)
             )
         ).thenReturn(expected)
 
@@ -156,6 +162,7 @@ class AddressLocalityControllerTest {
         mockMvc.perform(
             get(url)
                 .param("lang", LANGUAGE)
+                .param("scheme", SCHEME)
         )
             .andExpect(status().isOk)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -165,7 +172,7 @@ class AddressLocalityControllerTest {
             .andExpect(jsonPath("$.data.uri", equalTo(expected.uri)))
 
         verify(addressLocalityService, times(1))
-            .getBy(locality = any(), country = any(), region = any(), language = any())
+            .getBy(locality = any(), country = any(), region = any(), language = any(), scheme = any())
     }
 
     @Test
@@ -186,19 +193,26 @@ class AddressLocalityControllerTest {
             )
 
         verify(addressLocalityService, times(0))
-            .getBy(locality = any(), country = any(), region = any(), language = any())
+            .getBy(locality = any(), country = any(), region = any(), language = any(), scheme = any())
     }
 
     @Test
     fun `Getting the locality by code is error (language request parameter is empty)`() {
         doThrow(InvalidLanguageCodeException(description = "Invalid language code (value is blank)."))
             .whenever(addressLocalityService)
-            .getBy(locality = eq(LOCALITY), country = eq(COUNTRY), region = eq(REGION), language = eq(EMPTY_LANGUAGE))
+            .getBy(
+                locality = eq(LOCALITY),
+                country = eq(COUNTRY),
+                region = eq(REGION),
+                language = eq(EMPTY_LANGUAGE),
+                scheme = eq(SCHEME)
+            )
 
         val url = getUrl(locality = LOCALITY, country = COUNTRY, region = REGION)
         mockMvc.perform(
             get(url)
                 .param("lang", EMPTY_LANGUAGE)
+                .param("scheme", SCHEME)
         )
             .andExpect(status().isBadRequest)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -212,7 +226,7 @@ class AddressLocalityControllerTest {
             )
 
         verify(addressLocalityService, times(1))
-            .getBy(locality = any(), country = any(), region = any(), language = any())
+            .getBy(locality = any(), country = any(), region = any(), language = any(), scheme = any())
     }
 
     @Test
@@ -220,12 +234,19 @@ class AddressLocalityControllerTest {
 
         doThrow(InvalidLanguageCodeException(description = "Invalid language code: '$INVALID_LANGUAGE' (wrong length: '${INVALID_LANGUAGE.length}' required: '2')."))
             .whenever(addressLocalityService)
-            .getBy(locality = eq(LOCALITY), country = eq(COUNTRY), region = eq(REGION), language = eq(INVALID_LANGUAGE))
+            .getBy(
+                locality = eq(LOCALITY),
+                country = eq(COUNTRY),
+                region = eq(REGION),
+                language = eq(INVALID_LANGUAGE),
+                scheme = eq(SCHEME)
+            )
 
         val url = getUrl(locality = LOCALITY, country = COUNTRY, region = REGION)
         mockMvc.perform(
             get(url)
                 .param("lang", INVALID_LANGUAGE)
+                .param("scheme", SCHEME)
         )
             .andExpect(status().isBadRequest)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -239,19 +260,26 @@ class AddressLocalityControllerTest {
             )
 
         verify(addressLocalityService, times(1))
-            .getBy(locality = any(), country = any(), region = any(), language = any())
+            .getBy(locality = any(), country = any(), region = any(), language = any(), scheme = any())
     }
 
     @Test
     fun `Getting the locality by code is error (language request parameter is unknown)`() {
         doThrow(LanguageUnknownException(language = UNKNOWN_LANGUAGE))
             .whenever(addressLocalityService)
-            .getBy(locality = eq(LOCALITY), country = eq(COUNTRY), region = eq(REGION), language = eq(UNKNOWN_LANGUAGE))
+            .getBy(
+                locality = eq(LOCALITY),
+                country = eq(COUNTRY),
+                region = eq(REGION),
+                language = eq(UNKNOWN_LANGUAGE),
+                scheme = eq(SCHEME)
+            )
 
         val url = getUrl(locality = LOCALITY, country = COUNTRY, region = REGION)
         mockMvc.perform(
             get(url)
                 .param("lang", UNKNOWN_LANGUAGE)
+                .param("scheme", SCHEME)
         )
             .andExpect(status().isBadRequest)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -265,19 +293,26 @@ class AddressLocalityControllerTest {
             )
 
         verify(addressLocalityService, times(1))
-            .getBy(locality = any(), country = any(), region = any(), language = any())
+            .getBy(locality = any(), country = any(), region = any(), language = any(), scheme = any())
     }
 
     @Test
     fun `Getting the locality by code is error (country code is empty)`() {
         doThrow(InvalidCountryCodeException(description = "Invalid country code (value is blank)."))
             .whenever(addressLocalityService)
-            .getBy(locality = eq(LOCALITY), country = eq(EMPTY_COUNTRY), region = eq(REGION), language = eq(LANGUAGE))
+            .getBy(
+                locality = eq(LOCALITY),
+                country = eq(EMPTY_COUNTRY),
+                region = eq(REGION),
+                language = eq(LANGUAGE),
+                scheme = eq(SCHEME)
+            )
 
         val url = getUrl(locality = LOCALITY, country = EMPTY_COUNTRY, region = REGION)
         mockMvc.perform(
             get(url)
                 .param("lang", LANGUAGE)
+                .param("scheme", SCHEME)
         )
             .andExpect(status().isBadRequest)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -291,7 +326,7 @@ class AddressLocalityControllerTest {
             )
 
         verify(addressLocalityService, times(1))
-            .getBy(locality = any(), country = any(), region = any(), language = any())
+            .getBy(locality = any(), country = any(), region = any(), language = any(), scheme = any())
     }
 
     @Test
@@ -299,12 +334,19 @@ class AddressLocalityControllerTest {
 
         doThrow(InvalidCountryCodeException(description = "Invalid country code: '$INVALID_COUNTRY' (wrong length: '${INVALID_COUNTRY.length}' required: '2')."))
             .whenever(addressLocalityService)
-            .getBy(locality = eq(LOCALITY), country = eq(INVALID_COUNTRY), region = eq(REGION), language = eq(LANGUAGE))
+            .getBy(
+                locality = eq(LOCALITY),
+                country = eq(INVALID_COUNTRY),
+                region = eq(REGION),
+                language = eq(LANGUAGE),
+                scheme = eq(SCHEME)
+            )
 
         val url = getUrl(locality = LOCALITY, country = INVALID_COUNTRY, region = REGION)
         mockMvc.perform(
             get(url)
                 .param("lang", LANGUAGE)
+                .param("scheme", SCHEME)
         )
             .andExpect(status().isBadRequest)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -318,19 +360,26 @@ class AddressLocalityControllerTest {
             )
 
         verify(addressLocalityService, times(1))
-            .getBy(locality = any(), country = any(), region = any(), language = any())
+            .getBy(locality = any(), country = any(), region = any(), language = any(), scheme = any())
     }
 
     @Test
     fun `Getting the locality by code is error (region code is empty)`() {
         doThrow(InvalidRegionCodeException(description = "Invalid region code (value is blank)."))
             .whenever(addressLocalityService)
-            .getBy(locality = eq(LOCALITY), country = eq(COUNTRY), region = eq(EMPTY_REGION), language = eq(LANGUAGE))
+            .getBy(
+                locality = eq(LOCALITY),
+                country = eq(COUNTRY),
+                region = eq(EMPTY_REGION),
+                language = eq(LANGUAGE),
+                scheme = eq(SCHEME)
+            )
 
         val url = getUrl(locality = LOCALITY, country = COUNTRY, region = EMPTY_REGION)
         mockMvc.perform(
             get(url)
                 .param("lang", LANGUAGE)
+                .param("scheme", SCHEME)
         )
             .andExpect(status().isBadRequest)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -344,19 +393,26 @@ class AddressLocalityControllerTest {
             )
 
         verify(addressLocalityService, times(1))
-            .getBy(locality = any(), country = any(), region = any(), language = any())
+            .getBy(locality = any(), country = any(), region = any(), language = any(), scheme = any())
     }
 
     @Test
     fun `Getting the locality by code is error (locality code is empty)`() {
         doThrow(InvalidLocalityCodeException(description = "Invalid locality code (value is blank)."))
             .whenever(addressLocalityService)
-            .getBy(locality = eq(EMPTY_LOCALITY), country = eq(COUNTRY), region = eq(REGION), language = eq(LANGUAGE))
+            .getBy(
+                locality = eq(EMPTY_LOCALITY),
+                country = eq(COUNTRY),
+                region = eq(REGION),
+                language = eq(LANGUAGE),
+                scheme = eq(SCHEME)
+            )
 
         val url = getUrl(locality = EMPTY_LOCALITY, country = COUNTRY, region = REGION)
         mockMvc.perform(
             get(url)
                 .param("lang", LANGUAGE)
+                .param("scheme", SCHEME)
         )
             .andExpect(status().isBadRequest)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -370,19 +426,34 @@ class AddressLocalityControllerTest {
             )
 
         verify(addressLocalityService, times(1))
-            .getBy(locality = any(), country = any(), region = any(), language = any())
+            .getBy(locality = any(), country = any(), region = any(), language = any(), scheme = any())
     }
 
     @Test
     fun `Getting the locality by code is error (locality is not found)`() {
-        doThrow(LocalityNotFoundException(locality = LOCALITY, country = COUNTRY, region = REGION, language = LANGUAGE))
+        doThrow(
+            LocalityNotFoundException(
+                locality = LocalityCode(LOCALITY),
+                country = CountryCode(COUNTRY),
+                region = RegionCode(REGION),
+                language = LanguageCode(LANGUAGE),
+                scheme = LocalityScheme(SCHEME)
+            )
+        )
             .whenever(addressLocalityService)
-            .getBy(locality = eq(LOCALITY), country = eq(COUNTRY), region = eq(REGION), language = eq(LANGUAGE))
+            .getBy(
+                locality = eq(LOCALITY),
+                country = eq(COUNTRY),
+                region = eq(REGION),
+                language = eq(LANGUAGE),
+                scheme = eq(SCHEME)
+            )
 
         val url = getUrl(locality = LOCALITY, country = COUNTRY, region = REGION)
         mockMvc.perform(
             get(url)
                 .param("lang", LANGUAGE)
+                .param("scheme", SCHEME)
         )
             .andExpect(status().isNotFound)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -391,25 +462,32 @@ class AddressLocalityControllerTest {
             .andExpect(
                 jsonPath(
                     "$.errors[0].description",
-                    equalTo("The locality by code '$LOCALITY', country '$COUNTRY', region '$REGION', language '$LANGUAGE' not found.")
+                    equalTo("The locality by code '$LOCALITY', scheme '$SCHEME', country '$COUNTRY', region '$REGION', language '$LANGUAGE' not found.")
                 )
             )
 
 
         verify(addressLocalityService, times(1))
-            .getBy(locality = any(), country = any(), region = any(), language = any())
+            .getBy(locality = any(), country = any(), region = any(), language = any(), scheme = any())
     }
 
     @Test
     fun `Getting the locality by code is error (internal server error)`() {
         doThrow(RuntimeException())
             .whenever(addressLocalityService)
-            .getBy(locality = eq(LOCALITY), country = eq(COUNTRY), region = eq(REGION), language = eq(LANGUAGE))
+            .getBy(
+                locality = eq(LOCALITY),
+                country = eq(COUNTRY),
+                region = eq(REGION),
+                language = eq(LANGUAGE),
+                scheme = eq(SCHEME)
+            )
 
         val url = getUrl(locality = LOCALITY, country = COUNTRY, region = REGION)
         mockMvc.perform(
             get(url)
                 .param("lang", LANGUAGE)
+                .param("scheme", SCHEME)
         )
             .andExpect(status().isInternalServerError)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -419,7 +497,7 @@ class AddressLocalityControllerTest {
 
 
         verify(addressLocalityService, times(1))
-            .getBy(locality = any(), country = any(), region = any(), language = any())
+            .getBy(locality = any(), country = any(), region = any(), language = any(), scheme = any())
     }
 
     @Test

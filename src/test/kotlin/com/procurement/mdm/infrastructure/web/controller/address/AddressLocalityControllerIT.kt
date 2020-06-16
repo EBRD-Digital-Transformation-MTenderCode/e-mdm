@@ -5,10 +5,13 @@ import com.procurement.mdm.application.service.address.AddressLocalityServiceImp
 import com.procurement.mdm.domain.model.identifier.LocalityIdentifier
 import com.procurement.mdm.domain.repository.AdvancedLanguageRepository
 import com.procurement.mdm.domain.repository.address.AddressLocalityRepository
+import com.procurement.mdm.domain.repository.scheme.LocalitySchemeRepository
+import com.procurement.mdm.domain.repository.scheme.RegionSchemeRepository
 import com.procurement.mdm.infrastructure.repository.AbstractRepositoryTest
 import com.procurement.mdm.infrastructure.repository.loadSql
 import com.procurement.mdm.infrastructure.web.controller.RestExceptionHandler
 import com.procurement.mdm.infrastructure.web.controller.documentation.ModelDescription
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_COUNTRY_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_LANGUAGE_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_LOCALITY_CODE
@@ -16,6 +19,7 @@ import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_REGION_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LANGUAGE_REQUEST_PARAMETER_MISSING
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LANGUAGE_REQUEST_PARAMETER_UNKNOWN
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LOCALITY_NOT_FOUND
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LOCALITY_SCHEME_NOT_FOUND
 import org.hamcrest.core.IsEqual.equalTo
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -43,9 +47,12 @@ class AddressLocalityControllerIT : AbstractRepositoryTest() {
         private const val INVALID_COUNTRY = "INVALID_COUNTRY"
 
         private const val REGION = "region-1"
+        private const val UNKNOWN_REGION = "unknown-region"
+
         private const val EMPTY_REGION = "   "
 
         private const val LOCALITY = "locality-1"
+        private const val UNKNOWN_LOCALITY = "unknown-locality"
         private const val EMPTY_LOCALITY = "   "
 
         private const val LANGUAGE = "ro"
@@ -54,6 +61,7 @@ class AddressLocalityControllerIT : AbstractRepositoryTest() {
         private const val UNKNOWN_LANGUAGE = "ul"
 
         private const val SCHEME = "CUATM"
+        private const val UNKNOWN_SCHEME = "unknown-scheme"
     }
 
     private lateinit var mockMvc: MockMvc
@@ -65,11 +73,19 @@ class AddressLocalityControllerIT : AbstractRepositoryTest() {
     @Autowired
     private lateinit var advancedLanguageRepository: AdvancedLanguageRepository
 
+    @Autowired
+    private lateinit var regionSchemeRepository: RegionSchemeRepository
+
+    @Autowired
+    private lateinit var localitySchemeRepository: LocalitySchemeRepository
+
     @BeforeEach
     fun init(restDocumentation: RestDocumentationContextProvider) {
         addressLocalityService = AddressLocalityServiceImpl(
             addressLocalityRepository = addressLocalityRepository,
-            advancedLanguageRepository = advancedLanguageRepository
+            advancedLanguageRepository = advancedLanguageRepository,
+            regionSchemeRepository = regionSchemeRepository,
+            localitySchemeRepository = localitySchemeRepository
         )
 
         val controller = AddressLocalityController(addressLocalityService)
@@ -486,12 +502,129 @@ class AddressLocalityControllerIT : AbstractRepositoryTest() {
             )
     }
 
+    @Test
+    fun `Getting the locality by code with scheme is successful`() {
+        initData()
+
+        val expected = LocalityIdentifier(
+            scheme = SCHEME,
+            id = LOCALITY.toUpperCase(),
+            description = "mun.Chişinău",
+            uri = "http://statistica.md"
+        )
+
+        val url = getUrl(locality = LOCALITY, country = COUNTRY, region = REGION)
+        mockMvc.perform(
+            get(url)
+                .param("lang", LANGUAGE)
+                .param("scheme", SCHEME)
+        )
+            .andExpect(status().isOk)
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.data.scheme", equalTo(expected.scheme)))
+            .andExpect(jsonPath("$.data.id", equalTo(expected.id)))
+            .andExpect(jsonPath("$.data.description", equalTo(expected.description)))
+            .andExpect(jsonPath("$.data.uri", equalTo(expected.uri)))
+            .andDo(
+                document(
+                    "address/locality/get_by_code/success",
+                    responseFields(ModelDescription.Address.Locality.one())
+                )
+            )
+    }
+
+    @Test
+    fun `Getting the locality by code with scheme is error (unknown scheme)`() {
+        initData()
+
+        val url = getUrl(locality = LOCALITY, country = COUNTRY, region = REGION)
+        mockMvc.perform(
+            get(url)
+                .param("lang", LANGUAGE)
+                .param("scheme", UNKNOWN_SCHEME)
+        )
+            .andExpect(status().isNotFound)
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.errors.length()", equalTo(1)))
+            .andExpect(jsonPath("$.errors[0].code", equalTo(LOCALITY_SCHEME_NOT_FOUND.code)))
+            .andExpect(
+                jsonPath(
+                    "$.errors[0].description",
+                    equalTo("Locality scheme '$UNKNOWN_SCHEME' not found.")
+                )
+            )
+            .andDo(
+                document(
+                    "address/locality/get_by_code/errors/empty_lang",
+                    responseFields(ModelDescription.responseError())
+                )
+            )
+    }
+
+    @Test
+    fun `Getting the locality by code with scheme is error (unknown location by scheme)`() {
+        initData()
+
+        val url = getUrl(locality = UNKNOWN_LOCALITY, country = COUNTRY, region = REGION)
+        mockMvc.perform(
+            get(url)
+                .param("lang", LANGUAGE)
+                .param("scheme", SCHEME)
+        )
+            .andExpect(status().isNotFound)
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.errors.length()", equalTo(1)))
+            .andExpect(jsonPath("$.errors[0].code", equalTo(LOCALITY_NOT_FOUND.code)))
+            .andExpect(
+                jsonPath(
+                    "$.errors[0].description",
+                    equalTo("The locality by code '$UNKNOWN_LOCALITY' and scheme '$SCHEME' not found.")
+                )
+            )
+            .andDo(
+                document(
+                    "address/locality/get_by_code/errors/empty_lang",
+                    responseFields(ModelDescription.responseError())
+                )
+            )
+    }
+
+    @Test
+    fun `Getting the locality by code with scheme is error (region not linked to locality)`() {
+        initData()
+
+        val url = getUrl(locality = LOCALITY, country = COUNTRY, region = UNKNOWN_REGION)
+        mockMvc.perform(
+            get(url)
+                .param("lang", LANGUAGE)
+                .param("scheme", SCHEME)
+        )
+            .andExpect(status().isNotFound)
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.errors.length()", equalTo(1)))
+            .andExpect(jsonPath("$.errors[0].code", equalTo(ErrorCode.LOCALITY_NOT_LINKED_TO_REGION.code)))
+            .andExpect(
+                jsonPath(
+                    "$.errors[0].description",
+                    equalTo("The locality by code '$LOCALITY' and scheme '$SCHEME' is not linked to region '$UNKNOWN_REGION'.")
+                )
+            )
+            .andDo(
+                document(
+                    "address/locality/get_by_code/errors/empty_lang",
+                    responseFields(ModelDescription.responseError())
+                )
+            )
+    }
+
     private fun initData() {
         initLanguages()
         initSchemes()
         initCountries()
         initRegions()
         initLocalities()
+        initLocalitySchemes()
+        initRegionSchemes()
     }
 
     private fun initLanguages() {
@@ -517,6 +650,16 @@ class AddressLocalityControllerIT : AbstractRepositoryTest() {
     private fun initLocalities() {
         val sqlLocalities = loadSql("sql/address/localities_init_data.sql")
         executeSQLScript(sqlLocalities)
+    }
+
+    private fun initLocalitySchemes() {
+        val sqlLocalities = loadSql("sql/scheme/locality_schemes_init_data.sql")
+        executeSQLScript(sqlLocalities)
+    }
+
+    private fun initRegionSchemes() {
+        val sqlRegions = loadSql("sql/scheme/region_schemes_init_data.sql")
+        executeSQLScript(sqlRegions)
     }
 
     private fun getUrl(locality: String? = null, country: String, region: String): String =

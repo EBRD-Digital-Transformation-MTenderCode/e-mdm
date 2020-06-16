@@ -5,10 +5,13 @@ import com.procurement.mdm.application.service.address.AddressCountryServiceImpl
 import com.procurement.mdm.domain.model.identifier.CountryIdentifier
 import com.procurement.mdm.domain.repository.AdvancedLanguageRepository
 import com.procurement.mdm.domain.repository.address.AddressCountryRepository
+import com.procurement.mdm.domain.repository.scheme.CountrySchemeRepository
 import com.procurement.mdm.infrastructure.repository.AbstractRepositoryTest
 import com.procurement.mdm.infrastructure.repository.loadSql
 import com.procurement.mdm.infrastructure.web.controller.RestExceptionHandler
 import com.procurement.mdm.infrastructure.web.controller.documentation.ModelDescription
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_DESCRIPTION_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_COUNTRY_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_LANGUAGE_CODE
@@ -39,11 +42,17 @@ class AddressCountryControllerIT : AbstractRepositoryTest() {
         private const val COUNTRY = "md"
         private const val EMPTY_COUNTRY = "   "
         private const val INVALID_COUNTRY = "INVALID_COUNTRY"
+        private const val UNKNOWN_COUNTRY = "ua"
+        private const val COUNTRY_WITHOUT_DESCRIPTION = "fr"
 
         private const val LANGUAGE = "ro"
         private const val EMPTY_LANGUAGE = "   "
         private const val INVALID_LANGUAGE = "invalid"
         private const val UNKNOWN_LANGUAGE = "ul"
+
+        private const val SCHEME = "iso"
+        private const val EMPTY_SCHEME = "  "
+        private const val UNKNOWN_SCHEME = "unknown"
 
         private val COUNTRY_IDENTIFIER_FIRST = CountryIdentifier(
             scheme = "ISO",
@@ -69,11 +78,15 @@ class AddressCountryControllerIT : AbstractRepositoryTest() {
     @Autowired
     private lateinit var advancedLanguageRepository: AdvancedLanguageRepository
 
+    @Autowired
+    private lateinit var countrySchemeRepository: CountrySchemeRepository
+
     @BeforeEach
     fun init(restDocumentation: RestDocumentationContextProvider) {
         addressCountryService = AddressCountryServiceImpl(
             addressCountryRepository = addressCountryRepository,
-            advancedLanguageRepository = advancedLanguageRepository
+            advancedLanguageRepository = advancedLanguageRepository,
+            countrySchemeRepository = countrySchemeRepository
         )
 
         val controller = AddressCountryController(addressCountryService)
@@ -468,6 +481,198 @@ class AddressCountryControllerIT : AbstractRepositoryTest() {
             )
     }
 
+    @Test
+    fun `Getting the country by code with scheme is successful`() {
+        initData()
+
+        val url = getUrl(country = COUNTRY)
+        mockMvc.perform(
+            get(url)
+                .param("lang", LANGUAGE)
+                .param("scheme", SCHEME)
+        )
+            .andExpect(status().isOk)
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.data.scheme", equalTo(COUNTRY_IDENTIFIER_FIRST.scheme)))
+            .andExpect(jsonPath("$.data.id", equalTo(COUNTRY_IDENTIFIER_FIRST.id)))
+            .andExpect(jsonPath("$.data.description", equalTo(COUNTRY_IDENTIFIER_FIRST.description)))
+            .andExpect(jsonPath("$.data.uri", equalTo(COUNTRY_IDENTIFIER_FIRST.uri)))
+            .andDo(
+                document(
+                    "address/country/get_by_code/success",
+                    responseFields(ModelDescription.Address.Country.one())
+                )
+            )
+    }
+
+    @Test
+    fun `Getting the country by code with scheme is error (language request parameter is empty)`() {
+        initData()
+
+        val url = getUrl(country = COUNTRY)
+        mockMvc.perform(
+            get(url)
+                .param("lang", EMPTY_LANGUAGE)
+                .param("scheme", SCHEME)
+        )
+            .andExpect(status().isBadRequest)
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.errors.length()", equalTo(1)))
+            .andExpect(jsonPath("$.errors[0].code", equalTo(INVALID_LANGUAGE_CODE.code)))
+            .andExpect(
+                jsonPath(
+                    "$.errors[0].description",
+                    equalTo("Invalid language code (value is blank).")
+                )
+            )
+            .andDo(
+                document(
+                    "address/country/get_all/errors/empty_lang",
+                    responseFields(ModelDescription.responseError())
+                )
+            )
+    }
+
+    @Test
+    fun `Getting the country by code with scheme is error (language request parameter is invalid)`() {
+        initData()
+
+        val url = getUrl(country = COUNTRY)
+        mockMvc.perform(
+            get(url)
+                .param("lang", INVALID_LANGUAGE)
+                .param("scheme", SCHEME)
+        )
+            .andExpect(status().isBadRequest)
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.errors.length()", equalTo(1)))
+            .andExpect(jsonPath("$.errors[0].code", equalTo(INVALID_LANGUAGE_CODE.code)))
+            .andExpect(
+                jsonPath(
+                    "$.errors[0].description",
+                    equalTo("Invalid language code: '$INVALID_LANGUAGE' (wrong length: '${INVALID_LANGUAGE.length}' required: '2').")
+                )
+            )
+            .andDo(
+                document(
+                    "address/country/get_all/errors/invalid_lang",
+                    responseFields(ModelDescription.responseError())
+                )
+            )
+    }
+
+    @Test
+    fun `Getting the country by code with scheme is error (scheme request parameter is empty)`() {
+        initData()
+
+        val url = getUrl(country = COUNTRY)
+        mockMvc.perform(
+            get(url)
+                .param("lang", LANGUAGE)
+                .param("scheme", EMPTY_SCHEME)
+        )
+            .andExpect(status().isBadRequest)
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.errors.length()", equalTo(1)))
+            .andExpect(jsonPath("$.errors[0].code", equalTo(ErrorCode.INVALID_COUNTRY_SCHEME.code)))
+            .andExpect(
+                jsonPath(
+                    "$.errors[0].description",
+                    equalTo("Invalid country scheme (value is blank).")
+                )
+            )
+            .andDo(
+                document(
+                    "address/country/get_all/errors/empty_lang",
+                    responseFields(ModelDescription.responseError())
+                )
+            )
+    }
+
+    @Test
+    fun `Getting the country by code with scheme is error (scheme request parameter not found)`() {
+        initData()
+
+        val url = getUrl(country = COUNTRY)
+        mockMvc.perform(
+            get(url)
+                .param("lang", LANGUAGE)
+                .param("scheme", UNKNOWN_SCHEME)
+        )
+            .andExpect(status().isNotFound)
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.errors.length()", equalTo(1)))
+            .andExpect(jsonPath("$.errors[0].code", equalTo(ErrorCode.COUNTRY_SCHEME_NOT_FOUND.code)))
+            .andExpect(
+                jsonPath(
+                    "$.errors[0].description",
+                    equalTo("Country scheme '$UNKNOWN_SCHEME' not found.")
+                )
+            )
+            .andDo(
+                document(
+                    "address/country/get_all/errors/empty_lang",
+                    responseFields(ModelDescription.responseError())
+                )
+            )
+    }
+
+    @Test
+    fun `Getting the country by code with scheme is error (country by scheme not found)`() {
+        initData()
+
+        val url = getUrl(country = UNKNOWN_COUNTRY)
+        mockMvc.perform(
+            get(url)
+                .param("lang", LANGUAGE)
+                .param("scheme", SCHEME)
+        )
+            .andExpect(status().isNotFound)
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.errors.length()", equalTo(1)))
+            .andExpect(jsonPath("$.errors[0].code", equalTo(COUNTRY_NOT_FOUND.code)))
+            .andExpect(
+                jsonPath(
+                    "$.errors[0].description",
+                    equalTo("The country by code '$UNKNOWN_COUNTRY' and scheme '$SCHEME' not found.")
+                )
+            )
+            .andDo(
+                document(
+                    "address/country/get_all/errors/empty_lang",
+                    responseFields(ModelDescription.responseError())
+                )
+            )
+    }
+
+    @Test
+    fun `Getting the country by code with scheme is error (country description by lang not found)`() {
+        initData()
+
+        val url = getUrl(country = COUNTRY_WITHOUT_DESCRIPTION)
+        mockMvc.perform(
+            get(url)
+                .param("lang", LANGUAGE)
+                .param("scheme", SCHEME)
+        )
+            .andExpect(status().isNotFound)
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.errors.length()", equalTo(1)))
+            .andExpect(jsonPath("$.errors[0].code", equalTo(COUNTRY_DESCRIPTION_NOT_FOUND.code)))
+            .andExpect(
+                jsonPath(
+                    "$.errors[0].description",
+                    equalTo("The country '$COUNTRY_WITHOUT_DESCRIPTION' description in language '$LANGUAGE' not found.")
+                )
+            )
+            .andDo(
+                document(
+                    "address/country/get_all/errors/empty_lang",
+                    responseFields(ModelDescription.responseError())
+                )
+            )
+    }
+
     private fun initData() {
         initLanguages()
 
@@ -476,6 +681,9 @@ class AddressCountryControllerIT : AbstractRepositoryTest() {
 
         val sqlCountries = loadSql("sql/address/countries_init_data.sql")
         executeSQLScript(sqlCountries)
+
+        val sqlCountrySchemes = loadSql("sql/scheme/country_schemes_init_data.sql")
+        executeSQLScript(sqlCountrySchemes)
     }
 
     private fun initLanguages() {

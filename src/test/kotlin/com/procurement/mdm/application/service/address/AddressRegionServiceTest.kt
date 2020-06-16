@@ -3,15 +3,20 @@ package com.procurement.mdm.application.service.address
 import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
+import com.procurement.mdm.application.exception.RegionDescriptionNotFoundException
 import com.procurement.mdm.application.exception.RegionNotFoundException
+import com.procurement.mdm.application.exception.RegionNotLinkedToCountryException
+import com.procurement.mdm.application.exception.RegionSchemeNotFoundException
 import com.procurement.mdm.domain.entity.RegionEntity
 import com.procurement.mdm.domain.exception.LanguageUnknownException
 import com.procurement.mdm.domain.model.code.CountryCode
 import com.procurement.mdm.domain.model.code.LanguageCode
 import com.procurement.mdm.domain.model.code.RegionCode
 import com.procurement.mdm.domain.model.identifier.RegionIdentifier
+import com.procurement.mdm.domain.model.scheme.RegionScheme
 import com.procurement.mdm.domain.repository.AdvancedLanguageRepository
 import com.procurement.mdm.domain.repository.address.AddressRegionRepository
+import com.procurement.mdm.domain.repository.scheme.RegionSchemeRepository
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -39,6 +44,7 @@ class AddressRegionServiceTest {
         private val UNKNOWN_LANGUAGE_CODE = LanguageCode(UNKNOWN_LANGUAGE)
 
         private const val SCHEME = "CUATM"
+        private val REGION_SCHEME = RegionScheme(SCHEME)
         private const val DESCRIPTION = "Basarabeasca RO"
         private const val URI = "http://statistica.md"
 
@@ -58,6 +64,7 @@ class AddressRegionServiceTest {
     }
 
     private lateinit var addressRegionRepository: AddressRegionRepository
+    private lateinit var regionSchemeRepository: RegionSchemeRepository
     private lateinit var advancedLanguageRepository: AdvancedLanguageRepository
     private lateinit var service: AddressRegionService
 
@@ -65,8 +72,13 @@ class AddressRegionServiceTest {
     fun init() {
         addressRegionRepository = mock()
         advancedLanguageRepository = mock()
+        regionSchemeRepository = mock()
 
-        service = AddressRegionServiceImpl(addressRegionRepository, advancedLanguageRepository)
+        service = AddressRegionServiceImpl(
+            addressRegionRepository = addressRegionRepository,
+            regionSchemeRepository = regionSchemeRepository,
+            advancedLanguageRepository = advancedLanguageRepository
+        )
     }
 
     @Test
@@ -81,7 +93,7 @@ class AddressRegionServiceTest {
             )
         ).thenReturn(REGION_ENTITY_FIRST)
 
-        val result = service.getBy(region = REGION, country = COUNTRY, language = LANGUAGE)
+        val result = service.getBy(region = REGION, country = COUNTRY, language = LANGUAGE, scheme = null)
 
         assertEquals(REGION_IDENTIFIER_FIRST, result)
     }
@@ -92,7 +104,7 @@ class AddressRegionServiceTest {
             .thenReturn(false)
 
         val exception = assertThrows<LanguageUnknownException> {
-            service.getBy(region = REGION, country = COUNTRY, language = UNKNOWN_LANGUAGE)
+            service.getBy(region = REGION, country = COUNTRY, language = UNKNOWN_LANGUAGE, scheme = null)
         }
 
         assertEquals("The unknown code of a language '$UNKNOWN_LANGUAGE'.", exception.description)
@@ -112,7 +124,7 @@ class AddressRegionServiceTest {
         ).thenReturn(null)
 
         val exception = assertThrows<RegionNotFoundException> {
-            service.getBy(region = UNKNOWN_REGION, country = COUNTRY, language = LANGUAGE)
+            service.getBy(region = UNKNOWN_REGION, country = COUNTRY, language = LANGUAGE, scheme = null)
         }
 
         assertEquals(
@@ -135,7 +147,7 @@ class AddressRegionServiceTest {
         ).thenReturn(null)
 
         val exception = assertThrows<RegionNotFoundException> {
-            service.getBy(region = REGION, country = UNKNOWN_COUNTRY, language = LANGUAGE)
+            service.getBy(region = REGION, country = UNKNOWN_COUNTRY, language = LANGUAGE, scheme = null)
         }
 
         assertEquals(
@@ -158,11 +170,152 @@ class AddressRegionServiceTest {
         ).thenReturn(null)
 
         val exception = assertThrows<RegionNotFoundException> {
-            service.getBy(region = REGION, country = COUNTRY, language = UNKNOWN_LANGUAGE)
+            service.getBy(region = REGION, country = COUNTRY, language = UNKNOWN_LANGUAGE, scheme = null)
         }
 
         assertEquals(
             "The region by code '$REGION', country '$COUNTRY', language '$UNKNOWN_LANGUAGE' not found.",
+            exception.description
+        )
+    }
+
+    @Test
+    fun `Getting the region by code with scheme is successful`() {
+        whenever(advancedLanguageRepository.exists(eq(LANGUAGE_CODE)))
+            .thenReturn(true)
+        whenever(regionSchemeRepository.existsBy(eq(REGION_SCHEME)))
+            .thenReturn(true)
+        whenever(regionSchemeRepository.existsBy(region = eq(REGION_CODE), scheme = eq(REGION_SCHEME)))
+            .thenReturn(true)
+        whenever(
+            regionSchemeRepository.existsBy(
+                region = eq(REGION_CODE),
+                scheme = eq(REGION_SCHEME),
+                country = eq(COUNTRY_CODE)
+            )
+        ).thenReturn(true)
+
+        whenever(
+            regionSchemeRepository.findBy(
+                region = eq(REGION_CODE),
+                scheme = eq(REGION_SCHEME),
+                country = eq(COUNTRY_CODE),
+                language = eq(LANGUAGE_CODE)
+            )
+        ).thenReturn(REGION_ENTITY_FIRST)
+
+        val result = service.getBy(region = REGION, country = COUNTRY, language = LANGUAGE, scheme = SCHEME)
+
+        assertEquals(REGION_IDENTIFIER_FIRST, result)
+    }
+
+    @Test
+    fun `Getting the region by code with scheme is error (unknown language)`() {
+        whenever(advancedLanguageRepository.exists(eq(UNKNOWN_LANGUAGE_CODE)))
+            .thenReturn(false)
+
+        val exception = assertThrows<LanguageUnknownException> {
+            service.getBy(region = REGION, country = COUNTRY, language = UNKNOWN_LANGUAGE, scheme = SCHEME)
+        }
+
+        assertEquals("The unknown code of a language '$UNKNOWN_LANGUAGE'.", exception.description)
+    }
+
+    @Test
+    fun `Getting the region by code with scheme is error (unknown scheme)`() {
+        whenever(advancedLanguageRepository.exists(eq(LANGUAGE_CODE)))
+            .thenReturn(true)
+        whenever(regionSchemeRepository.existsBy(eq(REGION_SCHEME)))
+            .thenReturn(false)
+
+        val exception = assertThrows<RegionSchemeNotFoundException> {
+            service.getBy(region = REGION, country = COUNTRY, language = LANGUAGE, scheme = SCHEME)
+        }
+
+        assertEquals("Region scheme '$SCHEME' not found.", exception.description)
+    }
+
+    @Test
+    fun `Getting the region by code with scheme is error (unknown region code)`() {
+        whenever(advancedLanguageRepository.exists(eq(LANGUAGE_CODE)))
+            .thenReturn(true)
+
+        whenever(regionSchemeRepository.existsBy(eq(REGION_SCHEME)))
+            .thenReturn(true)
+
+        whenever(regionSchemeRepository.existsBy(region = eq(REGION_CODE), scheme = eq(REGION_SCHEME)))
+            .thenReturn(false)
+
+        val exception = assertThrows<RegionNotFoundException> {
+            service.getBy(region = REGION, country = COUNTRY, language = LANGUAGE, scheme = SCHEME)
+        }
+
+        assertEquals("The region by code '$REGION' and scheme '$SCHEME' not found.", exception.description)
+    }
+
+    @Test
+    fun `Getting the region by code with scheme is error (wrong country code)`() {
+        whenever(advancedLanguageRepository.exists(eq(LANGUAGE_CODE)))
+            .thenReturn(true)
+
+        whenever(regionSchemeRepository.existsBy(eq(REGION_SCHEME)))
+            .thenReturn(true)
+
+        whenever(regionSchemeRepository.existsBy(region = eq(REGION_CODE), scheme = eq(REGION_SCHEME)))
+            .thenReturn(true)
+
+        whenever(
+            regionSchemeRepository.existsBy(
+                region = eq(REGION_CODE),
+                scheme = eq(REGION_SCHEME),
+                country = eq(COUNTRY_CODE)
+            )
+        ).thenReturn(false)
+
+        val exception = assertThrows<RegionNotLinkedToCountryException> {
+            service.getBy(region = REGION, country = COUNTRY, language = LANGUAGE, scheme = SCHEME)
+        }
+
+        assertEquals(
+            "The region by code '$REGION' and scheme '$SCHEME' is not linked to country '$COUNTRY'.",
+            exception.description
+        )
+    }
+
+    @Test
+    fun `Getting the region by code with scheme is error (no description found)`() {
+        whenever(advancedLanguageRepository.exists(eq(LANGUAGE_CODE)))
+            .thenReturn(true)
+
+        whenever(regionSchemeRepository.existsBy(eq(REGION_SCHEME)))
+            .thenReturn(true)
+
+        whenever(regionSchemeRepository.existsBy(region = eq(REGION_CODE), scheme = eq(REGION_SCHEME)))
+            .thenReturn(true)
+
+        whenever(
+            regionSchemeRepository.existsBy(
+                region = eq(REGION_CODE),
+                scheme = eq(REGION_SCHEME),
+                country = eq(COUNTRY_CODE)
+            )
+        ).thenReturn(true)
+
+        whenever(
+            regionSchemeRepository.findBy(
+                region = eq(REGION_CODE),
+                scheme = eq(REGION_SCHEME),
+                country = eq(COUNTRY_CODE),
+                language = eq(LANGUAGE_CODE)
+            )
+        ).thenReturn(null)
+
+        val exception = assertThrows<RegionDescriptionNotFoundException> {
+            service.getBy(region = REGION, country = COUNTRY, language = LANGUAGE, scheme = SCHEME)
+        }
+
+        assertEquals(
+            "The region '$REGION' description in language '$LANGUAGE' not found.",
             exception.description
         )
     }
