@@ -38,6 +38,7 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
     COUNTRY_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.COUNTRY, id = "02"),
     COUNTRY_SCHEME_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.COUNTRY, id = "03"),
     INVALID_COUNTRY_SCHEME(status = HttpStatus.BAD_REQUEST, group = Groups.COUNTRY, id = "04"),
+    COUNTRY_DESCRIPTION_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.COUNTRY, id = "05"),
 
 
     /**

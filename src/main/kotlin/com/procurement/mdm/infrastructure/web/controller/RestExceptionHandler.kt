@@ -1,6 +1,7 @@
 package com.procurement.mdm.infrastructure.web.controller
 
 import com.procurement.mdm.application.exception.ApplicationException
+import com.procurement.mdm.application.exception.CountryDescriptionNotFoundException
 import com.procurement.mdm.application.exception.CountryNotFoundException
 import com.procurement.mdm.application.exception.CountrySchemeNotFoundException
 import com.procurement.mdm.application.exception.LocalityNotFoundException
@@ -28,6 +29,7 @@ import com.procurement.mdm.infrastructure.exception.NoHandlerUrlException
 import com.procurement.mdm.infrastructure.exception.RequestPayloadMissingException
 import com.procurement.mdm.infrastructure.web.dto.ApiError
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_DESCRIPTION_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_REQUEST_PARAMETER_MISSING
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_REQUEST_PARAMETER_UNKNOWN
@@ -131,6 +133,9 @@ class RestExceptionHandler : ResponseEntityExceptionHandler() {
 
             is LocalityNotLinkedToRegionException ->
                 exception.handler(errorCode = LOCALITY_NOT_LINKED_TO_REGION)
+
+            is CountryDescriptionNotFoundException ->
+                exception.handler(errorCode = COUNTRY_DESCRIPTION_NOT_FOUND)
         }
 
         return ResponseEntity.status(apiError.status).body(apiError)

@@ -21,6 +21,9 @@ class CountryNotFoundException : ApplicationException {
         super("The country by code '$country' and scheme '$scheme' not found.")
 }
 
+class CountryDescriptionNotFoundException(country: CountryCode, language: LanguageCode) :
+    ApplicationException("The country '$country' description in language '$language' bot found.")
+
 class RegionNotFoundException : ApplicationException {
     constructor(region: RegionCode, country: CountryCode, language: LanguageCode) :
         super("The region by code '$region', country '$country', language '$language' not found.")
@@ -66,10 +69,10 @@ class OrganizationSchemeNotFoundException(country: String) :
 class OrganizationScaleNotFoundException(country: String) :
     ApplicationException("The organization scale for country '$country' not found.")
 
-class CountrySchemeNotFoundException (scheme: CountryScheme) : ApplicationException("Country scheme '$scheme' not found.")
+class CountrySchemeNotFoundException(scheme: CountryScheme) : ApplicationException("Country scheme '$scheme' not found.")
 
-class RegionSchemeNotFoundException (scheme: RegionScheme) : ApplicationException("Region scheme '$scheme' not found.")
+class RegionSchemeNotFoundException(scheme: RegionScheme) : ApplicationException("Region scheme '$scheme' not found.")
 
-class LocalitySchemeNotFoundException (scheme: LocalityScheme) : ApplicationException("Locality scheme '$scheme' not found.")
+class LocalitySchemeNotFoundException(scheme: LocalityScheme) : ApplicationException("Locality scheme '$scheme' not found.")
 
 
