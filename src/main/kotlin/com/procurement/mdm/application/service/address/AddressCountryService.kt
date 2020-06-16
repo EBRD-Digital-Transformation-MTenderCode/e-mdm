@@ -1,5 +1,6 @@
 package com.procurement.mdm.application.service.address
 
+import com.procurement.mdm.application.exception.CountryDescriptionNotFoundException
 import com.procurement.mdm.application.exception.CountryNotFoundException
 import com.procurement.mdm.domain.model.code.CountryCode
 import com.procurement.mdm.domain.model.code.LanguageCode
@@ -77,7 +78,7 @@ class AddressCountryServiceImpl(
         val countryEntity = countrySchemeRepository.findBy(
             country = country, language = language, scheme = countryScheme
         )
-            ?: throw CountryNotFoundException(country = country, language = language)
+            ?: throw CountryDescriptionNotFoundException(country = country, language = language)
 
         return CountryIdentifier(
             scheme = countryEntity.scheme,
