@@ -175,6 +175,8 @@ class AddressCountryServiceTest {
 
     @Test
     fun `Getting the country by code with scheme is successful`() {
+        whenever(advancedLanguageRepository.exists(eq(LANGUAGE_CODE)))
+            .thenReturn(true)
         whenever(countrySchemeRepository.existsBy(eq(COUNTRY_SCHEME)))
             .thenReturn(true)
         whenever(countrySchemeRepository.existsBy(scheme = eq(COUNTRY_SCHEME),country = eq(COUNTRY_CODE)))
@@ -192,7 +194,21 @@ class AddressCountryServiceTest {
     }
 
     @Test
+    fun `Getting the country by code with scheme is error (unknown language)`() {
+        whenever(advancedLanguageRepository.exists(eq(LANGUAGE_CODE)))
+            .thenReturn(false)
+
+        val exception = assertThrows<LanguageUnknownException> {
+            service.getBy(country = COUNTRY, language = LANGUAGE, scheme = SCHEME)
+        }
+
+        assertEquals("The unknown code of a language '$LANGUAGE'.", exception.description)
+    }
+
+    @Test
     fun `Getting the country by code with scheme is error (unknown scheme)`() {
+        whenever(advancedLanguageRepository.exists(eq(LANGUAGE_CODE)))
+            .thenReturn(true)
         whenever(countrySchemeRepository.existsBy(eq(COUNTRY_SCHEME)))
             .thenReturn(false)
 
@@ -205,6 +221,8 @@ class AddressCountryServiceTest {
 
     @Test
     fun `Getting the country by code with scheme is error (unknown country code)`() {
+        whenever(advancedLanguageRepository.exists(eq(LANGUAGE_CODE)))
+            .thenReturn(true)
         whenever(countrySchemeRepository.existsBy(eq(COUNTRY_SCHEME)))
             .thenReturn(true)
         whenever(countrySchemeRepository.existsBy(scheme = eq(COUNTRY_SCHEME),country = eq(COUNTRY_CODE)))
@@ -219,6 +237,8 @@ class AddressCountryServiceTest {
 
     @Test
     fun `Getting the country by code with scheme is error (description by language not found)`() {
+        whenever(advancedLanguageRepository.exists(eq(LANGUAGE_CODE)))
+            .thenReturn(true)
         whenever(countrySchemeRepository.existsBy(eq(COUNTRY_SCHEME)))
             .thenReturn(true)
         whenever(countrySchemeRepository.existsBy(scheme = eq(COUNTRY_SCHEME),country = eq(COUNTRY_CODE)))

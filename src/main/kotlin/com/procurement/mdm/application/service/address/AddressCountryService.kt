@@ -45,7 +45,9 @@ class AddressCountryServiceImpl(
 
     override fun getBy(country: String, language: String, scheme: String?): CountryIdentifier {
         val countryCode = CountryCode(country)
-        val languageCode = LanguageCode(language)
+        val languageCode = LanguageCode(language).apply {
+            validation(advancedLanguageRepository)
+        }
 
         return if (scheme == null)
             getByDefaultScheme(countryCode, languageCode)
@@ -54,10 +56,6 @@ class AddressCountryServiceImpl(
     }
 
     private fun getByDefaultScheme(country: CountryCode, language: LanguageCode): CountryIdentifier {
-        language.apply {
-            validation(advancedLanguageRepository)
-        }
-
         val countryEntity = addressCountryRepository.findBy(country = country, language = language)
             ?: throw CountryNotFoundException(country = country, language = language)
 
