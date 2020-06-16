@@ -3,6 +3,7 @@ package com.procurement.mdm.application.service.address
 import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
+import com.procurement.mdm.application.exception.CountryDescriptionNotFoundException
 import com.procurement.mdm.application.exception.CountryNotFoundException
 import com.procurement.mdm.application.exception.CountrySchemeNotFoundException
 import com.procurement.mdm.domain.entity.CountryEntity
@@ -250,10 +251,10 @@ class AddressCountryServiceTest {
         )
             .thenReturn(null)
 
-        val exception = assertThrows<CountryNotFoundException> {
+        val exception = assertThrows<CountryDescriptionNotFoundException> {
             service.getBy(country = COUNTRY, language = LANGUAGE, scheme = SCHEME)
         }
 
-        assertEquals("The country by code '$COUNTRY' and language '$LANGUAGE' not found.", exception.description)
+        assertEquals("The country '$COUNTRY' description in language '$LANGUAGE' bot found.", exception.description)
     }
 }
