@@ -35,7 +35,6 @@ class RegionNotFoundException : ApplicationException {
 class RegionDescriptionNotFoundException(region: RegionCode, language: LanguageCode) :
     ApplicationException("The region '$region' description in language '$language' not found.")
 
-
 class RegionNotLinkedToCountryException : ApplicationException {
     constructor(region: RegionCode, scheme: RegionScheme, country: CountryCode) :
         super("The region by code '$region' and scheme '$scheme' is not linked to country '$country'.")
@@ -63,6 +62,9 @@ class LocalityNotFoundException : ApplicationException {
 
 class LocalityNotLinkedToRegionException(locality: LocalityCode, scheme: LocalityScheme, region: RegionCode) :
     ApplicationException("The locality by code '$locality' and scheme '$scheme' is not linked to region '$region'.")
+
+class LocalityDescriptionNotFoundException(locality: LocalityCode, language: LanguageCode) :
+    ApplicationException("The locality '$locality' description in language '$language' not found.")
 
 class OrganizationSchemeNotFoundException(country: String) :
     ApplicationException("The organization schemes for country '$country' not found.")

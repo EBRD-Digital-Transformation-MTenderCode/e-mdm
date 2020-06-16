@@ -4,6 +4,7 @@ import com.procurement.mdm.application.exception.ApplicationException
 import com.procurement.mdm.application.exception.CountryDescriptionNotFoundException
 import com.procurement.mdm.application.exception.CountryNotFoundException
 import com.procurement.mdm.application.exception.CountrySchemeNotFoundException
+import com.procurement.mdm.application.exception.LocalityDescriptionNotFoundException
 import com.procurement.mdm.application.exception.LocalityNotFoundException
 import com.procurement.mdm.application.exception.LocalityNotLinkedToRegionException
 import com.procurement.mdm.application.exception.LocalitySchemeNotFoundException
@@ -46,6 +47,7 @@ import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_REGION_SCHEM
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_URL
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LANGUAGE_REQUEST_PARAMETER_MISSING
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LANGUAGE_REQUEST_PARAMETER_UNKNOWN
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LOCALITY_DESCRIPTION_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LOCALITY_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LOCALITY_NOT_LINKED_TO_REGION
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LOCALITY_SCHEME_NOT_FOUND
@@ -141,6 +143,9 @@ class RestExceptionHandler : ResponseEntityExceptionHandler() {
 
             is RegionDescriptionNotFoundException ->
                 exception.handler(errorCode = REGION_DESCRIPTION_NOT_FOUND)
+
+            is LocalityDescriptionNotFoundException ->
+                exception.handler(errorCode = LOCALITY_DESCRIPTION_NOT_FOUND)
         }
 
         return ResponseEntity.status(apiError.status).body(apiError)

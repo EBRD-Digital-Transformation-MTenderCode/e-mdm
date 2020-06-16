@@ -58,7 +58,8 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
     LOCALITY_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.LOCALITY, id = "02"),
     LOCALITY_SCHEME_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.LOCALITY, id = "03"),
     INVALID_LOCALITY_SCHEME(status = HttpStatus.BAD_REQUEST, group = Groups.LOCALITY, id = "04"),
-    LOCALITY_NOT_LINKED_TO_REGION(status = HttpStatus.NOT_FOUND, group = Groups.LOCALITY, id = "05"),
+    LOCALITY_DESCRIPTION_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.LOCALITY, id = "05"),
+    LOCALITY_NOT_LINKED_TO_REGION(status = HttpStatus.NOT_FOUND, group = Groups.LOCALITY, id = "06"),
 
     /**
      * Organization scheme
