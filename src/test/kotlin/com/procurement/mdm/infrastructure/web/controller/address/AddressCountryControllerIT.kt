@@ -11,6 +11,7 @@ import com.procurement.mdm.infrastructure.repository.loadSql
 import com.procurement.mdm.infrastructure.web.controller.RestExceptionHandler
 import com.procurement.mdm.infrastructure.web.controller.documentation.ModelDescription
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_DESCRIPTION_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_COUNTRY_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_LANGUAGE_CODE
@@ -657,11 +658,11 @@ class AddressCountryControllerIT : AbstractRepositoryTest() {
             .andExpect(status().isNotFound)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
             .andExpect(jsonPath("$.errors.length()", equalTo(1)))
-            .andExpect(jsonPath("$.errors[0].code", equalTo(COUNTRY_NOT_FOUND.code)))
+            .andExpect(jsonPath("$.errors[0].code", equalTo(COUNTRY_DESCRIPTION_NOT_FOUND.code)))
             .andExpect(
                 jsonPath(
                     "$.errors[0].description",
-                    equalTo("The country by code '$COUNTRY_WITHOUT_DESCRIPTION' and language '$LANGUAGE' not found.")
+                    equalTo("The country '$COUNTRY_WITHOUT_DESCRIPTION' description in language '$LANGUAGE' not found.")
                 )
             )
             .andDo(

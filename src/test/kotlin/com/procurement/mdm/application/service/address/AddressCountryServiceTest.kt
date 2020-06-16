@@ -3,6 +3,7 @@ package com.procurement.mdm.application.service.address
 import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
+import com.procurement.mdm.application.exception.CountryDescriptionNotFoundException
 import com.procurement.mdm.application.exception.CountryNotFoundException
 import com.procurement.mdm.application.exception.CountrySchemeNotFoundException
 import com.procurement.mdm.domain.entity.CountryEntity
@@ -175,6 +176,8 @@ class AddressCountryServiceTest {
 
     @Test
     fun `Getting the country by code with scheme is successful`() {
+        whenever(advancedLanguageRepository.exists(eq(LANGUAGE_CODE)))
+            .thenReturn(true)
         whenever(countrySchemeRepository.existsBy(eq(COUNTRY_SCHEME)))
             .thenReturn(true)
         whenever(countrySchemeRepository.existsBy(scheme = eq(COUNTRY_SCHEME),country = eq(COUNTRY_CODE)))
@@ -192,7 +195,21 @@ class AddressCountryServiceTest {
     }
 
     @Test
+    fun `Getting the country by code with scheme is error (unknown language)`() {
+        whenever(advancedLanguageRepository.exists(eq(LANGUAGE_CODE)))
+            .thenReturn(false)
+
+        val exception = assertThrows<LanguageUnknownException> {
+            service.getBy(country = COUNTRY, language = LANGUAGE, scheme = SCHEME)
+        }
+
+        assertEquals("The unknown code of a language '$LANGUAGE'.", exception.description)
+    }
+
+    @Test
     fun `Getting the country by code with scheme is error (unknown scheme)`() {
+        whenever(advancedLanguageRepository.exists(eq(LANGUAGE_CODE)))
+            .thenReturn(true)
         whenever(countrySchemeRepository.existsBy(eq(COUNTRY_SCHEME)))
             .thenReturn(false)
 
@@ -205,6 +222,8 @@ class AddressCountryServiceTest {
 
     @Test
     fun `Getting the country by code with scheme is error (unknown country code)`() {
+        whenever(advancedLanguageRepository.exists(eq(LANGUAGE_CODE)))
+            .thenReturn(true)
         whenever(countrySchemeRepository.existsBy(eq(COUNTRY_SCHEME)))
             .thenReturn(true)
         whenever(countrySchemeRepository.existsBy(scheme = eq(COUNTRY_SCHEME),country = eq(COUNTRY_CODE)))
@@ -219,6 +238,8 @@ class AddressCountryServiceTest {
 
     @Test
     fun `Getting the country by code with scheme is error (description by language not found)`() {
+        whenever(advancedLanguageRepository.exists(eq(LANGUAGE_CODE)))
+            .thenReturn(true)
         whenever(countrySchemeRepository.existsBy(eq(COUNTRY_SCHEME)))
             .thenReturn(true)
         whenever(countrySchemeRepository.existsBy(scheme = eq(COUNTRY_SCHEME),country = eq(COUNTRY_CODE)))
@@ -230,10 +251,10 @@ class AddressCountryServiceTest {
         )
             .thenReturn(null)
 
-        val exception = assertThrows<CountryNotFoundException> {
+        val exception = assertThrows<CountryDescriptionNotFoundException> {
             service.getBy(country = COUNTRY, language = LANGUAGE, scheme = SCHEME)
         }
 
-        assertEquals("The country by code '$COUNTRY' and language '$LANGUAGE' not found.", exception.description)
+        assertEquals("The country '$COUNTRY' description in language '$LANGUAGE' not found.", exception.description)
     }
 }

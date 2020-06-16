@@ -1,13 +1,16 @@
 package com.procurement.mdm.infrastructure.web.controller
 
 import com.procurement.mdm.application.exception.ApplicationException
+import com.procurement.mdm.application.exception.CountryDescriptionNotFoundException
 import com.procurement.mdm.application.exception.CountryNotFoundException
 import com.procurement.mdm.application.exception.CountrySchemeNotFoundException
+import com.procurement.mdm.application.exception.LocalityDescriptionNotFoundException
 import com.procurement.mdm.application.exception.LocalityNotFoundException
 import com.procurement.mdm.application.exception.LocalityNotLinkedToRegionException
 import com.procurement.mdm.application.exception.LocalitySchemeNotFoundException
 import com.procurement.mdm.application.exception.OrganizationScaleNotFoundException
 import com.procurement.mdm.application.exception.OrganizationSchemeNotFoundException
+import com.procurement.mdm.application.exception.RegionDescriptionNotFoundException
 import com.procurement.mdm.application.exception.RegionNotFoundException
 import com.procurement.mdm.application.exception.RegionNotLinkedToCountryException
 import com.procurement.mdm.application.exception.RegionSchemeNotFoundException
@@ -32,6 +35,7 @@ import com.procurement.mdm.infrastructure.exception.PmdRequestParameterMissingEx
 import com.procurement.mdm.infrastructure.exception.RequestPayloadMissingException
 import com.procurement.mdm.infrastructure.web.dto.ApiError
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_DESCRIPTION_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_REQUEST_PARAMETER_MISSING
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_REQUEST_PARAMETER_UNKNOWN
@@ -49,6 +53,7 @@ import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_REGION_SCHEM
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_URL
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LANGUAGE_REQUEST_PARAMETER_MISSING
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LANGUAGE_REQUEST_PARAMETER_UNKNOWN
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LOCALITY_DESCRIPTION_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LOCALITY_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LOCALITY_NOT_LINKED_TO_REGION
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LOCALITY_SCHEME_NOT_FOUND
@@ -56,6 +61,7 @@ import com.procurement.mdm.infrastructure.web.dto.ErrorCode.ORGANIZATION_SCALE_N
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.ORGANIZATION_SCHEME_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.PHASE_REQUEST_PARAMETER_MISSING
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.PMD_REQUEST_PARAMETER_MISSING
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REGION_DESCRIPTION_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REGION_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REGION_NOT_LINKED_TO_COUNTRY
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REGION_SCHEME_NOT_FOUND
@@ -145,6 +151,15 @@ class RestExceptionHandler : ResponseEntityExceptionHandler() {
 
             is LocalityNotLinkedToRegionException ->
                 exception.handler(errorCode = LOCALITY_NOT_LINKED_TO_REGION)
+
+            is CountryDescriptionNotFoundException ->
+                exception.handler(errorCode = COUNTRY_DESCRIPTION_NOT_FOUND)
+
+            is RegionDescriptionNotFoundException ->
+                exception.handler(errorCode = REGION_DESCRIPTION_NOT_FOUND)
+
+            is LocalityDescriptionNotFoundException ->
+                exception.handler(errorCode = LOCALITY_DESCRIPTION_NOT_FOUND)
         }
 
         return ResponseEntity.status(apiError.status).body(apiError)

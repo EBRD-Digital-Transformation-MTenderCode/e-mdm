@@ -40,6 +40,7 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
     COUNTRY_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.COUNTRY, id = "02"),
     COUNTRY_SCHEME_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.COUNTRY, id = "03"),
     INVALID_COUNTRY_SCHEME(status = HttpStatus.BAD_REQUEST, group = Groups.COUNTRY, id = "04"),
+    COUNTRY_DESCRIPTION_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.COUNTRY, id = "05"),
 
 
     /**
@@ -49,7 +50,8 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
     REGION_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.REGION, id = "02"),
     REGION_SCHEME_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.REGION, id = "03"),
     INVALID_REGION_SCHEME(status = HttpStatus.BAD_REQUEST, group = Groups.REGION, id = "04"),
-    REGION_NOT_LINKED_TO_COUNTRY(status = HttpStatus.NOT_FOUND, group = Groups.REGION, id = "05"),
+    REGION_DESCRIPTION_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.REGION, id = "05"),
+    REGION_NOT_LINKED_TO_COUNTRY(status = HttpStatus.NOT_FOUND, group = Groups.REGION, id = "06"),
 
     /**
      * Locality.
@@ -58,7 +60,8 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
     LOCALITY_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.LOCALITY, id = "02"),
     LOCALITY_SCHEME_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.LOCALITY, id = "03"),
     INVALID_LOCALITY_SCHEME(status = HttpStatus.BAD_REQUEST, group = Groups.LOCALITY, id = "04"),
-    LOCALITY_NOT_LINKED_TO_REGION(status = HttpStatus.NOT_FOUND, group = Groups.LOCALITY, id = "05"),
+    LOCALITY_DESCRIPTION_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.LOCALITY, id = "05"),
+    LOCALITY_NOT_LINKED_TO_REGION(status = HttpStatus.NOT_FOUND, group = Groups.LOCALITY, id = "06"),
 
     /**
      * Organization scheme

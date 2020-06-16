@@ -1,5 +1,6 @@
 package com.procurement.mdm.application.service.address
 
+import com.procurement.mdm.application.exception.RegionDescriptionNotFoundException
 import com.procurement.mdm.application.exception.RegionNotFoundException
 import com.procurement.mdm.application.exception.RegionNotLinkedToCountryException
 import com.procurement.mdm.domain.model.code.CountryCode
@@ -26,7 +27,9 @@ class AddressRegionServiceImpl(
     override fun getBy(region: String, country: String, language: String, scheme: String?): RegionIdentifier {
         val countryCode = CountryCode(country)
         val regionCode = RegionCode(region)
-        val languageCode = LanguageCode(language)
+        val languageCode = LanguageCode(language).apply {
+            validation(advancedLanguageRepository)
+        }
 
         return if (scheme == null)
             getByDefaultScheme(countryCode, regionCode, languageCode)
@@ -37,10 +40,6 @@ class AddressRegionServiceImpl(
     private fun getByDefaultScheme(
         country: CountryCode, region: RegionCode, language: LanguageCode
     ): RegionIdentifier {
-        language.apply {
-            validation(advancedLanguageRepository)
-        }
-
         val regionEntity = addressRegionRepository.findBy(
             region = region,
             country = country,
@@ -68,9 +67,7 @@ class AddressRegionServiceImpl(
         val regionEntity = regionSchemeRepository.findBy(
             region = region, scheme = regionScheme, language = language, country = country
         )
-            ?: throw RegionNotFoundException(
-                region = region, scheme = regionScheme, country = country, language = language
-            )
+            ?: throw RegionDescriptionNotFoundException(region = region, language = language)
 
         return RegionIdentifier(
             scheme = regionEntity.scheme,

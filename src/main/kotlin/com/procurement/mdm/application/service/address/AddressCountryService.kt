@@ -1,5 +1,6 @@
 package com.procurement.mdm.application.service.address
 
+import com.procurement.mdm.application.exception.CountryDescriptionNotFoundException
 import com.procurement.mdm.application.exception.CountryNotFoundException
 import com.procurement.mdm.domain.model.code.CountryCode
 import com.procurement.mdm.domain.model.code.LanguageCode
@@ -45,7 +46,9 @@ class AddressCountryServiceImpl(
 
     override fun getBy(country: String, language: String, scheme: String?): CountryIdentifier {
         val countryCode = CountryCode(country)
-        val languageCode = LanguageCode(language)
+        val languageCode = LanguageCode(language).apply {
+            validation(advancedLanguageRepository)
+        }
 
         return if (scheme == null)
             getByDefaultScheme(countryCode, languageCode)
@@ -54,10 +57,6 @@ class AddressCountryServiceImpl(
     }
 
     private fun getByDefaultScheme(country: CountryCode, language: LanguageCode): CountryIdentifier {
-        language.apply {
-            validation(advancedLanguageRepository)
-        }
-
         val countryEntity = addressCountryRepository.findBy(country = country, language = language)
             ?: throw CountryNotFoundException(country = country, language = language)
 
@@ -79,7 +78,7 @@ class AddressCountryServiceImpl(
         val countryEntity = countrySchemeRepository.findBy(
             country = country, language = language, scheme = countryScheme
         )
-            ?: throw CountryNotFoundException(country = country, language = language)
+            ?: throw CountryDescriptionNotFoundException(country = country, language = language)
 
         return CountryIdentifier(
             scheme = countryEntity.scheme,

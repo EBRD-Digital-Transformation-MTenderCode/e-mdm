@@ -21,16 +21,19 @@ class CountryNotFoundException : ApplicationException {
         super("The country by code '$country' and scheme '$scheme' not found.")
 }
 
+class CountryDescriptionNotFoundException(country: CountryCode, language: LanguageCode) :
+    ApplicationException("The country '$country' description in language '$language' not found.")
+
 class RegionNotFoundException : ApplicationException {
     constructor(region: RegionCode, country: CountryCode, language: LanguageCode) :
         super("The region by code '$region', country '$country', language '$language' not found.")
 
-    constructor(region: RegionCode, scheme: RegionScheme, country: CountryCode, language: LanguageCode) :
-        super("The region by code '$region', scheme '$scheme', country '$country', language '$language' not found.")
-
     constructor(region: RegionCode, scheme: RegionScheme) :
         super("The region by code '$region' and scheme '$scheme' not found.")
 }
+
+class RegionDescriptionNotFoundException(region: RegionCode, language: LanguageCode) :
+    ApplicationException("The region '$region' description in language '$language' not found.")
 
 class RegionNotLinkedToCountryException : ApplicationException {
     constructor(region: RegionCode, scheme: RegionScheme, country: CountryCode) :
@@ -60,16 +63,19 @@ class LocalityNotFoundException : ApplicationException {
 class LocalityNotLinkedToRegionException(locality: LocalityCode, scheme: LocalityScheme, region: RegionCode) :
     ApplicationException("The locality by code '$locality' and scheme '$scheme' is not linked to region '$region'.")
 
+class LocalityDescriptionNotFoundException(locality: LocalityCode, language: LanguageCode) :
+    ApplicationException("The locality '$locality' description in language '$language' not found.")
+
 class OrganizationSchemeNotFoundException(country: String) :
     ApplicationException("The organization schemes for country '$country' not found.")
 
 class OrganizationScaleNotFoundException(country: String) :
     ApplicationException("The organization scale for country '$country' not found.")
 
-class CountrySchemeNotFoundException (scheme: CountryScheme) : ApplicationException("Country scheme '$scheme' not found.")
+class CountrySchemeNotFoundException(scheme: CountryScheme) : ApplicationException("Country scheme '$scheme' not found.")
 
-class RegionSchemeNotFoundException (scheme: RegionScheme) : ApplicationException("Region scheme '$scheme' not found.")
+class RegionSchemeNotFoundException(scheme: RegionScheme) : ApplicationException("Region scheme '$scheme' not found.")
 
-class LocalitySchemeNotFoundException (scheme: LocalityScheme) : ApplicationException("Locality scheme '$scheme' not found.")
+class LocalitySchemeNotFoundException(scheme: LocalityScheme) : ApplicationException("Locality scheme '$scheme' not found.")
 
 

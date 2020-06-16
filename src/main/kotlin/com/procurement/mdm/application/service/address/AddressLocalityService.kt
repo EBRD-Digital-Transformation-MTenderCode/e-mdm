@@ -1,5 +1,6 @@
 package com.procurement.mdm.application.service.address
 
+import com.procurement.mdm.application.exception.LocalityDescriptionNotFoundException
 import com.procurement.mdm.application.exception.LocalityNotFoundException
 import com.procurement.mdm.application.exception.LocalityNotLinkedToRegionException
 import com.procurement.mdm.application.exception.RegionNotLinkedToCountryException
@@ -60,7 +61,9 @@ class AddressLocalityServiceImpl(
         val localityCode = LocalityCode(locality)
         val countryCode = CountryCode(country)
         val regionCode = RegionCode(region)
-        val languageCode = LanguageCode(language)
+        val languageCode = LanguageCode(language).apply {
+            validation(advancedLanguageRepository)
+        }
 
         return if (scheme == null)
             getByDefaultScheme(localityCode, countryCode, regionCode, languageCode)
@@ -71,10 +74,6 @@ class AddressLocalityServiceImpl(
     private fun getByDefaultScheme(
         locality: LocalityCode, country: CountryCode, region: RegionCode, language: LanguageCode
     ): LocalityIdentifier {
-        language.apply {
-            validation(advancedLanguageRepository)
-        }
-
         val localityEntity = addressLocalityRepository.findBy(
             locality = locality, country = country, region = region, language = language
         ) ?: throw LocalityNotFoundException(
@@ -101,9 +100,7 @@ class AddressLocalityServiceImpl(
 
         val localityEntity = localitySchemeRepository.findBy(
             locality = locality, scheme = localityScheme, region = region, language = language
-        ) ?: throw LocalityNotFoundException(
-            locality = locality, scheme = localityScheme, country = country, region = region, language = language
-        )
+        ) ?: throw LocalityDescriptionNotFoundException(locality = locality, language = language)
 
         return LocalityIdentifier(
             scheme = localityEntity.scheme,

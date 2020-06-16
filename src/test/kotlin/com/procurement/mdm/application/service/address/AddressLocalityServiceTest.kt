@@ -3,6 +3,7 @@ package com.procurement.mdm.application.service.address
 import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
+import com.procurement.mdm.application.exception.LocalityDescriptionNotFoundException
 import com.procurement.mdm.application.exception.LocalityNotFoundException
 import com.procurement.mdm.application.exception.LocalityNotLinkedToRegionException
 import com.procurement.mdm.application.exception.LocalitySchemeNotFoundException
@@ -217,6 +218,8 @@ class AddressLocalityServiceTest {
 
     @Test
     fun `Getting the locality by code with scheme is successful`() {
+        whenever(advancedLanguageRepository.exists(eq(LANGUAGE_CODE)))
+            .thenReturn(true)
         whenever(localitySchemeRepository.existsBy(eq(LOCALITY_SCHEME)))
             .thenReturn(true)
         whenever(localitySchemeRepository.existsBy(eq(LOCALITY_SCHEME), eq(LOCALITY_CODE)))
@@ -243,7 +246,26 @@ class AddressLocalityServiceTest {
     }
 
     @Test
+    fun `Getting the locality by code with scheme fails (unknown language)`() {
+        whenever(advancedLanguageRepository.exists(eq(LANGUAGE_CODE)))
+            .thenReturn(false)
+
+        val exception = assertThrows<LanguageUnknownException> {
+            service.getBy(
+                locality = LOCALITY, country = COUNTRY, region = REGION, language = LANGUAGE, scheme = SCHEME
+            )
+        }
+
+        assertEquals(
+            "The unknown code of a language '$LANGUAGE'.",
+            exception.description
+        )
+    }
+
+    @Test
     fun `Getting the locality by code with scheme fails (unknown scheme)`() {
+        whenever(advancedLanguageRepository.exists(eq(LANGUAGE_CODE)))
+            .thenReturn(true)
         whenever(localitySchemeRepository.existsBy(eq(LOCALITY_SCHEME)))
             .thenReturn(false)
 
@@ -261,6 +283,8 @@ class AddressLocalityServiceTest {
 
     @Test
     fun `Getting the locality by code with scheme fails (unknown locality by scheme)`() {
+        whenever(advancedLanguageRepository.exists(eq(LANGUAGE_CODE)))
+            .thenReturn(true)
         whenever(localitySchemeRepository.existsBy(eq(LOCALITY_SCHEME)))
             .thenReturn(true)
         whenever(localitySchemeRepository.existsBy(eq(LOCALITY_SCHEME), eq(LOCALITY_CODE)))
@@ -280,6 +304,8 @@ class AddressLocalityServiceTest {
 
     @Test
     fun `Getting the locality by code with scheme fails (unknown region)`() {
+        whenever(advancedLanguageRepository.exists(eq(LANGUAGE_CODE)))
+            .thenReturn(true)
         whenever(localitySchemeRepository.existsBy(eq(LOCALITY_SCHEME)))
             .thenReturn(true)
         whenever(localitySchemeRepository.existsBy(eq(LOCALITY_SCHEME), eq(LOCALITY_CODE)))
@@ -301,6 +327,8 @@ class AddressLocalityServiceTest {
 
     @Test
     fun `Getting the locality by code with scheme fails (unknown country)`() {
+        whenever(advancedLanguageRepository.exists(eq(LANGUAGE_CODE)))
+            .thenReturn(true)
         whenever(localitySchemeRepository.existsBy(eq(LOCALITY_SCHEME)))
             .thenReturn(true)
         whenever(localitySchemeRepository.existsBy(eq(LOCALITY_SCHEME), eq(LOCALITY_CODE)))
@@ -323,7 +351,9 @@ class AddressLocalityServiceTest {
     }
 
     @Test
-    fun `Getting the locality by code with scheme fails (unknown language)`() {
+    fun `Getting the locality by code with scheme fails (description not found)`() {
+        whenever(advancedLanguageRepository.exists(eq(LANGUAGE_CODE)))
+            .thenReturn(true)
         whenever(localitySchemeRepository.existsBy(eq(LOCALITY_SCHEME)))
             .thenReturn(true)
         whenever(localitySchemeRepository.existsBy(eq(LOCALITY_SCHEME), eq(LOCALITY_CODE)))
@@ -341,15 +371,12 @@ class AddressLocalityServiceTest {
             )
         ).thenReturn(null)
 
-        val exception = assertThrows<LocalityNotFoundException> {
+        val exception = assertThrows<LocalityDescriptionNotFoundException> {
             service.getBy(
                 locality = LOCALITY, country = COUNTRY, region = REGION, language = LANGUAGE, scheme = SCHEME
             )
         }
 
-        assertEquals(
-            "The locality by code '$LOCALITY', scheme '$SCHEME', country '$COUNTRY', region '$REGION', language '$LANGUAGE' not found.",
-            exception.description
-        )
+        assertEquals("The locality '$LOCALITY' description in language '$LANGUAGE' not found.", exception.description)
     }
 }
