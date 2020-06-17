@@ -105,7 +105,7 @@ class DatabaseTestConfiguration {
         PostgresCountrySchemeRepository(jdbcTemplate())
 
     @Bean
-    fun criteriaRepository(): CriterionRepository =
+    fun criterionRepository(): CriterionRepository =
         PostgresCriterionRepository(jdbcTemplate())
 
     @Bean

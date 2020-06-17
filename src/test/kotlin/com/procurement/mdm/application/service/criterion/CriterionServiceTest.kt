@@ -53,7 +53,7 @@ class CriterionServiceTest {
     }
 
     @Test
-    fun `Getting all criterion is successful`() {
+    fun `Getting all criteria is successful`() {
         val storedCriterion = listOf(FIRST_CRITERION_ENTITY, SECOND_CRITERION_ENTITY)
         whenever(
             criterionRepository.findBy(
@@ -75,7 +75,7 @@ class CriterionServiceTest {
     }
 
     @Test
-    fun `Getting all criterion fails (criteria not found)`() {
+    fun `Getting all criteria fails (criteria not found)`() {
         whenever(
             criterionRepository.findBy(
                 country = eq(COUNTRY_CODE),
