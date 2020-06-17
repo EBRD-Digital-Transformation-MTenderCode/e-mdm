@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
-class CriteriaSchemeRepositoryIT : AbstractRepositoryTest() {
+class CriterionRepositoryIT : AbstractRepositoryTest() {
     companion object {
         private val LANGUAGE_CODE = LanguageCode("en")
         private val UNKNOWN_LANGUAGE_CODE = LanguageCode("ul")
