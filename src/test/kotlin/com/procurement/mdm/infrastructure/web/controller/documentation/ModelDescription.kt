@@ -74,11 +74,13 @@ object ModelDescription {
                     getFieldDescriptor("data[].uri", "A URI to identify the locality.")
                 )
             }
+
             fun emptyCollection(): List<FieldDescriptor> {
                 return listOf(
                     getFieldDescriptor("data", "Empty data of response.")
                 )
             }
+
             fun schemesCollection(): List<FieldDescriptor> {
                 return listOf(
                     getFieldDescriptor("data", "The data of response."),
@@ -135,7 +137,7 @@ object ModelDescription {
         }
     }
 
-    object Criteria{
+    object Criteria {
         fun collection(): List<FieldDescriptor> {
             return listOf(
                 getFieldDescriptor("data[]", "The data of response."),
@@ -144,6 +146,23 @@ object ModelDescription {
                 getFieldDescriptor("data[].title", "The title of the criteria.")
             )
         }
+
+        fun emptyCollection(): List<FieldDescriptor> {
+            return listOf(
+                getFieldDescriptor("data", "Empty data of response.")
+            )
+        }
+    }
+
+    object RequirementGroup {
+        fun collection(): List<FieldDescriptor> {
+            return listOf(
+                getFieldDescriptor("data[]", "The data of response."),
+                getFieldDescriptor("data[].id", "The identifier of the requirement group."),
+                getFieldDescriptorOptional("data[].description", "The description of the requirement group.")
+            )
+        }
+
         fun emptyCollection(): List<FieldDescriptor> {
             return listOf(
                 getFieldDescriptor("data", "Empty data of response.")
@@ -162,3 +181,6 @@ object ModelDescription {
 
 private fun getFieldDescriptor(property: String, description: String): FieldDescriptor =
     fieldWithPath(property).description(description)
+
+private fun getFieldDescriptorOptional(property: String, description: String): FieldDescriptor =
+    fieldWithPath(property).description(description).optional().type(String::class.java)
