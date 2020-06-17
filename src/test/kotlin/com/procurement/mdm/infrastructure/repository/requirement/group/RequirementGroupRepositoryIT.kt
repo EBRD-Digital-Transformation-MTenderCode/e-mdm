@@ -31,7 +31,7 @@ class RequirementGroupRepositoryIT : AbstractRepositoryTest() {
         private val REQ_GROUP_CRITERION_1 = CriterionCode("MD_OT_1")
         private val REQ_GROUP_CRITERION_2 = CriterionCode("MD_OT_2")
         private val REQ_GROUP_CRITERION_3 = CriterionCode("MD_OT_3")
-        private val REQ_GROUP_UNKNOWN_CRITERION = CriterionCode("unknown-criteria")
+        private val REQ_GROUP_UNKNOWN_CRITERION = CriterionCode("unknown-criterion")
     }
 
     @Autowired

@@ -25,15 +25,15 @@ class RequirementGroupServiceImpl(
     ): List<RequirementGroupIdentifier> {
         val countryCode = CountryCode(country)
         val languageCode = LanguageCode(language)
-        val criteriaPmd = Pmd(pmd)
-        val criteriaPhase = Phase(phase)
+        val criterionPmd = Pmd(pmd)
+        val criterionPhase = Phase(phase)
         val criterionCode = CriterionCode(criterion)
 
         return requirementGroupRepository.findBy(
             country = countryCode,
             language = languageCode,
-            pmd = criteriaPmd,
-            phase = criteriaPhase,
+            pmd = criterionPmd,
+            phase = criterionPhase,
             criterion = criterionCode
         ).map { entity ->
             RequirementGroupIdentifier(

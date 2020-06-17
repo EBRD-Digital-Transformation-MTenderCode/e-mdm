@@ -141,9 +141,9 @@ object ModelDescription {
         fun collection(): List<FieldDescriptor> {
             return listOf(
                 getFieldDescriptor("data[]", "The data of response."),
-                getFieldDescriptor("data[].id", "The identifier of the criteria."),
-                getFieldDescriptor("data[].description", "The description of the criteria."),
-                getFieldDescriptor("data[].title", "The title of the criteria.")
+                getFieldDescriptor("data[].id", "The identifier of the criterion."),
+                getFieldDescriptor("data[].description", "The description of the criterion."),
+                getFieldDescriptor("data[].title", "The title of the criterion.")
             )
         }
 

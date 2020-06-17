@@ -22,11 +22,11 @@ class CriterionRepositoryIT : AbstractRepositoryTest() {
         private val UNKNOWN_COUNTRY_CODE = CountryCode("ua")
 
         private const val PMD = "ot"
-        private val CRITERIA_PMD = Pmd(PMD)
+        private val CRITERION_PMD = Pmd(PMD)
         private val UNKNOWN_PMD = Pmd("gpa")
 
         private const val PHASE = "submission"
-        private val CRITERIA_PHASE = Phase(PHASE)
+        private val CRITERION_PHASE = Phase(PHASE)
         private val UNKNOWN_PHASE = Phase("awarding")
 
         private val FIRST_CRITERION_ENTITY = CriterionEntity(
@@ -56,9 +56,9 @@ class CriterionRepositoryIT : AbstractRepositoryTest() {
 
         val actual = repository.findBy(
             country = COUNTRY_CODE,
-            pmd = CRITERIA_PMD,
+            pmd = CRITERION_PMD,
             language = LANGUAGE_CODE,
-            phase = CRITERIA_PHASE
+            phase = CRITERION_PHASE
         )
 
         val expected = listOf(FIRST_CRITERION_ENTITY, SECOND_CRITERION_ENTITY)
@@ -72,9 +72,9 @@ class CriterionRepositoryIT : AbstractRepositoryTest() {
 
         val actual = repository.findBy(
             country = UNKNOWN_COUNTRY_CODE,
-            pmd = CRITERIA_PMD,
+            pmd = CRITERION_PMD,
             language = LANGUAGE_CODE,
-            phase = CRITERIA_PHASE
+            phase = CRITERION_PHASE
         )
 
         assertTrue(actual.isEmpty())
@@ -88,7 +88,7 @@ class CriterionRepositoryIT : AbstractRepositoryTest() {
             country = COUNTRY_CODE,
             pmd = UNKNOWN_PMD,
             language = LANGUAGE_CODE,
-            phase = CRITERIA_PHASE
+            phase = CRITERION_PHASE
         )
 
         assertTrue(actual.isEmpty())
@@ -100,9 +100,9 @@ class CriterionRepositoryIT : AbstractRepositoryTest() {
 
         val actual = repository.findBy(
             country = COUNTRY_CODE,
-            pmd = CRITERIA_PMD,
+            pmd = CRITERION_PMD,
             language = UNKNOWN_LANGUAGE_CODE,
-            phase = CRITERIA_PHASE
+            phase = CRITERION_PHASE
         )
 
         assertTrue(actual.isEmpty())
@@ -114,7 +114,7 @@ class CriterionRepositoryIT : AbstractRepositoryTest() {
 
         val actual = repository.findBy(
             country = COUNTRY_CODE,
-            pmd = CRITERIA_PMD,
+            pmd = CRITERION_PMD,
             language = LANGUAGE_CODE,
             phase = UNKNOWN_PHASE
         )

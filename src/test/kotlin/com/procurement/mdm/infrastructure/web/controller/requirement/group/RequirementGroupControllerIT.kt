@@ -557,7 +557,7 @@ class RequirementGroupControllerIT : AbstractRepositoryTest() {
             .andExpect(
                 jsonPath(
                     "$.errors[0].description",
-                    equalTo("Invalid criteria code (value is blank).")
+                    equalTo("Invalid criterion code (value is blank).")
                 )
             )
             .andDo(

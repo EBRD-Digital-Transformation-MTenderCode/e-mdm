@@ -25,10 +25,10 @@ class CriterionServiceTest {
         private val COUNTRY_CODE = CountryCode(COUNTRY)
 
         private const val PMD = "ot"
-        private val CRITERIA_PMD = Pmd(PMD)
+        private val CRITERION_PMD = Pmd(PMD)
 
         private const val PHASE = "submission"
-        private val CRITERIA_PHASE = Phase(PHASE)
+        private val CRITERION_PHASE = Phase(PHASE)
 
         private val FIRST_CRITERION_ENTITY = CriterionEntity(
             id = "MD_OT_1",
@@ -58,9 +58,9 @@ class CriterionServiceTest {
         whenever(
             criterionRepository.findBy(
                 country = eq(COUNTRY_CODE),
-                pmd = eq(CRITERIA_PMD),
+                pmd = eq(CRITERION_PMD),
                 language = eq(LANGUAGE_CODE),
-                phase = eq(CRITERIA_PHASE)
+                phase = eq(CRITERION_PHASE)
             )
         )
             .thenReturn(storedCriterion)
@@ -79,9 +79,9 @@ class CriterionServiceTest {
         whenever(
             criterionRepository.findBy(
                 country = eq(COUNTRY_CODE),
-                pmd = eq(CRITERIA_PMD),
+                pmd = eq(CRITERION_PMD),
                 language = eq(LANGUAGE_CODE),
-                phase = eq(CRITERIA_PHASE)
+                phase = eq(CRITERION_PHASE)
             )
         )
             .thenReturn(emptyList())

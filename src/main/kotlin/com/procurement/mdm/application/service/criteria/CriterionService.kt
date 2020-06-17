@@ -25,11 +25,11 @@ class CriterionServiceImpl(
 
         return criterionRepository.findBy(
             country = countryCode, language = languageCode, pmd = criterionPmd, phase = criterionPhase
-        ).map { criteria ->
+        ).map { criterion ->
             CriterionIdentifier(
-                id = criteria.id,
-                title = criteria.title,
-                description = criteria.description
+                id = criterion.id,
+                title = criterion.title,
+                description = criterion.description
             )
         }
     }

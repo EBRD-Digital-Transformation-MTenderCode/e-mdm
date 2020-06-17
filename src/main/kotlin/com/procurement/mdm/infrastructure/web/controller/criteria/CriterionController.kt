@@ -36,11 +36,11 @@ class CriterionController(private val criterionService: CriterionService) {
             throw PhaseRequestParameterMissingException()
 
         return criterionService.getAll(country = country, language = lang, pmd = pmd, phase = phase)
-            .map { criteria ->
+            .map { criterion ->
                 Criterion(
-                    id = criteria.id,
-                    title = criteria.title,
-                    description = criteria.description
+                    id = criterion.id,
+                    title = criterion.title,
+                    description = criterion.description
                 )
             }.let { CriteriaApiResponse(it) }
     }

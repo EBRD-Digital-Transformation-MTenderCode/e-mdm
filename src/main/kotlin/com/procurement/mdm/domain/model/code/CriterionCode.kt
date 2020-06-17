@@ -9,7 +9,7 @@ class CriterionCode private constructor(val value: String) {
         operator fun invoke(value: String): CriterionCode {
             val code = value.trim()
             if (code.isBlank())
-                throw InvalidCriterionCodeException("Invalid criteria code (value is blank).")
+                throw InvalidCriterionCodeException("Invalid criterion code (value is blank).")
             return CriterionCode(code)
         }
     }
