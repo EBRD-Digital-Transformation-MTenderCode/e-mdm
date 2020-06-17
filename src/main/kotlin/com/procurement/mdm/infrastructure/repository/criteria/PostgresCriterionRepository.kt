@@ -1,6 +1,6 @@
 package com.procurement.mdm.infrastructure.repository.criteria
 
-import com.procurement.mdm.domain.entity.CriteriaEntity
+import com.procurement.mdm.domain.entity.CriterionEntity
 import com.procurement.mdm.domain.model.Phase
 import com.procurement.mdm.domain.model.Pmd
 import com.procurement.mdm.domain.model.code.CountryCode
@@ -35,7 +35,7 @@ class PostgresCriterionRepository(
 
     override fun findBy(
         country: CountryCode, pmd: Pmd, language: LanguageCode, phase: Phase
-    ): List<CriteriaEntity> = getListObjects(
+    ): List<CriterionEntity> = getListObjects(
         sql = FIND_BY_SQL,
         params = mapOf(
             "country" to country.value.toUpperCase(),
@@ -43,11 +43,11 @@ class PostgresCriterionRepository(
             "language" to language.value.toUpperCase(),
             "phase" to phase.value.toUpperCase()
         ),
-        mapper = criteriaRowMapper
+        mapper = criterionRowMapper
     )
 
-    private val criteriaRowMapper: (ResultSet, Int) -> CriteriaEntity = { rs, _ ->
-        CriteriaEntity(
+    private val criterionRowMapper: (ResultSet, Int) -> CriterionEntity = { rs, _ ->
+        CriterionEntity(
             id = rs.getString("id"),
             title = rs.getString("title"),
             description = rs.getString("description")
