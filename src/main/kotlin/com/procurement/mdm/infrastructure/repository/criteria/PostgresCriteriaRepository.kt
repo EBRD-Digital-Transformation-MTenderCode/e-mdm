@@ -23,9 +23,9 @@ class PostgresCriteriaRepository(
             SELECT cr.code AS id,
                    cri18n.title,
                    cri18n.description          
-              FROM public.criterion AS cr    
-        INNER JOIN public.criterion_i18n cri18n 
-                ON cr.id = cri18n.criteria_id
+              FROM public.criteria AS cr    
+        INNER JOIN public.criteria_i18n cri18n 
+                ON cr.id = cri18n.criterion_id
              WHERE cr.country_code = :country
                AND cr.pmd = :pmd
                AND cr.phase = :phase

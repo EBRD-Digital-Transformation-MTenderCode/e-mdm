@@ -1,7 +1,7 @@
 --liquibase formatted sql
 
---changeset kateshaidurova:criterion
-CREATE TABLE public.criterion (
+--changeset kateshaidurova:criteria
+CREATE TABLE public.criteria (
   id                         BIGINT     NOT NULL PRIMARY KEY,
   country_code               VARCHAR(2) NOT NULL,
   pmd                        TEXT       NOT NULL,
@@ -10,12 +10,12 @@ CREATE TABLE public.criterion (
   UNIQUE (country_code, pmd, phase, code)
 );
 
---changeset kateshaidurova:criterion_i18n
-CREATE TABLE public.criterion_i18n (
+--changeset kateshaidurova:criteria_i18n
+CREATE TABLE public.criteria_i18n (
   id                         BIGINT     NOT NULL PRIMARY KEY,
-  criteria_id                BIGINT     NOT NULL REFERENCES criterion (id),
+  criterion_id                BIGINT     NOT NULL REFERENCES criteria (id),
   language_code              VARCHAR(2) NOT NULL,
   title                      TEXT       NOT NULL,
-  description                TEXT       NOT NULL DEFAULT '',
-  UNIQUE (criteria_id, language_code)
+  description                TEXT,
+  UNIQUE (criterion_id, language_code)
 );
