@@ -34,8 +34,8 @@ class RequirementGroupServiceTest {
         private const val CRITERION = "MD_OT_1"
         private val REQ_GROUP_CRITERION = CriterionCode(CRITERION)
 
-        private val FIRST_REQ_GROUP_ENTITY = RequirementGroupEntity(id = "REQ_1", description = "req-description-1")
-        private val SECOND_REQ_GROUP_ENTITY = RequirementGroupEntity(id = "REQ_2", description = "req-description-2")
+        private val FIRST_REQ_GROUP_ENTITY = RequirementGroupEntity(id = "REQ_GROUP_1", description = "req-group-description-1")
+        private val SECOND_REQ_GROUP_ENTITY = RequirementGroupEntity(id = "REQ_GROUP_2", description = "req-group-description-2")
     }
 
     private lateinit var requirementGroupRepository: RequirementGroupRepository

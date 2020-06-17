@@ -48,17 +48,17 @@ class RequirementGroupControllerIT : AbstractRepositoryTest() {
         private const val UNKNOWN_CRITERION = "md_gpa_1"
 
         private const val CRITERION_NO_DESCRIPTION = "md_ot_3"
-        private const val REQ_GROUP_CODE_NO_DESCRIPTION = "REQ_3"
+        private const val REQ_GROUP_CODE_NO_DESCRIPTION = "REQ_GROUP_3"
 
         private const val EMPTY_PARAMETER = "  "
 
         private val FIRST_REQ_GROUP_IDENTIFIER = RequirementGroupIdentifier(
-            id = "REQ_1",
-            description = "req-description-1"
+            id = "REQ_GROUP_1",
+            description = "req-group-description-1"
         )
         private val SECOND_REQ_GROUP_IDENTIFIER = RequirementGroupIdentifier(
-            id = "REQ_1_1",
-            description = "req-description-1-1"
+            id = "REQ_GROUP_1_1",
+            description = "req-group-description-1-1"
         )
     }
 

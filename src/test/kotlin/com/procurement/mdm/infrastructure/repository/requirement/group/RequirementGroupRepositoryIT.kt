@@ -54,8 +54,8 @@ class RequirementGroupRepositoryIT : AbstractRepositoryTest() {
             criterion = REQ_GROUP_CRITERION_1
         )
 
-        val firstRequirementGroupEntity = RequirementGroupEntity(id = "REQ_1", description = "req-description-1")
-        val secondRequirementGroupEntity = RequirementGroupEntity(id = "REQ_1_1", description = "req-description-1-1")
+        val firstRequirementGroupEntity = RequirementGroupEntity(id = "REQ_GROUP_1", description = "req-group-description-1")
+        val secondRequirementGroupEntity = RequirementGroupEntity(id = "REQ_GROUP_1_1", description = "req-group-description-1-1")
         val expected = listOf(firstRequirementGroupEntity, secondRequirementGroupEntity)
 
         assertEquals(expected, actual)
@@ -73,7 +73,7 @@ class RequirementGroupRepositoryIT : AbstractRepositoryTest() {
             criterion = REQ_GROUP_CRITERION_2
         )
 
-        val requirementGroupEntity = RequirementGroupEntity(id = "REQ_2", description = null)
+        val requirementGroupEntity = RequirementGroupEntity(id = "REQ_GROUP_2", description = null)
         val expected = listOf(requirementGroupEntity)
 
         assertEquals(expected, actual)
@@ -91,7 +91,7 @@ class RequirementGroupRepositoryIT : AbstractRepositoryTest() {
             criterion = REQ_GROUP_CRITERION_3
         )
 
-        val requirementGroupEntity = RequirementGroupEntity(id = "REQ_3", description = null)
+        val requirementGroupEntity = RequirementGroupEntity(id = "REQ_GROUP_3", description = null)
 
         val expected = listOf(requirementGroupEntity)
 
