@@ -49,9 +49,6 @@ class CriteriaServiceTest {
     @BeforeEach
     fun init() {
         criteriaRepository = mock()
-        service = mock()
-
-
         service = CriteriaServiceImpl(criteriaRepository)
     }
 
