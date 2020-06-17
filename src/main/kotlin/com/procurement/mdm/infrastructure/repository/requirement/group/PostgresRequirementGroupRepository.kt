@@ -1,4 +1,4 @@
-package com.procurement.mdm.infrastructure.repository.group
+package com.procurement.mdm.infrastructure.repository.requirement.group
 
 import com.procurement.mdm.domain.entity.RequirementGroupEntity
 import com.procurement.mdm.domain.model.Phase
