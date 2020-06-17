@@ -112,7 +112,7 @@ class CriterionControllerIT : AbstractRepositoryTest() {
             .andDo(
                 document(
                     "criteria/get_all/success",
-                    responseFields(ModelDescription.Criteria.collection())
+                    responseFields(ModelDescription.Criterion.collection())
                 )
             )
     }
@@ -135,7 +135,7 @@ class CriterionControllerIT : AbstractRepositoryTest() {
             .andDo(
                 document(
                     "criteria/get_all/unknown_lang/success_empty",
-                    responseFields(ModelDescription.Criteria.emptyCollection())
+                    responseFields(ModelDescription.Criterion.emptyCollection())
                 )
             )
     }
@@ -158,7 +158,7 @@ class CriterionControllerIT : AbstractRepositoryTest() {
             .andDo(
                 document(
                     "criteria/get_all/unknown_country/success_empty",
-                    responseFields(ModelDescription.Criteria.emptyCollection())
+                    responseFields(ModelDescription.Criterion.emptyCollection())
                 )
             )
     }
@@ -181,7 +181,7 @@ class CriterionControllerIT : AbstractRepositoryTest() {
             .andDo(
                 document(
                     "criteria/get_all/unknown_pmd/success_empty",
-                    responseFields(ModelDescription.Criteria.emptyCollection())
+                    responseFields(ModelDescription.Criterion.emptyCollection())
                 )
             )
     }
@@ -204,7 +204,7 @@ class CriterionControllerIT : AbstractRepositoryTest() {
             .andDo(
                 document(
                     "criteria/get_all/unknown_phase/success_empty",
-                    responseFields(ModelDescription.Criteria.emptyCollection())
+                    responseFields(ModelDescription.Criterion.emptyCollection())
                 )
             )
     }

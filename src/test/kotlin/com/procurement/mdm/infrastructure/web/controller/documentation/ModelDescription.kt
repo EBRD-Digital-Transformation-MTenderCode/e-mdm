@@ -137,7 +137,7 @@ object ModelDescription {
         }
     }
 
-    object Criteria {
+    object Criterion {
         fun collection(): List<FieldDescriptor> {
             return listOf(
                 getFieldDescriptor("data[]", "The data of response."),
