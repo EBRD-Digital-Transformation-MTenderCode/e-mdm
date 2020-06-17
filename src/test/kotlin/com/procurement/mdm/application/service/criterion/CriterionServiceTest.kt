@@ -1,4 +1,4 @@
-package com.procurement.mdm.application.service.criteria
+package com.procurement.mdm.application.service.criterion
 
 import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.mock

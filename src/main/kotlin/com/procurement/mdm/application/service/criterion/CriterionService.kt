@@ -1,4 +1,4 @@
-package com.procurement.mdm.application.service.criteria
+package com.procurement.mdm.application.service.criterion
 
 import com.procurement.mdm.domain.model.Phase
 import com.procurement.mdm.domain.model.Pmd

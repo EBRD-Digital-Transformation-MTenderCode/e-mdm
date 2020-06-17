@@ -1,7 +1,7 @@
 package com.procurement.mdm.infrastructure.web.controller.criteria
 
-import com.procurement.mdm.application.service.criteria.CriterionService
-import com.procurement.mdm.application.service.criteria.CriterionServiceImpl
+import com.procurement.mdm.application.service.criterion.CriterionService
+import com.procurement.mdm.application.service.criterion.CriterionServiceImpl
 import com.procurement.mdm.domain.model.identifier.CriterionIdentifier
 import com.procurement.mdm.domain.repository.criteria.CriterionRepository
 import com.procurement.mdm.infrastructure.repository.AbstractRepositoryTest

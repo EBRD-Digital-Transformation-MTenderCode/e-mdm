@@ -1,7 +1,7 @@
 package com.procurement.mdm.infrastructure.web.controller.criteria
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.procurement.mdm.application.service.criteria.CriterionService
+import com.procurement.mdm.application.service.criterion.CriterionService
 import com.procurement.mdm.infrastructure.exception.CountryRequestParameterMissingException
 import com.procurement.mdm.infrastructure.exception.LanguageRequestParameterMissingException
 import com.procurement.mdm.infrastructure.exception.PhaseRequestParameterMissingException
