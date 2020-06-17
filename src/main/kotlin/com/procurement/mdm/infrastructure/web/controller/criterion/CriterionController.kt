@@ -1,4 +1,4 @@
-package com.procurement.mdm.infrastructure.web.controller.criteria
+package com.procurement.mdm.infrastructure.web.controller.criterion
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.procurement.mdm.application.service.criterion.CriterionService
