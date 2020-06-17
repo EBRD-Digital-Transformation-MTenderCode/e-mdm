@@ -1,6 +1,6 @@
 package com.procurement.mdm.domain.entity
 
-class RequirementGroupEntity (
+data class RequirementGroupEntity (
     val id: String,
     val description: String?
 )
