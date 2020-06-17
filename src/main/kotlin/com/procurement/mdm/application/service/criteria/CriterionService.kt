@@ -20,11 +20,11 @@ class CriterionServiceImpl(
     override fun getAll(country: String, pmd: String, language: String, phase: String): List<CriterionIdentifier> {
         val countryCode = CountryCode(country)
         val languageCode = LanguageCode(language)
-        val criteriaPmd = Pmd(pmd)
-        val criteriaPhase = Phase(phase)
+        val criterionPmd = Pmd(pmd)
+        val criterionPhase = Phase(phase)
 
         return criterionRepository.findBy(
-            country = countryCode, language = languageCode, pmd = criteriaPmd, phase = criteriaPhase
+            country = countryCode, language = languageCode, pmd = criterionPmd, phase = criterionPhase
         ).map { criteria ->
             CriterionIdentifier(
                 id = criteria.id,
