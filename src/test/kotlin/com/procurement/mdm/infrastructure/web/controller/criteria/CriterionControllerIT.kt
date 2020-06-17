@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.test.web.servlet.setup.StandaloneMockMvcBuilder
 
 @ExtendWith(RestDocumentationExtension::class)
-class CriteriaControllerIT : AbstractRepositoryTest() {
+class CriterionControllerIT : AbstractRepositoryTest() {
     companion object {
         private const val LANGUAGE = "en"
         private const val UNKNOWN_LANGUAGE = "fr"
@@ -69,7 +69,7 @@ class CriteriaControllerIT : AbstractRepositoryTest() {
     fun init(restDocumentation: RestDocumentationContextProvider) {
         criterionService = CriterionServiceImpl(criterionRepository)
 
-        val controller = CriteriaController(criterionService)
+        val controller = CriterionController(criterionService)
         val restExceptionHandler = RestExceptionHandler()
         mockMvc = MockMvcBuilders.standaloneSetup(controller)
             .setControllerAdvice(restExceptionHandler)

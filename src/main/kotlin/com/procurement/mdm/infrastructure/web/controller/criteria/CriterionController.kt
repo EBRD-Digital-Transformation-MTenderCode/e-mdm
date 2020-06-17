@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/criteria")
-class CriteriaController(private val criterionService: CriterionService) {
+class CriterionController(private val criterionService: CriterionService) {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
