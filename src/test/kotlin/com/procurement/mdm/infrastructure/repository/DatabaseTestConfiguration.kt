@@ -7,6 +7,7 @@ import com.procurement.mdm.domain.repository.address.AddressRegionRepository
 import com.procurement.mdm.domain.repository.criteria.CriteriaRepository
 import com.procurement.mdm.domain.repository.organization.OrganizationScaleRepository
 import com.procurement.mdm.domain.repository.organization.OrganizationSchemeRepository
+import com.procurement.mdm.domain.repository.requirement.group.RequirementGroupRepository
 import com.procurement.mdm.domain.repository.scheme.CountrySchemeRepository
 import com.procurement.mdm.domain.repository.scheme.LocalitySchemeRepository
 import com.procurement.mdm.domain.repository.scheme.RegionSchemeRepository
@@ -14,6 +15,7 @@ import com.procurement.mdm.infrastructure.repository.address.PostgresAddressCoun
 import com.procurement.mdm.infrastructure.repository.address.PostgresAddressLocalityRepository
 import com.procurement.mdm.infrastructure.repository.address.PostgresAddressRegionRepository
 import com.procurement.mdm.infrastructure.repository.criteria.PostgresCriteriaRepository
+import com.procurement.mdm.infrastructure.repository.group.PostgresRequirementGroupRepository
 import com.procurement.mdm.infrastructure.repository.language.PostgresLanguageRepository
 import com.procurement.mdm.infrastructure.repository.organization.PostgresOrganizationScaleRepository
 import com.procurement.mdm.infrastructure.repository.organization.PostgresOrganizationSchemeRepository
@@ -105,6 +107,10 @@ class DatabaseTestConfiguration {
     @Bean
     fun criteriaRepository(): CriteriaRepository =
         PostgresCriteriaRepository(jdbcTemplate())
+
+    @Bean
+    fun requirementGroupRepository(): RequirementGroupRepository =
+        PostgresRequirementGroupRepository(jdbcTemplate())
 
     @Bean
     fun liquibase() = Liquibase(changeLogFile, FileSystemResourceAccessor(liquibaseDir()), database(dataSource()))
