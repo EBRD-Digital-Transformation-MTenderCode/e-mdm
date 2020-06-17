@@ -8,14 +8,14 @@ import com.procurement.mdm.domain.model.identifier.CriteriaIdentifier
 import com.procurement.mdm.domain.repository.criteria.CriterionRepository
 import org.springframework.stereotype.Service
 
-interface CriteriaService {
+interface CriterionService {
     fun getAll(country: String, pmd: String, language: String, phase: String): List<CriteriaIdentifier>
 }
 
 @Service
-class CriteriaServiceImpl(
+class CriterionServiceImpl(
     private val criterionRepository: CriterionRepository
-) : CriteriaService {
+) : CriterionService {
 
     override fun getAll(country: String, pmd: String, language: String, phase: String): List<CriteriaIdentifier> {
         val countryCode = CountryCode(country)

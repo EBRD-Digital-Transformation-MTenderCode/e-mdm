@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class CriteriaServiceTest {
+class CriterionServiceTest {
 
     companion object {
         private const val LANGUAGE = "en"
@@ -44,12 +44,12 @@ class CriteriaServiceTest {
     }
 
     private lateinit var criterionRepository: CriterionRepository
-    private lateinit var service: CriteriaService
+    private lateinit var service: CriterionService
 
     @BeforeEach
     fun init() {
         criterionRepository = mock()
-        service = CriteriaServiceImpl(criterionRepository)
+        service = CriterionServiceImpl(criterionRepository)
     }
 
     @Test

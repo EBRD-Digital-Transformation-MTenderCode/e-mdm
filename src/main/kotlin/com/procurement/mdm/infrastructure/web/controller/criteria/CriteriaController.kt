@@ -1,7 +1,7 @@
 package com.procurement.mdm.infrastructure.web.controller.criteria
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.procurement.mdm.application.service.criteria.CriteriaService
+import com.procurement.mdm.application.service.criteria.CriterionService
 import com.procurement.mdm.infrastructure.exception.CountryRequestParameterMissingException
 import com.procurement.mdm.infrastructure.exception.LanguageRequestParameterMissingException
 import com.procurement.mdm.infrastructure.exception.PhaseRequestParameterMissingException
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/criteria")
-class CriteriaController(private val criteriaService: CriteriaService) {
+class CriteriaController(private val criterionService: CriterionService) {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -35,7 +35,7 @@ class CriteriaController(private val criteriaService: CriteriaService) {
         if (phase == null)
             throw PhaseRequestParameterMissingException()
 
-        return criteriaService.getAll(country = country, language = lang, pmd = pmd, phase = phase)
+        return criterionService.getAll(country = country, language = lang, pmd = pmd, phase = phase)
             .map { criteria ->
                 Criteria(
                     id = criteria.id,

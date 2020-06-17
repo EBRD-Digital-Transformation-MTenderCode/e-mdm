@@ -1,7 +1,7 @@
 package com.procurement.mdm.infrastructure.web.controller.criteria
 
-import com.procurement.mdm.application.service.criteria.CriteriaService
-import com.procurement.mdm.application.service.criteria.CriteriaServiceImpl
+import com.procurement.mdm.application.service.criteria.CriterionService
+import com.procurement.mdm.application.service.criteria.CriterionServiceImpl
 import com.procurement.mdm.domain.model.identifier.CriteriaIdentifier
 import com.procurement.mdm.domain.repository.criteria.CriterionRepository
 import com.procurement.mdm.infrastructure.repository.AbstractRepositoryTest
@@ -60,16 +60,16 @@ class CriteriaControllerIT : AbstractRepositoryTest() {
     }
 
     private lateinit var mockMvc: MockMvc
-    private lateinit var criteriaService: CriteriaService
+    private lateinit var criterionService: CriterionService
 
     @Autowired
     private lateinit var criterionRepository: CriterionRepository
 
     @BeforeEach
     fun init(restDocumentation: RestDocumentationContextProvider) {
-        criteriaService = CriteriaServiceImpl(criterionRepository)
+        criterionService = CriterionServiceImpl(criterionRepository)
 
-        val controller = CriteriaController(criteriaService)
+        val controller = CriteriaController(criterionService)
         val restExceptionHandler = RestExceptionHandler()
         mockMvc = MockMvcBuilders.standaloneSetup(controller)
             .setControllerAdvice(restExceptionHandler)
