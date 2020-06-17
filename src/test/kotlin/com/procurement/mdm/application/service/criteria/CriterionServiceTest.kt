@@ -8,7 +8,7 @@ import com.procurement.mdm.domain.model.Phase
 import com.procurement.mdm.domain.model.Pmd
 import com.procurement.mdm.domain.model.code.CountryCode
 import com.procurement.mdm.domain.model.code.LanguageCode
-import com.procurement.mdm.domain.model.identifier.CriteriaIdentifier
+import com.procurement.mdm.domain.model.identifier.CriterionIdentifier
 import com.procurement.mdm.domain.repository.criteria.CriterionRepository
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -68,7 +68,7 @@ class CriterionServiceTest {
         val actual = service.getAll(country = COUNTRY, phase = PHASE, pmd = PMD, language = LANGUAGE)
 
         val expected = storedCriterion.map { entity ->
-            CriteriaIdentifier(id = entity.id, title = entity.title, description = entity.description)
+            CriterionIdentifier(id = entity.id, title = entity.title, description = entity.description)
         }
 
         assertEquals(expected, actual)

@@ -2,7 +2,7 @@ package com.procurement.mdm.infrastructure.web.controller.criteria
 
 import com.procurement.mdm.application.service.criteria.CriterionService
 import com.procurement.mdm.application.service.criteria.CriterionServiceImpl
-import com.procurement.mdm.domain.model.identifier.CriteriaIdentifier
+import com.procurement.mdm.domain.model.identifier.CriterionIdentifier
 import com.procurement.mdm.domain.repository.criteria.CriterionRepository
 import com.procurement.mdm.infrastructure.repository.AbstractRepositoryTest
 import com.procurement.mdm.infrastructure.repository.loadSql
@@ -46,13 +46,13 @@ class CriterionControllerIT : AbstractRepositoryTest() {
 
         private const val EMPTY_PARAMETER = "  "
 
-        private val FIRST_CRITERION_IDENTIFIER = CriteriaIdentifier(
+        private val FIRST_CRITERION_IDENTIFIER = CriterionIdentifier(
             id = "MD_OT_1",
             description = "criterion-description-1",
             title = "criterion-title-1"
         )
 
-        private val SECOND_CRITERION_IDENTIFIER = CriteriaIdentifier(
+        private val SECOND_CRITERION_IDENTIFIER = CriterionIdentifier(
             id = "MD_OT_2",
             description = "criterion-description-2",
             title = "criterion-title-2"
