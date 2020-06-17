@@ -14,7 +14,7 @@ import com.procurement.mdm.domain.repository.scheme.RegionSchemeRepository
 import com.procurement.mdm.infrastructure.repository.address.PostgresAddressCountryRepository
 import com.procurement.mdm.infrastructure.repository.address.PostgresAddressLocalityRepository
 import com.procurement.mdm.infrastructure.repository.address.PostgresAddressRegionRepository
-import com.procurement.mdm.infrastructure.repository.criteria.PostgresCriterionRepository
+import com.procurement.mdm.infrastructure.repository.criterion.PostgresCriterionRepository
 import com.procurement.mdm.infrastructure.repository.group.PostgresRequirementGroupRepository
 import com.procurement.mdm.infrastructure.repository.language.PostgresLanguageRepository
 import com.procurement.mdm.infrastructure.repository.organization.PostgresOrganizationScaleRepository
