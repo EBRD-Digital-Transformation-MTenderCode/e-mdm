@@ -5,7 +5,7 @@ import com.procurement.mdm.domain.model.Phase
 import com.procurement.mdm.domain.model.Pmd
 import com.procurement.mdm.domain.model.code.CountryCode
 import com.procurement.mdm.domain.model.code.LanguageCode
-import com.procurement.mdm.domain.repository.criteria.CriterionRepository
+import com.procurement.mdm.domain.repository.criterion.CriterionRepository
 import com.procurement.mdm.infrastructure.repository.AbstractRepository
 import org.intellij.lang.annotations.Language
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate

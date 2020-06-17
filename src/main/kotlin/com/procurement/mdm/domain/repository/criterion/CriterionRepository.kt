@@ -1,4 +1,4 @@
-package com.procurement.mdm.domain.repository.criteria
+package com.procurement.mdm.domain.repository.criterion
 
 import com.procurement.mdm.domain.entity.CriterionEntity
 import com.procurement.mdm.domain.model.Phase

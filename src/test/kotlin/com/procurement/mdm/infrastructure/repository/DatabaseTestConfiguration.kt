@@ -4,7 +4,7 @@ import com.procurement.mdm.domain.repository.AdvancedLanguageRepository
 import com.procurement.mdm.domain.repository.address.AddressCountryRepository
 import com.procurement.mdm.domain.repository.address.AddressLocalityRepository
 import com.procurement.mdm.domain.repository.address.AddressRegionRepository
-import com.procurement.mdm.domain.repository.criteria.CriterionRepository
+import com.procurement.mdm.domain.repository.criterion.CriterionRepository
 import com.procurement.mdm.domain.repository.organization.OrganizationScaleRepository
 import com.procurement.mdm.domain.repository.organization.OrganizationSchemeRepository
 import com.procurement.mdm.domain.repository.requirement.group.RequirementGroupRepository

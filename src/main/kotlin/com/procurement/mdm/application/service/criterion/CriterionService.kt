@@ -5,7 +5,7 @@ import com.procurement.mdm.domain.model.Pmd
 import com.procurement.mdm.domain.model.code.CountryCode
 import com.procurement.mdm.domain.model.code.LanguageCode
 import com.procurement.mdm.domain.model.identifier.CriterionIdentifier
-import com.procurement.mdm.domain.repository.criteria.CriterionRepository
+import com.procurement.mdm.domain.repository.criterion.CriterionRepository
 import org.springframework.stereotype.Service
 
 interface CriterionService {

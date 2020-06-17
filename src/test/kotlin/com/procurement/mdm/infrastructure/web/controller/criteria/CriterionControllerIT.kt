@@ -3,7 +3,7 @@ package com.procurement.mdm.infrastructure.web.controller.criteria
 import com.procurement.mdm.application.service.criterion.CriterionService
 import com.procurement.mdm.application.service.criterion.CriterionServiceImpl
 import com.procurement.mdm.domain.model.identifier.CriterionIdentifier
-import com.procurement.mdm.domain.repository.criteria.CriterionRepository
+import com.procurement.mdm.domain.repository.criterion.CriterionRepository
 import com.procurement.mdm.infrastructure.repository.AbstractRepositoryTest
 import com.procurement.mdm.infrastructure.repository.loadSql
 import com.procurement.mdm.infrastructure.web.controller.RestExceptionHandler
