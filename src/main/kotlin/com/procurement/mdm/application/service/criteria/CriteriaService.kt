@@ -5,7 +5,7 @@ import com.procurement.mdm.domain.model.Pmd
 import com.procurement.mdm.domain.model.code.CountryCode
 import com.procurement.mdm.domain.model.code.LanguageCode
 import com.procurement.mdm.domain.model.identifier.CriteriaIdentifier
-import com.procurement.mdm.domain.repository.criteria.CriteriaRepository
+import com.procurement.mdm.domain.repository.criteria.CriterionRepository
 import org.springframework.stereotype.Service
 
 interface CriteriaService {
@@ -14,7 +14,7 @@ interface CriteriaService {
 
 @Service
 class CriteriaServiceImpl(
-    private val criteriaRepository: CriteriaRepository
+    private val criterionRepository: CriterionRepository
 ) : CriteriaService {
 
     override fun getAll(country: String, pmd: String, language: String, phase: String): List<CriteriaIdentifier> {
@@ -23,7 +23,7 @@ class CriteriaServiceImpl(
         val criteriaPmd = Pmd(pmd)
         val criteriaPhase = Phase(phase)
 
-        return criteriaRepository.findBy(
+        return criterionRepository.findBy(
             country = countryCode, language = languageCode, pmd = criteriaPmd, phase = criteriaPhase
         ).map { criteria ->
             CriteriaIdentifier(

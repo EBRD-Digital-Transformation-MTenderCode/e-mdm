@@ -5,7 +5,7 @@ import com.procurement.mdm.domain.model.Phase
 import com.procurement.mdm.domain.model.Pmd
 import com.procurement.mdm.domain.model.code.CountryCode
 import com.procurement.mdm.domain.model.code.LanguageCode
-import com.procurement.mdm.domain.repository.criteria.CriteriaRepository
+import com.procurement.mdm.domain.repository.criteria.CriterionRepository
 import com.procurement.mdm.infrastructure.repository.AbstractRepositoryTest
 import com.procurement.mdm.infrastructure.repository.loadSql
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -43,7 +43,7 @@ class CriteriaSchemeRepositoryIT : AbstractRepositoryTest() {
     }
 
     @Autowired
-    private lateinit var repository: CriteriaRepository
+    private lateinit var repository: CriterionRepository
 
     private fun initData() {
         val sqlCountrySchemes = loadSql("sql/criteria/criterion_init_data.sql")

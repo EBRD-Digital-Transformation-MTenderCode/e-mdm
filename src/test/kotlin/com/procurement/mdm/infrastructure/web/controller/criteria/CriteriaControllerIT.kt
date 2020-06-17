@@ -3,7 +3,7 @@ package com.procurement.mdm.infrastructure.web.controller.criteria
 import com.procurement.mdm.application.service.criteria.CriteriaService
 import com.procurement.mdm.application.service.criteria.CriteriaServiceImpl
 import com.procurement.mdm.domain.model.identifier.CriteriaIdentifier
-import com.procurement.mdm.domain.repository.criteria.CriteriaRepository
+import com.procurement.mdm.domain.repository.criteria.CriterionRepository
 import com.procurement.mdm.infrastructure.repository.AbstractRepositoryTest
 import com.procurement.mdm.infrastructure.repository.loadSql
 import com.procurement.mdm.infrastructure.web.controller.RestExceptionHandler
@@ -63,11 +63,11 @@ class CriteriaControllerIT : AbstractRepositoryTest() {
     private lateinit var criteriaService: CriteriaService
 
     @Autowired
-    private lateinit var criteriaRepository: CriteriaRepository
+    private lateinit var criterionRepository: CriterionRepository
 
     @BeforeEach
     fun init(restDocumentation: RestDocumentationContextProvider) {
-        criteriaService = CriteriaServiceImpl(criteriaRepository)
+        criteriaService = CriteriaServiceImpl(criterionRepository)
 
         val controller = CriteriaController(criteriaService)
         val restExceptionHandler = RestExceptionHandler()

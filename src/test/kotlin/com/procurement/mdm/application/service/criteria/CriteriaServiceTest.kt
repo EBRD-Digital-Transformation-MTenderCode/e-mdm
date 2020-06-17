@@ -9,7 +9,7 @@ import com.procurement.mdm.domain.model.Pmd
 import com.procurement.mdm.domain.model.code.CountryCode
 import com.procurement.mdm.domain.model.code.LanguageCode
 import com.procurement.mdm.domain.model.identifier.CriteriaIdentifier
-import com.procurement.mdm.domain.repository.criteria.CriteriaRepository
+import com.procurement.mdm.domain.repository.criteria.CriterionRepository
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
@@ -43,20 +43,20 @@ class CriteriaServiceTest {
         )
     }
 
-    private lateinit var criteriaRepository: CriteriaRepository
+    private lateinit var criterionRepository: CriterionRepository
     private lateinit var service: CriteriaService
 
     @BeforeEach
     fun init() {
-        criteriaRepository = mock()
-        service = CriteriaServiceImpl(criteriaRepository)
+        criterionRepository = mock()
+        service = CriteriaServiceImpl(criterionRepository)
     }
 
     @Test
     fun `Getting all criterion is successful`() {
         val storedCriterion = listOf(FIRST_CRITERION_ENTITY, SECOND_CRITERION_ENTITY)
         whenever(
-            criteriaRepository.findBy(
+            criterionRepository.findBy(
                 country = eq(COUNTRY_CODE),
                 pmd = eq(CRITERIA_PMD),
                 language = eq(LANGUAGE_CODE),
@@ -77,7 +77,7 @@ class CriteriaServiceTest {
     @Test
     fun `Getting all criterion fails (criteria not found)`() {
         whenever(
-            criteriaRepository.findBy(
+            criterionRepository.findBy(
                 country = eq(COUNTRY_CODE),
                 pmd = eq(CRITERIA_PMD),
                 language = eq(LANGUAGE_CODE),
