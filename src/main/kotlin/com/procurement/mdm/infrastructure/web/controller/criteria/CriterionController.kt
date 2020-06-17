@@ -25,7 +25,7 @@ class CriterionController(private val criterionService: CriterionService) {
         @RequestParam(value = "country", required = false) country: String?,
         @RequestParam(value = "pmd", required = false) pmd: String?,
         @RequestParam(value = "phase", required = false) phase: String?
-    ): CriterionApiResponse {
+    ): CriteriaApiResponse {
         if (lang == null)
             throw LanguageRequestParameterMissingException()
         if (country == null)
@@ -37,17 +37,17 @@ class CriterionController(private val criterionService: CriterionService) {
 
         return criterionService.getAll(country = country, language = lang, pmd = pmd, phase = phase)
             .map { criteria ->
-                Criteria(
+                Criterion(
                     id = criteria.id,
                     title = criteria.title,
                     description = criteria.description
                 )
-            }.let { CriterionApiResponse(it) }
+            }.let { CriteriaApiResponse(it) }
     }
 
-    class CriterionApiResponse(criterion: List<Criteria>) : ApiResponse<List<Criteria>>(criterion)
+    class CriteriaApiResponse(criteria: List<Criterion>) : ApiResponse<List<Criterion>>(criteria)
 
-    data class Criteria(
+    data class Criterion(
         @field:JsonProperty("id") @param:JsonProperty("id") val id: String,
         @field:JsonProperty("title") @param:JsonProperty("title") val title: String,
         @field:JsonProperty("description") @param:JsonProperty("description") val description: String
