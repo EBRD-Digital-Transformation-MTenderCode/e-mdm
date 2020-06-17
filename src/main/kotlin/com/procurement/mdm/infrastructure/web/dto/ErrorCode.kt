@@ -16,6 +16,7 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
     COUNTRY_REQUEST_PARAMETER_MISSING(status = HttpStatus.BAD_REQUEST, group = Groups.REQUEST_PARAMETER_MISSING, id = "02"),
     PMD_REQUEST_PARAMETER_MISSING(status = HttpStatus.BAD_REQUEST, group = Groups.REQUEST_PARAMETER_MISSING, id = "03"),
     PHASE_REQUEST_PARAMETER_MISSING(status = HttpStatus.BAD_REQUEST, group = Groups.REQUEST_PARAMETER_MISSING, id = "04"),
+    CRITERION_REQUEST_PARAMETER_MISSING(status = HttpStatus.BAD_REQUEST, group = Groups.REQUEST_PARAMETER_MISSING, id = "05"),
 
     /**
      * Request parameter is unknown.
@@ -77,7 +78,8 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
      * Tender process
      */
     INVALID_PMD(status = HttpStatus.BAD_REQUEST, group = Groups.TENDER_PROCESS, id = "01"),
-    INVALID_PHASE(status = HttpStatus.BAD_REQUEST, group = Groups.TENDER_PROCESS, id = "02");
+    INVALID_PHASE(status = HttpStatus.BAD_REQUEST, group = Groups.TENDER_PROCESS, id = "02"),
+    INVALID_CRITERION(status = HttpStatus.BAD_REQUEST, group = Groups.TENDER_PROCESS, id = "03");
 
     @JsonValue
     val code: String = "${status.value()}.${GlobalProperties.serviceId}.$group.$id"

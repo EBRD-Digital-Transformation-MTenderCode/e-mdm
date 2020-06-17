@@ -18,6 +18,7 @@ import com.procurement.mdm.domain.exception.CountryUnknownException
 import com.procurement.mdm.domain.exception.DomainException
 import com.procurement.mdm.domain.exception.InvalidCountryCodeException
 import com.procurement.mdm.domain.exception.InvalidCountrySchemeException
+import com.procurement.mdm.domain.exception.InvalidCriterionCodeException
 import com.procurement.mdm.domain.exception.InvalidLanguageCodeException
 import com.procurement.mdm.domain.exception.InvalidLocalityCodeException
 import com.procurement.mdm.domain.exception.InvalidLocalitySchemeException
@@ -27,6 +28,7 @@ import com.procurement.mdm.domain.exception.InvalidRegionCodeException
 import com.procurement.mdm.domain.exception.InvalidRegionSchemeException
 import com.procurement.mdm.domain.exception.LanguageUnknownException
 import com.procurement.mdm.infrastructure.exception.CountryRequestParameterMissingException
+import com.procurement.mdm.infrastructure.exception.CriterionRequestParameterMissingException
 import com.procurement.mdm.infrastructure.exception.InfrastructureException
 import com.procurement.mdm.infrastructure.exception.LanguageRequestParameterMissingException
 import com.procurement.mdm.infrastructure.exception.NoHandlerUrlException
@@ -40,9 +42,11 @@ import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_REQUEST_PARAMETER_MISSING
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_REQUEST_PARAMETER_UNKNOWN
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_SCHEME_NOT_FOUND
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.CRITERION_REQUEST_PARAMETER_MISSING
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INTERNAL_SERVER_ERROR
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_COUNTRY_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_COUNTRY_SCHEME
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_CRITERION
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_LANGUAGE_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_LOCALITY_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_LOCALITY_SCHEME
@@ -114,6 +118,9 @@ class RestExceptionHandler : ResponseEntityExceptionHandler() {
 
             is InvalidPmdException ->
                 exception.handler(errorCode = INVALID_PMD)
+
+            is InvalidCriterionCodeException ->
+                exception.handler(errorCode = INVALID_CRITERION)
         }
 
         return ResponseEntity.status(apiError.status).body(apiError)
@@ -185,6 +192,9 @@ class RestExceptionHandler : ResponseEntityExceptionHandler() {
 
             is PhaseRequestParameterMissingException ->
                 exception.handler(errorCode = PHASE_REQUEST_PARAMETER_MISSING)
+
+            is CriterionRequestParameterMissingException ->
+                exception.handler(errorCode = CRITERION_REQUEST_PARAMETER_MISSING)
         }
 
         return ResponseEntity.status(apiError.status).body(apiError)

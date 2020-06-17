@@ -14,8 +14,11 @@ class RequestPayloadMissingException :
 class NoHandlerUrlException(url: String) :
     InfrastructureException("Unknown url: '$url'.")
 
-class PmdRequestParameterMissingException:
+class PmdRequestParameterMissingException :
     InfrastructureException("The request is missing a required query parameter - 'pmd'.")
 
-class PhaseRequestParameterMissingException:
+class PhaseRequestParameterMissingException :
     InfrastructureException("The request is missing a required query parameter - 'phase'.")
+
+class CriterionRequestParameterMissingException :
+    InfrastructureException("The request is missing a required query parameter - 'criterionId'.")
