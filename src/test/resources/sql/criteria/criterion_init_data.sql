@@ -5,8 +5,8 @@ VALUES (1, 'MD', 'OT', 'SUBMISSION', 'MD_OT_1'),
 
 
 INSERT INTO public.criteria_i18n (id, criterion_id, language_code, title, description)
-VALUES (1, 1, 'EN', 'criteria-title-1', 'criteria-description-1'),
-       (2, 2, 'EN', 'criteria-title-2', 'criteria-description-2');
+VALUES (1, 1, 'EN', 'criterion-title-1', 'criterion-description-1'),
+       (2, 2, 'EN', 'criterion-title-2', 'criterion-description-2');
 
 
 

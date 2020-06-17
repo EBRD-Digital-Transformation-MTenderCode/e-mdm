@@ -46,16 +46,16 @@ class CriteriaControllerIT : AbstractRepositoryTest() {
 
         private const val EMPTY_PARAMETER = "  "
 
-        private val FIRST_CRITERIA_IDENTIFIER = CriteriaIdentifier(
+        private val FIRST_CRITERION_IDENTIFIER = CriteriaIdentifier(
             id = "MD_OT_1",
-            description = "criteria-description-1",
-            title = "criteria-title-1"
+            description = "criterion-description-1",
+            title = "criterion-title-1"
         )
 
-        private val SECOND_CRITERIA_IDENTIFIER = CriteriaIdentifier(
+        private val SECOND_CRITERION_IDENTIFIER = CriteriaIdentifier(
             id = "MD_OT_2",
-            description = "criteria-description-2",
-            title = "criteria-title-2"
+            description = "criterion-description-2",
+            title = "criterion-title-2"
         )
     }
 
@@ -103,12 +103,12 @@ class CriteriaControllerIT : AbstractRepositoryTest() {
             .andExpect(status().isOk)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
             .andExpect(jsonPath("$.data.length()", equalTo(2)))
-            .andExpect(jsonPath("$.data[0].id", equalTo(FIRST_CRITERIA_IDENTIFIER.id)))
-            .andExpect(jsonPath("$.data[0].description", equalTo(FIRST_CRITERIA_IDENTIFIER.description)))
-            .andExpect(jsonPath("$.data[0].title", equalTo(FIRST_CRITERIA_IDENTIFIER.title)))
-            .andExpect(jsonPath("$.data[1].id", equalTo(SECOND_CRITERIA_IDENTIFIER.id)))
-            .andExpect(jsonPath("$.data[1].description", equalTo(SECOND_CRITERIA_IDENTIFIER.description)))
-            .andExpect(jsonPath("$.data[1].title", equalTo(SECOND_CRITERIA_IDENTIFIER.title)))
+            .andExpect(jsonPath("$.data[0].id", equalTo(FIRST_CRITERION_IDENTIFIER.id)))
+            .andExpect(jsonPath("$.data[0].description", equalTo(FIRST_CRITERION_IDENTIFIER.description)))
+            .andExpect(jsonPath("$.data[0].title", equalTo(FIRST_CRITERION_IDENTIFIER.title)))
+            .andExpect(jsonPath("$.data[1].id", equalTo(SECOND_CRITERION_IDENTIFIER.id)))
+            .andExpect(jsonPath("$.data[1].description", equalTo(SECOND_CRITERION_IDENTIFIER.description)))
+            .andExpect(jsonPath("$.data[1].title", equalTo(SECOND_CRITERION_IDENTIFIER.title)))
             .andDo(
                 document(
                     "criteria/get_all/success",
