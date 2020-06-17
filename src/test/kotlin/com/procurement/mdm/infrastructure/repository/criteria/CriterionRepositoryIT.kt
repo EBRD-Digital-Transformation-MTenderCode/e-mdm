@@ -46,7 +46,7 @@ class CriterionRepositoryIT : AbstractRepositoryTest() {
     private lateinit var repository: CriterionRepository
 
     private fun initData() {
-        val sqlCountrySchemes = loadSql("sql/criteria/criterion_init_data.sql")
+        val sqlCountrySchemes = loadSql("sql/criteria/criteria_init_data.sql")
         executeSQLScript(sqlCountrySchemes)
     }
 

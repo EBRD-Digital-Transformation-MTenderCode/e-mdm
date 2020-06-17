@@ -446,7 +446,7 @@ class CriterionControllerIT : AbstractRepositoryTest() {
     }
 
     private fun initData() {
-        val sqlCriterion = loadSql("sql/criteria/criterion_init_data.sql")
+        val sqlCriterion = loadSql("sql/criteria/criteria_init_data.sql")
         executeSQLScript(sqlCriterion)
     }
 
