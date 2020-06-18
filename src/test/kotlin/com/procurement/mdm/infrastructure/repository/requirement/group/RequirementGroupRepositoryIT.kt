@@ -38,7 +38,7 @@ class RequirementGroupRepositoryIT : AbstractRepositoryTest() {
     private lateinit var repository: RequirementGroupRepository
 
     private fun initData() {
-        val sqlCountrySchemes = loadSql("sql/requirement.group/requirement_groups_init_data.sql")
+        val sqlCountrySchemes = loadSql("sql/requirement/group/requirement_groups_init_data.sql")
         executeSQLScript(sqlCountrySchemes)
     }
 

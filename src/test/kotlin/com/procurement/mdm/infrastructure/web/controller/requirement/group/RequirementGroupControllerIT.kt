@@ -569,7 +569,7 @@ class RequirementGroupControllerIT : AbstractRepositoryTest() {
     }
 
     private fun initData() {
-        val sqlCriterion = loadSql("sql/requirement.group/requirement_groups_init_data.sql")
+        val sqlCriterion = loadSql("sql/requirement/group/requirement_groups_init_data.sql")
         executeSQLScript(sqlCriterion)
     }
 
