@@ -25,3 +25,6 @@ class CountryUnknownException(country: String) : DomainException("The unknown co
 class InvalidPmdException(description: String) : DomainException(description)
 
 class InvalidPhaseException(description: String) : DomainException(description)
+
+class InvalidRequirementGroupCodeException(description: String) : DomainException(description)
+

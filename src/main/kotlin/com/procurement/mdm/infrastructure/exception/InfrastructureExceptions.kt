@@ -22,3 +22,6 @@ class PhaseRequestParameterMissingException :
 
 class CriterionRequestParameterMissingException :
     InfrastructureException("The request is missing a required query parameter - 'criterionId'.")
+
+class RequirementGroupIdParameterMissingException:
+    InfrastructureException("The request is missing a required query parameter - 'requirementGroupId'.")

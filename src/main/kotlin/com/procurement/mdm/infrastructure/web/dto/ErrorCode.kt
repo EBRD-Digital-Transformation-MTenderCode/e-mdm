@@ -17,6 +17,7 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
     PMD_REQUEST_PARAMETER_MISSING(status = HttpStatus.BAD_REQUEST, group = Groups.REQUEST_PARAMETER_MISSING, id = "03"),
     PHASE_REQUEST_PARAMETER_MISSING(status = HttpStatus.BAD_REQUEST, group = Groups.REQUEST_PARAMETER_MISSING, id = "04"),
     CRITERION_REQUEST_PARAMETER_MISSING(status = HttpStatus.BAD_REQUEST, group = Groups.REQUEST_PARAMETER_MISSING, id = "05"),
+    REQUIREMENT_GROUP_REQUEST_PARAMETER_MISSING(status = HttpStatus.BAD_REQUEST, group = Groups.REQUEST_PARAMETER_MISSING, id = "06"),
 
     /**
      * Request parameter is unknown.
@@ -79,7 +80,8 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
      */
     INVALID_PMD(status = HttpStatus.BAD_REQUEST, group = Groups.TENDER_PROCESS, id = "01"),
     INVALID_PHASE(status = HttpStatus.BAD_REQUEST, group = Groups.TENDER_PROCESS, id = "02"),
-    INVALID_CRITERION(status = HttpStatus.BAD_REQUEST, group = Groups.TENDER_PROCESS, id = "03");
+    INVALID_CRITERION(status = HttpStatus.BAD_REQUEST, group = Groups.TENDER_PROCESS, id = "03"),
+    INVALID_REQUIREMENT_GROUP(status = HttpStatus.BAD_REQUEST, group = Groups.TENDER_PROCESS, id = "04");
 
     @JsonValue
     val code: String = "${status.value()}.${GlobalProperties.serviceId}.$group.$id"

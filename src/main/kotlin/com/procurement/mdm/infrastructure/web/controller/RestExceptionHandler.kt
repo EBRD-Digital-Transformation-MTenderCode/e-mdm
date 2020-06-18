@@ -26,6 +26,7 @@ import com.procurement.mdm.domain.exception.InvalidPhaseException
 import com.procurement.mdm.domain.exception.InvalidPmdException
 import com.procurement.mdm.domain.exception.InvalidRegionCodeException
 import com.procurement.mdm.domain.exception.InvalidRegionSchemeException
+import com.procurement.mdm.domain.exception.InvalidRequirementGroupCodeException
 import com.procurement.mdm.domain.exception.LanguageUnknownException
 import com.procurement.mdm.infrastructure.exception.CountryRequestParameterMissingException
 import com.procurement.mdm.infrastructure.exception.CriterionRequestParameterMissingException
@@ -35,6 +36,7 @@ import com.procurement.mdm.infrastructure.exception.NoHandlerUrlException
 import com.procurement.mdm.infrastructure.exception.PhaseRequestParameterMissingException
 import com.procurement.mdm.infrastructure.exception.PmdRequestParameterMissingException
 import com.procurement.mdm.infrastructure.exception.RequestPayloadMissingException
+import com.procurement.mdm.infrastructure.exception.RequirementGroupIdParameterMissingException
 import com.procurement.mdm.infrastructure.web.dto.ApiError
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_DESCRIPTION_NOT_FOUND
@@ -54,6 +56,7 @@ import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_PHASE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_PMD
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_REGION_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_REGION_SCHEME
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_REQUIREMENT_GROUP
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_URL
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LANGUAGE_REQUEST_PARAMETER_MISSING
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LANGUAGE_REQUEST_PARAMETER_UNKNOWN
@@ -70,6 +73,7 @@ import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REGION_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REGION_NOT_LINKED_TO_COUNTRY
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REGION_SCHEME_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REQUEST_PAYLOAD_MISSING
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REQUIREMENT_GROUP_REQUEST_PARAMETER_MISSING
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
@@ -121,6 +125,9 @@ class RestExceptionHandler : ResponseEntityExceptionHandler() {
 
             is InvalidCriterionCodeException ->
                 exception.handler(errorCode = INVALID_CRITERION)
+
+            is InvalidRequirementGroupCodeException ->
+                exception.handler(errorCode = INVALID_REQUIREMENT_GROUP)
         }
 
         return ResponseEntity.status(apiError.status).body(apiError)
@@ -195,6 +202,9 @@ class RestExceptionHandler : ResponseEntityExceptionHandler() {
 
             is CriterionRequestParameterMissingException ->
                 exception.handler(errorCode = CRITERION_REQUEST_PARAMETER_MISSING)
+
+            is RequirementGroupIdParameterMissingException ->
+                exception.handler(errorCode = REQUIREMENT_GROUP_REQUEST_PARAMETER_MISSING)
         }
 
         return ResponseEntity.status(apiError.status).body(apiError)
