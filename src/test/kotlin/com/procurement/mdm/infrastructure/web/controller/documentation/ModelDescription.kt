@@ -142,7 +142,7 @@ object ModelDescription {
             return listOf(
                 getFieldDescriptor("data[]", "The data of response."),
                 getFieldDescriptor("data[].id", "The identifier of the criterion."),
-                getFieldDescriptor("data[].description", "The description of the criterion."),
+                getFieldDescriptorOptional("data[].description", "The description of the criterion."),
                 getFieldDescriptor("data[].title", "The title of the criterion.")
             )
         }
