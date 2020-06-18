@@ -13,6 +13,9 @@ import com.procurement.mdm.domain.exception.InvalidCountryCodeException
 import com.procurement.mdm.domain.exception.InvalidLanguageCodeException
 import com.procurement.mdm.domain.exception.InvalidRegionCodeException
 import com.procurement.mdm.domain.exception.LanguageUnknownException
+import com.procurement.mdm.domain.model.code.CountryCode
+import com.procurement.mdm.domain.model.code.LanguageCode
+import com.procurement.mdm.domain.model.code.RegionCode
 import com.procurement.mdm.domain.model.identifier.RegionIdentifier
 import com.procurement.mdm.infrastructure.web.controller.RestExceptionHandler
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INTERNAL_SERVER_ERROR
@@ -46,6 +49,8 @@ class AddressRegionControllerTest {
         private const val EMPTY_LANGUAGE = "   "
         private const val INVALID_LANGUAGE = "invalid"
         private const val UNKNOWN_LANGUAGE = "ul"
+
+        private const val SCHEME = "cuatm"
     }
 
     private lateinit var mockMvc: MockMvc
@@ -71,13 +76,18 @@ class AddressRegionControllerTest {
             uri = "https://example-1.com"
         )
 
-        whenever(addressRegionService.getBy(region = eq(REGION), country = eq(COUNTRY), language = eq(LANGUAGE)))
+        whenever(
+            addressRegionService.getBy(
+                region = eq(REGION), country = eq(COUNTRY), language = eq(LANGUAGE), scheme = eq(SCHEME)
+            )
+        )
             .thenReturn(expected)
 
         val url = getUrl(region = REGION, country = COUNTRY)
         mockMvc.perform(
             get(url)
                 .param("lang", LANGUAGE)
+                .param("scheme", SCHEME)
         )
             .andExpect(status().isOk)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -87,7 +97,7 @@ class AddressRegionControllerTest {
             .andExpect(jsonPath("$.data.uri", equalTo(expected.uri)))
 
         verify(addressRegionService, times(1))
-            .getBy(region = any(), country = any(), language = any())
+            .getBy(region = any(), country = any(), language = any(), scheme = any())
     }
 
     @Test
@@ -108,19 +118,20 @@ class AddressRegionControllerTest {
             )
 
         verify(addressRegionService, times(0))
-            .getBy(region = any(), country = any(), language = any())
+            .getBy(region = any(), country = any(), language = any(), scheme = any())
     }
 
     @Test
     fun `Getting the region by code is error (language request parameter is empty)`() {
         doThrow(InvalidLanguageCodeException(description = "Invalid language code (value is blank)."))
             .whenever(addressRegionService)
-            .getBy(region = eq(REGION), country = eq(COUNTRY), language = eq(EMPTY_LANGUAGE))
+            .getBy(region = eq(REGION), country = eq(COUNTRY), language = eq(EMPTY_LANGUAGE), scheme = eq(SCHEME))
 
         val url = getUrl(country = COUNTRY, region = REGION)
         mockMvc.perform(
             get(url)
                 .param("lang", EMPTY_LANGUAGE)
+                .param("scheme", SCHEME)
         )
             .andExpect(status().isBadRequest)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -134,19 +145,20 @@ class AddressRegionControllerTest {
             )
 
         verify(addressRegionService, times(1))
-            .getBy(country = any(), region = any(), language = any())
+            .getBy(country = any(), region = any(), language = any(), scheme = any())
     }
 
     @Test
     fun `Getting the region by code is error (language request parameter is invalid)`() {
         doThrow(InvalidLanguageCodeException(description = "Invalid language code: '$INVALID_LANGUAGE' (wrong length: '${INVALID_LANGUAGE.length}' required: '2')."))
             .whenever(addressRegionService)
-            .getBy(region = eq(REGION), country = eq(COUNTRY), language = eq(INVALID_LANGUAGE))
+            .getBy(region = eq(REGION), country = eq(COUNTRY), language = eq(INVALID_LANGUAGE), scheme = eq(SCHEME))
 
         val url = getUrl(country = COUNTRY, region = REGION)
         mockMvc.perform(
             get(url)
                 .param("lang", INVALID_LANGUAGE)
+                .param("scheme", SCHEME)
         )
             .andExpect(status().isBadRequest)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -160,19 +172,20 @@ class AddressRegionControllerTest {
             )
 
         verify(addressRegionService, times(1))
-            .getBy(country = any(), region = any(), language = any())
+            .getBy(country = any(), region = any(), language = any(), scheme = any())
     }
 
     @Test
     fun `Getting the region by code is error (language request parameter is unknown)`() {
         doThrow(LanguageUnknownException(language = UNKNOWN_LANGUAGE))
             .whenever(addressRegionService)
-            .getBy(region = eq(REGION), country = eq(COUNTRY), language = eq(UNKNOWN_LANGUAGE))
+            .getBy(region = eq(REGION), country = eq(COUNTRY), language = eq(UNKNOWN_LANGUAGE), scheme = eq(SCHEME))
 
         val url = getUrl(region = REGION, country = COUNTRY)
         mockMvc.perform(
             get(url)
                 .param("lang", UNKNOWN_LANGUAGE)
+                .param("scheme", SCHEME)
         )
             .andExpect(status().isBadRequest)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -186,19 +199,20 @@ class AddressRegionControllerTest {
             )
 
         verify(addressRegionService, times(1))
-            .getBy(region = any(), country = any(), language = any())
+            .getBy(region = any(), country = any(), language = any(), scheme = any())
     }
 
     @Test
     fun `Getting the region by code is error (country code is empty)`() {
         doThrow(InvalidCountryCodeException(description = "Invalid country code (value is blank)."))
             .whenever(addressRegionService)
-            .getBy(region = eq(REGION), country = eq(EMPTY_COUNTRY), language = eq(LANGUAGE))
+            .getBy(region = eq(REGION), country = eq(EMPTY_COUNTRY), language = eq(LANGUAGE), scheme = eq(SCHEME))
 
         val url = getUrl(region = REGION, country = EMPTY_COUNTRY)
         mockMvc.perform(
             get(url)
                 .param("lang", LANGUAGE)
+                .param("scheme", SCHEME)
         )
             .andExpect(status().isBadRequest)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -212,7 +226,7 @@ class AddressRegionControllerTest {
             )
 
         verify(addressRegionService, times(1))
-            .getBy(region = any(), country = any(), language = any())
+            .getBy(region = any(), country = any(), language = any(), scheme = any())
     }
 
     @Test
@@ -220,12 +234,13 @@ class AddressRegionControllerTest {
 
         doThrow(InvalidCountryCodeException(description = "Invalid country code: '$INVALID_COUNTRY' (wrong length: '${INVALID_COUNTRY.length}' required: '2')."))
             .whenever(addressRegionService)
-            .getBy(region = eq(REGION), country = eq(INVALID_COUNTRY), language = eq(LANGUAGE))
+            .getBy(region = eq(REGION), country = eq(INVALID_COUNTRY), language = eq(LANGUAGE), scheme = eq(SCHEME))
 
         val url = getUrl(region = REGION, country = INVALID_COUNTRY)
         mockMvc.perform(
             get(url)
                 .param("lang", LANGUAGE)
+                .param("scheme", SCHEME)
         )
             .andExpect(status().isBadRequest)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -239,19 +254,20 @@ class AddressRegionControllerTest {
             )
 
         verify(addressRegionService, times(1))
-            .getBy(region = any(), country = any(), language = any())
+            .getBy(region = any(), country = any(), language = any(), scheme = any())
     }
 
     @Test
     fun `Getting the region by code is error (region code is empty)`() {
         doThrow(InvalidRegionCodeException(description = "Invalid region code (value is blank)."))
             .whenever(addressRegionService)
-            .getBy(region = eq(EMPTY_REGION), country = eq(COUNTRY), language = eq(LANGUAGE))
+            .getBy(region = eq(EMPTY_REGION), country = eq(COUNTRY), language = eq(LANGUAGE), scheme = eq(SCHEME))
 
         val url = getUrl(region = EMPTY_REGION, country = COUNTRY)
         mockMvc.perform(
             get(url)
                 .param("lang", LANGUAGE)
+                .param("scheme", SCHEME)
         )
             .andExpect(status().isBadRequest)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -265,7 +281,7 @@ class AddressRegionControllerTest {
             )
 
         verify(addressRegionService, times(1))
-            .getBy(region = any(), country = any(), language = any())
+            .getBy(region = any(), country = any(), language = any(), scheme = any())
     }
 
     @Test
@@ -273,12 +289,13 @@ class AddressRegionControllerTest {
 
         doThrow(InvalidRegionCodeException(description = "Invalid region code: '$INVALID_REGION' (wrong length: '${INVALID_REGION.length}' required: '2')."))
             .whenever(addressRegionService)
-            .getBy(region = eq(INVALID_REGION), country = eq(COUNTRY), language = eq(LANGUAGE))
+            .getBy(region = eq(INVALID_REGION), country = eq(COUNTRY), language = eq(LANGUAGE), scheme = eq(SCHEME))
 
         val url = getUrl(region = INVALID_REGION, country = COUNTRY)
         mockMvc.perform(
             get(url)
                 .param("lang", LANGUAGE)
+                .param("scheme", SCHEME)
         )
             .andExpect(status().isBadRequest)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -292,19 +309,24 @@ class AddressRegionControllerTest {
             )
 
         verify(addressRegionService, times(1))
-            .getBy(region = any(), country = any(), language = any())
+            .getBy(region = any(), country = any(), language = any(), scheme = any())
     }
 
     @Test
     fun `Getting the region by code is error (region is not found)`() {
-        doThrow(RegionNotFoundException(region = REGION, country = COUNTRY, language = LANGUAGE))
+        doThrow(
+            RegionNotFoundException(
+                region = RegionCode(REGION), country = CountryCode(COUNTRY), language = LanguageCode(LANGUAGE)
+            )
+        )
             .whenever(addressRegionService)
-            .getBy(region = eq(REGION), country = eq(COUNTRY), language = eq(LANGUAGE))
+            .getBy(region = eq(REGION), country = eq(COUNTRY), language = eq(LANGUAGE), scheme = eq(SCHEME))
 
         val url = getUrl(region = REGION, country = COUNTRY)
         mockMvc.perform(
             get(url)
                 .param("lang", LANGUAGE)
+                .param("scheme", SCHEME)
         )
             .andExpect(status().isNotFound)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -319,19 +341,20 @@ class AddressRegionControllerTest {
 
 
         verify(addressRegionService, times(1))
-            .getBy(region = any(), country = any(), language = any())
+            .getBy(region = any(), country = any(), language = any(), scheme = any())
     }
 
     @Test
     fun `Getting the region by code is error (internal server error)`() {
         doThrow(RuntimeException())
             .whenever(addressRegionService)
-            .getBy(region = eq(REGION), country = eq(COUNTRY), language = eq(LANGUAGE))
+            .getBy(region = eq(REGION), country = eq(COUNTRY), language = eq(LANGUAGE), scheme = eq(SCHEME))
 
         val url = getUrl(region = REGION, country = COUNTRY)
         mockMvc.perform(
             get(url)
                 .param("lang", LANGUAGE)
+                .param("scheme", SCHEME)
         )
             .andExpect(status().isInternalServerError)
             .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -340,7 +363,7 @@ class AddressRegionControllerTest {
             .andExpect(jsonPath("$.errors[0].description", equalTo("Internal server error.")))
 
         verify(addressRegionService, times(1))
-            .getBy(region = any(), country = any(), language = any())
+            .getBy(region = any(), country = any(), language = any(), scheme = any())
     }
 
     private fun getUrl(region: String, country: String): String =

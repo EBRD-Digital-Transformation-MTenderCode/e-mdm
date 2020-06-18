@@ -49,7 +49,8 @@ class AddressLocalityController(private val addressLocalityService: AddressLocal
         @PathVariable(value = "countryId") countryId: String,
         @PathVariable(value = "regionId") regionId: String,
         @PathVariable(value = "localityId") localityId: String,
-        @RequestParam(value = "lang", required = false) lang: String?
+        @RequestParam(value = "lang", required = false) lang: String?,
+        @RequestParam(value = "scheme", required = false) scheme: String?
     ): LocalityApiResponse {
 
         if (lang == null)
@@ -59,7 +60,8 @@ class AddressLocalityController(private val addressLocalityService: AddressLocal
             locality = localityId,
             country = countryId,
             region = regionId,
-            language = lang
+            language = lang,
+            scheme = scheme
         )
 
         return LocalityApiResponse(
