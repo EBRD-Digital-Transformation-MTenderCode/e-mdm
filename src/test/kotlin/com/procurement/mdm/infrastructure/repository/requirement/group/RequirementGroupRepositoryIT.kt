@@ -38,8 +38,8 @@ class RequirementGroupRepositoryIT : AbstractRepositoryTest() {
     private lateinit var repository: RequirementGroupRepository
 
     private fun initData() {
-        val sqlCountrySchemes = loadSql("sql/requirement/group/requirement_groups_init_data.sql")
-        executeSQLScript(sqlCountrySchemes)
+        val sqlRequirementGroups = loadSql("sql/requirement/group/requirement_groups_init_data.sql")
+        executeSQLScript(sqlRequirementGroups)
     }
 
     @Test
@@ -99,7 +99,7 @@ class RequirementGroupRepositoryIT : AbstractRepositoryTest() {
     }
 
     @Test
-    fun `Finding criterion is successful (unknown country)`() {
+    fun `Finding requirement group is successful (unknown country)`() {
         initData()
 
         val actual = repository.findBy(
@@ -114,7 +114,7 @@ class RequirementGroupRepositoryIT : AbstractRepositoryTest() {
     }
 
     @Test
-    fun `Finding criterion is successful (unknown pmd)`() {
+    fun `Finding requirement group is successful (unknown pmd)`() {
         initData()
 
         val actual = repository.findBy(
@@ -129,7 +129,7 @@ class RequirementGroupRepositoryIT : AbstractRepositoryTest() {
     }
 
     @Test
-    fun `Finding criterion is successful (unknown language)`() {
+    fun `Finding requirement group is successful (unknown language)`() {
         initData()
 
         val actual = repository.findBy(
@@ -144,7 +144,7 @@ class RequirementGroupRepositoryIT : AbstractRepositoryTest() {
     }
 
     @Test
-    fun `Finding criterion is successful (unknown phase)`() {
+    fun `Finding requirement group is successful (unknown phase)`() {
         initData()
 
         val actual = repository.findBy(
@@ -159,7 +159,7 @@ class RequirementGroupRepositoryIT : AbstractRepositoryTest() {
     }
 
     @Test
-    fun `Finding criterion is successful (unknown criterion)`() {
+    fun `Finding requirement group is successful (unknown criterion)`() {
         initData()
 
         val actual = repository.findBy(
