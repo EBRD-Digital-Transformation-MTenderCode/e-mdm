@@ -1,5 +1,6 @@
 package com.procurement.mdm.infrastructure.web.controller.criterion
 
+import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.procurement.mdm.application.service.criterion.CriterionService
 import com.procurement.mdm.infrastructure.exception.CountryRequestParameterMissingException
@@ -50,6 +51,7 @@ class CriterionController(private val criterionService: CriterionService) {
     data class Criterion(
         @field:JsonProperty("id") @param:JsonProperty("id") val id: String,
         @field:JsonProperty("title") @param:JsonProperty("title") val title: String,
-        @field:JsonProperty("description") @param:JsonProperty("description") val description: String
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        @field:JsonProperty("description") @param:JsonProperty("description") val description: String?
     )
 }
