@@ -10,6 +10,8 @@ class InvalidCountrySchemeException(description: String) : DomainException(descr
 
 class InvalidRegionCodeException(description: String) : DomainException(description)
 
+class InvalidCriterionCodeException(description: String) : DomainException(description)
+
 class InvalidRegionSchemeException(description: String) : DomainException(description)
 
 class InvalidLocalityCodeException(description: String) : DomainException(description)
@@ -19,3 +21,10 @@ class InvalidLocalitySchemeException(description: String) : DomainException(desc
 class LanguageUnknownException(language: String) : DomainException("The unknown code of a language '$language'.")
 
 class CountryUnknownException(country: String) : DomainException("The unknown code of a country '$country'.")
+
+class InvalidPmdException(description: String) : DomainException(description)
+
+class InvalidPhaseException(description: String) : DomainException(description)
+
+class InvalidRequirementGroupCodeException(description: String) : DomainException(description)
+

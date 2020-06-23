@@ -14,6 +14,10 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
      */
     LANGUAGE_REQUEST_PARAMETER_MISSING(status = HttpStatus.BAD_REQUEST, group = Groups.REQUEST_PARAMETER_MISSING, id = "01"),
     COUNTRY_REQUEST_PARAMETER_MISSING(status = HttpStatus.BAD_REQUEST, group = Groups.REQUEST_PARAMETER_MISSING, id = "02"),
+    PMD_REQUEST_PARAMETER_MISSING(status = HttpStatus.BAD_REQUEST, group = Groups.REQUEST_PARAMETER_MISSING, id = "03"),
+    PHASE_REQUEST_PARAMETER_MISSING(status = HttpStatus.BAD_REQUEST, group = Groups.REQUEST_PARAMETER_MISSING, id = "04"),
+    CRITERION_REQUEST_PARAMETER_MISSING(status = HttpStatus.BAD_REQUEST, group = Groups.REQUEST_PARAMETER_MISSING, id = "05"),
+    REQUIREMENT_GROUP_REQUEST_PARAMETER_MISSING(status = HttpStatus.BAD_REQUEST, group = Groups.REQUEST_PARAMETER_MISSING, id = "06"),
 
     /**
      * Request parameter is unknown.
@@ -69,7 +73,15 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
     /**
      * Organization scale
      */
-    ORGANIZATION_SCALE_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.ORGANIZATION_SCALE, id = "01");
+    ORGANIZATION_SCALE_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.ORGANIZATION_SCALE, id = "01"),
+
+    /**
+     * Tender process
+     */
+    INVALID_PMD(status = HttpStatus.BAD_REQUEST, group = Groups.TENDER_PROCESS, id = "01"),
+    INVALID_PHASE(status = HttpStatus.BAD_REQUEST, group = Groups.TENDER_PROCESS, id = "02"),
+    INVALID_CRITERION(status = HttpStatus.BAD_REQUEST, group = Groups.TENDER_PROCESS, id = "03"),
+    INVALID_REQUIREMENT_GROUP(status = HttpStatus.BAD_REQUEST, group = Groups.TENDER_PROCESS, id = "04");
 
     @JsonValue
     val code: String = "${status.value()}.${GlobalProperties.serviceId}.$group.$id"
@@ -84,7 +96,8 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
         REGION(code = "12"),
         LOCALITY(code = "13"),
         ORGANIZATION_SCHEME(code = "14"),
-        ORGANIZATION_SCALE(code = "15");
+        ORGANIZATION_SCALE(code = "15"),
+        TENDER_PROCESS(code = "16");
 
         override fun toString(): String = code
     }

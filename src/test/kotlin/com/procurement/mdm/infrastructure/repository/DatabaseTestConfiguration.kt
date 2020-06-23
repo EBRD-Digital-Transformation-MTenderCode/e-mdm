@@ -4,17 +4,23 @@ import com.procurement.mdm.domain.repository.AdvancedLanguageRepository
 import com.procurement.mdm.domain.repository.address.AddressCountryRepository
 import com.procurement.mdm.domain.repository.address.AddressLocalityRepository
 import com.procurement.mdm.domain.repository.address.AddressRegionRepository
+import com.procurement.mdm.domain.repository.criterion.CriterionRepository
 import com.procurement.mdm.domain.repository.organization.OrganizationScaleRepository
 import com.procurement.mdm.domain.repository.organization.OrganizationSchemeRepository
+import com.procurement.mdm.domain.repository.requirement.RequirementRepository
+import com.procurement.mdm.domain.repository.requirement.group.RequirementGroupRepository
 import com.procurement.mdm.domain.repository.scheme.CountrySchemeRepository
 import com.procurement.mdm.domain.repository.scheme.LocalitySchemeRepository
 import com.procurement.mdm.domain.repository.scheme.RegionSchemeRepository
 import com.procurement.mdm.infrastructure.repository.address.PostgresAddressCountryRepository
 import com.procurement.mdm.infrastructure.repository.address.PostgresAddressLocalityRepository
 import com.procurement.mdm.infrastructure.repository.address.PostgresAddressRegionRepository
+import com.procurement.mdm.infrastructure.repository.criterion.PostgresCriterionRepository
 import com.procurement.mdm.infrastructure.repository.language.PostgresLanguageRepository
 import com.procurement.mdm.infrastructure.repository.organization.PostgresOrganizationScaleRepository
 import com.procurement.mdm.infrastructure.repository.organization.PostgresOrganizationSchemeRepository
+import com.procurement.mdm.infrastructure.repository.requirement.PostgresRequirementRepository
+import com.procurement.mdm.infrastructure.repository.requirement.group.PostgresRequirementGroupRepository
 import com.procurement.mdm.infrastructure.repository.scheme.PostgresCountrySchemeRepository
 import com.procurement.mdm.infrastructure.repository.scheme.PostgresLocalitySchemeRepository
 import com.procurement.mdm.infrastructure.repository.scheme.PostgresRegionSchemeRepository
@@ -99,6 +105,18 @@ class DatabaseTestConfiguration {
     @Bean
     fun countrySchemeRepository(): CountrySchemeRepository =
         PostgresCountrySchemeRepository(jdbcTemplate())
+
+    @Bean
+    fun criterionRepository(): CriterionRepository =
+        PostgresCriterionRepository(jdbcTemplate())
+
+    @Bean
+    fun requirementGroupRepository(): RequirementGroupRepository =
+        PostgresRequirementGroupRepository(jdbcTemplate())
+
+    @Bean
+    fun requirementRepository(): RequirementRepository =
+        PostgresRequirementRepository(jdbcTemplate())
 
     @Bean
     fun liquibase() = Liquibase(changeLogFile, FileSystemResourceAccessor(liquibaseDir()), database(dataSource()))
