@@ -74,11 +74,13 @@ object ModelDescription {
                     getFieldDescriptor("data[].uri", "A URI to identify the locality.")
                 )
             }
+
             fun emptyCollection(): List<FieldDescriptor> {
                 return listOf(
                     getFieldDescriptor("data", "Empty data of response.")
                 )
             }
+
             fun schemesCollection(): List<FieldDescriptor> {
                 return listOf(
                     getFieldDescriptor("data", "The data of response."),
@@ -135,6 +137,56 @@ object ModelDescription {
         }
     }
 
+    object Criterion {
+        fun collection(): List<FieldDescriptor> {
+            return listOf(
+                getFieldDescriptor("data[]", "The data of response."),
+                getFieldDescriptor("data[].id", "The identifier of the criterion."),
+                getFieldDescriptorOptional("data[].description", "The description of the criterion."),
+                getFieldDescriptor("data[].title", "The title of the criterion.")
+            )
+        }
+
+        fun emptyCollection(): List<FieldDescriptor> {
+            return listOf(
+                getFieldDescriptor("data", "Empty data of response.")
+            )
+        }
+    }
+
+    object RequirementGroup {
+        fun collection(): List<FieldDescriptor> {
+            return listOf(
+                getFieldDescriptor("data[]", "The data of response."),
+                getFieldDescriptor("data[].id", "The identifier of the requirement group."),
+                getFieldDescriptorOptional("data[].description", "The description of the requirement group.")
+            )
+        }
+
+        fun emptyCollection(): List<FieldDescriptor> {
+            return listOf(
+                getFieldDescriptor("data", "Empty data of response.")
+            )
+        }
+    }
+
+    object Requirement {
+        fun collection(): List<FieldDescriptor> {
+            return listOf(
+                getFieldDescriptor("data[]", "The data of response."),
+                getFieldDescriptor("data[].id", "The identifier of the requirement."),
+                getFieldDescriptor("data[].title", "The title of the requirement."),
+                getFieldDescriptorOptional("data[].description", "The description of the requirement.")
+            )
+        }
+
+        fun emptyCollection(): List<FieldDescriptor> {
+            return listOf(
+                getFieldDescriptor("data", "Empty data of response.")
+            )
+        }
+    }
+
     fun responseError(): List<FieldDescriptor> {
         return listOf(
             getFieldDescriptor("errors", "List of errors."),
@@ -146,3 +198,6 @@ object ModelDescription {
 
 private fun getFieldDescriptor(property: String, description: String): FieldDescriptor =
     fieldWithPath(property).description(description)
+
+private fun getFieldDescriptorOptional(property: String, description: String): FieldDescriptor =
+    fieldWithPath(property).description(description).optional().type(String::class.java)
