@@ -2,6 +2,7 @@ package com.procurement.mdm.model.dto.data.ei
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
+import java.math.BigDecimal
 
 data class EIResponse(
     @param:JsonProperty("tender") @field:JsonProperty("tender") val tender: Tender,
@@ -26,10 +27,10 @@ data class EIResponse(
             @param:JsonProperty("classification") @field:JsonProperty("classification") val classification: Classification,
 
             @JsonInclude(JsonInclude.Include.NON_EMPTY)
-            @param:JsonProperty("--additionalClassifications") @field:JsonProperty("additionalClassifications") val additionalClassifications: List<AdditionalClassification>,
+            @param:JsonProperty("additionalClassifications") @field:JsonProperty("additionalClassifications") val additionalClassifications: List<AdditionalClassification>?,
 
             @param:JsonProperty("deliveryAddress") @field:JsonProperty("deliveryAddress") val deliveryAddress: DeliveryAddress,
-            @param:JsonProperty("quantity") @field:JsonProperty("quantity") val quantity: Double,
+            @param:JsonProperty("quantity") @field:JsonProperty("quantity") val quantity: BigDecimal,
             @param:JsonProperty("unit") @field:JsonProperty("unit") val unit: Unit
         ) {
             data class Classification(
@@ -51,7 +52,7 @@ data class EIResponse(
                 @param:JsonProperty("streetAddress") @field:JsonProperty("streetAddress") val streetAddress: String,
 
                 @JsonInclude(JsonInclude.Include.NON_NULL)
-                @param:JsonProperty("-postalCode") @field:JsonProperty("postalCode") val postalCode: String
+                @param:JsonProperty("postalCode") @field:JsonProperty("postalCode") val postalCode: String?
             )
 
             data class Unit(
