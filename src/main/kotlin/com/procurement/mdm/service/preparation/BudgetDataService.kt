@@ -61,11 +61,11 @@ class BudgetDataServiceImpl(
         val request = getEiRequest(cm)
         val data = request.convert()
 
-        val buyer = data.buyer ?: throw InErrorException(ErrorType.INVALID_BUYER)
-        organizationDataService.processOrganization(buyer, country)
+        data.buyer ?: throw InErrorException(ErrorType.INVALID_BUYER)
+        organizationDataService.processOrganization(data.buyer, country)
 
         val language = validationService.getLanguage(languageCode = lang, internal = true)
-        val updatedItems = updateItems(data, language)
+        val updatedItems = updateItems(data, language, cm.context.country)
 
         val updatedData = data.copy(tender = data.tender.copy(items = updatedItems))
 
@@ -411,120 +411,133 @@ class BudgetDataServiceImpl(
     private fun EIData.convert(cpvEntity: Cpv) = EIResponse(
         tender = tender.let { tender ->
             EIResponse.Tender(
-                classification = tender.classification.let { classification ->
-                    EIResponse.Tender.Classification(
-                        id = classification.id,
-                        description = cpvEntity.name,
-                        scheme = ClassificationScheme.CPV.value()
-                    )
-                },
+                classification = tender.classification
+                    .let { classification ->
+                        EIResponse.Tender.Classification(
+                            id = classification.id,
+                            description = cpvEntity.name,
+                            scheme = ClassificationScheme.CPV.value()
+                        )
+                    },
                 mainProcurementCategory = cpvEntity.mainProcurementCategory,
-                items = tender.items.map { item ->
-                    EIResponse.Tender.Item(
-                        id = item.id,
-                        description = item.description,
-                        classification = item.classification.let { classification ->
-                            EIResponse.Tender.Item.Classification(
-                                id = classification.id,
-                                description = classification.description,
-                                scheme = classification.scheme
-                            )
-                        },
-                        additionalClassifications = item.additionalClassifications.map { additionalClassification ->
-                            EIResponse.Tender.Item.AdditionalClassification(
-                                id = additionalClassification.id,
-                                scheme = additionalClassification.scheme,
-                                description = additionalClassification.description
-                            )
-                        },
-                        deliveryAddress = item.deliveryAddress.let { address ->
-                            EIResponse.Tender.Item.DeliveryAddress(
-                                streetAddress = address.streetAddress,
-                                postalCode = address.postalCode,
-                                addressDetails = address.addressDetails.let { addressDetails ->
-                                    EIResponse.Tender.Item.DeliveryAddress.AddressDetails(
-                                        country = addressDetails.country.let { country ->
-                                            EIResponse.Tender.Item.DeliveryAddress.AddressDetails.Country(
-                                                id = country.id,
-                                                description = country.description,
-                                                scheme = country.scheme
-                                            )
-                                        },
-                                        region = addressDetails.region.let { region ->
-                                            EIResponse.Tender.Item.DeliveryAddress.AddressDetails.Region(
-                                                id = region.id,
-                                                description = region.description,
-                                                scheme = region.scheme
-                                            )
-                                        },
-                                        locality = addressDetails.locality?.let { locality ->
-                                            EIResponse.Tender.Item.DeliveryAddress.AddressDetails.Locality(
-                                                id = locality.id,
-                                                description = locality.description,
-                                                scheme = locality.scheme
+                items = tender.items
+                    .map { item ->
+                        EIResponse.Tender.Item(
+                            id = item.id,
+                            description = item.description,
+                            classification = item.classification
+                                .let { classification ->
+                                    EIResponse.Tender.Item.Classification(
+                                        id = classification.id,
+                                        description = classification.description,
+                                        scheme = classification.scheme
+                                    )
+                                },
+                            additionalClassifications = item.additionalClassifications
+                                .map { additionalClassification ->
+                                    EIResponse.Tender.Item.AdditionalClassification(
+                                        id = additionalClassification.id,
+                                        scheme = additionalClassification.scheme,
+                                        description = additionalClassification.description
+                                    )
+                                },
+                            deliveryAddress = item.deliveryAddress
+                                .let { address ->
+                                    EIResponse.Tender.Item.DeliveryAddress(
+                                        streetAddress = address.streetAddress,
+                                        postalCode = address.postalCode,
+                                        addressDetails = address.addressDetails.let { addressDetails ->
+                                            EIResponse.Tender.Item.DeliveryAddress.AddressDetails(
+                                                country = addressDetails.country.let { country ->
+                                                    EIResponse.Tender.Item.DeliveryAddress.AddressDetails.Country(
+                                                        id = country.id,
+                                                        description = country.description,
+                                                        scheme = country.scheme
+                                                    )
+                                                },
+                                                region = addressDetails.region.let { region ->
+                                                    EIResponse.Tender.Item.DeliveryAddress.AddressDetails.Region(
+                                                        id = region.id,
+                                                        description = region.description,
+                                                        scheme = region.scheme
+                                                    )
+                                                },
+                                                locality = addressDetails.locality?.let { locality ->
+                                                    EIResponse.Tender.Item.DeliveryAddress.AddressDetails.Locality(
+                                                        id = locality.id,
+                                                        description = locality.description,
+                                                        scheme = locality.scheme
+                                                    )
+                                                }
                                             )
                                         }
                                     )
+                                },
+                            quantity = item.quantity,
+                            unit = item.unit
+                                .let { unit ->
+                                    EIResponse.Tender.Item.Unit(
+                                        id = unit.id,
+                                        name = unit.name
+                                    )
                                 }
-                            )
-                        },
-                        quantity = item.quantity,
-                        unit = item.unit.let { unit ->
-                            EIResponse.Tender.Item.Unit(
-                                id = unit.id,
-                                name = unit.name
-                            )
-                        }
-                    )
-                }
+                        )
+                    }
             )
         },
-        buyer = buyer.let { buyer ->
+        buyer = buyer?.let { buyer ->
             EIResponse.Buyer(
                 name = buyer.name,
-                address = buyer.address.let { address ->
-                    EIResponse.Buyer.Address(
-                        streetAddress = address.streetAddress,
-                        addressDetails = address.addressDetails.let { addressDetails ->
-                            EIResponse.Buyer.Address.AddressDetails(
-                                country = addressDetails.country.let { country ->
-                                    EIResponse.Buyer.Address.AddressDetails.Country(
-                                        id = country.id,
-                                        description = country.description,
-                                        scheme = country.scheme,
-                                        uri = country.uri
-                                    )
-                                },
-                                region = addressDetails.region.let { region ->
-                                    EIResponse.Buyer.Address.AddressDetails.Region(
-                                        id = region.id,
-                                        description = region.description,
-                                        scheme = region.scheme,
-                                        uri = region.uri
-                                    )
-                                },
-                                locality = addressDetails.locality.let { locality ->
-                                    EIResponse.Buyer.Address.AddressDetails.Locality(
-                                        id = locality.id,
-                                        description = locality.description,
-                                        scheme = locality.scheme,
-                                        uri = locality.uri
+                address = buyer.address
+                    ?.let { address ->
+                        EIResponse.Buyer.Address(
+                            streetAddress = address.streetAddress,
+                            addressDetails = address.addressDetails
+                                .let { addressDetails ->
+                                    EIResponse.Buyer.Address.AddressDetails(
+                                        country = addressDetails.country
+                                            .let { country ->
+                                                EIResponse.Buyer.Address.AddressDetails.Country(
+                                                    id = country.id,
+                                                    description = country.description,
+                                                    scheme = country.scheme,
+                                                    uri = country.uri
+                                                )
+                                            },
+                                        region = addressDetails.region
+                                            .let { region ->
+                                                EIResponse.Buyer.Address.AddressDetails.Region(
+                                                    id = region.id,
+                                                    description = region.description,
+                                                    scheme = region.scheme,
+                                                    uri = region.uri
+                                                )
+                                            },
+                                        locality = addressDetails.locality
+                                            .let { locality ->
+                                                EIResponse.Buyer.Address.AddressDetails.Locality(
+                                                    id = locality.id,
+                                                    description = locality.description,
+                                                    scheme = locality.scheme,
+                                                    uri = locality.uri
+                                                )
+                                            }
                                     )
                                 }
-                            )
-                        }
-                    )
-                },
-                contactPoint = buyer.contactPoint.let { contactPoint ->
-                    EIResponse.Buyer.ContactPoint(
-                        name = contactPoint.name,
-                        email = contactPoint.email,
-                        faxNumber = contactPoint.faxNumber,
-                        telephone = contactPoint.telephone,
-                        url = contactPoint.url
-                    )
-                },
-                identifier = buyer.identifier.let { identifier ->
+                        )
+                    },
+                contactPoint = buyer.contactPoint
+                    ?.let { contactPoint ->
+                        EIResponse.Buyer.ContactPoint(
+                            name = contactPoint.name,
+                            email = contactPoint.email,
+                            faxNumber = contactPoint.faxNumber,
+                            telephone = contactPoint.telephone,
+                            url = contactPoint.url
+                        )
+                    },
+                identifier = buyer.identifier
+                    ?.let { identifier ->
                     EIResponse.Buyer.Identifier(
                         id = identifier.id,
                         uri = identifier.uri,
