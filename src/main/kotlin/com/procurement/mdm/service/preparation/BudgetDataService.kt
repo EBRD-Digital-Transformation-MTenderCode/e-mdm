@@ -236,13 +236,35 @@ class BudgetDataServiceImpl(
                                     scheme = null
                                 )
                             }.orEmpty(),
-                        deliveryAddress = item.deliveryAddress.let { deliveryAddress ->
+                        deliveryAddress = item.deliveryAddress.let { address ->
                             EIData.Tender.Item.DeliveryAddress(
-                                countryName = deliveryAddress.countryName,
-                                locality = deliveryAddress.locality,
-                                postalCode = deliveryAddress.postalCode,
-                                region = deliveryAddress.region,
-                                streetAddress = deliveryAddress.streetAddress
+                                streetAddress = address.streetAddress,
+                                postalCode = address.postalCode,
+                                addressDetails = address.addressDetails.let { addressDetails ->
+                                    EIData.Tender.Item.DeliveryAddress.AddressDetails(
+                                        country = addressDetails.country.let { country ->
+                                            EIData.Tender.Item.DeliveryAddress.AddressDetails.Country(
+                                                id = country.id,
+                                                description = country.description,
+                                                scheme = country.scheme
+                                            )
+                                        },
+                                        region = addressDetails.region.let { region ->
+                                            EIData.Tender.Item.DeliveryAddress.AddressDetails.Region(
+                                                id = region.id,
+                                                description = region.description,
+                                                scheme = region.scheme
+                                            )
+                                        },
+                                        locality = addressDetails.locality?.let { locality ->
+                                            EIData.Tender.Item.DeliveryAddress.AddressDetails.Locality(
+                                                id = locality.id,
+                                                description = locality.description,
+                                                scheme = locality.scheme
+                                            )
+                                        }
+                                    )
+                                }
                             )
                         },
                         quantity = item.quantity,
@@ -348,13 +370,35 @@ class BudgetDataServiceImpl(
                                 description = additionalClassification.description
                             )
                         },
-                        deliveryAddress = item.deliveryAddress.let { deliveryAddress ->
+                        deliveryAddress = item.deliveryAddress.let { address ->
                             EIResponse.Tender.Item.DeliveryAddress(
-                                countryName = deliveryAddress.countryName,
-                                locality = deliveryAddress.locality,
-                                postalCode = deliveryAddress.postalCode,
-                                region = deliveryAddress.region,
-                                streetAddress = deliveryAddress.streetAddress
+                                streetAddress = address.streetAddress,
+                                postalCode = address.postalCode,
+                                addressDetails = address.addressDetails.let { addressDetails ->
+                                    EIResponse.Tender.Item.DeliveryAddress.AddressDetails(
+                                        country = addressDetails.country.let { country ->
+                                            EIResponse.Tender.Item.DeliveryAddress.AddressDetails.Country(
+                                                id = country.id,
+                                                description = country.description,
+                                                scheme = country.scheme
+                                            )
+                                        },
+                                        region = addressDetails.region.let { region ->
+                                            EIResponse.Tender.Item.DeliveryAddress.AddressDetails.Region(
+                                                id = region.id,
+                                                description = region.description,
+                                                scheme = region.scheme
+                                            )
+                                        },
+                                        locality = addressDetails.locality?.let { locality ->
+                                            EIResponse.Tender.Item.DeliveryAddress.AddressDetails.Locality(
+                                                id = locality.id,
+                                                description = locality.description,
+                                                scheme = locality.scheme
+                                            )
+                                        }
+                                    )
+                                }
                             )
                         },
                         quantity = item.quantity,
