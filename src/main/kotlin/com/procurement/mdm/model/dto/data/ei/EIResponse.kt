@@ -46,14 +46,40 @@ data class EIResponse(
             )
 
             data class DeliveryAddress(
-                @param:JsonProperty("countryName") @field:JsonProperty("countryName") val countryName: String,
-                @param:JsonProperty("region") @field:JsonProperty("region") val region: String,
-                @param:JsonProperty("locality") @field:JsonProperty("locality") val locality: String,
-                @param:JsonProperty("streetAddress") @field:JsonProperty("streetAddress") val streetAddress: String,
+                @JsonInclude(JsonInclude.Include.NON_NULL)
+                @param:JsonProperty("streetAddress") @field:JsonProperty("streetAddress") val streetAddress: String?,
 
                 @JsonInclude(JsonInclude.Include.NON_NULL)
-                @param:JsonProperty("postalCode") @field:JsonProperty("postalCode") val postalCode: String?
-            )
+                @param:JsonProperty("-postalCode") @field:JsonProperty("postalCode") val postalCode: String?,
+
+                @param:JsonProperty("addressDetails") @field:JsonProperty("addressDetails") val addressDetails: AddressDetails
+            ) {
+                data class AddressDetails(
+                    @param:JsonProperty("country") @field:JsonProperty("country") val country: Country,
+                    @param:JsonProperty("region") @field:JsonProperty("region") val region: Region,
+
+                    @JsonInclude(JsonInclude.Include.NON_NULL)
+                    @param:JsonProperty("locality") @field:JsonProperty("locality") val locality: Locality?
+                ) {
+                    data class Country(
+                        @param:JsonProperty("id") @field:JsonProperty("id") val id: String,
+                        @param:JsonProperty("description") @field:JsonProperty("description") val description: String,
+                        @param:JsonProperty("scheme") @field:JsonProperty("scheme") val scheme: String
+                    )
+
+                    data class Region(
+                        @param:JsonProperty("id") @field:JsonProperty("id") val id: String,
+                        @param:JsonProperty("description") @field:JsonProperty("description") val description: String,
+                        @param:JsonProperty("scheme") @field:JsonProperty("scheme") val scheme: String
+                    )
+
+                    data class Locality(
+                        @param:JsonProperty("id") @field:JsonProperty("id") val id: String,
+                        @param:JsonProperty("description") @field:JsonProperty("description") val description: String,
+                        @param:JsonProperty("scheme") @field:JsonProperty("scheme") val scheme: String
+                    )
+                }
+            }
 
             data class Unit(
                 @param:JsonProperty("id") @field:JsonProperty("id") val id: String,

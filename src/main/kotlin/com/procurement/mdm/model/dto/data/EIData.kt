@@ -37,12 +37,34 @@ data class EIData(
             )
 
             data class DeliveryAddress(
-                val countryName: String,
-                val region: String,
-                val locality: String,
-                val streetAddress: String,
-                val postalCode: String?
-            )
+                 val streetAddress: String?,
+                 val postalCode: String?,
+                 val addressDetails: AddressDetails
+            ) {
+                data class AddressDetails(
+                     val country: Country,
+                     val region: Region,
+                     val locality: Locality?
+                ) {
+                    data class Country(
+                         val id: String,
+                         val description: String,
+                         val scheme: String
+                    )
+
+                    data class Region(
+                         val id: String,
+                         val description: String,
+                         val scheme: String
+                    )
+
+                    data class Locality(
+                         val id: String,
+                         val description: String,
+                         val scheme: String
+                    )
+                }
+            }
 
             data class Unit(
                 val id: String,
