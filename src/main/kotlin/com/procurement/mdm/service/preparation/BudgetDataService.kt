@@ -18,6 +18,7 @@ import com.procurement.mdm.model.dto.data.RegionDetails
 import com.procurement.mdm.model.dto.data.ei.EIRequest
 import com.procurement.mdm.model.dto.data.ei.EIResponse
 import com.procurement.mdm.model.dto.getResponseDto
+import com.procurement.mdm.model.entity.Country
 import com.procurement.mdm.model.entity.Cpv
 import com.procurement.mdm.model.entity.CpvKey
 import com.procurement.mdm.model.entity.Cpvs
@@ -28,6 +29,8 @@ import com.procurement.mdm.model.entity.Units
 import com.procurement.mdm.repository.CpvRepository
 import com.procurement.mdm.repository.CpvsRepository
 import com.procurement.mdm.repository.CurrencyRepository
+import com.procurement.mdm.repository.LocalityRepository
+import com.procurement.mdm.repository.RegionRepository
 import com.procurement.mdm.repository.UnitRepository
 import com.procurement.mdm.service.ValidationService
 import com.procurement.mdm.utils.toObject
@@ -47,6 +50,8 @@ class BudgetDataServiceImpl(
     private val cpvRepository: CpvRepository,
     private val cpvsRepository: CpvsRepository,
     private val unitRepository: UnitRepository,
+    private val regionRepository: RegionRepository,
+    private val localityRepository: LocalityRepository,
     private val currencyRepository: CurrencyRepository
 ) : BudgetDataService {
 
@@ -55,12 +60,6 @@ class BudgetDataServiceImpl(
         val country = validationService.getCountry(languageCode = lang, countryCode = cm.context.country)
         val request = getEiRequest(cm)
         val data = request.convert()
-        val cpvCode = data.tender.classification.id
-        val cpvEntity = cpvRepository.findByCpvKeyCodeAndCpvKeyLanguageCode(
-            code = cpvCode,
-            languageCode = cm.context.language
-        )
-            ?: throw InErrorException(ErrorType.CPV_CODE_UNKNOWN)
 
         val buyer = data.buyer ?: throw InErrorException(ErrorType.INVALID_BUYER)
         organizationDataService.processOrganization(buyer, country)
@@ -70,13 +69,15 @@ class BudgetDataServiceImpl(
 
         val updatedData = data.copy(tender = data.tender.copy(items = updatedItems))
 
+        val cpvCode = data.tender.classification.id
+        val cpvEntity = cpvRepository.findByCpvKeyCodeAndCpvKeyLanguageCode(cpvCode, languageCode = cm.context.language)
+            ?: throw InErrorException(ErrorType.CPV_CODE_UNKNOWN)
         val response = updatedData.convert(cpvEntity)
 
         return getResponseDto(data = response, id = cm.id)
     }
 
-
-    private fun updateItems(data: EIData, language: Language) : List<EIData.Tender.Item>{
+    private fun updateItems(data: EIData, language: Language, countryCode: String): List<EIData.Tender.Item> {
         val items = data.tender.items
 
         val cpvsEntities = checkAndGetCpvsEntities(data, language)
@@ -88,16 +89,19 @@ class BudgetDataServiceImpl(
         val unitEntities = checkAndGetUnitEntities(data, language)
         val unitEntitiesByCode = unitEntities.associateBy { it.unitKey?.code }
 
+        val country = validationService.getCountry(languageCode = language.code, countryCode = countryCode)
+
         return items.map { item ->
             item.copy(
                 additionalClassifications = getUpdatedAdditionalClassifications(item, cpvsEntitiesByCode),
                 classification = getUpdatedClassification(item, cpvEntitiesByCode),
-                unit = getUpdatedUnit(item, unitEntitiesByCode)
+                unit = getUpdatedUnit(item, unitEntitiesByCode),
+                deliveryAddress = getUpdatedDeliveryAddress(item, country)
             )
         }
     }
 
-    private fun checkAndGetCpvsEntities(data: EIData, language: Language): List<Cpvs>{
+    private fun checkAndGetCpvsEntities(data: EIData, language: Language): List<Cpvs> {
         val items = data.tender.items
         val cpvsCodes = items.asSequence()
             .flatMap { it.additionalClassifications.asSequence() }
@@ -176,6 +180,69 @@ class BudgetDataServiceImpl(
             unit.copy(name = correspondingEntity.name)
         }
         return updatedUnit
+    }
+
+    private fun getUpdatedDeliveryAddress(
+        item: EIData.Tender.Item,
+        country: Country
+    ): EIData.Tender.Item.DeliveryAddress {
+        return item.deliveryAddress.copy(
+            addressDetails = item.deliveryAddress.addressDetails.let { addressDetails ->
+                addressDetails.copy(
+                    country = checkAndGetUpdatedCountry(addressDetails, country),
+                    region = checkAndGetUpdatedRegion(addressDetails, country),
+                    locality = checkAndGetUpdatedLocality(addressDetails, country)
+                )
+            }
+        )
+    }
+
+    private fun checkAndGetUpdatedLocality(
+        addressDetails: EIData.Tender.Item.DeliveryAddress.AddressDetails,
+        country: Country
+    ): EIData.Tender.Item.DeliveryAddress.AddressDetails.Locality? {
+        val locality = addressDetails.locality
+        val updatedLocality = if (locality != null) {
+            val schemeEntity = localityRepository.findOneByScheme(locality.scheme)
+            if (schemeEntity != null) {
+                val regionEntity = regionRepository
+                    .findByRegionKeyCodeAndRegionKeyCountry(addressDetails.region.id, country)
+                    ?: throw InErrorException(ErrorType.REGION_UNKNOWN)
+
+                val localityEntity = localityRepository
+                    .findByLocalityKeyCodeAndLocalityKeyRegionAndScheme(locality.id, regionEntity, locality.scheme)
+                    ?: throw InErrorException(ErrorType.LOCALITY_UNKNOWN)
+
+                locality.copy(description = localityEntity.name)
+            } else null
+        } else null
+
+        return updatedLocality
+    }
+
+    private fun checkAndGetUpdatedRegion(
+        addressDetails: EIData.Tender.Item.DeliveryAddress.AddressDetails,
+        country: Country
+    ): EIData.Tender.Item.DeliveryAddress.AddressDetails.Region {
+        val regionEntity = regionRepository.findByRegionKeyCodeAndRegionKeyCountry(addressDetails.region.id, country)
+            ?: throw InErrorException(ErrorType.REGION_UNKNOWN)
+
+        return addressDetails.region.copy(
+            scheme = regionEntity.scheme,
+            description = regionEntity.name
+        )
+    }
+
+    private fun checkAndGetUpdatedCountry(
+        addressDetails: EIData.Tender.Item.DeliveryAddress.AddressDetails,
+        country: Country
+    ): EIData.Tender.Item.DeliveryAddress.AddressDetails.Country {
+        if (addressDetails.country.id != country.countryKey?.code) throw InErrorException(ErrorType.INVALID_COUNTRY)
+
+        return addressDetails.country.copy(
+            scheme = country.scheme,
+            description = country.name
+        )
     }
 
     override fun processFsData(cm: CommandMessage): ResponseDto {
