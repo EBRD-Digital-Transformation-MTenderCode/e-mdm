@@ -1,30 +1,54 @@
 package com.procurement.mdm.model.dto.data
 
-import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.annotation.JsonInclude
+import java.math.BigDecimal
 
-data class EI @JsonCreator constructor(
+data class EIData(
+    var tender: Tender,
+    val buyer: OrganizationReference?
+) {
+    data class Tender(
+        var classification: Classification,
 
-        var tender: TenderEI,
+        val items: List<Item>
+    ) {
+        data class Classification(
+            val id: String
+        )
 
-        val buyer: OrganizationReference?
-)
+        data class Item(
+            val id: String,
+            val description: String,
+            val classification: Classification,
+            val additionalClassifications: List<AdditionalClassification>,
+            val deliveryAddress: DeliveryAddress,
+            val quantity: BigDecimal,
+            val unit: Unit
+        ) {
+            data class Classification(
+                val id: String,
+                val description: String?,
+                val scheme: String?
+            )
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-data class TenderEI @JsonCreator constructor(
+            data class AdditionalClassification(
+                val id: String,
+                val description: String?,
+                val scheme: String?
+            )
 
-        var classification: ClassificationEI,
+            data class DeliveryAddress(
+                val countryName: String,
+                val region: String,
+                val locality: String,
+                val streetAddress: String,
+                val postalCode: String?
+            )
 
-        var mainProcurementCategory: String?
+            data class Unit(
+                val id: String,
+                val name: String?
+            )
+        }
+    }
+}
 
-)
-
-@JsonInclude(JsonInclude.Include.NON_NULL)
-data class ClassificationEI @JsonCreator constructor(
-
-        val id: String,
-
-        var description: String?,
-
-        var scheme: String?
-)
