@@ -94,23 +94,13 @@ class BudgetDataServiceImpl(
 
     private fun getUpdatedItems(data: EIData, languageCode: String, countryCode: String): List<EIData.Tender.Item> {
         val language = validationService.getLanguage(languageCode = languageCode, internal = true)
-
-        val cpvsEntities = checkAndGetCpvsEntities(data, language)
-        val cpvsEntitiesByCode = cpvsEntities.associateBy { it.cpvsKey?.code }
-
-        val cpvEntities = checkAndGetCpvEntities(data, language)
-        val cpvEntitiesByCode = cpvEntities.associateBy { it.cpvKey?.code }
-
-        val unitEntities = checkAndGetUnitEntities(data, language)
-        val unitEntitiesByCode = unitEntities.associateBy { it.unitKey?.code }
-
         val country = validationService.getCountry(languageCode = language.code, countryCode = countryCode)
 
         return data.tender.items.map { item ->
             item.copy(
-                additionalClassifications = getUpdatedAdditionalClassifications(item, cpvsEntitiesByCode),
-                classification = getUpdatedClassification(item, cpvEntitiesByCode),
-                unit = getUpdatedUnit(item, unitEntitiesByCode),
+                additionalClassifications = getUpdatedAdditionalClassifications(item, data, language),
+                classification = getUpdatedClassification(item, data, language),
+                unit = getUpdatedUnit(item, data, language),
                 deliveryAddress = getUpdatedDeliveryAddress(item, country)
             )
         }
@@ -160,8 +150,12 @@ class BudgetDataServiceImpl(
 
     private fun getUpdatedAdditionalClassifications(
         item: EIData.Tender.Item,
-        cpvsEntitiesByCode: Map<String?, Cpvs>
+        data: EIData,
+        language: Language
     ): List<EIData.Tender.Item.AdditionalClassification> {
+        val cpvsEntities = checkAndGetCpvsEntities(data, language)
+        val cpvsEntitiesByCode = cpvsEntities.associateBy { it.cpvsKey?.code }
+
         val updatedAdditionalClassifications = item.additionalClassifications.map { additionalClassification ->
             val correspondingEntity = cpvsEntitiesByCode.getValue(additionalClassification.id)
             additionalClassification.copy(
@@ -174,8 +168,12 @@ class BudgetDataServiceImpl(
 
     private fun getUpdatedClassification(
         item: EIData.Tender.Item,
-        cpvEntitiesByCode: Map<String?, Cpv>
+        data: EIData,
+        language: Language
     ): EIData.Tender.Item.Classification {
+        val cpvEntities = checkAndGetCpvEntities(data, language)
+        val cpvEntitiesByCode = cpvEntities.associateBy { it.cpvKey?.code }
+
         val updatedClassification = item.classification.let { classification ->
             val correspondingEntity = cpvEntitiesByCode.getValue(classification.id)
             classification.copy(
@@ -188,8 +186,12 @@ class BudgetDataServiceImpl(
 
     private fun getUpdatedUnit(
         item: EIData.Tender.Item,
-        unitEntitiesByCode: Map<String?, Units>
+        data: EIData,
+        language: Language
     ): EIData.Tender.Item.Unit {
+        val unitEntities = checkAndGetUnitEntities(data, language)
+        val unitEntitiesByCode = unitEntities.associateBy { it.unitKey?.code }
+
         val updatedUnit = item.unit.let { unit ->
             val correspondingEntity = unitEntitiesByCode.getValue(unit.id)
             unit.copy(name = correspondingEntity.name)
