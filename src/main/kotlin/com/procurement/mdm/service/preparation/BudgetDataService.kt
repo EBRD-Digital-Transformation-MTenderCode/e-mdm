@@ -60,24 +60,40 @@ class BudgetDataServiceImpl(
         val country = validationService.getCountry(languageCode = lang, countryCode = cm.context.country)
         val request = getEiRequest(cm)
         val data = request.convert()
-
         data.buyer ?: throw InErrorException(ErrorType.INVALID_BUYER)
+
         organizationDataService.processOrganization(data.buyer, country)
 
-        val language = validationService.getLanguage(languageCode = lang, internal = true)
-        val updatedItems = updateItems(data, language, cm.context.country)
+        val updatedItems = getUpdatedItems(data, cm.context.language, cm.context.country)
+        val updatedTender = getUpdatedTender(data, cm.context.language, updatedItems)
+        val updatedData = data.copy(tender = updatedTender)
 
-        val updatedData = data.copy(tender = data.tender.copy(items = updatedItems))
-
-        val cpvCode = data.tender.classification.id
-        val cpvEntity = cpvRepository.findByCpvKeyCodeAndCpvKeyLanguageCode(cpvCode, languageCode = cm.context.language)
-            ?: throw InErrorException(ErrorType.CPV_CODE_UNKNOWN)
-        val response = updatedData.convert(cpvEntity)
+        val response = updatedData.convert()
 
         return getResponseDto(data = response, id = cm.id)
     }
 
-    private fun updateItems(data: EIData, language: Language, countryCode: String): List<EIData.Tender.Item> {
+    private fun getUpdatedTender(
+        data: EIData,
+        languageCode: String,
+        updatedItems: List<EIData.Tender.Item>
+    ): EIData.Tender {
+        val cpvCode = data.tender.classification.id
+        val cpvEntity = cpvRepository.findByCpvKeyCodeAndCpvKeyLanguageCode(cpvCode, languageCode = languageCode)
+            ?: throw InErrorException(ErrorType.CPV_CODE_UNKNOWN)
+
+        return data.tender.copy(
+            items = updatedItems,
+            classification = data.tender.classification.copy(
+                description = cpvEntity.name,
+                scheme = ClassificationScheme.CPV.value()
+            ),
+            mainProcurementCategory = cpvEntity.mainProcurementCategory
+        )
+    }
+
+    private fun getUpdatedItems(data: EIData, languageCode: String, countryCode: String): List<EIData.Tender.Item> {
+        val language = validationService.getLanguage(languageCode = languageCode, internal = true)
         val items = data.tender.items
 
         val cpvsEntities = checkAndGetCpvsEntities(data, language)
@@ -281,9 +297,12 @@ class BudgetDataServiceImpl(
             EIData.Tender(
                 classification = tender.classification.let { classification ->
                     EIData.Tender.Classification(
-                        id = classification.id
+                        id = classification.id,
+                        description = null,
+                        scheme = null
                     )
                 },
+                mainProcurementCategory = null,
                 items = tender.items?.map { item ->
                     EIData.Tender.Item(
                         id = item.id,
@@ -408,18 +427,18 @@ class BudgetDataServiceImpl(
         }
     )
 
-    private fun EIData.convert(cpvEntity: Cpv) = EIResponse(
+    private fun EIData.convert() = EIResponse(
         tender = tender.let { tender ->
             EIResponse.Tender(
                 classification = tender.classification
                     .let { classification ->
                         EIResponse.Tender.Classification(
                             id = classification.id,
-                            description = cpvEntity.name,
-                            scheme = ClassificationScheme.CPV.value()
+                            description = classification.description,
+                            scheme = classification.scheme
                         )
                     },
-                mainProcurementCategory = cpvEntity.mainProcurementCategory,
+                mainProcurementCategory = tender.mainProcurementCategory,
                 items = tender.items
                     .map { item ->
                         EIResponse.Tender.Item(
@@ -538,13 +557,13 @@ class BudgetDataServiceImpl(
                     },
                 identifier = buyer.identifier
                     ?.let { identifier ->
-                    EIResponse.Buyer.Identifier(
-                        id = identifier.id,
-                        uri = identifier.uri,
-                        scheme = identifier.scheme,
-                        legalName = identifier.legalName
-                    )
-                }
+                        EIResponse.Buyer.Identifier(
+                            id = identifier.id,
+                            uri = identifier.uri,
+                            scheme = identifier.scheme,
+                            legalName = identifier.legalName
+                        )
+                    }
             )
         }
     )
