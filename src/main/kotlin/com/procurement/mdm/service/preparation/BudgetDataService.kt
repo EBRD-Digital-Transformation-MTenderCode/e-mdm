@@ -98,9 +98,13 @@ class BudgetDataServiceImpl(
 
         return data.tender.items.map { item ->
             item.copy(
+                //BR-12.1.1
                 additionalClassifications = getUpdatedAdditionalClassifications(item, data, language),
+                //BR-12.1.2
                 classification = getUpdatedClassification(item, data, language),
+                //BR-12.1.3
                 unit = getUpdatedUnit(item, data, language),
+                //BR-12.5.1, BR-12.5.2, BR-12.5.3
                 deliveryAddress = getUpdatedDeliveryAddress(item, country)
             )
         }
@@ -206,8 +210,11 @@ class BudgetDataServiceImpl(
         return item.deliveryAddress.copy(
             addressDetails = item.deliveryAddress.addressDetails.let { addressDetails ->
                 addressDetails.copy(
+                    //BR-12.5.1
                     country = checkAndGetUpdatedCountry(addressDetails, country),
+                    //BR-12.5.2
                     region = checkAndGetUpdatedRegion(addressDetails, country),
+                    //BR-12.5.3
                     locality = checkAndGetUpdatedLocality(addressDetails, country)
                 )
             }
