@@ -8,11 +8,13 @@ data class EIData(
 ) {
     data class Tender(
         var classification: Classification,
-
+        val mainProcurementCategory: String?,
         val items: List<Item>
     ) {
         data class Classification(
-            val id: String
+            val id: String,
+            val description: String?,
+            val scheme: String?
         )
 
         data class Item(
