@@ -70,7 +70,7 @@ class BudgetDataServiceImpl(
 
         val updatedData = data.copy(tender = data.tender.copy(items = updatedItems))
 
-        val response = updatedData.convert()
+        val response = updatedData.convert(cpvEntity)
 
         return getResponseDto(data = response, id = cm.id)
     }
@@ -319,7 +319,7 @@ class BudgetDataServiceImpl(
         }
     )
 
-    private fun EIData.convert() = EIResponse(
+    private fun EIData.convert(cpvEntity: Cpv) = EIResponse(
         tender = tender.let { tender ->
             EIResponse.Tender(
                 classification = tender.classification.let { classification ->
@@ -330,22 +330,22 @@ class BudgetDataServiceImpl(
                     )
                 },
                 mainProcurementCategory = cpvEntity.mainProcurementCategory,
-                items = tender.items?.map { item ->
+                items = tender.items.map { item ->
                     EIResponse.Tender.Item(
                         id = item.id,
                         description = item.description,
                         classification = item.classification.let { classification ->
                             EIResponse.Tender.Item.Classification(
                                 id = classification.id,
-                                description = TODO(),
-                                scheme = TODO()
+                                description = classification.description,
+                                scheme = classification.scheme
                             )
                         },
                         additionalClassifications = item.additionalClassifications.map { additionalClassification ->
                             EIResponse.Tender.Item.AdditionalClassification(
                                 id = additionalClassification.id,
-                                scheme = TODO(),
-                                description = TODO()
+                                scheme = additionalClassification.scheme,
+                                description = additionalClassification.description
                             )
                         },
                         deliveryAddress = item.deliveryAddress.let { deliveryAddress ->
@@ -361,7 +361,7 @@ class BudgetDataServiceImpl(
                         unit = item.unit.let { unit ->
                             EIResponse.Tender.Item.Unit(
                                 id = unit.id,
-                                name = TODO()
+                                name = unit.name
                             )
                         }
                     )
@@ -370,7 +370,7 @@ class BudgetDataServiceImpl(
         },
         buyer = buyer.let { buyer ->
             EIResponse.Buyer(
-                name = buyer.name!!,
+                name = buyer.name,
                 address = buyer.address.let { address ->
                     EIResponse.Buyer.Address(
                         streetAddress = address.streetAddress,
@@ -379,17 +379,17 @@ class BudgetDataServiceImpl(
                                 country = addressDetails.country.let { country ->
                                     EIResponse.Buyer.Address.AddressDetails.Country(
                                         id = country.id,
-                                        description = TODO(),
-                                        scheme = TODO(),
-                                        uri = TODO()
+                                        description = country.description,
+                                        scheme = country.scheme,
+                                        uri = country.uri
                                     )
                                 },
                                 region = addressDetails.region.let { region ->
                                     EIResponse.Buyer.Address.AddressDetails.Region(
                                         id = region.id,
-                                        description = TODO(),
-                                        scheme = TODO(),
-                                        uri = TODO()
+                                        description = region.description,
+                                        scheme = region.scheme,
+                                        uri = region.uri
                                     )
                                 },
                                 locality = addressDetails.locality.let { locality ->
@@ -397,7 +397,7 @@ class BudgetDataServiceImpl(
                                         id = locality.id,
                                         description = locality.description,
                                         scheme = locality.scheme,
-                                        uri = TODO()
+                                        uri = locality.uri
                                     )
                                 }
                             )
