@@ -2,6 +2,7 @@ package com.procurement.mdm.model.dto.data.ei
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
+import java.math.BigDecimal
 
 data class EIRequest(
     @param:JsonProperty("tender") @field:JsonProperty("tender") val tender: Tender,
@@ -26,7 +27,7 @@ data class EIRequest(
             @param:JsonProperty("additionalClassifications") @field:JsonProperty("additionalClassifications") val additionalClassifications: List<AdditionalClassification>?,
 
             @param:JsonProperty("deliveryAddress") @field:JsonProperty("deliveryAddress") val deliveryAddress: DeliveryAddress,
-            @param:JsonProperty("quantity") @field:JsonProperty("quantity") val quantity: Int,
+            @param:JsonProperty("quantity") @field:JsonProperty("quantity") val quantity: BigDecimal,
             @param:JsonProperty("unit") @field:JsonProperty("unit") val unit: Unit
         ) {
             data class Classification(
