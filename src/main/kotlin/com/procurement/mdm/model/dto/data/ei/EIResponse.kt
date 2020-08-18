@@ -12,15 +12,21 @@ data class EIResponse(
 ) {
     data class Tender(
         @param:JsonProperty("classification") @field:JsonProperty("classification") val classification: Classification,
-        @param:JsonProperty("mainProcurementCategory") @field:JsonProperty("mainProcurementCategory") val mainProcurementCategory: String,
+
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        @param:JsonProperty("mainProcurementCategory") @field:JsonProperty("mainProcurementCategory") val mainProcurementCategory: String?,
 
         @JsonInclude(JsonInclude.Include.NON_EMPTY)
         @param:JsonProperty("items") @field:JsonProperty("items") val items: List<Item>?
     ) {
         data class Classification(
             @param:JsonProperty("id") @field:JsonProperty("id") val id: String,
-            @param:JsonProperty("description") @field:JsonProperty("description") val description: String,
-            @param:JsonProperty("scheme") @field:JsonProperty("scheme") val scheme: String
+
+            @JsonInclude(JsonInclude.Include.NON_NULL)
+            @param:JsonProperty("description") @field:JsonProperty("description") val description: String?,
+
+            @JsonInclude(JsonInclude.Include.NON_NULL)
+            @param:JsonProperty("scheme") @field:JsonProperty("scheme") val scheme: String?
         )
 
         data class Item(
