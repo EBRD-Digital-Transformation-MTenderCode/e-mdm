@@ -94,7 +94,6 @@ class BudgetDataServiceImpl(
 
     private fun getUpdatedItems(data: EIData, languageCode: String, countryCode: String): List<EIData.Tender.Item> {
         val language = validationService.getLanguage(languageCode = languageCode, internal = true)
-        val items = data.tender.items
 
         val cpvsEntities = checkAndGetCpvsEntities(data, language)
         val cpvsEntitiesByCode = cpvsEntities.associateBy { it.cpvsKey?.code }
@@ -107,7 +106,7 @@ class BudgetDataServiceImpl(
 
         val country = validationService.getCountry(languageCode = language.code, countryCode = countryCode)
 
-        return items.map { item ->
+        return data.tender.items.map { item ->
             item.copy(
                 additionalClassifications = getUpdatedAdditionalClassifications(item, cpvsEntitiesByCode),
                 classification = getUpdatedClassification(item, cpvEntitiesByCode),
