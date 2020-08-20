@@ -330,15 +330,15 @@ class BudgetDataServiceImpl(
                                         country = addressDetails.country.let { country ->
                                             EIData.Tender.Item.DeliveryAddress.AddressDetails.Country(
                                                 id = country.id,
-                                                description = country.description,
-                                                scheme = country.scheme
+                                                description = null,
+                                                scheme = null
                                             )
                                         },
                                         region = addressDetails.region.let { region ->
                                             EIData.Tender.Item.DeliveryAddress.AddressDetails.Region(
                                                 id = region.id,
-                                                description = region.description,
-                                                scheme = region.scheme
+                                                description = null,
+                                                scheme = null
                                             )
                                         },
                                         locality = addressDetails.locality?.let { locality ->
