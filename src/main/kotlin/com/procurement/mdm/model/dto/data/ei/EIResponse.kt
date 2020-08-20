@@ -66,7 +66,7 @@ data class EIResponse(
                 @param:JsonProperty("streetAddress") @field:JsonProperty("streetAddress") val streetAddress: String?,
 
                 @JsonInclude(JsonInclude.Include.NON_NULL)
-                @param:JsonProperty("-postalCode") @field:JsonProperty("postalCode") val postalCode: String?,
+                @param:JsonProperty("postalCode") @field:JsonProperty("postalCode") val postalCode: String?,
 
                 @param:JsonProperty("addressDetails") @field:JsonProperty("addressDetails") val addressDetails: AddressDetails
             ) {
