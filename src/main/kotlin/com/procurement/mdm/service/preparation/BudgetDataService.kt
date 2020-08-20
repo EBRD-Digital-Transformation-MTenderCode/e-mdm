@@ -111,14 +111,10 @@ class BudgetDataServiceImpl(
     }
 
     private fun checkAndGetCpvsEntities(data: EIData, language: Language): List<Cpvs> {
-        val items = data.tender.items
-        val cpvsCodes = items.asSequence()
+        val cpvsKeys = data.tender.items
+            .asSequence()
             .flatMap { it.additionalClassifications.asSequence() }
-            .map { it.id }
-            .toList()
-
-        val cpvsKeys = cpvsCodes.asSequence()
-            .map { CpvsKey(it, language) }
+            .map { CpvsKey(it.id, language) }
             .toSet()
 
         val cpvsEntities = cpvsRepository.findAllById(cpvsKeys)
@@ -127,10 +123,8 @@ class BudgetDataServiceImpl(
     }
 
     private fun checkAndGetCpvEntities(data: EIData, language: Language): List<Cpv> {
-        val items = data.tender.items
-        val cpvCodes = items.map { it.classification.id }
-        val cpvKeys = cpvCodes.asSequence()
-            .map { CpvKey(it, language) }
+        val cpvKeys = data.tender.items
+            .map { CpvKey(it.classification.id, language) }
             .toSet()
 
         val cpvEntities = cpvRepository.findAllById(cpvKeys)
@@ -139,11 +133,8 @@ class BudgetDataServiceImpl(
     }
 
     private fun checkAndGetUnitEntities(data: EIData, language: Language): List<Units> {
-        val items = data.tender.items
-        val unitCodes = items.map { it.unit.id }
-
-        val unitKeys = unitCodes.asSequence()
-            .map { UnitKey(it, language) }
+        val unitKeys = data.tender.items
+            .map { UnitKey(it.unit.id, language) }
             .toSet()
 
         val unitEntities = unitRepository.findAllById(unitKeys)
