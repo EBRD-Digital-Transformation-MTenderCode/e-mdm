@@ -55,15 +55,11 @@ data class EIRequest(
                     @param:JsonProperty("locality") @field:JsonProperty("locality") val locality: Locality?
                 ) {
                     data class Country(
-                        @param:JsonProperty("id") @field:JsonProperty("id") val id: String,
-                        @param:JsonProperty("description") @field:JsonProperty("description") val description: String,
-                        @param:JsonProperty("scheme") @field:JsonProperty("scheme") val scheme: String
+                        @param:JsonProperty("id") @field:JsonProperty("id") val id: String
                     )
 
                     data class Region(
-                        @param:JsonProperty("id") @field:JsonProperty("id") val id: String,
-                        @param:JsonProperty("description") @field:JsonProperty("description") val description: String,
-                        @param:JsonProperty("scheme") @field:JsonProperty("scheme") val scheme: String
+                        @param:JsonProperty("id") @field:JsonProperty("id") val id: String
                     )
 
                     data class Locality(
