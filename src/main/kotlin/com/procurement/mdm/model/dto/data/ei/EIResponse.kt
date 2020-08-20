@@ -79,14 +79,22 @@ data class EIResponse(
                 ) {
                     data class Country(
                         @param:JsonProperty("id") @field:JsonProperty("id") val id: String,
-                        @param:JsonProperty("description") @field:JsonProperty("description") val description: String,
-                        @param:JsonProperty("scheme") @field:JsonProperty("scheme") val scheme: String
+
+                        @JsonInclude(JsonInclude.Include.NON_NULL)
+                        @param:JsonProperty("description") @field:JsonProperty("description") val description: String?,
+
+                        @JsonInclude(JsonInclude.Include.NON_NULL)
+                        @param:JsonProperty("scheme") @field:JsonProperty("scheme") val scheme: String?
                     )
 
                     data class Region(
                         @param:JsonProperty("id") @field:JsonProperty("id") val id: String,
-                        @param:JsonProperty("description") @field:JsonProperty("description") val description: String,
-                        @param:JsonProperty("scheme") @field:JsonProperty("scheme") val scheme: String
+
+                        @JsonInclude(JsonInclude.Include.NON_NULL)
+                        @param:JsonProperty("description") @field:JsonProperty("description") val description: String?,
+
+                        @JsonInclude(JsonInclude.Include.NON_NULL)
+                        @param:JsonProperty("scheme") @field:JsonProperty("scheme") val scheme: String?
                     )
 
                     data class Locality(
