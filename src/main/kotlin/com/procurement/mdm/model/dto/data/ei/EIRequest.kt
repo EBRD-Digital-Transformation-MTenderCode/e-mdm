@@ -2,6 +2,9 @@ package com.procurement.mdm.model.dto.data.ei
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.procurement.mdm.model.dto.data.MainGeneralActivity
+import com.procurement.mdm.model.dto.data.MainSectoralActivity
+import com.procurement.mdm.model.dto.data.TypeOfBuyer
 import java.math.BigDecimal
 
 data class EIRequest(
@@ -84,7 +87,10 @@ data class EIRequest(
         @param:JsonProperty("additionalIdentifiers") @field:JsonProperty("additionalIdentifiers") val additionalIdentifiers: List<AdditionalIdentifiers>?,
 
         @param:JsonProperty("address") @field:JsonProperty("address") val address: Address,
-        @param:JsonProperty("contactPoint") @field:JsonProperty("contactPoint") val contactPoint: ContactPoint
+        @param:JsonProperty("contactPoint") @field:JsonProperty("contactPoint") val contactPoint: ContactPoint,
+
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        @param:JsonProperty("details") @field:JsonProperty("details") val details: Details?
     ) {
         data class Identifier(
             @param:JsonProperty("scheme") @field:JsonProperty("scheme") val scheme: String,
@@ -139,6 +145,17 @@ data class EIRequest(
 
             @JsonInclude(JsonInclude.Include.NON_NULL)
             @param:JsonProperty("url") @field:JsonProperty("url") val url: String?
+        )
+
+        data class Details(
+            @JsonInclude(JsonInclude.Include.NON_NULL)
+            @param:JsonProperty("typeOfBuyer") @field:JsonProperty("typeOfBuyer") val typeOfBuyer: TypeOfBuyer?,
+
+            @JsonInclude(JsonInclude.Include.NON_NULL)
+            @param:JsonProperty("mainGeneralActivity") @field:JsonProperty("mainGeneralActivity") val mainGeneralActivity: MainGeneralActivity?,
+
+            @JsonInclude(JsonInclude.Include.NON_NULL)
+            @param:JsonProperty("mainSectoralActivity") @field:JsonProperty("mainSectoralActivity") val mainSectoralActivity: MainSectoralActivity?
         )
     }
 }
