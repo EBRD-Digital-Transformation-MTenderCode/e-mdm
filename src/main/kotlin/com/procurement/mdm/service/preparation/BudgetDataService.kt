@@ -9,7 +9,6 @@ import com.procurement.mdm.model.dto.data.AddressDetails
 import com.procurement.mdm.model.dto.data.ClassificationScheme
 import com.procurement.mdm.model.dto.data.ContactPoint
 import com.procurement.mdm.model.dto.data.CountryDetails
-import com.procurement.mdm.model.dto.data.Details
 import com.procurement.mdm.model.dto.data.EIData
 import com.procurement.mdm.model.dto.data.FS
 import com.procurement.mdm.model.dto.data.Identifier
@@ -367,20 +366,7 @@ class BudgetDataServiceImpl(
         buyer = buyer.let { buyer ->
             OrganizationReference(
                 id = null,
-                details = buyer.details
-                    ?.let { details ->
-                        Details(
-                            typeOfBuyer = details.typeOfBuyer,
-                            mainGeneralActivity = details.mainGeneralActivity,
-                            mainSectoralActivity = details.mainSectoralActivity,
-                            mainEconomicActivities = null,
-                            bankAccounts = null,
-                            legalForm = null,
-                            permits = null,
-                            scale = null,
-                            typeOfSupplier = null
-                        )
-                    },
+                details = buyer.details,
                 additionalIdentifiers = buyer.additionalIdentifiers
                     ?.map { additionalIdentifier ->
                         Identifier(
@@ -595,13 +581,6 @@ class BudgetDataServiceImpl(
                         )
                     },
                 details = buyer.details
-                    ?.let { details ->
-                        EIResponse.Buyer.Details(
-                            typeOfBuyer = details.typeOfBuyer,
-                            mainSectoralActivity = details.mainSectoralActivity,
-                            mainGeneralActivity = details.mainGeneralActivity
-                        )
-                    }
             )
         }
     )
