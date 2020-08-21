@@ -4,17 +4,9 @@ import com.procurement.mdm.exception.ErrorType
 import com.procurement.mdm.exception.InErrorException
 import com.procurement.mdm.model.dto.CommandMessage
 import com.procurement.mdm.model.dto.ResponseDto
-import com.procurement.mdm.model.dto.data.Address
-import com.procurement.mdm.model.dto.data.AddressDetails
 import com.procurement.mdm.model.dto.data.ClassificationScheme
-import com.procurement.mdm.model.dto.data.ContactPoint
-import com.procurement.mdm.model.dto.data.CountryDetails
 import com.procurement.mdm.model.dto.data.EIData
 import com.procurement.mdm.model.dto.data.FS
-import com.procurement.mdm.model.dto.data.Identifier
-import com.procurement.mdm.model.dto.data.LocalityDetails
-import com.procurement.mdm.model.dto.data.OrganizationReference
-import com.procurement.mdm.model.dto.data.RegionDetails
 import com.procurement.mdm.model.dto.data.ei.EIRequest
 import com.procurement.mdm.model.dto.data.ei.EIResponse
 import com.procurement.mdm.model.dto.getResponseDto
@@ -363,75 +355,7 @@ class BudgetDataServiceImpl(
                 }.orEmpty()
             )
         },
-        buyer = buyer.let { buyer ->
-            OrganizationReference(
-                id = null,
-                details = null,
-                additionalIdentifiers = buyer.additionalIdentifiers
-                    ?.map { additionalIdentifier ->
-                        Identifier(
-                            id = additionalIdentifier.id,
-                            scheme = additionalIdentifier.scheme,
-                            legalName = additionalIdentifier.legalName,
-                            uri = additionalIdentifier.uri
-                        )
-                    },
-                buyerProfile = null,
-                persones = null,
-                name = buyer.name,
-                address = buyer.address.let { address ->
-                    Address(
-                        streetAddress = address.streetAddress,
-                        postalCode = null,
-                        addressDetails = address.addressDetails.let { addressDetails ->
-                            AddressDetails(
-                                country = addressDetails.country.let { country ->
-                                    CountryDetails(
-                                        id = country.id,
-                                        scheme = null,
-                                        uri = null,
-                                        description = null
-                                    )
-                                },
-                                region = addressDetails.region.let { region ->
-                                    RegionDetails(
-                                        id = region.id,
-                                        scheme = null,
-                                        uri = null,
-                                        description = null
-                                    )
-                                },
-                                locality = addressDetails.locality.let { locality ->
-                                    LocalityDetails(
-                                        id = locality.id,
-                                        description = locality.description,
-                                        scheme = locality.scheme,
-                                        uri = null
-                                    )
-                                }
-                            )
-                        }
-                    )
-                },
-                contactPoint = buyer.contactPoint.let { contactPoint ->
-                    ContactPoint(
-                        name = contactPoint.name,
-                        email = contactPoint.email,
-                        faxNumber = contactPoint.faxNumber,
-                        telephone = contactPoint.telephone,
-                        url = contactPoint.url
-                    )
-                },
-                identifier = buyer.identifier.let { identifier ->
-                    Identifier(
-                        id = identifier.id,
-                        uri = identifier.uri,
-                        scheme = identifier.scheme,
-                        legalName = identifier.legalName
-                    )
-                }
-            )
-        }
+        buyer = buyer
     )
 
     private fun EIData.convert() = EIResponse(
@@ -511,68 +435,7 @@ class BudgetDataServiceImpl(
                     }
             )
         },
-        buyer = buyer?.let { buyer ->
-            EIResponse.Buyer(
-                name = buyer.name,
-                address = buyer.address
-                    ?.let { address ->
-                        EIResponse.Buyer.Address(
-                            streetAddress = address.streetAddress,
-                            addressDetails = address.addressDetails
-                                .let { addressDetails ->
-                                    EIResponse.Buyer.Address.AddressDetails(
-                                        country = addressDetails.country
-                                            .let { country ->
-                                                EIResponse.Buyer.Address.AddressDetails.Country(
-                                                    id = country.id,
-                                                    description = country.description,
-                                                    scheme = country.scheme,
-                                                    uri = country.uri
-                                                )
-                                            },
-                                        region = addressDetails.region
-                                            .let { region ->
-                                                EIResponse.Buyer.Address.AddressDetails.Region(
-                                                    id = region.id,
-                                                    description = region.description,
-                                                    scheme = region.scheme,
-                                                    uri = region.uri
-                                                )
-                                            },
-                                        locality = addressDetails.locality
-                                            .let { locality ->
-                                                EIResponse.Buyer.Address.AddressDetails.Locality(
-                                                    id = locality.id,
-                                                    description = locality.description,
-                                                    scheme = locality.scheme,
-                                                    uri = locality.uri
-                                                )
-                                            }
-                                    )
-                                }
-                        )
-                    },
-                contactPoint = buyer.contactPoint
-                    ?.let { contactPoint ->
-                        EIResponse.Buyer.ContactPoint(
-                            name = contactPoint.name,
-                            email = contactPoint.email,
-                            faxNumber = contactPoint.faxNumber,
-                            telephone = contactPoint.telephone,
-                            url = contactPoint.url
-                        )
-                    },
-                identifier = buyer.identifier
-                    ?.let { identifier ->
-                        EIResponse.Buyer.Identifier(
-                            id = identifier.id,
-                            uri = identifier.uri,
-                            scheme = identifier.scheme,
-                            legalName = identifier.legalName
-                        )
-                    }
-            )
-        }
+        buyer = buyer
     )
 }
 
