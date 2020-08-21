@@ -79,6 +79,10 @@ data class EIRequest(
     data class Buyer(
         @param:JsonProperty("name") @field:JsonProperty("name") val name: String,
         @param:JsonProperty("identifier") @field:JsonProperty("identifier") val identifier: Identifier,
+
+        @JsonInclude(JsonInclude.Include.NON_EMPTY)
+        @param:JsonProperty("additionalIdentifiers") @field:JsonProperty("additionalIdentifiers") val additionalIdentifiers: List<AdditionalIdentifiers>?,
+
         @param:JsonProperty("address") @field:JsonProperty("address") val address: Address,
         @param:JsonProperty("contactPoint") @field:JsonProperty("contactPoint") val contactPoint: ContactPoint
     ) {
@@ -86,7 +90,18 @@ data class EIRequest(
             @param:JsonProperty("scheme") @field:JsonProperty("scheme") val scheme: String,
             @param:JsonProperty("id") @field:JsonProperty("id") val id: String,
             @param:JsonProperty("legalName") @field:JsonProperty("legalName") val legalName: String,
-            @param:JsonProperty("uri") @field:JsonProperty("uri") val uri: String
+
+            @JsonInclude(JsonInclude.Include.NON_NULL)
+            @param:JsonProperty("uri") @field:JsonProperty("uri") val uri: String?
+        )
+
+        data class AdditionalIdentifiers(
+            @param:JsonProperty("scheme") @field:JsonProperty("scheme") val scheme: String,
+            @param:JsonProperty("id") @field:JsonProperty("id") val id: String,
+            @param:JsonProperty("legalName") @field:JsonProperty("legalName") val legalName: String,
+
+            @JsonInclude(JsonInclude.Include.NON_NULL)
+            @param:JsonProperty("uri") @field:JsonProperty("uri") val uri: String?
         )
 
         data class Address(
@@ -118,8 +133,12 @@ data class EIRequest(
             @param:JsonProperty("name") @field:JsonProperty("name") val name: String,
             @param:JsonProperty("email") @field:JsonProperty("email") val email: String,
             @param:JsonProperty("telephone") @field:JsonProperty("telephone") val telephone: String,
-            @param:JsonProperty("faxNumber") @field:JsonProperty("faxNumber") val faxNumber: String,
-            @param:JsonProperty("url") @field:JsonProperty("url") val url: String
+
+            @JsonInclude(JsonInclude.Include.NON_NULL)
+            @param:JsonProperty("faxNumber") @field:JsonProperty("faxNumber") val faxNumber: String?,
+
+            @JsonInclude(JsonInclude.Include.NON_NULL)
+            @param:JsonProperty("url") @field:JsonProperty("url") val url: String?
         )
     }
 }

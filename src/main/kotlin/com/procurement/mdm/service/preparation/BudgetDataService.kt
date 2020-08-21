@@ -367,7 +367,15 @@ class BudgetDataServiceImpl(
             OrganizationReference(
                 id = null,
                 details = null,
-                additionalIdentifiers = null,
+                additionalIdentifiers = buyer.additionalIdentifiers
+                    ?.map { additionalIdentifier ->
+                        Identifier(
+                            id = additionalIdentifier.id,
+                            scheme = additionalIdentifier.scheme,
+                            legalName = additionalIdentifier.legalName,
+                            uri = additionalIdentifier.uri
+                        )
+                    },
                 buyerProfile = null,
                 persones = null,
                 name = buyer.name,
