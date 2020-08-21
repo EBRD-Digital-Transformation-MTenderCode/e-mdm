@@ -124,6 +124,9 @@ data class EIResponse(
         @JsonInclude(JsonInclude.Include.NON_NULL)
         @param:JsonProperty("identifier") @field:JsonProperty("identifier") val identifier: Identifier?,
 
+        @JsonInclude(JsonInclude.Include.NON_EMPTY)
+        @param:JsonProperty("additionalIdentifiers") @field:JsonProperty("additionalIdentifiers") val additionalIdentifiers: List<AdditionalIdentifiers>?,
+
         @JsonInclude(JsonInclude.Include.NON_NULL)
         @param:JsonProperty("contactPoint") @field:JsonProperty("contactPoint") val contactPoint: ContactPoint?
     ) {
@@ -176,6 +179,17 @@ data class EIResponse(
         data class Identifier(
             @param:JsonProperty("id") @field:JsonProperty("id") val id: String,
             @param:JsonProperty("scheme") @field:JsonProperty("scheme") val scheme: String,
+
+            @JsonInclude(JsonInclude.Include.NON_NULL)
+            @param:JsonProperty("legalName") @field:JsonProperty("legalName") val legalName: String?,
+
+            @JsonInclude(JsonInclude.Include.NON_NULL)
+            @param:JsonProperty("uri") @field:JsonProperty("uri") val uri: String?
+        )
+
+        data class AdditionalIdentifiers(
+            @param:JsonProperty("scheme") @field:JsonProperty("scheme") val scheme: String,
+            @param:JsonProperty("id") @field:JsonProperty("id") val id: String,
 
             @JsonInclude(JsonInclude.Include.NON_NULL)
             @param:JsonProperty("legalName") @field:JsonProperty("legalName") val legalName: String?,

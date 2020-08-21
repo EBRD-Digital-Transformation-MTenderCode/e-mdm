@@ -570,6 +570,15 @@ class BudgetDataServiceImpl(
                             scheme = identifier.scheme,
                             legalName = identifier.legalName
                         )
+                    },
+                additionalIdentifiers = buyer.additionalIdentifiers
+                    ?.map { additionalIdentifier ->
+                        EIResponse.Buyer.AdditionalIdentifiers(
+                            id = additionalIdentifier.id,
+                            legalName = additionalIdentifier.legalName,
+                            uri = additionalIdentifier.uri,
+                            scheme = additionalIdentifier.scheme
+                        )
                     }
             )
         }
