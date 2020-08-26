@@ -27,6 +27,7 @@ class CommandServiceImpl(private val tenderDataService: TenderDataService,
             CommandType.PROCESS_BID_DATA -> bidDataService.processBidData(cm)
             CommandType.PROCESS_ENQUIRY_DATA -> enquiryDataService.processEnquiryData(cm)
             CommandType.PROCESS_CONTRACT_DATA -> contractDataService.processContractData(cm)
+            CommandType.VALIDATE_AP -> tenderDataService.validateAP(cm)
         }
     }
 }
