@@ -81,8 +81,8 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
         val cpvEntity = maybeCpvEntity.orElseThrow { throw InErrorException(ErrorType.INVALID_CPV) }
 
         val updatedClassification = request.tender.classification.copy(
-            description = cpvEntity.description,
-            scheme = cpvEntity.name
+            description = cpvEntity.name,
+            scheme = ClassificationScheme.CPV.value()
         )
 
         organizationDataService.processOrganization(request.tender.procuringEntity, country)
