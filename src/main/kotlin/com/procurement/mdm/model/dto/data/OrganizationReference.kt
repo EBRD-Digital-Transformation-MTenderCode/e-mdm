@@ -69,7 +69,7 @@ data class Document(
 
         val id: String,
 
-        val documentType: BusinessFunctionDocumentType,
+        val documentType: String,
 
         val title: String,
 
