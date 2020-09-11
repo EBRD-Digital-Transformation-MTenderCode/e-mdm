@@ -27,12 +27,13 @@ data class Context @JsonCreator constructor(
 )
 
 enum class CommandType(private val value: String) {
+    PROCESS_BID_DATA("processBidData"),
+    PROCESS_CONTRACT_DATA("processContractData"),
     PROCESS_EI_DATA("processEiData"),
+    PROCESS_ENQUIRY_DATA("processEnquiryData"),
     PROCESS_FS_DATA("processFsData"),
     PROCESS_TENDER_DATA("processTenderData"),
-    PROCESS_BID_DATA("processBidData"),
-    PROCESS_ENQUIRY_DATA("processEnquiryData"),
-    PROCESS_CONTRACT_DATA("processContractData");
+    VALIDATE_AP("validateAP");
 
     @JsonValue
     fun value(): String {

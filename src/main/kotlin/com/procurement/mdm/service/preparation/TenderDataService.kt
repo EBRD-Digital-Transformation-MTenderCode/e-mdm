@@ -1,20 +1,37 @@
 package com.procurement.mdm.service.preparation
 
-import com.procurement.mdm.utils.toObject
 import com.procurement.mdm.exception.ErrorType
 import com.procurement.mdm.exception.InErrorException
 import com.procurement.mdm.model.dto.CommandMessage
 import com.procurement.mdm.model.dto.ResponseDto
-import com.procurement.mdm.model.dto.data.*
+import com.procurement.mdm.model.dto.data.ClassificationScheme
+import com.procurement.mdm.model.dto.data.ClassificationTD
+import com.procurement.mdm.model.dto.data.ItemTD
+import com.procurement.mdm.model.dto.data.ItemUnitTD
+import com.procurement.mdm.model.dto.data.TD
+import com.procurement.mdm.model.dto.data.ap.AggregationPlan
 import com.procurement.mdm.model.dto.getResponseDto
-import com.procurement.mdm.model.entity.*
-import com.procurement.mdm.repository.*
+import com.procurement.mdm.model.entity.Country
+import com.procurement.mdm.model.entity.Cpv
+import com.procurement.mdm.model.entity.CpvKey
+import com.procurement.mdm.model.entity.Cpvs
+import com.procurement.mdm.model.entity.CpvsKey
+import com.procurement.mdm.model.entity.Language
+import com.procurement.mdm.model.entity.UnitKey
+import com.procurement.mdm.model.entity.Units
+import com.procurement.mdm.repository.CpvRepository
+import com.procurement.mdm.repository.CpvsRepository
+import com.procurement.mdm.repository.PmdRepository
+import com.procurement.mdm.repository.TranslateRepository
+import com.procurement.mdm.repository.UnitRepository
 import com.procurement.mdm.service.ValidationService
+import com.procurement.mdm.utils.toObject
 import org.springframework.stereotype.Service
 
 interface TenderDataService {
 
     fun processTenderData(cm: CommandMessage): ResponseDto
+    fun validateAP(cm: CommandMessage): ResponseDto
 }
 
 @Service
@@ -44,6 +61,43 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
         }
         processTranslate(dto, country, lang, pmd)
         return getResponseDto(data = dto, id = cm.id)
+    }
+
+    override fun validateAP(cm: CommandMessage): ResponseDto {
+        val lang = cm.context.language
+        val pmd = cm.context.pmd ?: throw InErrorException(ErrorType.INVALID_PMD)
+        val language = validationService.getLanguage(languageCode = lang, internal = true)
+        val country = validationService.getCountry(languageCode = lang, countryCode = cm.context.country)
+        val request = toObject(AggregationPlan::class.java, cm.data)
+
+        val submissionMethodRationale = listOf(getTranslate("submissionMethodRationale", lang))
+        val submissionMethodDetails = getTranslate("submissionMethodDetails", lang)
+        val procurementMethodDetails = getPmd(pmd, country)
+        val eligibilityCriteria = getTranslate("eligibilityCriteria", lang)
+
+        val cpvKey = request.tender.classification.id
+            .let { CpvKey(it, language) }
+        val maybeCpvEntity = cpvRepository.findById(cpvKey)
+        val cpvEntity = maybeCpvEntity.orElseThrow { throw InErrorException(ErrorType.INVALID_CPV) }
+
+        val updatedClassification = request.tender.classification.copy(
+            description = cpvEntity.name,
+            scheme = ClassificationScheme.CPV.value()
+        )
+
+        organizationDataService.processOrganization(request.tender.procuringEntity, country)
+
+        val enrichedAp = request.copy(
+            tender = request.tender.copy(
+                submissionMethodRationale = submissionMethodRationale,
+                submissionMethodDetails = submissionMethodDetails,
+                procurementMethodDetails = procurementMethodDetails,
+                eligibilityCriteria = eligibilityCriteria,
+                classification = updatedClassification
+            )
+        )
+
+        return getResponseDto(data = enrichedAp, id = cm.id)
     }
 
     private fun processTranslate(dto: TD, country: Country, lang: String, pmd: String) {
