@@ -25,14 +25,14 @@ class CommandServiceImpl(private val tenderDataService: TenderDataService,
 
     override fun execute(cm: CommandMessage): ResponseDto {
         return when (cm.command) {
+            CommandType.ENRICH_DATA_FOR_UPDATE_AP -> tenderDataService.enrichDataForUpdateAP(cm)
+            CommandType.PROCESS_BID_DATA -> bidDataService.processBidData(cm)
+            CommandType.PROCESS_CONTRACT_DATA -> contractDataService.processContractData(cm)
             CommandType.PROCESS_EI_DATA -> budgetDataService.processEiData(cm)
+            CommandType.PROCESS_ENQUIRY_DATA -> enquiryDataService.processEnquiryData(cm)
             CommandType.PROCESS_FS_DATA -> budgetDataService.processFsData(cm)
             CommandType.PROCESS_TENDER_DATA -> tenderDataService.processTenderData(cm)
-            CommandType.PROCESS_BID_DATA -> bidDataService.processBidData(cm)
-            CommandType.PROCESS_ENQUIRY_DATA -> enquiryDataService.processEnquiryData(cm)
-            CommandType.PROCESS_CONTRACT_DATA -> contractDataService.processContractData(cm)
             CommandType.VALIDATE_AP -> tenderDataService.validateAP(cm)
-            CommandType.ENRICH_DATA_FOR_UPDATE_AP -> tenderDataService.enrichDataForUpdateAP(cm)
         }
     }
 }
