@@ -33,7 +33,8 @@ enum class CommandType(private val value: String) {
     PROCESS_ENQUIRY_DATA("processEnquiryData"),
     PROCESS_FS_DATA("processFsData"),
     PROCESS_TENDER_DATA("processTenderData"),
-    VALIDATE_AP("validateAP");
+    VALIDATE_AP("validateAP"),
+    ENRICH_DATA_FOR_UPDATE_AP("enrichDataForUpdateAP");
 
     @JsonValue
     fun value(): String {

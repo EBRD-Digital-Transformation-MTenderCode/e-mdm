@@ -3,7 +3,11 @@ package com.procurement.mdm.service
 import com.procurement.mdm.model.dto.CommandMessage
 import com.procurement.mdm.model.dto.CommandType
 import com.procurement.mdm.model.dto.ResponseDto
-import com.procurement.mdm.service.preparation.*
+import com.procurement.mdm.service.preparation.BidDataService
+import com.procurement.mdm.service.preparation.BudgetDataService
+import com.procurement.mdm.service.preparation.ContractDataService
+import com.procurement.mdm.service.preparation.EnquiryDataService
+import com.procurement.mdm.service.preparation.TenderDataService
 import org.springframework.stereotype.Service
 
 interface CommandService {
@@ -28,6 +32,7 @@ class CommandServiceImpl(private val tenderDataService: TenderDataService,
             CommandType.PROCESS_ENQUIRY_DATA -> enquiryDataService.processEnquiryData(cm)
             CommandType.PROCESS_CONTRACT_DATA -> contractDataService.processContractData(cm)
             CommandType.VALIDATE_AP -> tenderDataService.validateAP(cm)
+            CommandType.ENRICH_DATA_FOR_UPDATE_AP -> tenderDataService.enrichDataForUpdateAP(cm)
         }
     }
 }
