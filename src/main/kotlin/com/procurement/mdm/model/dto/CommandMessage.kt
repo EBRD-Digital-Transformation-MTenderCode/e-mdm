@@ -27,6 +27,7 @@ data class Context @JsonCreator constructor(
 )
 
 enum class CommandType(private val value: String) {
+    ENRICH_DATA_FOR_UPDATE_AP("enrichDataForUpdateAP"),
     PROCESS_BID_DATA("processBidData"),
     PROCESS_CONTRACT_DATA("processContractData"),
     PROCESS_EI_DATA("processEiData"),

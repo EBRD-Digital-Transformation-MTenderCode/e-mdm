@@ -6,10 +6,14 @@ import com.procurement.mdm.model.dto.CommandMessage
 import com.procurement.mdm.model.dto.ResponseDto
 import com.procurement.mdm.model.dto.data.ClassificationScheme
 import com.procurement.mdm.model.dto.data.ClassificationTD
+import com.procurement.mdm.model.dto.data.CountryDetails
 import com.procurement.mdm.model.dto.data.ItemTD
 import com.procurement.mdm.model.dto.data.ItemUnitTD
+import com.procurement.mdm.model.dto.data.LocalityDetails
+import com.procurement.mdm.model.dto.data.RegionDetails
 import com.procurement.mdm.model.dto.data.TD
 import com.procurement.mdm.model.dto.data.ap.AggregationPlan
+import com.procurement.mdm.model.dto.data.ap.UpdateAggregationPlan
 import com.procurement.mdm.model.dto.getResponseDto
 import com.procurement.mdm.model.entity.Country
 import com.procurement.mdm.model.entity.Cpv
@@ -21,7 +25,9 @@ import com.procurement.mdm.model.entity.UnitKey
 import com.procurement.mdm.model.entity.Units
 import com.procurement.mdm.repository.CpvRepository
 import com.procurement.mdm.repository.CpvsRepository
+import com.procurement.mdm.repository.LocalityRepository
 import com.procurement.mdm.repository.PmdRepository
+import com.procurement.mdm.repository.RegionRepository
 import com.procurement.mdm.repository.TranslateRepository
 import com.procurement.mdm.repository.UnitRepository
 import com.procurement.mdm.service.ValidationService
@@ -32,6 +38,7 @@ interface TenderDataService {
 
     fun processTenderData(cm: CommandMessage): ResponseDto
     fun validateAP(cm: CommandMessage): ResponseDto
+    fun enrichDataForUpdateAP(cm: CommandMessage): ResponseDto
 }
 
 @Service
@@ -39,6 +46,8 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
                                    private val cpvRepository: CpvRepository,
                                    private val cpvsRepository: CpvsRepository,
                                    private val unitRepository: UnitRepository,
+                                   private val regionRepository: RegionRepository,
+                                   private val localityRepository: LocalityRepository,
                                    private val translateRepository: TranslateRepository,
                                    private val organizationDataService: OrganizationDataService,
                                    private val addressDataService: AddressDataService,
@@ -94,6 +103,253 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
                 procurementMethodDetails = procurementMethodDetails,
                 eligibilityCriteria = eligibilityCriteria,
                 classification = updatedClassification
+            )
+        )
+
+        return getResponseDto(data = enrichedAp, id = cm.id)
+    }
+
+    companion object UpdateAP {
+
+        fun getCpv(classification: ClassificationTD, language: Language, cpvRepository: CpvRepository): Cpv {
+            val cpvKey = classification.id.let { CpvKey(it, language) }
+            val maybeCpvEntity = cpvRepository.findById(cpvKey)
+            return maybeCpvEntity.orElseThrow { throw InErrorException(ErrorType.INVALID_CPV) }
+        }
+
+        fun updateClassification(classification: ClassificationTD, cpv: Cpv): ClassificationTD =
+            classification.copy(
+                description = cpv.name,
+                scheme = ClassificationScheme.CPV.value()
+            )
+
+        fun updateCpv(
+            items: List<UpdateAggregationPlan.Tender.Item>,
+            language: Language,
+            cpvRepository: CpvRepository
+        ): List<UpdateAggregationPlan.Tender.Item> {
+            val cpvCodes = items.map { it.classification.id }
+            val updatedItems =
+                if (cpvCodes.isNotEmpty()) {
+                    val cpvKeys = cpvCodes.asSequence()
+                        .map { CpvKey(it, language) }
+                        .toSet()
+
+                    val cpvEntities = cpvRepository.findAllById(cpvKeys)
+                    if (cpvEntities.isEmpty() || cpvEntities.size != cpvKeys.size) throw InErrorException(ErrorType.INVALID_CPV)
+                    cpvEntities
+                        .asSequence()
+                        .flatMap { entity ->
+                            items.asSequence()
+                                .filter { it.classification.id == entity.cpvKey?.code }
+                                .map { item ->
+                                    item.copy(
+                                        classification = item.classification.copy(
+                                            scheme = ClassificationScheme.CPV.value(),
+                                            description = entity.name
+                                        )
+                                    )
+                                }
+                        }
+                        .toList()
+                } else {
+                    items
+                }
+
+            return updatedItems
+        }
+
+        fun updateCpvs(
+            items: List<UpdateAggregationPlan.Tender.Item>,
+            language: Language,
+            cpvsRepository: CpvsRepository
+        ): List<UpdateAggregationPlan.Tender.Item> {
+
+            val cpvsCodes = items.flatMap { item ->
+                item.additionalClassifications
+                    ?.map { additionalClassification -> additionalClassification.id }
+                    .orEmpty()
+            }
+
+            val updatedItems =
+                if (cpvsCodes.isNotEmpty()) {
+                    val cpvsKeys = cpvsCodes.asSequence()
+                        .map { CpvsKey(it, language) }
+                        .toSet()
+
+                    val cpvsEntities = cpvsRepository.findAllById(cpvsKeys)
+                    if (cpvsEntities.isEmpty() || cpvsEntities.size != cpvsKeys.size) throw InErrorException(ErrorType.INVALID_CPVS)
+                    cpvsEntities.asSequence()
+                        .flatMap { entity ->
+                            items.asSequence()
+                                .map { item ->
+                                    val updatedAC = item.additionalClassifications?.asSequence()
+                                        ?.filter { it.id == entity.cpvsKey?.code }
+                                        ?.map { additionalClassification ->
+                                            additionalClassification.copy(
+                                                scheme = ClassificationScheme.CPVS.value(),
+                                                description = entity.name
+                                            )
+                                        }
+                                        ?.toList()
+                                        .orEmpty()
+
+                                    item.copy(additionalClassifications = updatedAC)
+                            }
+                        }
+                        .toList()
+                } else {
+                    items
+                }
+
+            return updatedItems
+        }
+
+        fun updateUnit(
+            items: List<UpdateAggregationPlan.Tender.Item>,
+            language: Language,
+            unitRepository: UnitRepository
+        ): List<UpdateAggregationPlan.Tender.Item> {
+
+            val unitCodes = items.map { it.unit.id }
+            val updatedItems =
+                if (unitCodes.isNotEmpty()) {
+                    val unitKeys = unitCodes.asSequence()
+                        .map { UnitKey(it, language) }
+                        .toSet()
+
+                    val unitEntities = unitRepository.findAllById(unitKeys)
+                    if (unitEntities.isEmpty() || unitEntities.size != unitKeys.size) throw InErrorException(ErrorType.INVALID_UNIT)
+                    unitEntities.asSequence()
+                        .flatMap { entity ->
+                            items.asSequence()
+                                .filter { it.unit.id == entity.unitKey?.code }
+                                .map { item ->
+                                    item.copy(
+                                        unit = item.unit.copy(
+                                            name = entity.name
+                                        )
+                                    )
+                                }
+                        }
+                        .toList()
+                } else {
+                    items
+                }
+
+            return updatedItems
+        }
+
+        fun getUpdatedAddress(
+            address: UpdateAggregationPlan.Tender.Address,
+            country: Country,
+            localityRepository: LocalityRepository,
+            regionRepository: RegionRepository
+        ): UpdateAggregationPlan.Tender.Address = address.copy(
+            addressDetails = address.addressDetails.let { addressDetails ->
+                addressDetails.copy(
+                    //BR-12.5.1
+                    country = getUpdatedCountry(addressDetails.country, country),
+                    //BR-12.5.2
+                    region = getUpdatedRegion(addressDetails.region, country, regionRepository),
+                    //BR-12.5.3
+                    locality = getUpdatedLocality(addressDetails.locality, country, localityRepository, regionRepository)
+                )
+            }
+        )
+
+
+        fun getUpdatedLocality(
+            localityDetails: LocalityDetails?,
+            country: Country,
+            localityRepository: LocalityRepository,
+            regionRepository: RegionRepository
+        ): LocalityDetails? {
+            val updatedLocality = localityDetails?.let {
+                val schemeEntity = localityRepository.findOneByScheme(localityDetails.scheme)
+                if (schemeEntity != null) {
+                    val regionEntity = regionRepository
+                        .findByRegionKeyCodeAndRegionKeyCountry(localityDetails.id, country)
+                        ?: throw InErrorException(ErrorType.REGION_UNKNOWN)
+
+                    val localityEntity = localityRepository
+                        .findByLocalityKeyCodeAndLocalityKeyRegionAndScheme(localityDetails.id, regionEntity, localityDetails.scheme)
+                        ?: throw InErrorException(ErrorType.LOCALITY_UNKNOWN)
+
+                    localityDetails.copy(description = localityEntity.name)
+                } else
+                    localityDetails
+            }
+            return updatedLocality
+        }
+
+        fun getUpdatedRegion(regionDetails: RegionDetails, country: Country, regionRepository: RegionRepository): RegionDetails {
+            val regionEntity = regionRepository.findByRegionKeyCodeAndRegionKeyCountry(regionDetails.id, country)
+                ?: throw InErrorException(ErrorType.REGION_UNKNOWN)
+
+            return regionDetails.copy(
+                scheme = regionEntity.scheme,
+                description = regionEntity.name
+            )
+        }
+
+        fun getUpdatedCountry(countryDetails: CountryDetails, country: Country): CountryDetails {
+            if (countryDetails.id != country.countryKey?.code) throw InErrorException(ErrorType.INVALID_COUNTRY)
+
+            return countryDetails.copy(
+                scheme = country.scheme,
+                description = country.name
+            )
+        }
+
+    }
+
+    override fun enrichDataForUpdateAP(cm: CommandMessage): ResponseDto {
+        val lang = cm.context.language
+        val language = validationService.getLanguage(languageCode = lang, internal = true)
+        val country = validationService.getCountry(languageCode = lang, countryCode = cm.context.country)
+        val request = toObject(UpdateAggregationPlan::class.java, cm.data)
+
+        val (updatedClassification: ClassificationTD?, mainProcurementCategory: String?) = request.tender.classification
+            ?.let {
+                val cpv = getCpv(request.tender.classification, language, cpvRepository)
+                val updateClassification = updateClassification(it, cpv)
+                val mainProcurementCategory = cpv.mainProcurementCategory
+                updateClassification to mainProcurementCategory
+            }
+            ?: null to null
+
+        val updatedItems = request.tender.items.orEmpty().let { items ->
+                // BR-12.1.2
+                val updatedItemsCpv = updateCpv(items, language, cpvRepository)
+                // BR-12.1.1
+                val updatedItemsCpvs = updateCpvs(updatedItemsCpv, language, cpvsRepository)
+                // BR-12.1.2
+                val updatedItemsUnit = updateUnit(updatedItemsCpvs, language, unitRepository)
+
+                updatedItemsUnit.map { item ->
+                    val updatedDeliveryAddress = item.deliveryAddress
+                        ?.let { getUpdatedAddress(it, country, localityRepository, regionRepository) }
+                    item.copy(deliveryAddress = updatedDeliveryAddress)
+                }
+            }
+
+        val updatedLots = request.tender.lots.orEmpty()
+            .map { lot ->
+                val updatedPlaceOfPerformance = lot.placeOfPerformance?.let {
+                    val updatedAddress = getUpdatedAddress(it.address, country, localityRepository, regionRepository)
+                    it.copy(address = updatedAddress)
+                }
+                lot.copy(placeOfPerformance = updatedPlaceOfPerformance)
+            }
+
+
+        val enrichedAp = request.copy(
+            tender = request.tender.copy(
+                classification = updatedClassification,
+                mainProcurementCategory = mainProcurementCategory,
+                items = updatedItems,
+                lots = updatedLots
             )
         )
 
