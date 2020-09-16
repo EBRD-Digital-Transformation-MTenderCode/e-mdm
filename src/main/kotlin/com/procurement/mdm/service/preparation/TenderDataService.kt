@@ -111,14 +111,9 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
 
     companion object UpdateAP {
 
-        fun getCpv(classification: ClassificationTD, language: Language, cpvRepository: CpvRepository): Cpv {
-            val cpvKey = classification.id.let { CpvKey(it, language) }
-            val maybeCpvEntity = cpvRepository.findById(cpvKey)
-            return maybeCpvEntity.orElseThrow { throw InErrorException(ErrorType.INVALID_CPV) }
-        }
-
         fun updateClassification(classification: ClassificationTD, cpv: Cpv): ClassificationTD =
             classification.copy(
+                id = cpv.cpvKey?.code!!,
                 description = cpv.name,
                 scheme = ClassificationScheme.CPV.value()
             )
@@ -312,9 +307,12 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
 
         val (updatedClassification: ClassificationTD?, mainProcurementCategory: String?) = request.tender.classification
             ?.let {
-                val cpv = getCpv(request.tender.classification, language, cpvRepository)
-                val updateClassification = updateClassification(it, cpv)
-                val mainProcurementCategory = cpv.mainProcurementCategory
+                val commonClass = it.id
+                val cpvEntity = cpvRepository.getCommonClass(code = commonClass, language = language)
+                    ?: throw InErrorException(ErrorType.INVALID_COMMON_CPV, commonClass)
+
+                val updateClassification = updateClassification(it, cpvEntity)
+                val mainProcurementCategory = cpvEntity.mainProcurementCategory
                 updateClassification to mainProcurementCategory
             }
             ?: null to null
