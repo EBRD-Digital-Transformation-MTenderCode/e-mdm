@@ -271,7 +271,10 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
                         .findByLocalityKeyCodeAndLocalityKeyRegionAndScheme(localityDetails.id, regionEntity, localityDetails.scheme)
                         ?: throw InErrorException(ErrorType.LOCALITY_UNKNOWN)
 
-                    localityDetails.copy(description = localityEntity.name)
+                    localityDetails.copy(
+                        description = localityEntity.name,
+                        uri = localityEntity.uri
+                    )
                 } else
                     localityDetails
             }
@@ -284,7 +287,8 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
 
             return regionDetails.copy(
                 scheme = regionEntity.scheme,
-                description = regionEntity.name
+                description = regionEntity.name,
+                uri = regionEntity.uri
             )
         }
 
@@ -293,7 +297,8 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
 
             return countryDetails.copy(
                 scheme = country.scheme,
-                description = country.name
+                description = country.name,
+                uri = country.uri
             )
         }
 
