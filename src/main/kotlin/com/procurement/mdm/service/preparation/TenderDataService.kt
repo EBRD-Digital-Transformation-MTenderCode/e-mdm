@@ -21,6 +21,7 @@ import com.procurement.mdm.model.entity.CpvKey
 import com.procurement.mdm.model.entity.Cpvs
 import com.procurement.mdm.model.entity.CpvsKey
 import com.procurement.mdm.model.entity.Language
+import com.procurement.mdm.model.entity.Region
 import com.procurement.mdm.model.entity.UnitKey
 import com.procurement.mdm.model.entity.Units
 import com.procurement.mdm.repository.CpvRepository
@@ -65,8 +66,8 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
         }
         if (dto.tender.lots != null) {
             dto.tender.lots.asSequence()
-                    .filter { it.placeOfPerformance != null }
-                    .forEach { addressDataService.processAddress(it.placeOfPerformance!!.address, country) }
+                .filter { it.placeOfPerformance != null }
+                .forEach { addressDataService.processAddress(it.placeOfPerformance!!.address, country) }
         }
         processTranslate(dto, country, lang, pmd)
         return getResponseDto(data = dto, id = cm.id)
@@ -190,7 +191,7 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
                                         .orEmpty()
 
                                     item.copy(additionalClassifications = updatedAC)
-                            }
+                                }
                         }
                         .toList()
                 } else {
@@ -242,13 +243,18 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
             regionRepository: RegionRepository
         ): UpdateAggregationPlan.Tender.Address = address.copy(
             addressDetails = address.addressDetails.let { addressDetails ->
+                val updatedCountry = getUpdatedCountry(addressDetails.country, country)
+                val regionEntity = regionRepository.findByRegionKeyCodeAndRegionKeyCountry(addressDetails.region.id, country)
+                    ?: throw InErrorException(ErrorType.REGION_UNKNOWN)
+                val updatedReguion = addressDetails.region.updateBy(regionEntity)
+                val updatedLocality = getUpdatedLocality(addressDetails.locality, localityRepository, regionEntity)
                 addressDetails.copy(
                     //BR-12.5.1
-                    country = getUpdatedCountry(addressDetails.country, country),
+                    country = updatedCountry,
                     //BR-12.5.2
-                    region = getUpdatedRegion(addressDetails.region, country, regionRepository),
+                    region = updatedReguion,
                     //BR-12.5.3
-                    locality = getUpdatedLocality(addressDetails.locality, country, localityRepository, regionRepository)
+                    locality = updatedLocality
                 )
             }
         )
@@ -256,19 +262,14 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
 
         fun getUpdatedLocality(
             localityDetails: LocalityDetails?,
-            country: Country,
             localityRepository: LocalityRepository,
-            regionRepository: RegionRepository
+            region: Region
         ): LocalityDetails? {
             val updatedLocality = localityDetails?.let {
                 val schemeEntity = localityRepository.findOneByScheme(localityDetails.scheme)
                 if (schemeEntity != null) {
-                    val regionEntity = regionRepository
-                        .findByRegionKeyCodeAndRegionKeyCountry(localityDetails.id, country)
-                        ?: throw InErrorException(ErrorType.REGION_UNKNOWN)
-
                     val localityEntity = localityRepository
-                        .findByLocalityKeyCodeAndLocalityKeyRegionAndScheme(localityDetails.id, regionEntity, localityDetails.scheme)
+                        .findByLocalityKeyCodeAndLocalityKeyRegionAndScheme(localityDetails.id, region, localityDetails.scheme)
                         ?: throw InErrorException(ErrorType.LOCALITY_UNKNOWN)
 
                     localityDetails.copy(
@@ -281,16 +282,12 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
             return updatedLocality
         }
 
-        fun getUpdatedRegion(regionDetails: RegionDetails, country: Country, regionRepository: RegionRepository): RegionDetails {
-            val regionEntity = regionRepository.findByRegionKeyCodeAndRegionKeyCountry(regionDetails.id, country)
-                ?: throw InErrorException(ErrorType.REGION_UNKNOWN)
-
-            return regionDetails.copy(
+        fun RegionDetails.updateBy(regionEntity: Region): RegionDetails =
+            this.copy(
                 scheme = regionEntity.scheme,
                 description = regionEntity.name,
                 uri = regionEntity.uri
             )
-        }
 
         fun getUpdatedCountry(countryDetails: CountryDetails, country: Country): CountryDetails {
             if (countryDetails.id != country.countryKey?.code) throw InErrorException(ErrorType.INVALID_COUNTRY)
@@ -323,19 +320,19 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
             ?: null to null
 
         val updatedItems = request.tender.items.orEmpty().let { items ->
-                // BR-12.1.2
-                val updatedItemsCpv = updateCpv(items, language, cpvRepository)
-                // BR-12.1.1
-                val updatedItemsCpvs = updateCpvs(updatedItemsCpv, language, cpvsRepository)
-                // BR-12.1.2
-                val updatedItemsUnit = updateUnit(updatedItemsCpvs, language, unitRepository)
+            // BR-12.1.2
+            val updatedItemsCpv = updateCpv(items, language, cpvRepository)
+            // BR-12.1.1
+            val updatedItemsCpvs = updateCpvs(updatedItemsCpv, language, cpvsRepository)
+            // BR-12.1.2
+            val updatedItemsUnit = updateUnit(updatedItemsCpvs, language, unitRepository)
 
-                updatedItemsUnit.map { item ->
-                    val updatedDeliveryAddress = item.deliveryAddress
-                        ?.let { getUpdatedAddress(it, country, localityRepository, regionRepository) }
-                    item.copy(deliveryAddress = updatedDeliveryAddress)
-                }
+            updatedItemsUnit.map { item ->
+                val updatedDeliveryAddress = item.deliveryAddress
+                    ?.let { getUpdatedAddress(it, country, localityRepository, regionRepository) }
+                item.copy(deliveryAddress = updatedDeliveryAddress)
             }
+        }
 
         val updatedLots = request.tender.lots.orEmpty()
             .map { lot ->
@@ -379,8 +376,8 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
                 if (cpvEntities.isEmpty() || cpvEntities.size != cpvKeys.size) throw InErrorException(ErrorType.INVALID_CPV)
                 cpvEntities.asSequence().forEach { entity ->
                     items.asSequence()
-                            .filter { it.classification.id == entity.cpvKey?.code }
-                            .forEach { setCpvData(it.classification, entity) }
+                        .filter { it.classification.id == entity.cpvKey?.code }
+                        .forEach { setCpvData(it.classification, entity) }
                 }
             }
             //data cpvs
@@ -392,8 +389,8 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
                 cpvsEntities.asSequence().forEach { entity ->
                     items.asSequence().forEach { item ->
                         item.additionalClassifications?.asSequence()
-                                ?.filter { it.id == entity.cpvsKey?.code }
-                                ?.forEach { setCpvsData(it, entity) }
+                            ?.filter { it.id == entity.cpvsKey?.code }
+                            ?.forEach { setCpvsData(it, entity) }
                     }
                 }
             }
@@ -405,8 +402,8 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
                 if (unitEntities.isEmpty() || unitEntities.size != unitKeys.size) throw InErrorException(ErrorType.INVALID_UNIT)
                 unitEntities.asSequence().forEach { entity ->
                     items.asSequence()
-                            .filter { it.unit.id == entity.unitKey?.code }
-                            .forEach { seUnitData(it.unit, entity) }
+                        .filter { it.unit.id == entity.unitKey?.code }
+                        .forEach { seUnitData(it.unit, entity) }
                 }
             }
         }
@@ -414,7 +411,7 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
         if (dto.tender.classification != null) {
             val commonClass = dto.tender.classification!!.id
             val cpvEntity = cpvRepository.getCommonClass(code = commonClass, language = language)
-                    ?: throw InErrorException(ErrorType.INVALID_COMMON_CPV, commonClass)
+                ?: throw InErrorException(ErrorType.INVALID_COMMON_CPV, commonClass)
 
             dto.tender.classification?.apply {
                 id = cpvEntity.cpvKey?.code!!
@@ -429,14 +426,14 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
 
     private fun getTranslate(code: String, lang: String): String {
         val entity = translateRepository.findByTranslateKeyCodeAndTranslateKeyLanguageCode(
-                code = code, languageCode = lang)
-                ?: throw InErrorException(ErrorType.TRANSLATION_UNKNOWN, code)
+            code = code, languageCode = lang)
+            ?: throw InErrorException(ErrorType.TRANSLATION_UNKNOWN, code)
         return entity.name
     }
 
     private fun getPmd(code: String, country: Country): String {
         val entity = pmdRepository.findByPmdKeyCodeAndPmdKeyCountry(code = code, country = country)
-                ?: throw InErrorException(ErrorType.PMD_UNKNOWN, code)
+            ?: throw InErrorException(ErrorType.PMD_UNKNOWN, code)
         return entity.name
     }
 
