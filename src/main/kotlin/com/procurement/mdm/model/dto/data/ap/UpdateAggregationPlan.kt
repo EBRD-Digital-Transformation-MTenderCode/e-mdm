@@ -3,12 +3,10 @@ package com.procurement.mdm.model.dto.data.ap
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.procurement.mdm.model.dto.data.ClassificationTD
-import com.procurement.mdm.model.dto.data.ContractPeriod
 import com.procurement.mdm.model.dto.data.CountryDetails
 import com.procurement.mdm.model.dto.data.LocalityDetails
 import com.procurement.mdm.model.dto.data.Period
 import com.procurement.mdm.model.dto.data.RegionDetails
-import com.procurement.mdm.model.dto.data.Value
 import java.math.BigDecimal
 
 data class UpdateAggregationPlan(
@@ -88,7 +86,6 @@ data class UpdateAggregationPlan(
         }
 
         data class Lot(
-
             @param:JsonProperty("id") @field:JsonProperty("id") val id: String,
 
             @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -96,8 +93,6 @@ data class UpdateAggregationPlan(
 
             @param:JsonProperty("title") @field:JsonProperty("title") val title: String,
             @param:JsonProperty("description") @field:JsonProperty("description") val description: String,
-            @param:JsonProperty("value") @field:JsonProperty("value") val value: Value,
-            @param:JsonProperty("contractPeriod") @field:JsonProperty("contractPeriod") val contractPeriod: ContractPeriod,
 
             @JsonInclude(JsonInclude.Include.NON_NULL)
             @param:JsonProperty("placeOfPerformance") @field:JsonProperty("placeOfPerformance") val placeOfPerformance: PlaceOfPerformance?
