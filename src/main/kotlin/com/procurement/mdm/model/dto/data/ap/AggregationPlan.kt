@@ -3,6 +3,7 @@ package com.procurement.mdm.model.dto.data.ap
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.procurement.mdm.model.dto.data.ClassificationTD
+import com.procurement.mdm.model.dto.data.ContractPeriod
 import com.procurement.mdm.model.dto.data.Document
 import com.procurement.mdm.model.dto.data.OrganizationReference
 import com.procurement.mdm.model.dto.data.Period
@@ -17,6 +18,8 @@ data class ApTender(
     @field:JsonProperty("description") @param:JsonProperty("description") val description: String,
 
     @field:JsonProperty("legalBasis") @param:JsonProperty("legalBasis") val legalBasis: String,
+
+    @field:JsonProperty("contractPeriod") @param:JsonProperty("contractPeriod") val contractPeriod: ContractPeriod,
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @field:JsonProperty("procurementMethodRationale") @param:JsonProperty("procurementMethodRationale") val procurementMethodRationale: String?,
