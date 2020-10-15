@@ -7,6 +7,7 @@ import com.procurement.mdm.model.dto.data.ContractPeriod
 import com.procurement.mdm.model.dto.data.Document
 import com.procurement.mdm.model.dto.data.OrganizationReference
 import com.procurement.mdm.model.dto.data.Period
+import com.procurement.mdm.model.dto.data.Value
 
 data class AggregationPlan(
     @field:JsonProperty("tender") @param:JsonProperty("tender") val tender: ApTender
@@ -39,5 +40,7 @@ data class ApTender(
 
     @field:JsonProperty("procurementMethodDetails") @param:JsonProperty("procurementMethodDetails") val procurementMethodDetails: String?,
 
-    @field:JsonProperty("eligibilityCriteria") @param:JsonProperty("eligibilityCriteria") val eligibilityCriteria: String?
+    @field:JsonProperty("eligibilityCriteria") @param:JsonProperty("eligibilityCriteria") val eligibilityCriteria: String?,
+
+    @field:JsonProperty("value") @param:JsonProperty("value") val value: Value
 )
