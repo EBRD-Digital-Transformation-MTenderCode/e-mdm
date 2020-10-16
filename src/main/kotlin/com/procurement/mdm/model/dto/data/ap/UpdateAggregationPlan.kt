@@ -7,6 +7,7 @@ import com.procurement.mdm.model.dto.data.CountryDetails
 import com.procurement.mdm.model.dto.data.LocalityDetails
 import com.procurement.mdm.model.dto.data.Period
 import com.procurement.mdm.model.dto.data.RegionDetails
+import com.procurement.mdm.model.dto.data.Value
 import java.math.BigDecimal
 
 data class UpdateAggregationPlan(
@@ -35,7 +36,10 @@ data class UpdateAggregationPlan(
         @field:JsonProperty("documents") @param:JsonProperty("documents") val documents: List<Document>?,
 
         @JsonInclude(JsonInclude.Include.NON_NULL)
-        @param:JsonProperty("mainProcurementCategory") @field:JsonProperty("mainProcurementCategory") val mainProcurementCategory: String?
+        @param:JsonProperty("mainProcurementCategory") @field:JsonProperty("mainProcurementCategory") val mainProcurementCategory: String?,
+
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        @field:JsonProperty("value") @param:JsonProperty("value") val value: Value?
 
     ) {
         data class Item(
