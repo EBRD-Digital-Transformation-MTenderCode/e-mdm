@@ -2,6 +2,7 @@ package com.procurement.mdm.application.service.classification
 
 import com.procurement.mdm.application.exception.ClassificationLanguageNotFoundException
 import com.procurement.mdm.application.exception.ClassificationNotFoundException
+import com.procurement.mdm.application.exception.ClassificationTranslationNotFoundException
 import com.procurement.mdm.application.exception.IncorrectClassificationSchemeException
 import com.procurement.mdm.application.service.classification.ClassificationServiceImpl.ClassificationById.cpvByLangFilter
 import com.procurement.mdm.domain.model.classification.Classification
@@ -36,7 +37,7 @@ class ClassificationServiceImpl(
                     storedClassifications
                         .find { cpv -> cpvByLangFilter(cpv, languageCode) }
                         ?.let { cpv -> Classification(id = cpv.cpvKey!!.code!!, description = cpv.name) }
-                        ?: throw ClassificationNotFoundException(id = id)
+                        ?: throw ClassificationTranslationNotFoundException(language = language)
             }
             ClassificationScheme.CPC,
             ClassificationScheme.CPVS,
