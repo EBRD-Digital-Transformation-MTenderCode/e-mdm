@@ -78,4 +78,8 @@ class RegionSchemeNotFoundException(scheme: RegionScheme) : ApplicationException
 
 class LocalitySchemeNotFoundException(scheme: LocalityScheme) : ApplicationException("Locality scheme '$scheme' not found.")
 
+class UnitLanguageNotFoundException(language: LanguageCode) : ApplicationException("Language code '${language.value}' not found.")
 
+class UnitNotFoundException(id: String) : ApplicationException("Unit '${id}' not found.")
+
+class UnitTranslationNotFoundException(language: String) : ApplicationException("Unit translation for language '${language}' not found.")

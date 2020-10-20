@@ -81,7 +81,15 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
     INVALID_PMD(status = HttpStatus.BAD_REQUEST, group = Groups.TENDER_PROCESS, id = "01"),
     INVALID_PHASE(status = HttpStatus.BAD_REQUEST, group = Groups.TENDER_PROCESS, id = "02"),
     INVALID_CRITERION(status = HttpStatus.BAD_REQUEST, group = Groups.TENDER_PROCESS, id = "03"),
-    INVALID_REQUIREMENT_GROUP(status = HttpStatus.BAD_REQUEST, group = Groups.TENDER_PROCESS, id = "04");
+    INVALID_REQUIREMENT_GROUP(status = HttpStatus.BAD_REQUEST, group = Groups.TENDER_PROCESS, id = "04"),
+
+    /**
+     * Unit.
+     */
+    UNIT_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.UNIT, id = "01"),
+    INVALID_UNIT_LANGUAGE_CODE(status = HttpStatus.BAD_REQUEST, group = Groups.UNIT, id = "02"),
+    UNIT_TRANSLATION_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.UNIT, id = "03");
+
 
     @JsonValue
     val code: String = "${status.value()}.${GlobalProperties.serviceId}.$group.$id"
@@ -97,7 +105,8 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
         LOCALITY(code = "13"),
         ORGANIZATION_SCHEME(code = "14"),
         ORGANIZATION_SCALE(code = "15"),
-        TENDER_PROCESS(code = "16");
+        TENDER_PROCESS(code = "16"),
+        UNIT(code = "18");
 
         override fun toString(): String = code
     }
