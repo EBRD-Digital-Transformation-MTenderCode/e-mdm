@@ -1,7 +1,7 @@
 package com.procurement.mdm.infrastructure.web.controller.unit
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.procurement.mdm.application.service.unit.UnitService
+import com.procurement.mdm.application.service.unit.UnitsService
 import com.procurement.mdm.infrastructure.exception.LanguageRequestParameterMissingException
 import com.procurement.mdm.infrastructure.web.dto.ApiResponse
 import org.springframework.http.HttpStatus
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/units")
-class UnitController(private val unitService: UnitService) {
+class UnitsController(private val unitsService: UnitsService) {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -25,7 +25,7 @@ class UnitController(private val unitService: UnitService) {
         if (lang == null)
             throw LanguageRequestParameterMissingException()
 
-        return unitService.getById(id = id, language = lang)
+        return unitsService.getById(id = id, language = lang)
             .let { unit -> Unit(id = unit.id, name = unit.name) }
             .let { ClassificationApiResponse(it) }
     }
