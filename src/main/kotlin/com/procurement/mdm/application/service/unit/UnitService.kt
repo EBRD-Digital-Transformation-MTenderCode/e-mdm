@@ -32,7 +32,7 @@ class UnitServiceImpl(
             storedUnits
                 .find { unit -> unitByLangFilter(unit, languageCode) }
                 ?.let { unit -> Unit(id = unit.unitKey!!.code!!, name = unit.name) }
-                ?: throw UnitTranslationNotFoundException(language = id)
+                ?: throw UnitTranslationNotFoundException(language = language)
     }
 
     private fun validation(languageCode: LanguageCode) {
