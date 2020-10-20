@@ -78,4 +78,12 @@ class RegionSchemeNotFoundException(scheme: RegionScheme) : ApplicationException
 
 class LocalitySchemeNotFoundException(scheme: LocalityScheme) : ApplicationException("Locality scheme '$scheme' not found.")
 
+class ClassificationLanguageNotFoundException(language: LanguageCode) : ApplicationException("Language code '${language.value}' not found.")
+
+class ClassificationNotFoundException(id: String) : ApplicationException("Classification '${id}' not found.")
+
+class IncorrectClassificationSchemeException(scheme: String) : ApplicationException("Incorrect classification scheme '${scheme}'.")
+
+class ClassificationTranslationNotFoundException(language: String) : ApplicationException("Classification translation for language '${language}' not found.")
+
 
