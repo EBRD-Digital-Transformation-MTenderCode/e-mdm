@@ -20,4 +20,7 @@ interface CpvRepository : JpaRepository<Cpv, CpvKey> {
 
     @Transactional(readOnly = true)
     fun findByParentAndCpvKeyLanguageCode(parentCode: String = "", languageCode: String): List<Cpv>
+
+    @Transactional(readOnly = true)
+    fun findByCpvKeyCode(code: String): List<Cpv>
 }
