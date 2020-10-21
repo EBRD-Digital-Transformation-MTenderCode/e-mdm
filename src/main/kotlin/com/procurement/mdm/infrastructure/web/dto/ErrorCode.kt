@@ -84,6 +84,14 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
     INVALID_REQUIREMENT_GROUP(status = HttpStatus.BAD_REQUEST, group = Groups.TENDER_PROCESS, id = "04"),
 
     /**
+     * Classification.
+     */
+    INVALID_CLASSIFICATION_LANGUAGE_CODE(status = HttpStatus.BAD_REQUEST, group = Groups.CLASSIFICATION, id = "01"),
+    CLASSIFICATION_SCHEME_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.CLASSIFICATION, id = "02"),
+    CLASSIFICATION_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.CLASSIFICATION, id = "03"),
+    CLASSIFICATION_TRANSLATION_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.CLASSIFICATION, id = "04"),
+
+    /**
      * Unit.
      */
     UNIT_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.UNIT, id = "01"),
@@ -106,6 +114,7 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
         ORGANIZATION_SCHEME(code = "14"),
         ORGANIZATION_SCALE(code = "15"),
         TENDER_PROCESS(code = "16"),
+        CLASSIFICATION(code = "17"),
         UNIT(code = "18");
 
         override fun toString(): String = code
