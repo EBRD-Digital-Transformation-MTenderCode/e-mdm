@@ -86,4 +86,8 @@ class IncorrectClassificationSchemeException(scheme: String) : ApplicationExcept
 
 class ClassificationTranslationNotFoundException(language: String) : ApplicationException("Classification translation for language '${language}' not found.")
 
+class UnitLanguageNotFoundException(language: LanguageCode) : ApplicationException("Language code '${language.value}' not found.")
 
+class UnitNotFoundException(id: String) : ApplicationException("Unit '${id}' not found.")
+
+class UnitTranslationNotFoundException(language: String) : ApplicationException("Unit translation for language '${language}' not found.")

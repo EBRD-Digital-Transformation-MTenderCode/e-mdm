@@ -89,7 +89,15 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
     INVALID_CLASSIFICATION_LANGUAGE_CODE(status = HttpStatus.BAD_REQUEST, group = Groups.CLASSIFICATION, id = "01"),
     CLASSIFICATION_SCHEME_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.CLASSIFICATION, id = "02"),
     CLASSIFICATION_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.CLASSIFICATION, id = "03"),
-    CLASSIFICATION_TRANSLATION_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.CLASSIFICATION, id = "04");
+    CLASSIFICATION_TRANSLATION_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.CLASSIFICATION, id = "04"),
+
+    /**
+     * Unit.
+     */
+    UNIT_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.UNIT, id = "01"),
+    INVALID_UNIT_LANGUAGE_CODE(status = HttpStatus.BAD_REQUEST, group = Groups.UNIT, id = "02"),
+    UNIT_TRANSLATION_NOT_FOUND(status = HttpStatus.NOT_FOUND, group = Groups.UNIT, id = "03");
+
 
     @JsonValue
     val code: String = "${status.value()}.${GlobalProperties.serviceId}.$group.$id"
@@ -106,7 +114,8 @@ enum class ErrorCode(val status: HttpStatus, group: GroupError, id: String) {
         ORGANIZATION_SCHEME(code = "14"),
         ORGANIZATION_SCALE(code = "15"),
         TENDER_PROCESS(code = "16"),
-        CLASSIFICATION(code = "17");
+        CLASSIFICATION(code = "17"),
+        UNIT(code = "18");
 
         override fun toString(): String = code
     }
