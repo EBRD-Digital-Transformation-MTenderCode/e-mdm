@@ -3,8 +3,15 @@ package com.procurement.mdm.model.entity
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.io.Serializable
-
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Embeddable
+import javax.persistence.EmbeddedId
+import javax.persistence.Entity
+import javax.persistence.FetchType
+import javax.persistence.ForeignKey
+import javax.persistence.JoinColumn
+import javax.persistence.ManyToOne
+import javax.persistence.Table
 
 @Entity
 @Table(name = "unit")
@@ -33,7 +40,7 @@ class UnitKey(
 
         @ManyToOne(optional = false, fetch = FetchType.LAZY)
         @JoinColumn(foreignKey = ForeignKey(name = "FK_unit_language"))
-        private val language: Language? = null
+        val language: Language? = null
 
 ) : Serializable {
 

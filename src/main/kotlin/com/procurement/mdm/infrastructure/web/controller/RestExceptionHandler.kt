@@ -1,9 +1,13 @@
 package com.procurement.mdm.infrastructure.web.controller
 
 import com.procurement.mdm.application.exception.ApplicationException
+import com.procurement.mdm.application.exception.ClassificationLanguageNotFoundException
+import com.procurement.mdm.application.exception.ClassificationNotFoundException
+import com.procurement.mdm.application.exception.ClassificationTranslationNotFoundException
 import com.procurement.mdm.application.exception.CountryDescriptionNotFoundException
 import com.procurement.mdm.application.exception.CountryNotFoundException
 import com.procurement.mdm.application.exception.CountrySchemeNotFoundException
+import com.procurement.mdm.application.exception.IncorrectClassificationSchemeException
 import com.procurement.mdm.application.exception.LocalityDescriptionNotFoundException
 import com.procurement.mdm.application.exception.LocalityNotFoundException
 import com.procurement.mdm.application.exception.LocalityNotLinkedToRegionException
@@ -14,6 +18,9 @@ import com.procurement.mdm.application.exception.RegionDescriptionNotFoundExcept
 import com.procurement.mdm.application.exception.RegionNotFoundException
 import com.procurement.mdm.application.exception.RegionNotLinkedToCountryException
 import com.procurement.mdm.application.exception.RegionSchemeNotFoundException
+import com.procurement.mdm.application.exception.UnitLanguageNotFoundException
+import com.procurement.mdm.application.exception.UnitNotFoundException
+import com.procurement.mdm.application.exception.UnitTranslationNotFoundException
 import com.procurement.mdm.domain.exception.CountryUnknownException
 import com.procurement.mdm.domain.exception.DomainException
 import com.procurement.mdm.domain.exception.InvalidCountryCodeException
@@ -37,8 +44,12 @@ import com.procurement.mdm.infrastructure.exception.PhaseRequestParameterMissing
 import com.procurement.mdm.infrastructure.exception.PmdRequestParameterMissingException
 import com.procurement.mdm.infrastructure.exception.RequestPayloadMissingException
 import com.procurement.mdm.infrastructure.exception.RequirementGroupIdParameterMissingException
+import com.procurement.mdm.infrastructure.exception.SchemeRequestParameterMissingException
 import com.procurement.mdm.infrastructure.web.dto.ApiError
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.CLASSIFICATION_NOT_FOUND
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.CLASSIFICATION_SCHEME_NOT_FOUND
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.CLASSIFICATION_TRANSLATION_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_DESCRIPTION_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_REQUEST_PARAMETER_MISSING
@@ -46,6 +57,7 @@ import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_REQUEST_PARA
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.COUNTRY_SCHEME_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.CRITERION_REQUEST_PARAMETER_MISSING
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INTERNAL_SERVER_ERROR
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_CLASSIFICATION_LANGUAGE_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_COUNTRY_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_COUNTRY_SCHEME
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_CRITERION
@@ -57,6 +69,7 @@ import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_PMD
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_REGION_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_REGION_SCHEME
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_REQUIREMENT_GROUP
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_UNIT_LANGUAGE_CODE
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.INVALID_URL
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LANGUAGE_REQUEST_PARAMETER_MISSING
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.LANGUAGE_REQUEST_PARAMETER_UNKNOWN
@@ -74,6 +87,8 @@ import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REGION_NOT_LINKED_TO
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REGION_SCHEME_NOT_FOUND
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REQUEST_PAYLOAD_MISSING
 import com.procurement.mdm.infrastructure.web.dto.ErrorCode.REQUIREMENT_GROUP_REQUEST_PARAMETER_MISSING
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.UNIT_NOT_FOUND
+import com.procurement.mdm.infrastructure.web.dto.ErrorCode.UNIT_TRANSLATION_NOT_FOUND
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
@@ -174,6 +189,27 @@ class RestExceptionHandler : ResponseEntityExceptionHandler() {
 
             is LocalityDescriptionNotFoundException ->
                 exception.handler(errorCode = LOCALITY_DESCRIPTION_NOT_FOUND)
+
+            is ClassificationLanguageNotFoundException ->
+                exception.handler(errorCode = INVALID_CLASSIFICATION_LANGUAGE_CODE)
+
+            is ClassificationNotFoundException ->
+                exception.handler(errorCode = CLASSIFICATION_NOT_FOUND)
+
+            is IncorrectClassificationSchemeException ->
+                exception.handler(errorCode = CLASSIFICATION_SCHEME_NOT_FOUND)
+
+            is ClassificationTranslationNotFoundException ->
+                exception.handler(errorCode = CLASSIFICATION_TRANSLATION_NOT_FOUND)
+
+            is UnitLanguageNotFoundException ->
+                exception.handler(errorCode = INVALID_UNIT_LANGUAGE_CODE)
+
+            is UnitNotFoundException ->
+                exception.handler(errorCode = UNIT_NOT_FOUND)
+
+            is UnitTranslationNotFoundException ->
+                exception.handler(errorCode = UNIT_TRANSLATION_NOT_FOUND)
         }
 
         return ResponseEntity.status(apiError.status).body(apiError)
@@ -205,6 +241,9 @@ class RestExceptionHandler : ResponseEntityExceptionHandler() {
 
             is RequirementGroupIdParameterMissingException ->
                 exception.handler(errorCode = REQUIREMENT_GROUP_REQUEST_PARAMETER_MISSING)
+
+            is SchemeRequestParameterMissingException ->
+                exception.handler(errorCode = CLASSIFICATION_SCHEME_NOT_FOUND)
         }
 
         return ResponseEntity.status(apiError.status).body(apiError)
