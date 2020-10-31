@@ -15,4 +15,6 @@ interface UnitRepository : JpaRepository<Units, UnitKey> {
     @Transactional(readOnly = true)
     fun findByUnitKeyCodeAndUnitKeyLanguageCode(unitCode: String, languageCode: String): Units?
 
+    @Transactional(readOnly = true)
+    fun findByUnitKeyCode(code: String): List<Units>
 }

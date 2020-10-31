@@ -25,3 +25,6 @@ class CriterionRequestParameterMissingException :
 
 class RequirementGroupIdParameterMissingException:
     InfrastructureException("The request is missing a required query parameter - 'requirementGroupId'.")
+
+class SchemeRequestParameterMissingException :
+    InfrastructureException("The request is missing a required query parameter - 'scheme'.")
