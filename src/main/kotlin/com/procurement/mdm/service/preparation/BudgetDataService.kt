@@ -220,7 +220,7 @@ class BudgetDataServiceImpl(
                     .findByLocalityKeyCodeAndLocalityKeyRegionAndScheme(locality.id, regionEntity, locality.scheme)
                     ?: throw InErrorException(ErrorType.LOCALITY_UNKNOWN)
 
-                locality.copy(description = localityEntity.name)
+                locality.copy(description = localityEntity.name, uri = localityEntity.uri)
             } else null
         } else null
 
@@ -236,7 +236,8 @@ class BudgetDataServiceImpl(
 
         return addressDetails.region.copy(
             scheme = regionEntity.scheme,
-            description = regionEntity.name
+            description = regionEntity.name,
+            uri = regionEntity.uri
         )
     }
 
@@ -248,7 +249,8 @@ class BudgetDataServiceImpl(
 
         return addressDetails.country.copy(
             scheme = country.scheme,
-            description = country.name
+            description = country.name,
+            uri = country.uri
         )
     }
 
@@ -323,21 +325,24 @@ class BudgetDataServiceImpl(
                                             EIData.Tender.Item.DeliveryAddress.AddressDetails.Country(
                                                 id = country.id,
                                                 description = null,
-                                                scheme = null
+                                                scheme = null,
+                                                uri = null
                                             )
                                         },
                                         region = addressDetails.region.let { region ->
                                             EIData.Tender.Item.DeliveryAddress.AddressDetails.Region(
                                                 id = region.id,
                                                 description = null,
-                                                scheme = null
+                                                scheme = null,
+                                                uri = null
                                             )
                                         },
                                         locality = addressDetails.locality?.let { locality ->
                                             EIData.Tender.Item.DeliveryAddress.AddressDetails.Locality(
                                                 id = locality.id,
                                                 description = locality.description,
-                                                scheme = locality.scheme
+                                                scheme = locality.scheme,
+                                                uri = null
                                             )
                                         }
                                     )
@@ -402,21 +407,24 @@ class BudgetDataServiceImpl(
                                                     EIResponse.Tender.Item.DeliveryAddress.AddressDetails.Country(
                                                         id = country.id,
                                                         description = country.description,
-                                                        scheme = country.scheme
+                                                        scheme = country.scheme,
+                                                        uri = country.uri
                                                     )
                                                 },
                                                 region = addressDetails.region.let { region ->
                                                     EIResponse.Tender.Item.DeliveryAddress.AddressDetails.Region(
                                                         id = region.id,
                                                         description = region.description,
-                                                        scheme = region.scheme
+                                                        scheme = region.scheme,
+                                                        uri = region.uri
                                                     )
                                                 },
                                                 locality = addressDetails.locality?.let { locality ->
                                                     EIResponse.Tender.Item.DeliveryAddress.AddressDetails.Locality(
                                                         id = locality.id,
                                                         description = locality.description,
-                                                        scheme = locality.scheme
+                                                        scheme = locality.scheme,
+                                                        uri = locality.uri
                                                     )
                                                 }
                                             )
