@@ -51,19 +51,22 @@ data class EIData(
                     data class Country(
                          val id: String,
                          val description: String?,
-                         val scheme: String?
+                         val scheme: String?,
+                         val uri: String?
                     )
 
                     data class Region(
                          val id: String,
                          val description: String?,
-                         val scheme: String?
+                         val scheme: String?,
+                         val uri: String?
                     )
 
                     data class Locality(
                          val id: String,
                          val description: String,
-                         val scheme: String
+                         val scheme: String,
+                         val uri: String?
                     )
                 }
             }

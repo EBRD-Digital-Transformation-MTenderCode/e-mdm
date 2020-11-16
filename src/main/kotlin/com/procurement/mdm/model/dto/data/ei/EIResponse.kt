@@ -85,7 +85,10 @@ data class EIResponse(
                         @param:JsonProperty("description") @field:JsonProperty("description") val description: String?,
 
                         @JsonInclude(JsonInclude.Include.NON_NULL)
-                        @param:JsonProperty("scheme") @field:JsonProperty("scheme") val scheme: String?
+                        @param:JsonProperty("scheme") @field:JsonProperty("scheme") val scheme: String?,
+
+                        @JsonInclude(JsonInclude.Include.NON_NULL)
+                        @param:JsonProperty("uri") @field:JsonProperty("uri") val uri: String?
                     )
 
                     data class Region(
@@ -95,13 +98,19 @@ data class EIResponse(
                         @param:JsonProperty("description") @field:JsonProperty("description") val description: String?,
 
                         @JsonInclude(JsonInclude.Include.NON_NULL)
-                        @param:JsonProperty("scheme") @field:JsonProperty("scheme") val scheme: String?
+                        @param:JsonProperty("scheme") @field:JsonProperty("scheme") val scheme: String?,
+
+                        @JsonInclude(JsonInclude.Include.NON_NULL)
+                        @param:JsonProperty("uri") @field:JsonProperty("uri") val uri: String?
                     )
 
                     data class Locality(
                         @param:JsonProperty("id") @field:JsonProperty("id") val id: String,
                         @param:JsonProperty("description") @field:JsonProperty("description") val description: String,
-                        @param:JsonProperty("scheme") @field:JsonProperty("scheme") val scheme: String
+                        @param:JsonProperty("scheme") @field:JsonProperty("scheme") val scheme: String,
+
+                        @JsonInclude(JsonInclude.Include.NON_NULL)
+                        @param:JsonProperty("uri") @field:JsonProperty("uri") val uri: String?
                     )
                 }
             }
