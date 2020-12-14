@@ -28,7 +28,9 @@ data class TenderTD @JsonCreator constructor(
 
         var eligibilityCriteria: String?,
 
-        val procuringEntity: OrganizationReference?
+        val procuringEntity: OrganizationReference?,
+
+        var additionalProcurementCategories: List<String>?
 )
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
