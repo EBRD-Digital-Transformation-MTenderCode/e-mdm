@@ -398,7 +398,7 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
 
                 val additionalProcurementCategories = cpvEntities.asSequence()
                     .map { it.mainProcurementCategory }
-                    .filter { it != dto.tender.mainProcurementCategory}
+                    .filter { category -> category != dto.tender.mainProcurementCategory}
                     .toList()
 
                 if (additionalProcurementCategories.isNotEmpty())
