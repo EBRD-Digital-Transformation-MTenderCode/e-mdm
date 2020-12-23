@@ -21,6 +21,8 @@ class AddressDataServiceImpl(private val regionRepository: RegionRepository,
 
         val addressDetails = address.addressDetails
         //country
+
+        if(addressDetails.country.id.isBlank()) throw InErrorException(ErrorType.COUNTRY_NOT_FOUND)
         if (addressDetails.country.id != country.countryKey?.code) throw InErrorException(ErrorType.INVALID_COUNTRY)
         addressDetails.country.apply {
             scheme = country.scheme
