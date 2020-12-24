@@ -2,7 +2,16 @@ package com.procurement.mdm.model.entity
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.io.Serializable
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Embeddable
+import javax.persistence.EmbeddedId
+import javax.persistence.Entity
+import javax.persistence.FetchType
+import javax.persistence.ForeignKey
+import javax.persistence.JoinColumn
+import javax.persistence.ManyToMany
+import javax.persistence.ManyToOne
+import javax.persistence.Table
 
 @Entity
 @Table(name = "country")
@@ -27,7 +36,7 @@ data class Country(
         val uri: String = "",
 
         @ManyToMany(mappedBy = "countries", fetch = FetchType.LAZY)
-        private val currencies: Set<Currency>? = null
+        private val currencies: List<Currency>? = null
 )
 
 @Embeddable
