@@ -49,6 +49,8 @@ class AddressDataServiceImpl(private val regionRepository: RegionRepository,
                 description = localityEntity.name
                 uri = localityEntity.uri
             }
+        } else {
+            addressDetails.locality.uri = null
         }
     }
 }

@@ -221,7 +221,7 @@ class BudgetDataServiceImpl(
                     ?: throw InErrorException(ErrorType.LOCALITY_UNKNOWN)
 
                 locality.copy(description = localityEntity.name, uri = localityEntity.uri)
-            } else locality
+            } else locality.copy(uri = null)
         } else null
 
         return updatedLocality
