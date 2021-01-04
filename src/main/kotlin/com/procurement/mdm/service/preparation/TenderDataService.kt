@@ -366,6 +366,22 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
     }
 
     private fun processItems(dto: TD, language: Language) {
+        //tender.classification
+        if (dto.tender.classification != null) {
+            val commonClass = dto.tender.classification!!.id
+            val cpvEntity = cpvRepository.getCommonClass(code = commonClass, language = language)
+                ?: throw InErrorException(ErrorType.INVALID_COMMON_CPV, commonClass)
+
+            dto.tender.classification?.apply {
+                id = cpvEntity.cpvKey?.code!!
+                description = cpvEntity.name
+                scheme = ClassificationScheme.CPV.value()
+            }
+            dto.tender.apply {
+                mainProcurementCategory = cpvEntity.mainProcurementCategory
+            }
+        }
+
         val items = dto.tender.items
         //data cpv
         if (items != null) {
@@ -379,6 +395,15 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
                         .filter { it.classification.id == entity.cpvKey?.code }
                         .forEach { setCpvData(it.classification, entity) }
                 }
+
+                val additionalProcurementCategories = cpvEntities.asSequence()
+                    .map { it.mainProcurementCategory }
+                    .filter { category -> category != dto.tender.mainProcurementCategory}
+                    .toList()
+
+                if (additionalProcurementCategories.isNotEmpty())
+                    dto.tender.additionalProcurementCategories = additionalProcurementCategories
+
             }
             //data cpvs
             val cpvsCodes = getCpvsCodes(items)
@@ -405,21 +430,6 @@ class TenderDataServiceServiceImpl(private val validationService: ValidationServ
                         .filter { it.unit.id == entity.unitKey?.code }
                         .forEach { seUnitData(it.unit, entity) }
                 }
-            }
-        }
-        //tender.classification
-        if (dto.tender.classification != null) {
-            val commonClass = dto.tender.classification!!.id
-            val cpvEntity = cpvRepository.getCommonClass(code = commonClass, language = language)
-                ?: throw InErrorException(ErrorType.INVALID_COMMON_CPV, commonClass)
-
-            dto.tender.classification?.apply {
-                id = cpvEntity.cpvKey?.code!!
-                description = cpvEntity.name
-                scheme = ClassificationScheme.CPV.value()
-            }
-            dto.tender.apply {
-                mainProcurementCategory = cpvEntity.mainProcurementCategory
             }
         }
     }
