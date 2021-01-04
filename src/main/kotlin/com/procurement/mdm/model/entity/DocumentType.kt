@@ -2,7 +2,17 @@ package com.procurement.mdm.model.entity
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.io.Serializable
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Embeddable
+import javax.persistence.EmbeddedId
+import javax.persistence.Entity
+import javax.persistence.FetchType
+import javax.persistence.ForeignKey
+import javax.persistence.JoinColumn
+import javax.persistence.JoinTable
+import javax.persistence.ManyToMany
+import javax.persistence.ManyToOne
+import javax.persistence.Table
 
 @Entity
 @Table(name = "document_type")
@@ -25,7 +35,7 @@ data class DocumentType(
                 inverseJoinColumns = [JoinColumn(name = "entity_kind_code")],
                 foreignKey = ForeignKey(name = "FK_document_type_code"),
                 inverseForeignKey = ForeignKey(name = "FK_entity_kind_code"))
-        private val entityKinds: Set<EntityKind>? = null
+        private val entityKinds: List<EntityKind>? = null
 )
 
 @Embeddable
