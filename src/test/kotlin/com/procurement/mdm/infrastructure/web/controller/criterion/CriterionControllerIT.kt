@@ -4,6 +4,7 @@ import com.procurement.mdm.application.service.criterion.CriterionService
 import com.procurement.mdm.application.service.criterion.CriterionServiceImpl
 import com.procurement.mdm.domain.model.identifier.CriterionIdentifier
 import com.procurement.mdm.domain.repository.criterion.CriterionRepository
+import com.procurement.mdm.domain.repository.criterion.StandardCriterionRepository
 import com.procurement.mdm.infrastructure.repository.AbstractRepositoryTest
 import com.procurement.mdm.infrastructure.repository.loadSql
 import com.procurement.mdm.infrastructure.web.controller.RestExceptionHandler
@@ -65,9 +66,12 @@ class CriterionControllerIT : AbstractRepositoryTest() {
     @Autowired
     private lateinit var criterionRepository: CriterionRepository
 
+    @Autowired
+    private lateinit var standardCriterionRepository: StandardCriterionRepository
+
     @BeforeEach
     fun init(restDocumentation: RestDocumentationContextProvider) {
-        criterionService = CriterionServiceImpl(criterionRepository)
+        criterionService = CriterionServiceImpl(criterionRepository, standardCriterionRepository)
 
         val controller = CriterionController(criterionService)
         val restExceptionHandler = RestExceptionHandler()
