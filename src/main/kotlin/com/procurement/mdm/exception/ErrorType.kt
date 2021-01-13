@@ -28,5 +28,7 @@ enum class ErrorType constructor(val code: String, val message: String) {
     INVALID_PR_ENTITY("01.09", "Invalid procuring entity."),
     INVALID_COUNTRY("01.10", "Invalid country."),
     INVALID_URI("01.11", "Invalid uri."),
-    EMPTY_PERSONES("01.12", "Persones array must not be empty.");
+    EMPTY_PERSONES("01.12", "Persones array must not be empty."),
+    INVALID_CRITERIA_CATEGORY("01.13", "Invalid criteria category."),
+    INVALID_PROCUREMENT_CATEGORY("01.14", "Invalid procurement category.");
 }
