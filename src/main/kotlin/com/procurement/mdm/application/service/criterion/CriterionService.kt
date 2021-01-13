@@ -71,7 +71,6 @@ class CriterionServiceImpl(
             else -> emptyList()
         }
 
-
         return standardCriteriaRecords
             .map { StandardCriterionRecord.toEntity(it) }
             .map { StandardCriteriaResult.fromEntity(it) }

@@ -67,8 +67,7 @@ class CriterionController(private val criterionService: CriterionService) {
                 criteriaCategory = criteriaCategory
             )
             .map { criterion -> StandardCriteriaResponse.fromResult(criterion) }
-            .let { StandardCriteriaResponse(it) }
-            .let { StandardCriteriaApiResponse(it) }
+            .let { StandardCriteriaApiResponse(StandardCriteriaResponse(it)) }
     }
 
 
