@@ -10,6 +10,7 @@ import com.procurement.mdm.domain.model.code.CountryCode
 import com.procurement.mdm.domain.model.code.LanguageCode
 import com.procurement.mdm.domain.model.identifier.CriterionIdentifier
 import com.procurement.mdm.domain.repository.criterion.CriterionRepository
+import com.procurement.mdm.domain.repository.criterion.StandardCriterionRepository
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
@@ -44,12 +45,13 @@ class CriterionServiceTest {
     }
 
     private lateinit var criterionRepository: CriterionRepository
+    private val standardCriterionRepository: StandardCriterionRepository = mock()
     private lateinit var service: CriterionService
 
     @BeforeEach
     fun init() {
         criterionRepository = mock()
-        service = CriterionServiceImpl(criterionRepository)
+        service = CriterionServiceImpl(criterionRepository, standardCriterionRepository)
     }
 
     @Test

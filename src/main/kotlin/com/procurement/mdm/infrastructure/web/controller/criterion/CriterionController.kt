@@ -7,19 +7,18 @@ import com.procurement.mdm.infrastructure.exception.CountryRequestParameterMissi
 import com.procurement.mdm.infrastructure.exception.LanguageRequestParameterMissingException
 import com.procurement.mdm.infrastructure.exception.PhaseRequestParameterMissingException
 import com.procurement.mdm.infrastructure.exception.PmdRequestParameterMissingException
+import com.procurement.mdm.infrastructure.web.controller.criterion.model.StandardCriteriaResponse
 import com.procurement.mdm.infrastructure.web.dto.ApiResponse
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/criteria")
 class CriterionController(private val criterionService: CriterionService) {
 
-    @GetMapping
+    @GetMapping("/criteria")
     @ResponseStatus(HttpStatus.OK)
     fun getCriteriaById(
         @RequestParam(value = "lang", required = false) lang: String?,
@@ -46,7 +45,35 @@ class CriterionController(private val criterionService: CriterionService) {
             }.let { CriteriaApiResponse(it) }
     }
 
+    @GetMapping("/standardCriteria")
+    @ResponseStatus(HttpStatus.OK)
+    fun getStandardCriteria(
+        @RequestParam(value = "lang", required = false) lang: String?,
+        @RequestParam(value = "country", required = false) country: String?,
+        @RequestParam(value = "mainProcurementCategory", required = false) mainProcurementCategory: String?,
+        @RequestParam(value = "criteriaCategory", required = false) criteriaCategory: String?
+    ): StandardCriteriaApiResponse {
+        if (lang == null)
+            throw LanguageRequestParameterMissingException()
+
+        if (country == null)
+            throw CountryRequestParameterMissingException()
+
+        return criterionService
+            .getStandard(
+                country = country,
+                language = lang,
+                mainProcurementCategory = mainProcurementCategory,
+                criteriaCategory = criteriaCategory
+            )
+            .map { criterion -> StandardCriteriaResponse.fromResult(criterion) }
+            .let { StandardCriteriaResponse(it) }
+            .let { StandardCriteriaApiResponse(it) }
+    }
+
+
     class CriteriaApiResponse(criteria: List<Criterion>) : ApiResponse<List<Criterion>>(criteria)
+    class StandardCriteriaApiResponse(criteria: StandardCriteriaResponse) : ApiResponse<StandardCriteriaResponse>(criteria)
 
     data class Criterion(
         @field:JsonProperty("id") @param:JsonProperty("id") val id: String,
