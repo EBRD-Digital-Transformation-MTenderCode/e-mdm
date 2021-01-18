@@ -18,7 +18,12 @@ import org.springframework.stereotype.Service
 
 interface CriterionService {
     fun getAll(country: String, pmd: String, language: String, phase: String): List<CriterionIdentifier>
-    fun getStandard(country: String, language: String, mainProcurementCategory: String?, criteriaCategory: String?): StandardCriteriaResult
+    fun getStandard(
+        country: String,
+        language: String,
+        mainProcurementCategory: String?,
+        criteriaCategory: String?
+    ): StandardCriteriaResult
 }
 
 @Service
@@ -39,7 +44,14 @@ class CriterionServiceImpl(
             CriterionIdentifier(
                 id = criterion.id,
                 title = criterion.title,
-                description = criterion.description
+                description = criterion.description,
+                classification = criterion.classification
+                    .let { classification ->
+                        CriterionIdentifier.Classification(
+                            id = classification.id,
+                            scheme = classification.scheme
+                        )
+                    }
             )
         }
     }
@@ -66,7 +78,12 @@ class CriterionServiceImpl(
                 standardCriterionRepository.findBy(countryCode, languageCode, parsedCriteriaCategory)
 
             parsedProcurementCategory != null && parsedCriteriaCategory != null ->
-                standardCriterionRepository.findBy(countryCode, languageCode, parsedProcurementCategory, parsedCriteriaCategory)
+                standardCriterionRepository.findBy(
+                    countryCode,
+                    languageCode,
+                    parsedProcurementCategory,
+                    parsedCriteriaCategory
+                )
 
             else -> emptyList()
         }
@@ -75,7 +92,6 @@ class CriterionServiceImpl(
             .map { StandardCriterionRecord.toEntity(it) }
             .map { StandardCriteriaResult.fromEntity(it) }
             .let { StandardCriteriaResult(it) }
-
     }
 
     private fun parseCriteriaCategory(category: String): CriterionCategory =
@@ -92,5 +108,4 @@ class CriterionServiceImpl(
         } catch (ex: InErrorException) {
             throw ExErrorException(ErrorType.INVALID_PROCUREMENT_CATEGORY)
         }
-
 }
