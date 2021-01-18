@@ -40,7 +40,13 @@ class CriterionController(private val criterionService: CriterionService) {
                 Criterion(
                     id = criterion.id,
                     title = criterion.title,
-                    description = criterion.description
+                    description = criterion.description,
+                    classification = criterion.classification.let { classification ->
+                        Criterion.Classification(
+                            id = classification.id,
+                            scheme = classification.scheme
+                        )
+                    }
                 )
             }.let { CriteriaApiResponse(it) }
     }
@@ -78,6 +84,12 @@ class CriterionController(private val criterionService: CriterionService) {
         @field:JsonProperty("id") @param:JsonProperty("id") val id: String,
         @field:JsonProperty("title") @param:JsonProperty("title") val title: String,
         @JsonInclude(JsonInclude.Include.NON_NULL)
-        @field:JsonProperty("description") @param:JsonProperty("description") val description: String?
-    )
+        @field:JsonProperty("description") @param:JsonProperty("description") val description: String?,
+        @field:JsonProperty("classification") @param:JsonProperty("classification") val classification: Classification
+    ){
+        data class Classification(
+            @field:JsonProperty("id") @param:JsonProperty("id") val id: String,
+            @field:JsonProperty("scheme") @param:JsonProperty("scheme") val scheme: String
+        )
+    }
 }
