@@ -32,13 +32,21 @@ class CriterionRepositoryIT : AbstractRepositoryTest() {
         private val FIRST_CRITERION_ENTITY = CriterionEntity(
             id = "MD_OT_1",
             description = "criterion-description-1",
-            title = "criterion-title-1"
+            title = "criterion-title-1",
+            classification = CriterionEntity.Classification(
+                id = "classification-1",
+                scheme = "scheme-1"
+            )
         )
 
         private val SECOND_CRITERION_ENTITY = CriterionEntity(
             id = "MD_OT_2",
             description = "criterion-description-2",
-            title = "criterion-title-2"
+            title = "criterion-title-2",
+            classification = CriterionEntity.Classification(
+                id = "classification-2",
+                scheme = "scheme-2"
+            )
         )
     }
 
