@@ -22,10 +22,16 @@ class PostgresCriterionRepository(
         private const val FIND_BY_SQL = """
             SELECT cr.code AS id,
                    cri18n.title,
-                   cri18n.description          
+                   cri18n.description,
+                   classifications.code as classification_id,
+                   schemes.code as scheme         
               FROM public.criteria AS cr    
         INNER JOIN public.criteria_i18n cri18n 
                 ON cr.id = cri18n.criterion_id
+        INNER JOIN criteria_classifications classifications
+                ON cr.classification_id = classifications.id
+        INNER JOIN criteria_classification_schemes schemes
+                ON classifications.scheme_id = schemes.id    
              WHERE cr.country_code = :country
                AND cr.pmd = :pmd
                AND cr.phase = :phase
@@ -50,7 +56,11 @@ class PostgresCriterionRepository(
         CriterionEntity(
             id = rs.getString("id"),
             title = rs.getString("title"),
-            description = rs.getString("description")
+            description = rs.getString("description"),
+            classification = CriterionEntity.Classification(
+                id = rs.getString("classification_id"),
+                scheme = rs.getString("scheme")
+            )
         )
     }
 }

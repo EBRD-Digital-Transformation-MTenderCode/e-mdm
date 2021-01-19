@@ -34,13 +34,21 @@ class CriterionServiceTest {
         private val FIRST_CRITERION_ENTITY = CriterionEntity(
             id = "MD_OT_1",
             description = "criterion-description-1",
-            title = "criterion-title-1"
+            title = "criterion-title-1",
+            classification = CriterionEntity.Classification(
+                id = "classification-id-1",
+                scheme = "classification-scheme-1"
+            )
         )
 
         private val SECOND_CRITERION_ENTITY = CriterionEntity(
             id = "MD_OT_2",
             description = "criterion-description-2",
-            title = "criterion-title-2"
+            title = "criterion-title-2",
+            classification = CriterionEntity.Classification(
+                id = "classification-id-1",
+                scheme = "classification-scheme-1"
+            )
         )
     }
 
@@ -70,7 +78,15 @@ class CriterionServiceTest {
         val actual = service.getAll(country = COUNTRY, phase = PHASE, pmd = PMD, language = LANGUAGE)
 
         val expected = storedCriterion.map { entity ->
-            CriterionIdentifier(id = entity.id, title = entity.title, description = entity.description)
+            CriterionIdentifier(
+                id = entity.id, title = entity.title, description = entity.description,
+                classification = entity.classification.let { classification ->
+                    CriterionIdentifier.Classification(
+                        id = classification.id,
+                        scheme = classification.scheme
+                    )
+                }
+            )
         }
 
         assertEquals(expected, actual)
@@ -92,5 +108,4 @@ class CriterionServiceTest {
 
         assertTrue(actual.isEmpty())
     }
-
 }
