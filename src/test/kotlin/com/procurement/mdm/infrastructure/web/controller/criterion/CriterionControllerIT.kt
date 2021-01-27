@@ -4,6 +4,7 @@ import com.procurement.mdm.application.service.criterion.CriterionService
 import com.procurement.mdm.application.service.criterion.CriterionServiceImpl
 import com.procurement.mdm.domain.model.identifier.CriterionIdentifier
 import com.procurement.mdm.domain.repository.criterion.CriterionRepository
+import com.procurement.mdm.domain.repository.criterion.StandardCriterionRepository
 import com.procurement.mdm.infrastructure.repository.AbstractRepositoryTest
 import com.procurement.mdm.infrastructure.repository.loadSql
 import com.procurement.mdm.infrastructure.web.controller.RestExceptionHandler
@@ -49,13 +50,21 @@ class CriterionControllerIT : AbstractRepositoryTest() {
         private val FIRST_CRITERION_IDENTIFIER = CriterionIdentifier(
             id = "MD_OT_1",
             description = "criterion-description-1",
-            title = "criterion-title-1"
+            title = "criterion-title-1",
+            classification = CriterionIdentifier.Classification(
+                id = "classification-1",
+                scheme = "scheme-1"
+            )
         )
 
         private val SECOND_CRITERION_IDENTIFIER = CriterionIdentifier(
             id = "MD_OT_2",
             description = "criterion-description-2",
-            title = "criterion-title-2"
+            title = "criterion-title-2",
+            classification = CriterionIdentifier.Classification(
+                id = "classification-2",
+                scheme = "scheme-2"
+            )
         )
     }
 
@@ -65,9 +74,12 @@ class CriterionControllerIT : AbstractRepositoryTest() {
     @Autowired
     private lateinit var criterionRepository: CriterionRepository
 
+    @Autowired
+    private lateinit var standardCriterionRepository: StandardCriterionRepository
+
     @BeforeEach
     fun init(restDocumentation: RestDocumentationContextProvider) {
-        criterionService = CriterionServiceImpl(criterionRepository)
+        criterionService = CriterionServiceImpl(criterionRepository, standardCriterionRepository)
 
         val controller = CriterionController(criterionService)
         val restExceptionHandler = RestExceptionHandler()
@@ -106,9 +118,13 @@ class CriterionControllerIT : AbstractRepositoryTest() {
             .andExpect(jsonPath("$.data[0].id", equalTo(FIRST_CRITERION_IDENTIFIER.id)))
             .andExpect(jsonPath("$.data[0].description", equalTo(FIRST_CRITERION_IDENTIFIER.description)))
             .andExpect(jsonPath("$.data[0].title", equalTo(FIRST_CRITERION_IDENTIFIER.title)))
+            .andExpect(jsonPath("$.data[0].classification.id", equalTo(FIRST_CRITERION_IDENTIFIER.classification.id)))
+            .andExpect(jsonPath("$.data[0].classification.scheme", equalTo(FIRST_CRITERION_IDENTIFIER.classification.scheme)))
             .andExpect(jsonPath("$.data[1].id", equalTo(SECOND_CRITERION_IDENTIFIER.id)))
             .andExpect(jsonPath("$.data[1].description", equalTo(SECOND_CRITERION_IDENTIFIER.description)))
             .andExpect(jsonPath("$.data[1].title", equalTo(SECOND_CRITERION_IDENTIFIER.title)))
+            .andExpect(jsonPath("$.data[1].classification.id", equalTo(SECOND_CRITERION_IDENTIFIER.classification.id)))
+            .andExpect(jsonPath("$.data[1].classification.scheme", equalTo(SECOND_CRITERION_IDENTIFIER.classification.scheme)))
             .andDo(
                 document(
                     "criteria/get_all/success",

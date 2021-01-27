@@ -5,6 +5,7 @@ import com.procurement.mdm.domain.repository.address.AddressCountryRepository
 import com.procurement.mdm.domain.repository.address.AddressLocalityRepository
 import com.procurement.mdm.domain.repository.address.AddressRegionRepository
 import com.procurement.mdm.domain.repository.criterion.CriterionRepository
+import com.procurement.mdm.domain.repository.criterion.StandardCriterionRepository
 import com.procurement.mdm.domain.repository.organization.OrganizationScaleRepository
 import com.procurement.mdm.domain.repository.organization.OrganizationSchemeRepository
 import com.procurement.mdm.domain.repository.requirement.RequirementRepository
@@ -16,6 +17,7 @@ import com.procurement.mdm.infrastructure.repository.address.PostgresAddressCoun
 import com.procurement.mdm.infrastructure.repository.address.PostgresAddressLocalityRepository
 import com.procurement.mdm.infrastructure.repository.address.PostgresAddressRegionRepository
 import com.procurement.mdm.infrastructure.repository.criterion.PostgresCriterionRepository
+import com.procurement.mdm.infrastructure.repository.criterion.PostgresStandardCriterionRepository
 import com.procurement.mdm.infrastructure.repository.language.PostgresLanguageRepository
 import com.procurement.mdm.infrastructure.repository.organization.PostgresOrganizationScaleRepository
 import com.procurement.mdm.infrastructure.repository.organization.PostgresOrganizationSchemeRepository
@@ -109,6 +111,10 @@ class DatabaseTestConfiguration {
     @Bean
     fun criterionRepository(): CriterionRepository =
         PostgresCriterionRepository(jdbcTemplate())
+
+    @Bean
+    fun standardCriterionRepository(): StandardCriterionRepository =
+        PostgresStandardCriterionRepository(jdbcTemplate())
 
     @Bean
     fun requirementGroupRepository(): RequirementGroupRepository =

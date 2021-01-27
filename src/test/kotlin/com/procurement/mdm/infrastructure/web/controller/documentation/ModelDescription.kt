@@ -143,7 +143,10 @@ object ModelDescription {
                 getFieldDescriptor("data[]", "The data of response."),
                 getFieldDescriptor("data[].id", "The identifier of the criterion."),
                 getFieldDescriptorOptional("data[].description", "The description of the criterion."),
-                getFieldDescriptor("data[].title", "The title of the criterion.")
+                getFieldDescriptor("data[].title", "The title of the criterion."),
+                getFieldDescriptor("data[].classification.id", "The id of the classification."),
+                getFieldDescriptor("data[].classification.scheme", "The scheme of the classification.")
+
             )
         }
 
