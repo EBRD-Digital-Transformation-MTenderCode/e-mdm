@@ -20,17 +20,22 @@ class OrganizationSchemeController(private val organizationSchemeService: Organi
 
     @GetMapping("/organization/schemes")
     @ResponseStatus(HttpStatus.OK)
-    fun getSchemesByCountry(
-        @RequestParam(value = "country", required = false) country: String?
-    ): OrganizationSchemesApiResponse {
+    fun getSchemesByCountryIds(
+        @RequestParam(value = "countryId", required = false) countries: List<String>?
+    ): OrganizationSchemesByCountriesApiResponse {
 
-        if (country == null)
+        if (countries.isNullOrEmpty())
             throw CountryRequestParameterMissingException()
 
-        val schemesCodes = organizationSchemeService.find(country = country)
-        return OrganizationSchemesApiResponse(
-            OrganizationSchemesApiResponse.OrganizationSchemes(
-                schemes = schemesCodes
+        val schemesCodes = organizationSchemeService.find(countries)
+        return OrganizationSchemesByCountriesApiResponse(
+            OrganizationSchemesByCountriesApiResponse.Elements(
+                elements = schemesCodes.map { (country, schemes) ->
+                    OrganizationSchemesByCountriesApiResponse.Elements.Element(
+                        country = country.value,
+                        schemes = schemes
+                    )
+                }
             )
         )
     }
@@ -60,14 +65,6 @@ class OrganizationSchemeController(private val organizationSchemeService: Organi
     class OrganizationSchemesApiRequest(
         @field:JsonProperty("countries") @param:JsonProperty("countries") val countries: List<String>
     )
-
-    class OrganizationSchemesApiResponse(schemes: OrganizationSchemes) :
-        ApiResponse<OrganizationSchemesApiResponse.OrganizationSchemes>(schemes) {
-
-        data class OrganizationSchemes(
-            @field:JsonProperty("schemes") @param:JsonProperty("schemes") val schemes: List<String>
-        )
-    }
 
     class OrganizationSchemesByCountriesApiResponse(elements: Elements) :
         ApiResponse<OrganizationSchemesByCountriesApiResponse.Elements>(elements) {
