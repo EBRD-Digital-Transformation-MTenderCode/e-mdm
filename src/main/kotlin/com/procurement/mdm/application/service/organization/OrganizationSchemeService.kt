@@ -7,8 +7,6 @@ import com.procurement.mdm.domain.repository.organization.OrganizationSchemeRepo
 import org.springframework.stereotype.Service
 
 interface OrganizationSchemeService {
-    fun find(country: String): List<String>
-
     fun find(countries: List<String>): Map<CountryCode, List<String>>
 }
 
@@ -17,11 +15,6 @@ class OrganizationSchemeServiceImpl(
     private val organizationSchemeRepository: OrganizationSchemeRepository,
     private val addressCountryRepository: AddressCountryRepository
 ) : OrganizationSchemeService {
-
-    override fun find(country: String): List<String> {
-        val code = getCountryCode(country)
-        return getSchemesByCountry(code = code)
-    }
 
     override fun find(countries: List<String>): Map<CountryCode, List<String>> {
         val codes = countries.map { country ->
