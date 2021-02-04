@@ -73,9 +73,9 @@ class OrganizationSchemeControllerTest {
             )
                 .andExpect(status().isOk)
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(jsonPath("$.data.elements.length()", equalTo(1)))
-                .andExpect(jsonPath("$.data.elements[0].country", equalTo(COUNTRY)))
-                .andExpect(jsonPath("$.data.elements[0].schemes", contains(SCHEME_CODE_FIRST, SCHEME_CODE_SECOND)))
+                .andExpect(jsonPath("$.data.length()", equalTo(1)))
+                .andExpect(jsonPath("$.data[0].country", equalTo(COUNTRY)))
+                .andExpect(jsonPath("$.data[0].schemes", contains(SCHEME_CODE_FIRST, SCHEME_CODE_SECOND)))
                 .andReturn()
 
             verify(organizationSchemeService, times(1))

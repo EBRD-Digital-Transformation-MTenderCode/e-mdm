@@ -22,21 +22,19 @@ class OrganizationSchemeController(private val organizationSchemeService: Organi
     @ResponseStatus(HttpStatus.OK)
     fun getSchemesByCountryIds(
         @RequestParam(value = "countryId", required = false) countries: List<String>?
-    ): OrganizationSchemesByCountriesApiResponse {
+    ): OrganizationSchemesByCountryIdsApiResponse {
 
         if (countries.isNullOrEmpty())
             throw CountryRequestParameterMissingException()
 
         val schemesCodes = organizationSchemeService.find(countries)
-        return OrganizationSchemesByCountriesApiResponse(
-            OrganizationSchemesByCountriesApiResponse.Elements(
-                elements = schemesCodes.map { (country, schemes) ->
-                    OrganizationSchemesByCountriesApiResponse.Elements.Element(
-                        country = country.value,
-                        schemes = schemes
-                    )
-                }
-            )
+        return OrganizationSchemesByCountryIdsApiResponse(
+            schemesCodes.map { (country, schemes) ->
+                Scheme(
+                    country = country.value,
+                    schemes = schemes
+                )
+            }
         )
     }
 
@@ -78,4 +76,11 @@ class OrganizationSchemeController(private val organizationSchemeService: Organi
             )
         }
     }
+
+    class OrganizationSchemesByCountryIdsApiResponse(schemes: List<Scheme>) : ApiResponse<List<Scheme>>(schemes)
+
+    data class Scheme(
+        @field:JsonProperty("country") @param:JsonProperty("country") val country: String,
+        @field:JsonProperty("schemes") @param:JsonProperty("schemes") val schemes: List<String>
+    )
 }
