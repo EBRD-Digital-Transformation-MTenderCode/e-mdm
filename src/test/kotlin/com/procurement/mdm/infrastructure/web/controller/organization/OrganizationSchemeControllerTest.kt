@@ -58,28 +58,32 @@ class OrganizationSchemeControllerTest {
     }
 
     @Nested
-    inner class SchemesByCountry {
+    inner class SchemesByCountryIds {
         @Test
-        fun `Getting the organization schemes for country is successful`() {
-            whenever(organizationSchemeService.find(country = eq(COUNTRY)))
-                .thenReturn(SCHEMES_CODES)
+        fun `Getting the organization schemes for countries is successful`() {
+            whenever(organizationSchemeService.find(countries = eq(listOf(COUNTRY, COUNTRY))))
+                .thenReturn(
+                    mapOf(CountryCode(COUNTRY) to listOf(SCHEME_CODE_FIRST, SCHEME_CODE_SECOND))
+                )
 
             val url = getUrl()
             mockMvc.perform(
                 get(url)
-                    .param("country", COUNTRY)
+                    .param("countryId", COUNTRY, COUNTRY)
             )
                 .andExpect(status().isOk)
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(jsonPath("$.data.schemes[0]", equalTo(SCHEME_CODE_FIRST)))
-                .andExpect(jsonPath("$.data.schemes[1]", equalTo(SCHEME_CODE_SECOND)))
+                .andExpect(jsonPath("$.data.length()", equalTo(1)))
+                .andExpect(jsonPath("$.data[0].country", equalTo(COUNTRY)))
+                .andExpect(jsonPath("$.data[0].schemes", contains(SCHEME_CODE_FIRST, SCHEME_CODE_SECOND)))
+                .andReturn()
 
             verify(organizationSchemeService, times(1))
-                .find(country = any())
+                .find(countries = any())
         }
 
         @Test
-        fun `Getting the organization schemes for country is error (country request parameter is missing)`() {
+        fun `Getting the organization schemes for country is error (countryId is missing)`() {
             val url = getUrl()
             mockMvc.perform(
                 get(url)
@@ -96,33 +100,30 @@ class OrganizationSchemeControllerTest {
                 )
 
             verify(organizationSchemeService, times(0))
-                .find(country = any())
+                .find(countries = any())
         }
 
         @Test
-        fun `Getting the organization schemes for country is error (country code is empty)`() {
+        fun `Getting the organization schemes for country is error (countryId list is empty)`() {
             doThrow(InvalidCountryCodeException(description = "Invalid country code (value is blank)."))
                 .whenever(organizationSchemeService)
-                .find(country = eq(EMPTY_COUNTRY))
+                .find(countries = eq(listOf(EMPTY_COUNTRY)))
 
             val url = getUrl()
             mockMvc.perform(
                 get(url)
-                    .param("country", EMPTY_COUNTRY)
+                    .param("countryId", "")
             )
                 .andExpect(status().isBadRequest)
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(jsonPath("$.errors.length()", equalTo(1)))
-                .andExpect(jsonPath("$.errors[0].code", equalTo(INVALID_COUNTRY_CODE.code)))
+                .andExpect(jsonPath("$.errors[0].code", equalTo(COUNTRY_REQUEST_PARAMETER_MISSING.code)))
                 .andExpect(
                     jsonPath(
                         "$.errors[0].description",
-                        equalTo("Invalid country code (value is blank).")
+                        equalTo("The request is missing a required query parameter - 'country'.")
                     )
                 )
-
-            verify(organizationSchemeService, times(1))
-                .find(country = any())
         }
 
         @Test
@@ -130,12 +131,12 @@ class OrganizationSchemeControllerTest {
 
             doThrow(InvalidCountryCodeException(description = "Invalid country code: '$INVALID_COUNTRY' (wrong length: '${INVALID_COUNTRY.length}' required: '2')."))
                 .whenever(organizationSchemeService)
-                .find(country = eq(INVALID_COUNTRY))
+                .find(countries = eq(listOf(INVALID_COUNTRY)))
 
             val url = getUrl()
             mockMvc.perform(
                 get(url)
-                    .param("country", INVALID_COUNTRY)
+                    .param("countryId", INVALID_COUNTRY)
             )
                 .andExpect(status().isBadRequest)
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -149,19 +150,19 @@ class OrganizationSchemeControllerTest {
                 )
 
             verify(organizationSchemeService, times(1))
-                .find(country = any())
+                .find(countries = any())
         }
 
         @Test
-        fun `Getting the organization schemes for country is error (country request parameter is unknown)`() {
+        fun `Getting the organization schemes for country is error (country code is unknown)`() {
             doThrow(CountryUnknownException(country = UNKNOWN_COUNTRY))
                 .whenever(organizationSchemeService)
-                .find(country = eq(UNKNOWN_COUNTRY))
+                .find(countries = eq(listOf(UNKNOWN_COUNTRY)))
 
             val url = getUrl()
             mockMvc.perform(
                 get(url)
-                    .param("country", UNKNOWN_COUNTRY)
+                    .param("countryId", UNKNOWN_COUNTRY)
             )
                 .andExpect(status().isBadRequest)
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -175,19 +176,19 @@ class OrganizationSchemeControllerTest {
                 )
 
             verify(organizationSchemeService, times(1))
-                .find(country = any())
+                .find(countries = any())
         }
 
         @Test
         fun `Getting the organization schemes for country is error (organization schemes not found)`() {
             doThrow(OrganizationSchemeNotFoundException(country = COUNTRY))
                 .whenever(organizationSchemeService)
-                .find(country = eq(COUNTRY))
+                .find(countries = eq(listOf(COUNTRY)))
 
             val url = getUrl()
             mockMvc.perform(
                 get(url)
-                    .param("country", COUNTRY)
+                    .param("countryId", COUNTRY)
             )
                 .andExpect(status().isNotFound)
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -201,19 +202,19 @@ class OrganizationSchemeControllerTest {
                 )
 
             verify(organizationSchemeService, times(1))
-                .find(country = any())
+                .find(countries = any())
         }
 
         @Test
         fun `Getting the organization schemes for country is error (internal server error)`() {
             doThrow(RuntimeException())
                 .whenever(organizationSchemeService)
-                .find(country = eq(COUNTRY))
+                .find(countries = eq(listOf(COUNTRY)))
 
             val url = getUrl()
             mockMvc.perform(
                 get(url)
-                    .param("country", COUNTRY)
+                    .param("countryId", COUNTRY)
             )
                 .andExpect(status().isInternalServerError)
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -222,7 +223,7 @@ class OrganizationSchemeControllerTest {
                 .andExpect(jsonPath("$.errors[0].description", equalTo("Internal server error.")))
 
             verify(organizationSchemeService, times(1))
-                .find(country = any())
+                .find(countries = any())
         }
     }
 
@@ -236,7 +237,7 @@ class OrganizationSchemeControllerTest {
                 )
 
             val url = getUrl()
-            val l = mockMvc.perform(
+            mockMvc.perform(
                 post(url)
                     .contentType(MediaType.APPLICATION_JSON_UTF8)
                     .content("""{"countries": ["$COUNTRY"]}""")
@@ -248,7 +249,6 @@ class OrganizationSchemeControllerTest {
                 .andExpect(jsonPath("$.data.elements[0].schemes", contains(SCHEME_CODE_FIRST, SCHEME_CODE_SECOND)))
                 .andReturn()
 
-            println(l.response.contentAsString)
             verify(organizationSchemeService, times(1))
                 .find(countries = any())
         }
