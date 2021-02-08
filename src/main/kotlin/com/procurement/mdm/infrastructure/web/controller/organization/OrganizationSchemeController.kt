@@ -20,18 +20,21 @@ class OrganizationSchemeController(private val organizationSchemeService: Organi
 
     @GetMapping("/organization/schemes")
     @ResponseStatus(HttpStatus.OK)
-    fun getSchemesByCountry(
-        @RequestParam(value = "country", required = false) country: String?
-    ): OrganizationSchemesApiResponse {
+    fun getSchemesByCountryIds(
+        @RequestParam(value = "countryId", required = false) countries: List<String>?
+    ): OrganizationSchemesByCountryIdsApiResponse {
 
-        if (country == null)
+        if (countries.isNullOrEmpty())
             throw CountryRequestParameterMissingException()
 
-        val schemesCodes = organizationSchemeService.find(country = country)
-        return OrganizationSchemesApiResponse(
-            OrganizationSchemesApiResponse.OrganizationSchemes(
-                schemes = schemesCodes
-            )
+        val schemesCodes = organizationSchemeService.find(countries)
+        return OrganizationSchemesByCountryIdsApiResponse(
+            schemesCodes.map { (country, schemes) ->
+                Scheme(
+                    country = country.value,
+                    schemes = schemes
+                )
+            }
         )
     }
 
@@ -61,14 +64,6 @@ class OrganizationSchemeController(private val organizationSchemeService: Organi
         @field:JsonProperty("countries") @param:JsonProperty("countries") val countries: List<String>
     )
 
-    class OrganizationSchemesApiResponse(schemes: OrganizationSchemes) :
-        ApiResponse<OrganizationSchemesApiResponse.OrganizationSchemes>(schemes) {
-
-        data class OrganizationSchemes(
-            @field:JsonProperty("schemes") @param:JsonProperty("schemes") val schemes: List<String>
-        )
-    }
-
     class OrganizationSchemesByCountriesApiResponse(elements: Elements) :
         ApiResponse<OrganizationSchemesByCountriesApiResponse.Elements>(elements) {
 
@@ -81,4 +76,11 @@ class OrganizationSchemeController(private val organizationSchemeService: Organi
             )
         }
     }
+
+    class OrganizationSchemesByCountryIdsApiResponse(schemes: List<Scheme>) : ApiResponse<List<Scheme>>(schemes)
+
+    data class Scheme(
+        @field:JsonProperty("country") @param:JsonProperty("country") val country: String,
+        @field:JsonProperty("schemes") @param:JsonProperty("schemes") val schemes: List<String>
+    )
 }

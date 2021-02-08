@@ -36,47 +36,6 @@ class OrganizationSchemeServiceTest {
     }
 
     @Nested
-    inner class SchemesByCountry {
-        @Test
-        fun `Getting the organization schemes is successful`() {
-            whenever(addressCountryRepository.exists(code = eq(COUNTRY_CODE)))
-                .thenReturn(true)
-            whenever(organizationSchemeRepository.find(country = eq(COUNTRY_CODE)))
-                .thenReturn(SCHEMES_CODES)
-
-            val actual = service.find(country = COUNTRY)
-
-            assertEquals(SCHEMES_CODES.toSet(), actual.toSet())
-        }
-
-        @Test
-        fun `Getting the organization schemes is error (country request parameter is unknown)`() {
-            whenever(addressCountryRepository.exists(code = eq(COUNTRY_CODE)))
-                .thenReturn(false)
-
-            val exception = assertThrows<CountryUnknownException> {
-                service.find(country = COUNTRY)
-            }
-
-            assertEquals("The unknown code of a country '$COUNTRY'.", exception.description)
-        }
-
-        @Test
-        fun `Getting the organization schemes is error (schemes codes by country is not found)`() {
-            whenever(addressCountryRepository.exists(code = eq(COUNTRY_CODE)))
-                .thenReturn(true)
-            whenever(organizationSchemeRepository.find(country = eq(COUNTRY_CODE)))
-                .thenReturn(emptyList())
-
-            val exception = assertThrows<OrganizationSchemeNotFoundException> {
-                service.find(country = COUNTRY)
-            }
-
-            assertEquals("The organization schemes for country '$COUNTRY' not found.", exception.description)
-        }
-    }
-
-    @Nested
     inner class SchemesByCountries {
         @Test
         fun `Getting the organization schemes is successful`() {
