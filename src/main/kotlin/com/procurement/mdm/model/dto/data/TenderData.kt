@@ -2,6 +2,7 @@ package com.procurement.mdm.model.dto.data
 
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonInclude
+import com.fasterxml.jackson.annotation.JsonProperty
 import java.math.BigDecimal
 
 data class TD @JsonCreator constructor(
@@ -74,20 +75,88 @@ data class ItemUnitTD @JsonCreator constructor(
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class LotTD @JsonCreator constructor(
 
-        val id: String?,
+    val id: String?,
 
-        val internalId: String?,
+    val internalId: String?,
 
-        val title: String?,
+    val title: String?,
 
-        val description: String?,
+    val description: String?,
 
-        val value: Value?,
+    val value: Value?,
 
-        val contractPeriod: ContractPeriod?,
+    val contractPeriod: ContractPeriod?,
 
-        val placeOfPerformance: PlaceOfPerformance?
-)
+    val placeOfPerformance: PlaceOfPerformance?,
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @field:JsonProperty("hasOptions") @param:JsonProperty("hasOptions") val hasOptions: Boolean?,
+
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @field:JsonProperty("options") @param:JsonProperty("options") val options: List<Option>?,
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @field:JsonProperty("hasRecurrence") @param:JsonProperty("hasRecurrence") val hasRecurrence: Boolean?,
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @field:JsonProperty("recurrence") @param:JsonProperty("recurrence") val recurrence: Recurrence?,
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @field:JsonProperty("hasRenewal") @param:JsonProperty("hasRenewal") val hasRenewal: Boolean?,
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @field:JsonProperty("renewal") @param:JsonProperty("renewal") val renewal: Renewal?
+) {
+    data class Option(
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        @field:JsonProperty("description") @param:JsonProperty("description") val description: String?,
+
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        @field:JsonProperty("period") @param:JsonProperty("period") val period: Period?
+    )
+
+    data class Recurrence(
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        @field:JsonProperty("description") @param:JsonProperty("description") val description: String?,
+
+        @JsonInclude(JsonInclude.Include.NON_EMPTY)
+        @field:JsonProperty("dates") @param:JsonProperty("dates") val dates: List<Date>?
+    ) {
+        data class Date(
+            @JsonInclude(JsonInclude.Include.NON_NULL)
+            @field:JsonProperty("startDate") @param:JsonProperty("startDate") val startDate: String?
+        )
+    }
+
+    data class Renewal(
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        @field:JsonProperty("description") @param:JsonProperty("description") val description: String?,
+
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        @field:JsonProperty("minimumRenewals") @param:JsonProperty("minimumRenewals") val minimumRenewals: Int?,
+
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        @field:JsonProperty("maximumRenewals") @param:JsonProperty("maximumRenewals") val maximumRenewals: Int?,
+
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        @field:JsonProperty("period") @param:JsonProperty("period") val period: Period?
+    )
+
+    data class Period(
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        @field:JsonProperty("startDate") @param:JsonProperty("startDate") val startDate: String?,
+
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        @field:JsonProperty("endDate") @param:JsonProperty("endDate") val endDate: String?,
+
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        @field:JsonProperty("durationInDays") @param:JsonProperty("durationInDays") val durationInDays: Int?,
+
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        @field:JsonProperty("maxExtentDate") @param:JsonProperty("maxExtentDate") val maxExtentDate: String?
+    )
+}
+
 
 data class Value @JsonCreator constructor(
 
