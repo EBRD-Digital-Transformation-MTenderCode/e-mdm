@@ -22,5 +22,6 @@ interface CpvRepository : JpaRepository<Cpv, CpvKey> {
     fun findByParentAndCpvKeyLanguageCode(parentCode: String = "", languageCode: String): List<Cpv>
 
     @Transactional(readOnly = true)
+    @Query("SELECT c FROM Cpv c WHERE c.cpvKey.code LIKE ?1%")
     fun findByCpvKeyCode(code: String): List<Cpv>
 }
