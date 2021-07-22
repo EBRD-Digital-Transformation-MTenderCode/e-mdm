@@ -7,6 +7,8 @@ class StandardCriteriaResult(values: List<Criterion>) : List<StandardCriteriaRes
     data class Criterion(
         val id: String,
         val title: String,
+        val source: String,
+        val relatesTo: String,
         val classification: Classification,
         val requirementGroups: List<RequirementGroup>,
         val description: String?
@@ -25,10 +27,10 @@ class StandardCriteriaResult(values: List<Criterion>) : List<StandardCriteriaRes
                 val id: String,
                 val title: String,
                 val description: String?,
-                val dataType: String
+                val dataType: String,
+                val expectedValue: Any?
             )
         }
-
     }
 
     companion object {
@@ -37,6 +39,8 @@ class StandardCriteriaResult(values: List<Criterion>) : List<StandardCriteriaRes
             Criterion(
                 id = entity.id,
                 title = entity.criterion.title,
+                source = entity.criterion.source,
+                relatesTo = entity.criterion.relatesTo,
                 description = entity.criterion.description,
                 classification = entity.criterion.classification
                     .let { Criterion.Classification(id = it.id, scheme = it.scheme) },
@@ -56,9 +60,8 @@ class StandardCriteriaResult(values: List<Criterion>) : List<StandardCriteriaRes
                 id = entity.id,
                 description = entity.description,
                 title = entity.title,
-                dataType = entity.dataType
+                dataType = entity.dataType,
+                expectedValue = entity.expectedValue
             )
-
     }
-
 }

@@ -8,6 +8,8 @@ class StandardCriteriaResponse(values: List<Criterion>) : List<StandardCriteriaR
     data class Criterion(
         @field:JsonProperty("id") @param:JsonProperty("id") val id: String,
         @field:JsonProperty("title") @param:JsonProperty("title") val title: String,
+        @field:JsonProperty("source") @param:JsonProperty("source") val source: String,
+        @field:JsonProperty("relatesTo") @param:JsonProperty("relatesTo") val relatesTo: String,
 
         @JsonInclude(JsonInclude.Include.NON_NULL)
         @field:JsonProperty("description") @param:JsonProperty("description") val description: String?,
@@ -32,8 +34,14 @@ class StandardCriteriaResponse(values: List<Criterion>) : List<StandardCriteriaR
             class Requirement(
                 @field:JsonProperty("id") @param:JsonProperty("id") val id: String,
                 @field:JsonProperty("title") @param:JsonProperty("title") val title: String,
+
+                @JsonInclude(JsonInclude.Include.NON_NULL)
                 @field:JsonProperty("description") @param:JsonProperty("description") val description: String?,
-                @field:JsonProperty("dataType") @param:JsonProperty("dataType") val dataType: String
+
+                @field:JsonProperty("dataType") @param:JsonProperty("dataType") val dataType: String,
+
+                @JsonInclude(JsonInclude.Include.NON_NULL)
+                @field:JsonProperty("expectedValue") @param:JsonProperty("expectedValue") val expectedValue: Any?
             )
         }
 
@@ -45,6 +53,8 @@ class StandardCriteriaResponse(values: List<Criterion>) : List<StandardCriteriaR
             Criterion(
                 id = result.id,
                 title = result.title,
+                source= result.source,
+                relatesTo = result.relatesTo,
                 description = result.description,
                 classification = result.classification
                     .let { Criterion.Classification(id = it.id, scheme = it.scheme) },
@@ -64,7 +74,8 @@ class StandardCriteriaResponse(values: List<Criterion>) : List<StandardCriteriaR
                 id = result.id,
                 description = result.description,
                 title = result.title,
-                dataType = result.dataType
+                dataType = result.dataType,
+                expectedValue = result.expectedValue
             )
 
     }
