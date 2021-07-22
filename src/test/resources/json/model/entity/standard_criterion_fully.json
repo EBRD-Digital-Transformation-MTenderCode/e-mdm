@@ -1,0 +1,55 @@
+{
+  "id": "22c5e617-6176-4e54-8c7e-51e0df753de4",
+  "title": "Title",
+  "description": "description",
+  "source": "tenderer",
+  "classification": {
+    "scheme": "ESPD-2.2.1",
+    "id": "CRITERION.SELECTION.TECHNICAL_PROFESSIONAL_ABILITY.CERTIFICATES.ENVIRONMENTAL_MANAGEMENT.ENV_INDEPENDENT_CERTIFICATE"
+  },
+  "relatesTo": "tenderer",
+  "mainProcurementCategories": [
+    "goods"
+  ],
+  "requirementGroups": [
+    {
+      "id": "a2f11e8b-1ff1-48af-b518-99d25123e31f",
+      "description": "description",
+      "requirements": [
+        {
+          "id": "088b7fde-2489-40db-886b-75904dc08129",
+          "title": "Да",
+          "description": "description",
+          "dataType": "boolean",
+          "expectedValue": true
+        },
+        {
+          "id": "efb736a8-d1fe-47d9-a699-b35961ea6f8b",
+          "description": "description",
+          "title": "Title",
+          "dataType": "integer",
+          "expectedValue": 10
+        }
+      ]
+    },
+    {
+      "id": "32f55ffd-0084-4eb2-ac5e-dc6f0a0461e9",
+      "requirements": [
+        {
+          "id": "77d43484-02d8-4cf5-9758-18809f8b129e",
+          "title": "Title",
+          "description": "description",
+          "dataType": "string",
+          "expectedValue": "expectedValue"
+        },
+        {
+          "id": "ffbc2e80-e322-4a20-b56d-b6266bc5e162",
+          "title": "Title",
+          "description": "description",
+          "dataType": "number",
+          "expectedValue": 1.5
+        }
+      ]
+    }
+  ]
+}

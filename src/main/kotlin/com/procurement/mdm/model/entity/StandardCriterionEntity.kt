@@ -13,12 +13,15 @@ data class StandardCriterionEntity(
     data class StandardCriterion(
         @field:JsonProperty("id") @param:JsonProperty("id") val id: String,
         @field:JsonProperty("title") @param:JsonProperty("title") val title: String,
+        @field:JsonProperty("source") @param:JsonProperty("source") val source: String,
+        @field:JsonProperty("relatesTo") @param:JsonProperty("relatesTo") val relatesTo: String,
         @field:JsonProperty("classification") @param:JsonProperty("classification") val classification: Classification,
         @field:JsonProperty("requirementGroups") @param:JsonProperty("requirementGroups") val requirementGroups: List<RequirementGroup>,
 
         @JsonInclude(JsonInclude.Include.NON_NULL)
         @field:JsonProperty("description") @param:JsonProperty("description") val description: String?,
 
+        @JsonInclude(JsonInclude.Include.NON_EMPTY)
         @field:JsonProperty("mainProcurementCategories") @param:JsonProperty("mainProcurementCategories") val mainProcurementCategories: List<ProcurementCategory>?
     ) {
         data class Classification(
@@ -37,8 +40,14 @@ data class StandardCriterionEntity(
             class Requirement(
                 @field:JsonProperty("id") @param:JsonProperty("id") val id: String,
                 @field:JsonProperty("title") @param:JsonProperty("title") val title: String,
+
+                @JsonInclude(JsonInclude.Include.NON_NULL)
                 @field:JsonProperty("description") @param:JsonProperty("description") val description: String?,
-                @field:JsonProperty("dataType") @param:JsonProperty("dataType") val dataType: String
+
+                @field:JsonProperty("dataType") @param:JsonProperty("dataType") val dataType: String,
+
+                @JsonInclude(JsonInclude.Include.NON_NULL)
+                @field:JsonProperty("expectedValue") @param:JsonProperty("expectedValue") val expectedValue: Any?
             )
         }
 
